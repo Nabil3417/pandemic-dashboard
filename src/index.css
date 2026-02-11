@@ -1,13 +1,71 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 1. Standard Leaflet CSS Import */
+@import "leaflet/dist/leaflet.css";
+
+/* 2. Global Body Styling */
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #F8FAFC; /* Slate-50: A professional neutral background */
+  color: #0F172A; /* Slate-900: High contrast for readability */
+}
+
+/* 3. Professional Custom Scrollbar (WebKit based) */
+/* This ensures the scrollbar matches the dark sidebar theme */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1; /* Slate-300 */
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8; /* Slate-400 */
+}
+
+/* 4. Global Map Adjustments */
+/* Fixes Leaflet's default behaviors to stay inside your rounded dashboard cards */
+.leaflet-container {
+  width: 100%;
+  height: 100%;
+  border-radius: 1.5rem; /* Matches 'rounded-3xl' */
+  z-index: 10;
+  font-family: inherit;
+}
+
+/* Fix for Leaflet zoom buttons to look more modern */
+.leaflet-bar {
+  border: none !important;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1) !important;
+}
+
+.leaflet-bar a {
+  background-color: white !important;
+  color: #64748b !important;
+  border-bottom: 1px solid #f1f5f9 !important;
+}
+
+/* 5. Glassmorphism Utility (Optional extra polish) */
+.glass-effect {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
