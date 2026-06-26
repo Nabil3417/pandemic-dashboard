@@ -3,13 +3,14 @@ import RiskCard from '../components/RiskCard';
 import RiskMap from '../components/RiskMap';
 import RiskChart from '../components/RiskChart';
 import { 
-  Radio, Globe, Activity, TrendingUp, AlertTriangle, Zap, ShieldAlert
+  Radio, Globe, Activity, TrendingUp, Zap, ShieldAlert, Bell
 } from 'lucide-react';
 import { toast, Toaster } from 'react-hot-toast';
 
 const Dashboard = () => {
   const [data, setData] = useState(null);
   const [isCrisis, setIsCrisis] = useState(false);
+  const [alerts, setAlerts] = useState([]); // NEW: State for tactical alerts
 
   const fetchData = () => {
     fetch('http://localhost:5000/api/risk-status')
@@ -17,13 +18,14 @@ const Dashboard = () => {
       .then(json => {
         setData(json);
         setIsCrisis(json.crisis_active);
+        setAlerts(json.alerts || []); // NEW: Capture alerts from backend
       })
       .catch(err => console.error("Data Sync Error", err));
   };
 
   useEffect(() => {
     fetchData();
-    const interval = setInterval(fetchData, 5000); // Auto-refresh every 5s
+    const interval = setInterval(fetchData, 5000); 
     return () => clearInterval(interval);
   }, []);
 
@@ -48,7 +50,6 @@ const Dashboard = () => {
     <div className={`transition-colors duration-700 ${isCrisis ? 'bg-[#1a0505]' : 'bg-[#020617]'} text-white min-h-screen p-6 lg:p-10 overflow-x-hidden relative`}>
       <Toaster position="top-right" />
       
-      {/* Background Alerts Overlay when Crisis is Active */}
       {isCrisis && (
         <div className="absolute inset-0 pointer-events-none border-[10px] border-rose-600/20 animate-pulse z-[100]" />
       )}
@@ -67,7 +68,7 @@ const Dashboard = () => {
                 isCrisis ? 'bg-rose-600 text-white shadow-lg shadow-rose-900/40' : 'bg-white/5 border border-white/20 text-slate-400 hover:bg-rose-600 hover:text-white'
               }`}
             >
-              {isCrisis ? <Zap size={12} fill="white"/> : <Zap size={12}/>}
+              <Zap size={12} fill={isCrisis ? "white" : "none"}/>
               {isCrisis ? "Deactivate Crisis" : "Simulate Outbreak"}
             </button>
           </div>
@@ -103,7 +104,6 @@ const Dashboard = () => {
 
       {/* 3. Main Workspace */}
       <div className="grid grid-cols-1 xl:grid-cols-12 gap-8">
-        {/* Forecast & Feed */}
         <div className="xl:col-span-6 space-y-8">
           <div className="bg-white/5 border border-white/10 p-8 rounded-[3.5rem] shadow-xl h-[520px] flex flex-col relative overflow-hidden group">
               <div className="flex items-center justify-between mb-8 relative z-10">
@@ -117,20 +117,27 @@ const Dashboard = () => {
               </div>
           </div>
 
+          {/* NEW: Dynamic Alert Ticker */}
           <div className={`${isCrisis ? 'bg-rose-600/10 border-rose-500/20' : 'bg-blue-600/5 border-blue-500/10'} p-8 rounded-[3rem] text-white shadow-2xl relative border overflow-hidden`}>
             <h3 className="font-black flex items-center gap-3 text-xs uppercase tracking-[0.3em] italic mb-6">
               <Radio size={18} className={`${isCrisis ? 'text-rose-500' : 'text-blue-400'} animate-pulse`} /> 
-              Signal Intelligence Feed
+              Tactical Feedback Loop
             </h3>
             <div className="space-y-3">
-               <div className="p-4 bg-black/40 rounded-2xl border border-white/5 flex justify-between items-center group hover:border-blue-500/50 transition-all">
-                  <p className="text-[13px] font-bold text-slate-300 italic uppercase">
-                    {isCrisis ? "Neural Outbreak Classification Active" : "Satellite Sweep Active"}
-                  </p>
-                  <span className={`text-[10px] font-black uppercase tracking-widest ${isCrisis ? 'text-rose-500' : 'text-blue-400'}`}>
-                    {isCrisis ? 'EMERGENCY' : 'STABLE'}
-                  </span>
-               </div>
+               {alerts.length > 0 ? (
+                 alerts.map((alert, idx) => (
+                    <div key={idx} className="p-4 bg-black/40 rounded-2xl border border-white/5 flex justify-between items-center group hover:border-blue-500/50 transition-all">
+                      <p className="text-[12px] font-bold text-slate-300 italic uppercase">
+                        {alert.message}
+                      </p>
+                      <span className={`text-[9px] font-black uppercase tracking-widest ${alert.severity === 'CRITICAL' ? 'text-rose-500' : 'text-blue-400'}`}>
+                        {alert.severity}
+                      </span>
+                    </div>
+                 ))
+               ) : (
+                 <p className="text-[11px] text-slate-500 uppercase font-black italic">Monitoring sector signals...</p>
+               )}
             </div>
           </div>
         </div>
@@ -146,10 +153,10 @@ const Dashboard = () => {
             
             <div className="absolute top-8 left-8 z-[70] pointer-events-none">
               <div className="bg-slate-900/90 backdrop-blur-xl px-5 py-3 rounded-2xl border border-white/10 flex items-center gap-3 shadow-2xl">
-                 <ShieldAlert size={16} className={isCrisis ? "text-rose-500" : "text-emerald-500"} />
-                 <span className="text-[11px] font-black uppercase tracking-[0.2em] text-white">
+                  <ShieldAlert size={16} className={isCrisis ? "text-rose-500" : "text-emerald-500"} />
+                  <span className="text-[11px] font-black uppercase tracking-[0.2em] text-white">
                     {isCrisis ? 'CRISIS VECTOR STREAM' : 'LIVE VECTOR STREAM'}
-                 </span>
+                  </span>
               </div>
             </div>
 
