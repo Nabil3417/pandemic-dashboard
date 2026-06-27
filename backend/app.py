@@ -420,6 +420,9 @@ def get_db_stats():
                              ),
     })
 
+@app.route('/api/engine-status', methods=['GET'])
+def get_engine_status():
+    return jsonify(bert_ai.get_engine_status())
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000)

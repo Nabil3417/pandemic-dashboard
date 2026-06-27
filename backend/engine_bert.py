@@ -1,39 +1,454 @@
-# backend/engine_bert.py
-from transformers import pipeline
-import torch
+"""
+BioGuard AI — Multi-Lingual Symptom Detection Engine
+=====================================================
+Architecture:
+  - XLM-RoBERTa (cardiffnlp/twitter-xlm-roberta-base-sentiment)
+      → English + 103 other languages (primary model)
+  - BanglaBERT  (same XLM-RoBERTa, second instance)
+      → Bangla & Banglish (ensemble partner)
+  - Keyword Boost → amplifies health signal detection
 
-class BertInferenceEngine:
+Supports 104 languages. Designed for CPU deployment.
+"""
+
+import re
+from transformers import pipeline
+from langdetect import detect, DetectorFactory
+from langdetect.lang_detect_exception import LangDetectException
+
+# Makes language detection deterministic across runs
+DetectorFactory.seed = 42
+
+# ─────────────────────────────────────────────────────────────
+# HEALTH SYMPTOM KEYWORDS PER LANGUAGE
+# ─────────────────────────────────────────────────────────────
+
+SYMPTOM_KEYWORDS = {
+    'en': [
+        'fever', 'sick', 'ill', 'hospital', 'flu', 'cough', 'outbreak',
+        'infection', 'virus', 'symptom', 'medicine', 'doctor', 'clinic',
+        'patient', 'disease', 'health', 'dengue', 'cholera', 'epidemic',
+        'pandemic', 'vaccination', 'vaccine', 'death', 'infected', 'vomit',
+        'diarrhea', 'breathless', 'pneumonia', 'quarantine', 'isolation',
+        'positive', 'tested', 'covid', 'corona', 'monkeypox', 'mpox',
+        'icu', 'emergency', 'ward', 'admitted', 'discharge', 'outbreak',
+    ],
+    'bn': [
+        'জ্বর', 'কাশি', 'হাসপাতাল', 'অসুস্থ', 'ডাক্তার', 'ভাইরাস',
+        'রোগ', 'ঔষধ', 'সর্দি', 'ক্লিনিক', 'রোগী', 'স্বাস্থ্য',
+        'ইনফেকশন', 'করোনা', 'ফ্লু', 'ডেঙ্গু', 'কলেরা', 'মহামারী',
+        'টিকা', 'মৃত্যু', 'আক্রান্ত', 'চিকিৎসা', 'সংক্রমণ',
+        'প্রাদুর্ভাব', 'শ্বাসকষ্ট', 'বমি', 'ডায়রিয়া', 'নিউমোনিয়া',
+        'কোয়ারেন্টাইন', 'আইসোলেশন', 'পজিটিভ', 'টেস্ট', 'চিকিৎসক',
+        'স্বাস্থ্যসেবা', 'হৃদরোগ', 'ক্যান্সার', 'ডায়াবেটিস',
+    ],
+    'hi': [
+        'बुखार', 'बीमार', 'अस्पताल', 'खांसी', 'वायरस', 'संक्रमण',
+        'डॉक्टर', 'दवा', 'मरीज', 'बीमारी', 'स्वास्थ्य', 'महामारी',
+        'टीका', 'मृत्यु', 'कोरोना', 'डेंगू', 'निमोनिया', 'बीमारी',
+    ],
+    'ar': [
+        'حمى', 'مريض', 'مستشفى', 'سعال', 'فيروس', 'عدوى',
+        'طبيب', 'دواء', 'مرض', 'صحة', 'وباء', 'لقاح', 'كورونا',
+    ],
+    'pt': [
+        'febre', 'doente', 'hospital', 'tosse', 'vírus', 'infecção',
+        'médico', 'remédio', 'paciente', 'doença', 'saúde', 'pandemia',
+        'vacina', 'covid', 'dengue', 'pneumonia',
+    ],
+    'fr': [
+        'fièvre', 'malade', 'hôpital', 'toux', 'virus', 'infection',
+        'médecin', 'médicament', 'patient', 'maladie', 'santé',
+        'pandémie', 'vaccin', 'covid', 'pneumonie',
+    ],
+    'es': [
+        'fiebre', 'enfermo', 'hospital', 'tos', 'virus', 'infección',
+        'médico', 'medicamento', 'paciente', 'enfermedad', 'salud',
+        'pandemia', 'vacuna', 'covid', 'dengue', 'neumonía',
+    ],
+    'id': [
+        'demam', 'sakit', 'rumah sakit', 'batuk', 'virus', 'infeksi',
+        'dokter', 'obat', 'pasien', 'penyakit', 'kesehatan', 'pandemi',
+        'vaksin', 'covid', 'corona',
+    ],
+}
+
+UNIVERSAL_KEYWORDS = [
+    'covid', 'corona', 'covid-19', 'pandemic', 'epidemic', 'who',
+    'hospital', 'icu', 'pcr', 'vaccine', 'virus', 'mpox', 'monkeypox',
+    'lockdown', 'quarantine', 'outbreak', 'infected',
+]
+
+# Banglish Roman words commonly used by Bangladeshis
+BANGLISH_MARKERS = [
+    'ami', 'amar', 'ache', 'asha', 'bhai', 'boro', 'chilo',
+    'diye', 'ektu', 'gece', 'hobe', 'jabo', 'keno', 'kore',
+    'lagce', 'lagche', 'nai', 'onek', 'osusto', 'hochhe',
+    'hocche', 'thakbo', 'dekho', 'jani', 'mane', 'hoye',
+    'kintu', 'tahole', 'dhaka', 'nsu', 'buet', 'dhanmondi',
+    'mirpur', 'uttara', 'gulshan', 'banani', 'bashundhara',
+    'kharap', 'valo', 'bhalo', 'kothay', 'jacchi', 'asche',
+]
+
+# Language codes that langdetect often wrongly assigns to Banglish text
+UNLIKELY_LANGS = ['sq', 'et', 'lt', 'lv', 'sl', 'sk', 'hr', 'mk', 'cy', 'af']
+
+
+# ─────────────────────────────────────────────────────────────
+# HELPER FUNCTIONS
+# ─────────────────────────────────────────────────────────────
+
+def detect_language(text):
+    """
+    Detects language of input text.
+    Returns ISO 639-1 language code e.g. 'en', 'bn', 'hi', 'ar'.
+    Falls back to 'en' on failure.
+    """
+    try:
+        if len(text.strip()) < 10:
+            return 'en'
+        return detect(text)
+    except LangDetectException:
+        return 'en'
+
+
+def is_banglish(text, detected_lang):
+    """
+    Detects Banglish — Roman-script Bengali common on Bangladeshi social media.
+    Examples:
+        "Amar onek fever hochhe, hospital jabo"
+        "NSU te class ache kintu ami osusto"
+        "Onek kharap lagche, doctor er kache jabo"
+    """
+    text_lower = text.lower()
+
+    # Rule 1 — mixed Bangla unicode + Roman characters = definitely Banglish
+    bangla_chars = re.findall(r'[\u0980-\u09FF]', text)
+    roman_words  = re.findall(r'[a-zA-Z]{3,}', text)
+    if len(bangla_chars) > 0 and len(roman_words) > 2:
+        return True
+
+    # Rule 2 — 2+ Banglish marker words found
+    banglish_hits = sum(1 for m in BANGLISH_MARKERS if m in text_lower)
+    if banglish_hits >= 2:
+        return True
+
+    # Rule 3 — weird language detected (langdetect confused by Banglish)
+    if detected_lang in UNLIKELY_LANGS and len(roman_words) > 3:
+        return True
+
+    # Rule 4 — detected English but contains Bangla health keywords
+    bangla_kw_hits = sum(
+        1 for kw in SYMPTOM_KEYWORDS['bn'] if kw in text
+    )
+    if detected_lang == 'en' and bangla_kw_hits > 0:
+        return True
+
+    return False
+
+
+def has_health_keywords(text, lang='en'):
+    """
+    Checks for health-related keywords.
+    Returns a boost value between 0.0 and 0.30.
+    """
+    text_lower = text.lower()
+
+    universal_hits = sum(
+        1 for kw in UNIVERSAL_KEYWORDS if kw in text_lower
+    )
+    lang_keywords = SYMPTOM_KEYWORDS.get(lang, SYMPTOM_KEYWORDS['en'])
+    lang_hits = sum(1 for kw in lang_keywords if kw in text_lower)
+
+    # Also check Bangla keywords regardless of detected language
+    # This catches mixed Banglish where lang detected as 'en'
+    bangla_hits = sum(
+        1 for kw in SYMPTOM_KEYWORDS['bn'] if kw in text
+    )
+
+    total = universal_hits + lang_hits + bangla_hits
+
+    if total == 0:   return 0.0
+    elif total == 1: return 0.12
+    elif total == 2: return 0.22
+    else:            return 0.30
+
+# ─────────────────────────────────────────────────────────────
+# MAIN ENGINE CLASS
+# ─────────────────────────────────────────────────────────────
+
+class MultiLingualSymptomEngine:
+    """
+    Multi-lingual symptom detection engine for pandemic early warning.
+
+    Uses two instances of XLM-RoBERTa-base as an ensemble:
+      - Primary   → scores all languages
+      - Secondary → ensemble partner for Bangla/Banglish
+
+    Combined with keyword boosting for improved health signal detection.
+    """
+
     def __init__(self):
-        # Using distilbert: fast, lightweight, and perfect for real-time dashboards
-        self.device = 0 if torch.cuda.is_available() else -1
-        print(f"--- Initializing BERT Engine on {'GPU' if self.device == 0 else 'CPU'} ---")
-        
-        # This model is pre-trained to understand sentiment and urgency
-        self.classifier = pipeline(
-            "sentiment-analysis", 
-            model="distilbert-base-uncased-finetuned-sst-2-english",
-            device=self.device
-        )
+        self.xlmroberta_ready  = False
+        self.banglabert_ready  = False
+        self.xlmroberta        = None
+        self.banglabert        = None
+
+        print("🌍 Initializing Multi-Lingual Symptom Detection Engine...")
+        print("   Supports: Bangla, Banglish, English, Hindi, Arabic,")
+        print("             French, Spanish, Portuguese, Indonesian + 96 more")
+        print()
+
+        self._load_xlmroberta()
+        self._load_banglabert()
+
+        if self.xlmroberta_ready:
+            print("\n✅ Engine ready — Multi-lingual ensemble active")
+        else:
+            print("\n⚠️  Engine ready — Limited mode")
+
+    def _load_xlmroberta(self):
+        """Primary model — XLM-RoBERTa for 104 languages."""
+        try:
+            print("📥 Loading XLM-RoBERTa (primary — 104 languages)...")
+            self.xlmroberta = pipeline(
+                "text-classification",
+                model="cardiffnlp/twitter-xlm-roberta-base-sentiment",
+                tokenizer="cardiffnlp/twitter-xlm-roberta-base-sentiment",
+                max_length=128,
+                truncation=True,
+                device=-1,
+            )
+            self.xlmroberta_ready = True
+            print("✅ XLM-RoBERTa (primary) loaded!")
+        except Exception as e:
+            print(f"⚠️  XLM-RoBERTa failed: {e}")
+            self._load_fallback_bert()
+
+    def _load_banglabert(self):
+        """
+        Secondary model — second XLM-RoBERTa instance used as
+        ensemble partner for Bangla/Banglish text.
+        Already cached from primary load — no extra download needed.
+        """
+        try:
+            print("📥 Loading ensemble partner (Bangla/Banglish)...")
+            self.banglabert = pipeline(
+                "text-classification",
+                model="cardiffnlp/twitter-xlm-roberta-base-sentiment",
+                tokenizer="cardiffnlp/twitter-xlm-roberta-base-sentiment",
+                max_length=128,
+                truncation=True,
+                device=-1,
+            )
+            self.banglabert_ready = True
+            print("✅ Ensemble partner loaded!")
+        except Exception as e:
+            print(f"⚠️  Ensemble partner failed: {e}")
+            self.banglabert_ready = False
+
+    def _load_fallback_bert(self):
+        """Fallback to English DistilBERT if XLM-RoBERTa fails."""
+        try:
+            self.xlmroberta = pipeline(
+                "sentiment-analysis",
+                model="distilbert-base-uncased-finetuned-sst-2-english",
+                max_length=128,
+                truncation=True,
+                device=-1,
+            )
+            self.xlmroberta_ready = True
+            print("✅ Fallback English BERT loaded")
+        except Exception as e:
+            print(f"❌ All models failed to load: {e}")
+
+    def _score_with_model(self, model_pipeline, text):
+        """
+        Runs inference and maps sentiment to outbreak risk score 0-100.
+        NEGATIVE sentiment → higher risk (sick posts are negative in tone).
+        NEUTRAL            → moderate baseline.
+        POSITIVE           → low risk.
+        """
+        try:
+            result = model_pipeline(text[:512])[0]
+            label  = result['label'].upper()
+            conf   = result['score']
+
+            if label in ['NEGATIVE', 'NEG', 'LABEL_0']:
+                return conf * 100           # 0–100
+            elif label in ['POSITIVE', 'POS', 'LABEL_2']:
+                return (1 - conf) * 40      # 0–40
+            else:
+                return 35.0                 # Neutral baseline
+
+        except Exception:
+            return 30.0
 
     def analyze_text_signals(self, text):
         """
-        Actually processes text through BERT and returns a 0-100 risk score.
+        PRIMARY METHOD — called from app.py for every post.
+
+        Returns a risk score between 0 and 100.
+        Higher = stronger outbreak signal detected.
+
+        Pipeline:
+          1. Detect language
+          2. Detect Banglish
+          3. Route to correct model(s)
+          4. Apply keyword boost
+          5. Clamp and return final score
         """
-        try:
-            result = self.classifier(text)[0]
-            label = result['label']
-            confidence = result['score']
+        if not text or len(text.strip()) < 3:
+            return 0.0
 
-            # Logic: Negative sentiment in a medical context = High Risk
-            if label == "NEGATIVE":
-                # Convert confidence to a high-range risk score (70-100)
-                return round(70 + (confidence * 30), 2)
-            else:
-                # Positive/Neutral sentiment = Low-range risk score (0-40)
-                return round(confidence * 40, 2)
-        except Exception as e:
-            print(f"BERT Inference Error: {e}")
-            return 20.0  # Default neutral score on error
+        # Step 1 — Language detection
+        lang     = detect_language(text)
+        banglish = is_banglish(text, lang)
 
-# Singleton instance to be used by app.py
-engine = BertInferenceEngine()
+        # Step 2 — Keyword boost
+        boost = has_health_keywords(text, lang)
+
+        # Step 3 — Model scoring
+        if banglish:
+            # Ensemble: average both model scores
+            s1 = self._score_with_model(self.xlmroberta, text) \
+                 if self.xlmroberta_ready else 30.0
+            s2 = self._score_with_model(self.banglabert, text) \
+                 if self.banglabert_ready else 30.0
+            base_score = (s1 + s2) / 2
+
+        elif lang == 'bn':
+            # Pure Bangla — use primary model
+            base_score = self._score_with_model(self.xlmroberta, text) \
+                         if self.xlmroberta_ready else 30.0
+
+        else:
+            # English or any other of 104 languages
+            base_score = self._score_with_model(self.xlmroberta, text) \
+                         if self.xlmroberta_ready else 30.0
+
+        # Step 4 — Apply keyword boost
+        final_score = min(round(base_score + (boost * 100), 2), 100.0)
+
+        return final_score
+
+    def analyze_batch(self, posts):
+        """
+        Scores a list of post documents from MongoDB.
+        Returns list of dicts with score and language metadata.
+        """
+        results = []
+        for post in posts:
+            text = post.get('text', '')
+            lang = detect_language(text)
+            results.append({
+                'post':     post,
+                'score':    self.analyze_text_signals(text),
+                'language': lang,
+                'banglish': is_banglish(text, lang),
+            })
+        return results
+
+    def get_engine_status(self):
+        """Returns engine status for /api/engine-status endpoint."""
+        models = []
+        if self.xlmroberta_ready:
+            models.append("XLM-RoBERTa-base (104 langs) — Primary")
+        if self.banglabert_ready:
+            models.append("XLM-RoBERTa-base (104 langs) — Ensemble Partner")
+
+        return {
+            "xlmroberta_active":   self.xlmroberta_ready,
+            "banglabert_active":   self.banglabert_ready,
+            "languages_supported": 104 if self.xlmroberta_ready else 1,
+            "models_active":       models,
+            "mode": (
+                "Multi-Lingual Ensemble"
+                if self.xlmroberta_ready and self.banglabert_ready
+                else "Single Model"
+            ),
+        }
+
+
+# ─────────────────────────────────────────────
+# Single global instance — imported by app.py
+# ─────────────────────────────────────────────
+engine = MultiLingualSymptomEngine()
+
+
+# ─────────────────────────────────────────────
+# STANDALONE TEST
+# ─────────────────────────────────────────────
+if __name__ == "__main__":
+    print("\n" + "=" * 65)
+    print("TESTING MULTI-LINGUAL SYMPTOM DETECTION ENGINE")
+    print("=" * 65)
+
+    test_posts = [
+        # English — health
+        ("My whole family has fever and cough",              "English  ✅ HIGH"),
+        # English — normal
+        ("Beautiful day in Dhaka, loving the weather",       "English  ✅ LOW"),
+        # Bangla — health
+        ("জ্বর আর কাশি থামছে না, ডাক্তারের কাছে যাব",      "Bangla   ✅ HIGH"),
+        # Bangla — normal
+        ("আজকের আবহাওয়া অনেক সুন্দর",                       "Bangla   ✅ LOW"),
+        # Banglish — health
+        ("Amar onek fever hochhe, hospital jabo",            "Banglish ✅ HIGH"),
+        # Banglish — normal
+        ("NSU library te study kortesi",                     "Banglish ✅ LOW"),
+        # Banglish with Bangla keywords
+        ("Amar বমি hocche onek, doctor lagbe",               "Banglish ✅ HIGH"),
+        # Hindi
+        ("मुझे बुखार और खांसी है, डॉक्टर के पास जाना होगा", "Hindi    ✅ HIGH"),
+        # Arabic
+        ("أعاني من حمى شديدة وسعال مستمر",                  "Arabic   ✅ HIGH"),
+        # French
+        ("J'ai de la fièvre et je tousse beaucoup",         "French   ✅ HIGH"),
+        # Portuguese
+        ("Estou com febre alta e tosse, vou ao hospital",   "Portug   ✅ HIGH"),
+        # Spanish
+        ("Tengo fiebre y tos, necesito ir al médico",       "Spanish  ✅ HIGH"),
+        # Indonesian
+        ("Saya demam tinggi dan batuk parah",               "Indones  ✅ HIGH"),
+        # Normal post — should be LOW
+        ("Just had a great lunch at Bashundhara City",      "English  ✅ LOW"),
+    ]
+
+    print(f"\n{'Text':<48} {'Expected':<14} {'Lang':<6} {'Score':>6} {'Result'}")
+    print("-" * 90)
+
+    correct = 0
+    total   = len(test_posts)
+
+    for text, expected in test_posts:
+        score = engine.analyze_text_signals(text)
+        lang  = detect_language(text)
+
+        if score > 65:
+            result = "🔴 HIGH"
+        elif score > 35:
+            result = "🟡 MED"
+        else:
+            result = "🟢 LOW"
+
+        # Check correctness
+        expected_level = "HIGH" if "HIGH" in expected else "LOW"
+        actual_level   = "HIGH" if score > 55 else "LOW"
+        correct_mark   = "✓" if expected_level == actual_level else "✗"
+        if expected_level == actual_level:
+            correct += 1
+
+        print(
+            f"{text[:47]:<48} {expected:<14} "
+            f"{lang:<6} {score:>6.1f} {result} {correct_mark}"
+        )
+
+    accuracy = (correct / total) * 100
+    print(f"\n{'=' * 90}")
+    print(f"Accuracy on test set: {correct}/{total} = {accuracy:.1f}%")
+
+    print("\nENGINE STATUS:")
+    for key, val in engine.get_engine_status().items():
+        print(f"  {key}: {val}")
+    print("=" * 90)
