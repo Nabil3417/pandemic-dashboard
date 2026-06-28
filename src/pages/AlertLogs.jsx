@@ -53,9 +53,27 @@ const AlertLogs = () => {
               className="pl-12 pr-6 py-4 bg-white/5 border border-white/10 rounded-2xl text-sm font-bold text-white focus:outline-none focus:border-blue-500 w-full xl:w-80 transition-all"
             />
           </div>
-          <button className="flex items-center gap-3 px-8 py-4 bg-blue-600 text-white rounded-2xl text-[10px] font-black uppercase tracking-widest hover:bg-blue-700 transition-all shadow-xl shadow-blue-900/20">
-            <Download size={18} /> Export Results
-          </button>
+          <button 
+  onClick={() => {
+    if (!dynamicLogs.length) return;
+    const headers = ['ID', 'City', 'Severity', 'Message', 'Timestamp'];
+    const rows = dynamicLogs.map(a => [
+      a.id, a.city, a.severity, a.message, new Date().toISOString()
+    ]);
+    const csvContent = [headers, ...rows]
+      .map(row => row.map(cell => `"${cell}"`).join(','))
+      .join('\n');
+    const blob = new Blob([csvContent], { type: 'text/csv' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `bioguard_alerts_${new Date().toISOString().split('T')[0]}.csv`;
+    link.click();
+    URL.revokeObjectURL(url);
+  }}
+  className="flex items-center gap-3 px-8 py-4 bg-blue-600 text-white rounded-2xl text-[10px] font-black uppercase tracking-widest hover:bg-blue-700 transition-all shadow-xl shadow-blue-900/20">
+  <Download size={18} /> Export Results
+</button>
         </div>
       </header>
 
