@@ -214,15 +214,15 @@ def calculate_multi_modal_risk(zone, crisis_mode):
 
     # 2. Mobility anomaly — IsolationForest
     lat, lng = zone['center']
-    is_anomaly = mobility_ai.detect_anomaly(lat, lng)
-
+    mobility_result = mobility_ai.analyze_zone_mobility(zone['id'], crisis_mode)
+    is_anomaly      = mobility_result['is_anomaly']
+    cluster_size    = mobility_result['cluster_size']
+    mobility_score  = mobility_result['mobility_score']
     # 3. Wastewater viral load
     bio_load = wastewater_ai.get_localized_load(zone['id'], crisis_mode)
 
     # MULTI-MODAL WEIGHTED FUSION
-    fused_score = (nlp_score * 0.3) + (bio_load * 0.5)
-    if is_anomaly:
-        fused_score += 20
+    fused_score = (nlp_score * 0.3) + (bio_load * 0.5) + (mobility_score * 0.2)
     final_score = min(round(fused_score), 100)
 
     # Risk level
@@ -241,8 +241,10 @@ def calculate_multi_modal_risk(zone, crisis_mode):
         mobility_anomaly=is_anomaly,
         wastewater_score=bio_load,
         fused_score=final_score,
-        risk_level=risk
-    )
+        risk_level=risk,
+        cluster_size=cluster_size,
+        mobility_score=mobility_score
+           )
 
     return final_score, risk, color, nlp_score, is_anomaly, bio_load
 

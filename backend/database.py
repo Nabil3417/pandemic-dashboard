@@ -34,20 +34,19 @@ zones_collection    = db['zones']               # NEW — stores zone definition
 
 
 def save_risk_snapshot(zone_id, city, nlp_score, mobility_anomaly,
-                       wastewater_score, fused_score, risk_level):
-    """
-    Call this every time a risk score is calculated.
-    Builds up your historical dataset automatically.
-    """
+                       wastewater_score, fused_score, risk_level,
+                       cluster_size=0, mobility_score=0):
     risk_snapshots.insert_one({
-        "zone_id":           zone_id,
-        "city":              city,
-        "nlp_score":         nlp_score,
-        "mobility_anomaly":  mobility_anomaly,
-        "wastewater_score":  wastewater_score,
-        "fused_score":       fused_score,
-        "risk_level":        risk_level,
-        "timestamp":         datetime.now()
+        "zone_id":          zone_id,
+        "city":             city,
+        "nlp_score":        nlp_score,
+        "mobility_anomaly": mobility_anomaly,
+        "mobility_score":   mobility_score,
+        "cluster_size":     cluster_size,
+        "wastewater_score": wastewater_score,
+        "fused_score":      fused_score,
+        "risk_level":       risk_level,
+        "timestamp":        datetime.now()
     })
 
 
