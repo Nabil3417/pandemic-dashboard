@@ -84,7 +84,7 @@ def detect_zone(text):
     for zone_id, keywords in ZONE_KEYWORDS.items():
         if any(kw in text_lower for kw in keywords):
             return zone_id
-   return 15  # Default to NSU zone if no location match
+    return 15  # Default to NSU zone if no location match
 
 def is_health_related(text):
     """Check if a message contains health-related keywords."""

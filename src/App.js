@@ -8,6 +8,7 @@ import DataModalities from './pages/DataModalities';
 import AlertLogs from './pages/AlertLogs';
 import SignalIntelligence from './pages/SignalIntelligence';
 import PredictiveEngine from './pages/PredictiveEngine';
+import DataFeed from './pages/DataFeed';
 
 const PageLoader = () => (
   <div className="h-full w-full flex items-center justify-center bg-[#020617]">
@@ -38,6 +39,7 @@ function App() {
                 <Route path="/engine" element={<PredictiveEngine />} />
                 <Route path="/modalities" element={<DataModalities />} />
                 <Route path="/alerts" element={<AlertLogs />} />
+                <Route path="/datafeed" element={<DataFeed />} />
                 <Route path="*" element={<Navigate to="/" replace />} />
               </Routes>
             </div>

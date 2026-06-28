@@ -19,6 +19,7 @@ const Sidebar = () => {
     { name: 'Predictive Engine', icon: Cpu, path: '/engine' }, // New: Research Accuracy
     { name: 'Data Modalities', icon: Database, path: '/modalities' },
     { name: 'Alert Logs', icon: Bell, path: '/alerts' },
+    { name: 'Data Feed', icon: Database, path: '/datafeed' },
   ];
 
   return (
