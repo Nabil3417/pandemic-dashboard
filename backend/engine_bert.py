@@ -13,9 +13,13 @@ Supports 104 languages. Designed for CPU deployment.
 Gracefully degrades to keyword-only mode if torch is unavailable.
 """
 import os
-os.add_dll_directory(
-    r'C:\Users\Istiak Ahmed\AppData\Local\Programs\Python\Python312\Lib\site-packages\torch\lib'
-)
+try:
+    import torch
+    torch_lib = os.path.join(os.path.dirname(torch.__file__), 'lib')
+    if os.path.exists(torch_lib):
+        os.add_dll_directory(torch_lib)
+except Exception:
+    pass
 
 import re
 
