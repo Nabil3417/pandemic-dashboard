@@ -1,31 +1,74 @@
 """
-BioGuard AI — ARIMA Wastewater Viral Load Engine
-=================================================
-Replaces the random number generator with a proper
-time-series model based on ARIMA.
+BioGuard AI — Symptom-Search Surveillance Engine (formerly "wastewater engine")
+================================================================================
+v5.0 — REAL DATA UPGRADE
 
-Scientific basis:
-  Peccia et al. 2020 (Nature Biotechnology) — SARS-CoV-2 RNA
-  in wastewater tracks community infection dynamics.
+WHAT CHANGED FROM v4.x:
+  The old version generated a fully synthetic viral-load series (sine
+  wave + noise + scripted "outbreak bumps") and fit ARIMA on that fake
+  data. That is no longer acceptable for a research system, so this
+  engine now:
 
-Viral load ranges (copies/mL) referenced from literature:
-  Baseline:   100 - 1,000
-  Elevated:   1,000 - 10,000
-  High:       10,000 - 100,000
-  Critical:   100,000+
+    1. Loads REAL Google Trends symptom-search data collected by
+       data_collectors/google_trends_collector.py (either from the
+       local CSV cache data/dhaka_zone_symptom_trends.csv, or live
+       from MongoDB's trends_data collection).
+    2. Fits ARIMA(1,1,1) on that REAL series per zone — same modeling
+       approach as before, now grounded in real search-behavior data
+       instead of a synthetic generator.
+    3. Falls back to the old synthetic generator ONLY if no real data
+       has been collected yet for a zone (e.g. before the collector has
+       been run), and clearly marks that zone's data_source as
+       "synthetic-fallback" everywhere it's reported — including in
+       get_engine_status(), so the dashboard and any evaluation code
+       can distinguish real results from placeholder ones.
+
+HONESTY NOTE FOR THE RESEARCH WRITE-UP:
+  Bangladesh has no public wastewater-surveillance API. A real sewage
+  surveillance program for Dhaka does exist (icddr,b / University of
+  Virginia / IEDCR, published in Rogawski McQuade et al., Lancet
+  Microbe 2023 — 2,073 samples, 37 sites, weekly Dec 2019-Dec 2021,
+  showing sewage signal precedes clinical case rises by 1-2 weeks),
+  but its raw dataset is not bulk-downloadable; it lives in the
+  paper's supplementary materials / with the authors.
+  This engine therefore uses Google Trends symptom-search volume as a
+  REAL, immediately-available proxy signal for population-level
+  illness burden — an approach with its own peer-reviewed precedent
+  (Ginsberg et al., "Detecting influenza epidemics using search engine
+  query data", Nature, 2009). It is a genuinely real signal, but it is
+  a different modality than viral RNA in sewage, and that substitution
+  should be stated explicitly wherever this module is described.
+
+  Google Trends also does not report at ward/neighborhood resolution
+  for Bangladesh — only national/divisional. Zone-level values here
+  are therefore a disaggregation (using the same zone-weight table as
+  the mobility engine), not a direct per-zone measurement. State this
+  limitation in the methodology section.
+
+References:
+  Ginsberg, J., et al. Detecting influenza epidemics using search
+    engine query data. Nature, 2009.
+  Mavragani, A. & Ochoa, G. Google Trends in Infodemiology and
+    Infoveillance. JMIR Public Health Surveill, 2019.
+  Rogawski McQuade, E.T., et al. Real-time sewage surveillance for
+    SARS-CoV-2 in Dhaka, Bangladesh versus clinical COVID-19
+    surveillance. Lancet Microbe, 2023.
 """
 
+import os
 import random
 import numpy as np
+import pandas as pd
 from datetime import datetime
 from statsmodels.tsa.arima.model import ARIMA
 import warnings
 warnings.filterwarnings('ignore')
 
-# ─────────────────────────────────────────────────────────────
-# ZONE BASELINE VIRAL LOAD PROFILES
-# ─────────────────────────────────────────────────────────────
+from database import get_zone_trends_series
 
+# ─────────────────────────────────────────────────────────────
+# ZONE PROFILES — used only for the synthetic fallback generator
+# ─────────────────────────────────────────────────────────────
 ZONE_PROFILES = {
     1:  {"name": "Uttara",                  "baseline": 35, "volatility": 0.08},
     2:  {"name": "Mirpur",                  "baseline": 48, "volatility": 0.10},
@@ -44,16 +87,20 @@ ZONE_PROFILES = {
     15: {"name": "Bashundhara R/A (NSU)",   "baseline": 38, "volatility": 0.08},
 }
 
+CSV_FILENAME = "dhaka_zone_symptom_trends.csv"
+MIN_REAL_POINTS = 15  # below this, ARIMA on real data is unreliable — use fallback
+
 _zone_cache = {}
 _cache_timestamp = {}
 CACHE_TTL_MINUTES = 30
 
 
-def _generate_time_series(zone_id, days=60, crisis_mode=False):
-    """
-    Generates a scientifically grounded viral load time series.
-    Uses additive model to prevent runaway compounding.
-    """
+# ─────────────────────────────────────────────────────────────
+# SYNTHETIC FALLBACK (unchanged from v4.x — only used when a zone
+# has no real Google Trends data collected yet)
+# ─────────────────────────────────────────────────────────────
+
+def _generate_synthetic_series(zone_id, days=60, crisis_mode=False):
     profile   = ZONE_PROFILES.get(zone_id, ZONE_PROFILES[15])
     baseline  = profile['baseline']
     volatility = profile['volatility']
@@ -62,101 +109,146 @@ def _generate_time_series(zone_id, days=60, crisis_mode=False):
     current = baseline
 
     for day in range(days):
-        # Weekly pattern — pure additive sine wave
         weekly_swing = 2.0 * np.sin(2 * np.pi * day / 7)
-
-        # Random noise — additive, not multiplicative
         noise = random.gauss(0, volatility * 10)
-
-        # Mean reversion — pulls value back toward baseline
-        # This prevents runaway drift in either direction
         mean_reversion = (baseline - current) * 0.15
 
         if crisis_mode and day > days - 10:
-            # Crisis spike in final 10 days
             crisis_boost = random.uniform(15, 25)
         else:
             crisis_boost = 0
 
-        # Minor outbreak spike around day 40-50
         outbreak_boost = 0
         if not crisis_mode and 40 < day < 50:
             outbreak_boost = random.uniform(2, 6)
 
-        current = max(
-            5,
-            min(
-                90,
-                current
-                + weekly_swing
-                + noise
-                + mean_reversion
-                + crisis_boost
-                + outbreak_boost
-            )
-        )
+        current = max(5, min(90, current + weekly_swing + noise
+                              + mean_reversion + crisis_boost + outbreak_boost))
         series.append(round(current, 2))
 
     return series
 
-def _fit_arima(series):
-    """
-    Fits ARIMA(1,1,1) on the time series.
-    Returns fitted model or None if fitting fails.
-    """
+
+# ─────────────────────────────────────────────────────────────
+# REAL DATA LOADING
+# ─────────────────────────────────────────────────────────────
+
+def _load_real_series_from_csv(zone_id):
+    """Loads a zone's real weekly symptom_score series from the CSV cache."""
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    csv_path = os.path.join(base_dir, "data", CSV_FILENAME)
+
+    if not os.path.exists(csv_path):
+        return None
+
     try:
-        model = ARIMA(series, order=(1, 1, 1))
-        result = model.fit()
-        return result
-    except Exception:
+        df = pd.read_csv(csv_path)
+        df['date'] = pd.to_datetime(df['date'])
+        zone_df = df[df['zone_id'] == zone_id].sort_values('date')
+        if len(zone_df) < MIN_REAL_POINTS:
+            return None
+        return zone_df['symptom_score'].tolist()
+    except Exception as e:
+        print(f"   ⚠️  Could not read {CSV_FILENAME}: {e}")
+        return None
+
+
+def _load_real_series_from_mongo(zone_id):
+    """Loads a zone's real weekly symptom_score series from MongoDB (live data)."""
+    try:
+        docs = get_zone_trends_series(zone_id, limit=200)
+        if len(docs) < MIN_REAL_POINTS:
+            return None
+        return [d['symptom_score'] for d in docs]
+    except Exception as e:
+        print(f"   ⚠️  Could not read trends_data from MongoDB: {e}")
         return None
 
 
 def _get_zone_series(zone_id, crisis_mode):
     """
-    Returns cached time series for zone, regenerates every 30 minutes.
+    Returns (series, data_source) for a zone.
+    Priority: MongoDB (live, most current) -> CSV cache -> synthetic fallback.
+    Cached for CACHE_TTL_MINUTES to avoid re-querying Mongo/CSV on every request.
     """
     now = datetime.now()
     cache_key = f"{zone_id}_{crisis_mode}"
     last_update = _cache_timestamp.get(cache_key)
 
-    if (last_update is None or
-            (now - last_update).seconds > CACHE_TTL_MINUTES * 60):
-        _zone_cache[cache_key] = _generate_time_series(
-            zone_id, days=60, crisis_mode=crisis_mode
-        )
-        _cache_timestamp[cache_key] = now
+    if (last_update is not None and
+            (now - last_update).seconds < CACHE_TTL_MINUTES * 60):
+        return _zone_cache[cache_key]
 
-    return _zone_cache[cache_key]
+    # 1. Try MongoDB (real, live)
+    series = _load_real_series_from_mongo(zone_id)
+    source = "real-google-trends (mongodb)"
 
+    # 2. Try CSV cache (real, offline-safe)
+    if series is None:
+        series = _load_real_series_from_csv(zone_id)
+        source = "real-google-trends (csv-cache)"
+
+    # 3. Fall back to synthetic (clearly flagged)
+    if series is None:
+        series = _generate_synthetic_series(zone_id, days=60, crisis_mode=crisis_mode)
+        source = "synthetic-fallback"
+    elif crisis_mode:
+        # Overlay a crisis boost on the tail of a REAL series so the
+        # crisis-mode demo toggle still works meaningfully even on real data.
+        series = series.copy()
+        boost_len = min(10, len(series))
+        for i in range(len(series) - boost_len, len(series)):
+            series[i] = min(95, series[i] + random.uniform(15, 25))
+
+    result = (series, source)
+    _zone_cache[cache_key] = result
+    _cache_timestamp[cache_key] = now
+    return result
+
+
+def _fit_arima(series):
+    try:
+        model = ARIMA(series, order=(1, 1, 1))
+        return model.fit()
+    except Exception:
+        return None
+
+
+# ─────────────────────────────────────────────────────────────
+# MAIN ENGINE CLASS
+# ─────────────────────────────────────────────────────────────
 
 class WastewaterARIMAEngine:
     """
-    ARIMA-based wastewater viral load engine.
-    Provides current load estimate and multi-day forecasts.
+    ARIMA-based symptom-search surveillance engine.
+    Public method names are unchanged from v4.x so app.py requires no
+    changes — only the underlying data source changed from fully
+    synthetic to real Google Trends data (with synthetic fallback).
     """
 
     def __init__(self):
-        print("🔬 Initializing ARIMA Wastewater Engine...")
+        print("🔬 Initializing Symptom-Search Surveillance Engine v5.0...")
         print("   Model: ARIMA(1,1,1)")
         print("   Zones: 15 Dhaka City Corporation zones")
-        print("   Reference: Peccia et al. 2020 (Nature Biotechnology)")
-        print("✅ Wastewater engine ready!")
+        print("   Primary data source: Google Trends (real) — see")
+        print("     data_collectors/google_trends_collector.py")
+        print("   Fallback: literature-grounded synthetic generator")
+        print("     (used only for zones with no collected data yet)")
+        print("✅ Symptom-search engine ready!")
 
     def get_localized_load(self, zone_id, crisis_mode=False):
         """
         PRIMARY METHOD — called from app.py.
-        Returns current viral load score (0-100) for a zone.
+        Returns current symptom-search intensity score (0-100) for a zone.
         """
-        series = _get_zone_series(zone_id, crisis_mode)
-        historical = series[:53]
+        series, _ = _get_zone_series(zone_id, crisis_mode)
+        historical = series[:max(1, len(series) - 7)] if len(series) > 20 else series
         model = _fit_arima(historical)
 
         if model is not None:
             try:
                 fitted_values = model.fittedvalues
                 if len(fitted_values) > 0:
-                    # fitted_values is numpy array — use [-1] not .iloc[-1]
                     current_load = float(fitted_values[-1])
                     current_load = max(5.0, min(95.0, current_load))
                     return round(current_load, 2)
@@ -166,11 +258,9 @@ class WastewaterARIMAEngine:
         return round(series[-1], 2)
 
     def get_forecast(self, zone_id, crisis_mode=False, days=7):
-        """
-        Returns ARIMA forecast for next N days with confidence intervals.
-        """
-        series = _get_zone_series(zone_id, crisis_mode)
-        historical = series[:53]
+        """Returns ARIMA forecast for next N days with confidence intervals."""
+        series, _ = _get_zone_series(zone_id, crisis_mode)
+        historical = series[:max(1, len(series) - 7)] if len(series) > 20 else series
         model = _fit_arima(historical)
         forecast_data = []
 
@@ -180,14 +270,11 @@ class WastewaterARIMAEngine:
                 forecast_obj = model.get_forecast(steps=days)
                 conf_int = forecast_obj.conf_int(alpha=0.2)
 
-                # conf_int can be DataFrame or ndarray depending on version
                 for i, pred in enumerate(forecast):
                     try:
-                        # Try DataFrame access first (newer statsmodels)
                         lower = float(conf_int.iloc[i, 0])
                         upper = float(conf_int.iloc[i, 1])
                     except AttributeError:
-                        # Fall back to ndarray access
                         lower = float(conf_int[i][0])
                         upper = float(conf_int[i][1])
 
@@ -198,11 +285,9 @@ class WastewaterARIMAEngine:
                         "upper": round(min(100, upper), 2),
                     })
                 return forecast_data
-
             except Exception:
                 pass
 
-        # Fallback — simple linear projection
         last = series[-1]
         for i in range(days):
             last = min(95, last * 1.02 + random.gauss(0, 1))
@@ -215,16 +300,11 @@ class WastewaterARIMAEngine:
         return forecast_data
 
     def get_14day_forecast(self, zone_id, crisis_mode=False):
-        """Returns 14-day forecast for /api/forecast endpoint."""
         return self.get_forecast(zone_id, crisis_mode, days=14)
 
     def get_trend(self, zone_id, crisis_mode=False):
-        """
-        Returns trend direction: 'rising', 'falling', or 'stable'.
-        Used for dashboard arrows.
-        """
-        series = _get_zone_series(zone_id, crisis_mode)
-        recent = series[-7:]
+        series, _ = _get_zone_series(zone_id, crisis_mode)
+        recent = series[-7:] if len(series) >= 7 else series
 
         if len(recent) < 2:
             return "stable"
@@ -238,18 +318,40 @@ class WastewaterARIMAEngine:
         else:
             return "stable"
 
+    def get_data_source(self, zone_id):
+        """Returns whether this zone is currently using real or fallback data."""
+        _, source = _get_zone_series(zone_id, crisis_mode=False)
+        return source
+
     def get_engine_status(self):
-        """Returns engine status for dashboard."""
+        """Returns engine status for dashboard — now reports real vs fallback coverage."""
+        real_zones = 0
+        fallback_zones = 0
+        for zone_id in ZONE_PROFILES:
+            source = self.get_data_source(zone_id)
+            if source.startswith("real"):
+                real_zones += 1
+            else:
+                fallback_zones += 1
+
         return {
-            "model":     "ARIMA(1,1,1)",
-            "zones":     len(ZONE_PROFILES),
-            "cache_size": len(_zone_cache),
-            "reference": "Peccia et al. 2020, Nature Biotechnology",
-            "status":    "active"
+            "model":              "ARIMA(1,1,1)",
+            "zones":              len(ZONE_PROFILES),
+            "zones_real_data":    real_zones,
+            "zones_fallback":     fallback_zones,
+            "cache_size":         len(_zone_cache),
+            "primary_source":     "Google Trends symptom-search (real)",
+            "fallback_source":    "Literature-grounded synthetic generator",
+            "reference":          "Ginsberg et al. 2009, Nature; "
+                                   "Rogawski McQuade et al. 2023, Lancet Microbe",
+            "status": (
+                "fully real"    if fallback_zones == 0 else
+                "partially real" if real_zones > 0 else
+                "no real data collected yet — run google_trends_collector.py"
+            ),
         }
 
 
-# Single global instance — imported by app.py
 wastewater_ai = WastewaterARIMAEngine()
 
 
@@ -258,41 +360,18 @@ wastewater_ai = WastewaterARIMAEngine()
 # ─────────────────────────────────────────────
 if __name__ == "__main__":
     print("\n" + "=" * 65)
-    print("TESTING ARIMA WASTEWATER ENGINE")
+    print("TESTING SYMPTOM-SEARCH SURVEILLANCE ENGINE (v5.0 — real data)")
     print("=" * 65)
 
-    print(f"\n{'Zone':<30} {'Current':>8} {'Trend':>12} {'4-Day Forecast'}")
-    print("-" * 80)
+    print(f"\n{'Zone':<30} {'Source':<28} {'Current':>8} {'Trend':>10}")
+    print("-" * 85)
 
     for zone_id, profile in ZONE_PROFILES.items():
         current = wastewater_ai.get_localized_load(zone_id)
-        trend = wastewater_ai.get_trend(zone_id)
-        forecast = wastewater_ai.get_forecast(zone_id, days=7)
-
-        trend_arrow = (
-            "↑ Rising"  if trend == "rising"  else
-            "↓ Falling" if trend == "falling" else
-            "→ Stable"
-        )
-
-        forecast_vals = [str(f['load']) for f in forecast[:4]]
-        forecast_str = " → ".join(forecast_vals) + "..."
-
-        print(
-            f"{profile['name']:<30} {current:>8.1f} "
-            f"{trend_arrow:>12}  {forecast_str}"
-        )
-
-    print("\n--- CRISIS MODE TEST ---")
-    crisis_load = wastewater_ai.get_localized_load(15, crisis_mode=True)
-    normal_load = wastewater_ai.get_localized_load(15, crisis_mode=False)
-    print(f"Zone 15 (NSU) — Normal: {normal_load}  |  Crisis: {crisis_load}")
-
-    print("\n--- 14-DAY FORECAST (Zone 15 NSU) ---")
-    forecast_14 = wastewater_ai.get_14day_forecast(15)
-    for f in forecast_14:
-        bar = "█" * int(f['load'] / 5)
-        print(f"  {f['day']:>3}: {f['load']:>5.1f}  [{f['lower']:.1f} - {f['upper']:.1f}]  {bar}")
+        source  = wastewater_ai.get_data_source(zone_id)
+        trend   = wastewater_ai.get_trend(zone_id)
+        trend_arrow = "↑" if trend == "rising" else "↓" if trend == "falling" else "→"
+        print(f"{profile['name']:<30} {source:<28} {current:>8.1f} {trend_arrow:>10}")
 
     print("\nENGINE STATUS:")
     for key, val in wastewater_ai.get_engine_status().items():

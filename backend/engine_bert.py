@@ -7,17 +7,41 @@ Architecture:
   - BanglaBERT  (same XLM-RoBERTa, second instance)
       → Bangla & Banglish (ensemble partner)
   - Keyword Boost → amplifies health signal detection
+  - Keyword-Only Fallback → works without torch/transformers
 
 Supports 104 languages. Designed for CPU deployment.
+Gracefully degrades to keyword-only mode if torch is unavailable.
 """
+import os
+os.add_dll_directory(
+    r'C:\Users\Istiak Ahmed\AppData\Local\Programs\Python\Python312\Lib\site-packages\torch\lib'
+)
 
 import re
-from transformers import pipeline
-from langdetect import detect, DetectorFactory
-from langdetect.lang_detect_exception import LangDetectException
 
-# Makes language detection deterministic across runs
-DetectorFactory.seed = 42
+# ── Graceful import: torch/transformers may be broken on Windows ──
+_transformers_available = False
+_pipeline_func = None
+
+try:
+    from transformers import pipeline
+    _transformers_available = True
+except (OSError, ImportError, Exception) as e:
+    print(f"⚠️  transformers/torch import failed: {e}")
+    print("   → Engine will run in KEYWORD-ONLY mode (no ML model).")
+    print("   → To fix: install Visual C++ Redistributable 2019-2022 from")
+    print("      https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist")
+    print("      then reinstall: pip install torch --index-url https://download.pytorch.org/whl/cpu")
+
+try:
+    from langdetect import detect, DetectorFactory
+    from langdetect.lang_detect_exception import LangDetectException
+    _langdetect_available = True
+except ImportError:
+    _langdetect_available = False
+
+if _langdetect_available:
+    DetectorFactory.seed = 42
 
 # ─────────────────────────────────────────────────────────────
 # HEALTH SYMPTOM KEYWORDS PER LANGUAGE
@@ -104,6 +128,8 @@ def detect_language(text):
     Returns ISO 639-1 language code e.g. 'en', 'bn', 'hi', 'ar'.
     Falls back to 'en' on failure.
     """
+    if not _langdetect_available:
+        return 'en'
     try:
         if len(text.strip()) < 10:
             return 'en'
@@ -115,10 +141,6 @@ def detect_language(text):
 def is_banglish(text, detected_lang):
     """
     Detects Banglish — Roman-script Bengali common on Bangladeshi social media.
-    Examples:
-        "Amar onek fever hochhe, hospital jabo"
-        "NSU te class ache kintu ami osusto"
-        "Onek kharap lagche, doctor er kache jabo"
     """
     text_lower = text.lower()
 
@@ -161,7 +183,6 @@ def has_health_keywords(text, lang='en'):
     lang_hits = sum(1 for kw in lang_keywords if kw in text_lower)
 
     # Also check Bangla keywords regardless of detected language
-    # This catches mixed Banglish where lang detected as 'en'
     bangla_hits = sum(
         1 for kw in SYMPTOM_KEYWORDS['bn'] if kw in text
     )
@@ -172,6 +193,33 @@ def has_health_keywords(text, lang='en'):
     elif total == 1: return 0.12
     elif total == 2: return 0.22
     else:            return 0.30
+
+
+def _keyword_only_score(text, lang='en'):
+    """
+    Fallback scoring when torch/transformers are unavailable.
+    Uses only keyword matching — still quite effective for health signals.
+    Returns 0-100 score.
+    """
+    boost = has_health_keywords(text, lang)
+
+    # Banglish detection for extra context
+    banglish = is_banglish(text, lang)
+
+    # Base score from keyword density
+    if boost >= 0.30:
+        base = 55.0   # Multiple health keywords = likely outbreak signal
+    elif boost >= 0.22:
+        base = 42.0
+    elif boost >= 0.12:
+        base = 28.0
+    else:
+        base = 12.0   # No health keywords = low risk
+
+    # Add keyword boost
+    final = min(round(base + (boost * 100), 2), 100.0)
+    return final
+
 
 # ─────────────────────────────────────────────────────────────
 # MAIN ENGINE CLASS
@@ -186,6 +234,8 @@ class MultiLingualSymptomEngine:
       - Secondary → ensemble partner for Bangla/Banglish
 
     Combined with keyword boosting for improved health signal detection.
+
+    Falls back to keyword-only mode if torch/transformers unavailable.
     """
 
     def __init__(self):
@@ -193,19 +243,31 @@ class MultiLingualSymptomEngine:
         self.banglabert_ready  = False
         self.xlmroberta        = None
         self.banglabert        = None
+        self.keyword_only      = False
 
         print("🌍 Initializing Multi-Lingual Symptom Detection Engine...")
         print("   Supports: Bangla, Banglish, English, Hindi, Arabic,")
         print("             French, Spanish, Portuguese, Indonesian + 96 more")
         print()
 
-        self._load_xlmroberta()
-        self._load_banglabert()
+        if _transformers_available:
+            self._load_xlmroberta()
+            self._load_banglabert()
 
-        if self.xlmroberta_ready:
-            print("\n✅ Engine ready — Multi-lingual ensemble active")
+            if self.xlmroberta_ready:
+                print("\n✅ Engine ready — Multi-lingual ensemble active")
+            else:
+                print("\n⚠️  Engine ready — Limited mode")
         else:
-            print("\n⚠️  Engine ready — Limited mode")
+            self.keyword_only = True
+            print("\n⚠️  PyTorch/Transformers not available.")
+            print("   Running in KEYWORD-ONLY mode.")
+            print("   Scores will be based on health-keyword matching only.")
+            print("   To enable ML models, fix your PyTorch installation:")
+            print("   → pip uninstall torch")
+            print("   → pip install torch --index-url https://download.pytorch.org/whl/cpu")
+            print("   → Or install Visual C++ Redistributable 2019-2022")
+            print()
 
     def _load_xlmroberta(self):
         """Primary model — XLM-RoBERTa for 104 languages."""
@@ -229,7 +291,6 @@ class MultiLingualSymptomEngine:
         """
         Secondary model — second XLM-RoBERTa instance used as
         ensemble partner for Bangla/Banglish text.
-        Already cached from primary load — no extra download needed.
         """
         try:
             print("📥 Loading ensemble partner (Bangla/Banglish)...")
@@ -261,6 +322,8 @@ class MultiLingualSymptomEngine:
             print("✅ Fallback English BERT loaded")
         except Exception as e:
             print(f"❌ All models failed to load: {e}")
+            print("   Switching to keyword-only mode.")
+            self.keyword_only = True
 
     def _score_with_model(self, model_pipeline, text):
         """
@@ -294,7 +357,7 @@ class MultiLingualSymptomEngine:
         Pipeline:
           1. Detect language
           2. Detect Banglish
-          3. Route to correct model(s)
+          3. Route to correct model(s) OR keyword fallback
           4. Apply keyword boost
           5. Clamp and return final score
         """
@@ -305,8 +368,12 @@ class MultiLingualSymptomEngine:
         lang     = detect_language(text)
         banglish = is_banglish(text, lang)
 
-        # Step 2 — Keyword boost
+        # Step 2 — Keyword boost (always computed)
         boost = has_health_keywords(text, lang)
+
+        # ── KEYWORD-ONLY MODE (torch broken) ──
+        if self.keyword_only:
+            return _keyword_only_score(text, lang)
 
         # Step 3 — Model scoring
         if banglish:
@@ -356,13 +423,18 @@ class MultiLingualSymptomEngine:
             models.append("XLM-RoBERTa-base (104 langs) — Primary")
         if self.banglabert_ready:
             models.append("XLM-RoBERTa-base (104 langs) — Ensemble Partner")
+        if self.keyword_only:
+            models.append("Keyword-Only Fallback (no ML)")
 
         return {
             "xlmroberta_active":   self.xlmroberta_ready,
             "banglabert_active":   self.banglabert_ready,
-            "languages_supported": 104 if self.xlmroberta_ready else 1,
+            "keyword_only_mode":   self.keyword_only,
+            "languages_supported": 104 if self.xlmroberta_ready else (8 if _langdetect_available else 1),
             "models_active":       models,
             "mode": (
+                "KEYWORD-ONLY (torch unavailable)"
+                if self.keyword_only else
                 "Multi-Lingual Ensemble"
                 if self.xlmroberta_ready and self.banglabert_ready
                 else "Single Model"
@@ -385,34 +457,20 @@ if __name__ == "__main__":
     print("=" * 65)
 
     test_posts = [
-        # English — health
-        ("My whole family has fever and cough",              "English  ✅ HIGH"),
-        # English — normal
-        ("Beautiful day in Dhaka, loving the weather",       "English  ✅ LOW"),
-        # Bangla — health
-        ("জ্বর আর কাশি থামছে না, ডাক্তারের কাছে যাব",      "Bangla   ✅ HIGH"),
-        # Bangla — normal
-        ("আজকের আবহাওয়া অনেক সুন্দর",                       "Bangla   ✅ LOW"),
-        # Banglish — health
-        ("Amar onek fever hochhe, hospital jabo",            "Banglish ✅ HIGH"),
-        # Banglish — normal
-        ("NSU library te study kortesi",                     "Banglish ✅ LOW"),
-        # Banglish with Bangla keywords
-        ("Amar বমি hocche onek, doctor lagbe",               "Banglish ✅ HIGH"),
-        # Hindi
-        ("मुझे बुखार और खांसी है, डॉक्टर के पास जाना होगा", "Hindi    ✅ HIGH"),
-        # Arabic
-        ("أعاني من حمى شديدة وسعال مستمر",                  "Arabic   ✅ HIGH"),
-        # French
-        ("J'ai de la fièvre et je tousse beaucoup",         "French   ✅ HIGH"),
-        # Portuguese
-        ("Estou com febre alta e tosse, vou ao hospital",   "Portug   ✅ HIGH"),
-        # Spanish
-        ("Tengo fiebre y tos, necesito ir al médico",       "Spanish  ✅ HIGH"),
-        # Indonesian
-        ("Saya demam tinggi dan batuk parah",               "Indones  ✅ HIGH"),
-        # Normal post — should be LOW
-        ("Just had a great lunch at Bashundhara City",      "English  ✅ LOW"),
+        ("My whole family has fever and cough",              "English  HIGH"),
+        ("Beautiful day in Dhaka, loving the weather",       "English  LOW"),
+        ("জ্বর আর কাশি থামছে না, ডাক্তারের কাছে যাব",      "Bangla   HIGH"),
+        ("আজকের আবহাওয়া অনেক সুন্দর",                       "Bangla   LOW"),
+        ("Amar onek fever hochhe, hospital jabo",            "Banglish HIGH"),
+        ("NSU library te study kortesi",                     "Banglish LOW"),
+        ("Amar বমি hocche onek, doctor lagbe",               "Banglish HIGH"),
+        ("मुझे बुखार और खांसी है, डॉक्टर के पास जाना होगा", "Hindi    HIGH"),
+        ("أعاني من حمى شديدة وسعال مستمر",                  "Arabic   HIGH"),
+        ("J'ai de la fièvre et je tousse beaucoup",         "French   HIGH"),
+        ("Estou com febre alta e tosse, vou ao hospital",   "Portug   HIGH"),
+        ("Tengo fiebre y tos, necesito ir al médico",       "Spanish  HIGH"),
+        ("Saya demam tinggi dan batuk parah",               "Indones  HIGH"),
+        ("Just had a great lunch at Bashundhara City",      "English  LOW"),
     ]
 
     print(f"\n{'Text':<48} {'Expected':<14} {'Lang':<6} {'Score':>6} {'Result'}")
@@ -426,13 +484,12 @@ if __name__ == "__main__":
         lang  = detect_language(text)
 
         if score > 65:
-            result = "🔴 HIGH"
+            result = "HIGH"
         elif score > 35:
-            result = "🟡 MED"
+            result = "MED"
         else:
-            result = "🟢 LOW"
+            result = "LOW"
 
-        # Check correctness
         expected_level = "HIGH" if "HIGH" in expected else "LOW"
         actual_level   = "HIGH" if score > 55 else "LOW"
         correct_mark   = "✓" if expected_level == actual_level else "✗"

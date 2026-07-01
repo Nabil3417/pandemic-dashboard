@@ -1,0 +1,3151 @@
+date,zone_id,zone_name,symptom_score,source
+2019-12-29,1,Uttara,1.2,google_trends
+2019-12-29,2,Mirpur,0.06,google_trends
+2019-12-29,3,Gulshan & Banani,2.23,google_trends
+2019-12-29,4,Agargaon & Kafrul,0.92,google_trends
+2019-12-29,5,Farmgate & Karwan Bazar,6.74,google_trends
+2019-12-29,6,Diabari & Ashkona,0.0,google_trends
+2019-12-29,7,Uttarkhan & Faidabad,0.24,google_trends
+2019-12-29,8,Dakshinkhan & Dumni,3.94,google_trends
+2019-12-29,9,Vatara & Kuril,0.0,google_trends
+2019-12-29,10,Badda & Aftabnagar,3.94,google_trends
+2019-12-29,11,Ramna & Motijheel,5.5,google_trends
+2019-12-29,12,Khilgaon & Mugda,3.11,google_trends
+2019-12-29,13,Dhanmondi & Azimpur,4.1,google_trends
+2019-12-29,14,Wari & Jatrabari,4.47,google_trends
+2019-12-29,15,Bashundhara R/A (NSU),5.23,google_trends
+2020-01-05,1,Uttara,5.63,google_trends
+2020-01-05,2,Mirpur,1.2,google_trends
+2020-01-05,3,Gulshan & Banani,2.48,google_trends
+2020-01-05,4,Agargaon & Kafrul,0.0,google_trends
+2020-01-05,5,Farmgate & Karwan Bazar,6.08,google_trends
+2020-01-05,6,Diabari & Ashkona,2.77,google_trends
+2020-01-05,7,Uttarkhan & Faidabad,7.13,google_trends
+2020-01-05,8,Dakshinkhan & Dumni,5.52,google_trends
+2020-01-05,9,Vatara & Kuril,8.6,google_trends
+2020-01-05,10,Badda & Aftabnagar,3.54,google_trends
+2020-01-05,11,Ramna & Motijheel,6.44,google_trends
+2020-01-05,12,Khilgaon & Mugda,1.3,google_trends
+2020-01-05,13,Dhanmondi & Azimpur,1.73,google_trends
+2020-01-05,14,Wari & Jatrabari,10.15,google_trends
+2020-01-05,15,Bashundhara R/A (NSU),6.46,google_trends
+2020-01-12,1,Uttara,0.0,google_trends
+2020-01-12,2,Mirpur,5.21,google_trends
+2020-01-12,3,Gulshan & Banani,0.95,google_trends
+2020-01-12,4,Agargaon & Kafrul,3.33,google_trends
+2020-01-12,5,Farmgate & Karwan Bazar,3.75,google_trends
+2020-01-12,6,Diabari & Ashkona,1.27,google_trends
+2020-01-12,7,Uttarkhan & Faidabad,5.68,google_trends
+2020-01-12,8,Dakshinkhan & Dumni,5.51,google_trends
+2020-01-12,9,Vatara & Kuril,4.95,google_trends
+2020-01-12,10,Badda & Aftabnagar,7.71,google_trends
+2020-01-12,11,Ramna & Motijheel,2.76,google_trends
+2020-01-12,12,Khilgaon & Mugda,6.17,google_trends
+2020-01-12,13,Dhanmondi & Azimpur,7.81,google_trends
+2020-01-12,14,Wari & Jatrabari,6.79,google_trends
+2020-01-12,15,Bashundhara R/A (NSU),4.41,google_trends
+2020-01-19,1,Uttara,5.19,google_trends
+2020-01-19,2,Mirpur,5.17,google_trends
+2020-01-19,3,Gulshan & Banani,3.21,google_trends
+2020-01-19,4,Agargaon & Kafrul,2.07,google_trends
+2020-01-19,5,Farmgate & Karwan Bazar,5.83,google_trends
+2020-01-19,6,Diabari & Ashkona,1.23,google_trends
+2020-01-19,7,Uttarkhan & Faidabad,2.77,google_trends
+2020-01-19,8,Dakshinkhan & Dumni,3.67,google_trends
+2020-01-19,9,Vatara & Kuril,6.52,google_trends
+2020-01-19,10,Badda & Aftabnagar,3.65,google_trends
+2020-01-19,11,Ramna & Motijheel,10.59,google_trends
+2020-01-19,12,Khilgaon & Mugda,6.14,google_trends
+2020-01-19,13,Dhanmondi & Azimpur,4.23,google_trends
+2020-01-19,14,Wari & Jatrabari,5.18,google_trends
+2020-01-19,15,Bashundhara R/A (NSU),12.36,google_trends
+2020-01-26,1,Uttara,5.63,google_trends
+2020-01-26,2,Mirpur,10.0,google_trends
+2020-01-26,3,Gulshan & Banani,7.06,google_trends
+2020-01-26,4,Agargaon & Kafrul,0.32,google_trends
+2020-01-26,5,Farmgate & Karwan Bazar,11.3,google_trends
+2020-01-26,6,Diabari & Ashkona,2.38,google_trends
+2020-01-26,7,Uttarkhan & Faidabad,1.62,google_trends
+2020-01-26,8,Dakshinkhan & Dumni,6.53,google_trends
+2020-01-26,9,Vatara & Kuril,4.44,google_trends
+2020-01-26,10,Badda & Aftabnagar,5.79,google_trends
+2020-01-26,11,Ramna & Motijheel,9.12,google_trends
+2020-01-26,12,Khilgaon & Mugda,4.64,google_trends
+2020-01-26,13,Dhanmondi & Azimpur,0.05,google_trends
+2020-01-26,14,Wari & Jatrabari,5.26,google_trends
+2020-01-26,15,Bashundhara R/A (NSU),5.06,google_trends
+2020-02-02,1,Uttara,6.81,google_trends
+2020-02-02,2,Mirpur,3.55,google_trends
+2020-02-02,3,Gulshan & Banani,3.95,google_trends
+2020-02-02,4,Agargaon & Kafrul,3.23,google_trends
+2020-02-02,5,Farmgate & Karwan Bazar,2.75,google_trends
+2020-02-02,6,Diabari & Ashkona,4.83,google_trends
+2020-02-02,7,Uttarkhan & Faidabad,0.0,google_trends
+2020-02-02,8,Dakshinkhan & Dumni,1.57,google_trends
+2020-02-02,9,Vatara & Kuril,9.17,google_trends
+2020-02-02,10,Badda & Aftabnagar,6.11,google_trends
+2020-02-02,11,Ramna & Motijheel,7.91,google_trends
+2020-02-02,12,Khilgaon & Mugda,6.84,google_trends
+2020-02-02,13,Dhanmondi & Azimpur,1.38,google_trends
+2020-02-02,14,Wari & Jatrabari,9.42,google_trends
+2020-02-02,15,Bashundhara R/A (NSU),8.55,google_trends
+2020-02-09,1,Uttara,0.0,google_trends
+2020-02-09,2,Mirpur,6.99,google_trends
+2020-02-09,3,Gulshan & Banani,4.43,google_trends
+2020-02-09,4,Agargaon & Kafrul,4.14,google_trends
+2020-02-09,5,Farmgate & Karwan Bazar,4.91,google_trends
+2020-02-09,6,Diabari & Ashkona,4.8,google_trends
+2020-02-09,7,Uttarkhan & Faidabad,2.69,google_trends
+2020-02-09,8,Dakshinkhan & Dumni,4.6,google_trends
+2020-02-09,9,Vatara & Kuril,0.0,google_trends
+2020-02-09,10,Badda & Aftabnagar,5.37,google_trends
+2020-02-09,11,Ramna & Motijheel,4.13,google_trends
+2020-02-09,12,Khilgaon & Mugda,3.59,google_trends
+2020-02-09,13,Dhanmondi & Azimpur,3.51,google_trends
+2020-02-09,14,Wari & Jatrabari,4.04,google_trends
+2020-02-09,15,Bashundhara R/A (NSU),7.5,google_trends
+2020-02-16,1,Uttara,3.28,google_trends
+2020-02-16,2,Mirpur,5.25,google_trends
+2020-02-16,3,Gulshan & Banani,7.43,google_trends
+2020-02-16,4,Agargaon & Kafrul,2.66,google_trends
+2020-02-16,5,Farmgate & Karwan Bazar,13.71,google_trends
+2020-02-16,6,Diabari & Ashkona,2.73,google_trends
+2020-02-16,7,Uttarkhan & Faidabad,6.15,google_trends
+2020-02-16,8,Dakshinkhan & Dumni,5.77,google_trends
+2020-02-16,9,Vatara & Kuril,8.87,google_trends
+2020-02-16,10,Badda & Aftabnagar,4.41,google_trends
+2020-02-16,11,Ramna & Motijheel,8.74,google_trends
+2020-02-16,12,Khilgaon & Mugda,10.31,google_trends
+2020-02-16,13,Dhanmondi & Azimpur,8.59,google_trends
+2020-02-16,14,Wari & Jatrabari,8.95,google_trends
+2020-02-16,15,Bashundhara R/A (NSU),11.24,google_trends
+2020-02-23,1,Uttara,2.81,google_trends
+2020-02-23,2,Mirpur,6.35,google_trends
+2020-02-23,3,Gulshan & Banani,3.17,google_trends
+2020-02-23,4,Agargaon & Kafrul,0.0,google_trends
+2020-02-23,5,Farmgate & Karwan Bazar,7.09,google_trends
+2020-02-23,6,Diabari & Ashkona,2.72,google_trends
+2020-02-23,7,Uttarkhan & Faidabad,0.0,google_trends
+2020-02-23,8,Dakshinkhan & Dumni,2.47,google_trends
+2020-02-23,9,Vatara & Kuril,4.51,google_trends
+2020-02-23,10,Badda & Aftabnagar,4.83,google_trends
+2020-02-23,11,Ramna & Motijheel,6.08,google_trends
+2020-02-23,12,Khilgaon & Mugda,5.52,google_trends
+2020-02-23,13,Dhanmondi & Azimpur,4.69,google_trends
+2020-02-23,14,Wari & Jatrabari,6.06,google_trends
+2020-02-23,15,Bashundhara R/A (NSU),7.8,google_trends
+2020-03-01,1,Uttara,5.93,google_trends
+2020-03-01,2,Mirpur,8.78,google_trends
+2020-03-01,3,Gulshan & Banani,3.09,google_trends
+2020-03-01,4,Agargaon & Kafrul,1.61,google_trends
+2020-03-01,5,Farmgate & Karwan Bazar,6.48,google_trends
+2020-03-01,6,Diabari & Ashkona,4.28,google_trends
+2020-03-01,7,Uttarkhan & Faidabad,0.39,google_trends
+2020-03-01,8,Dakshinkhan & Dumni,5.36,google_trends
+2020-03-01,9,Vatara & Kuril,4.41,google_trends
+2020-03-01,10,Badda & Aftabnagar,4.39,google_trends
+2020-03-01,11,Ramna & Motijheel,6.45,google_trends
+2020-03-01,12,Khilgaon & Mugda,4.84,google_trends
+2020-03-01,13,Dhanmondi & Azimpur,13.69,google_trends
+2020-03-01,14,Wari & Jatrabari,4.23,google_trends
+2020-03-01,15,Bashundhara R/A (NSU),8.8,google_trends
+2020-03-08,1,Uttara,5.29,google_trends
+2020-03-08,2,Mirpur,5.5,google_trends
+2020-03-08,3,Gulshan & Banani,4.0,google_trends
+2020-03-08,4,Agargaon & Kafrul,4.39,google_trends
+2020-03-08,5,Farmgate & Karwan Bazar,8.52,google_trends
+2020-03-08,6,Diabari & Ashkona,0.0,google_trends
+2020-03-08,7,Uttarkhan & Faidabad,1.67,google_trends
+2020-03-08,8,Dakshinkhan & Dumni,2.14,google_trends
+2020-03-08,9,Vatara & Kuril,7.14,google_trends
+2020-03-08,10,Badda & Aftabnagar,0.72,google_trends
+2020-03-08,11,Ramna & Motijheel,10.09,google_trends
+2020-03-08,12,Khilgaon & Mugda,9.01,google_trends
+2020-03-08,13,Dhanmondi & Azimpur,9.2,google_trends
+2020-03-08,14,Wari & Jatrabari,7.9,google_trends
+2020-03-08,15,Bashundhara R/A (NSU),15.44,google_trends
+2020-03-15,1,Uttara,10.65,google_trends
+2020-03-15,2,Mirpur,15.23,google_trends
+2020-03-15,3,Gulshan & Banani,10.47,google_trends
+2020-03-15,4,Agargaon & Kafrul,9.16,google_trends
+2020-03-15,5,Farmgate & Karwan Bazar,9.74,google_trends
+2020-03-15,6,Diabari & Ashkona,3.39,google_trends
+2020-03-15,7,Uttarkhan & Faidabad,6.22,google_trends
+2020-03-15,8,Dakshinkhan & Dumni,3.71,google_trends
+2020-03-15,9,Vatara & Kuril,9.42,google_trends
+2020-03-15,10,Badda & Aftabnagar,5.72,google_trends
+2020-03-15,11,Ramna & Motijheel,15.73,google_trends
+2020-03-15,12,Khilgaon & Mugda,12.4,google_trends
+2020-03-15,13,Dhanmondi & Azimpur,10.72,google_trends
+2020-03-15,14,Wari & Jatrabari,13.82,google_trends
+2020-03-15,15,Bashundhara R/A (NSU),17.69,google_trends
+2020-03-22,1,Uttara,11.25,google_trends
+2020-03-22,2,Mirpur,11.54,google_trends
+2020-03-22,3,Gulshan & Banani,10.43,google_trends
+2020-03-22,4,Agargaon & Kafrul,7.26,google_trends
+2020-03-22,5,Farmgate & Karwan Bazar,14.91,google_trends
+2020-03-22,6,Diabari & Ashkona,10.53,google_trends
+2020-03-22,7,Uttarkhan & Faidabad,10.04,google_trends
+2020-03-22,8,Dakshinkhan & Dumni,5.56,google_trends
+2020-03-22,9,Vatara & Kuril,13.8,google_trends
+2020-03-22,10,Badda & Aftabnagar,10.98,google_trends
+2020-03-22,11,Ramna & Motijheel,21.1,google_trends
+2020-03-22,12,Khilgaon & Mugda,11.97,google_trends
+2020-03-22,13,Dhanmondi & Azimpur,10.55,google_trends
+2020-03-22,14,Wari & Jatrabari,15.78,google_trends
+2020-03-22,15,Bashundhara R/A (NSU),21.86,google_trends
+2020-03-29,1,Uttara,15.86,google_trends
+2020-03-29,2,Mirpur,12.8,google_trends
+2020-03-29,3,Gulshan & Banani,10.63,google_trends
+2020-03-29,4,Agargaon & Kafrul,5.95,google_trends
+2020-03-29,5,Farmgate & Karwan Bazar,18.14,google_trends
+2020-03-29,6,Diabari & Ashkona,8.77,google_trends
+2020-03-29,7,Uttarkhan & Faidabad,4.95,google_trends
+2020-03-29,8,Dakshinkhan & Dumni,3.95,google_trends
+2020-03-29,9,Vatara & Kuril,11.73,google_trends
+2020-03-29,10,Badda & Aftabnagar,6.99,google_trends
+2020-03-29,11,Ramna & Motijheel,14.3,google_trends
+2020-03-29,12,Khilgaon & Mugda,17.45,google_trends
+2020-03-29,13,Dhanmondi & Azimpur,12.94,google_trends
+2020-03-29,14,Wari & Jatrabari,13.62,google_trends
+2020-03-29,15,Bashundhara R/A (NSU),20.14,google_trends
+2020-04-05,1,Uttara,6.53,google_trends
+2020-04-05,2,Mirpur,8.77,google_trends
+2020-04-05,3,Gulshan & Banani,8.36,google_trends
+2020-04-05,4,Agargaon & Kafrul,8.65,google_trends
+2020-04-05,5,Farmgate & Karwan Bazar,14.58,google_trends
+2020-04-05,6,Diabari & Ashkona,3.59,google_trends
+2020-04-05,7,Uttarkhan & Faidabad,6.36,google_trends
+2020-04-05,8,Dakshinkhan & Dumni,0.09,google_trends
+2020-04-05,9,Vatara & Kuril,7.45,google_trends
+2020-04-05,10,Badda & Aftabnagar,8.08,google_trends
+2020-04-05,11,Ramna & Motijheel,12.33,google_trends
+2020-04-05,12,Khilgaon & Mugda,11.65,google_trends
+2020-04-05,13,Dhanmondi & Azimpur,4.2,google_trends
+2020-04-05,14,Wari & Jatrabari,8.3,google_trends
+2020-04-05,15,Bashundhara R/A (NSU),14.99,google_trends
+2020-04-12,1,Uttara,4.86,google_trends
+2020-04-12,2,Mirpur,6.54,google_trends
+2020-04-12,3,Gulshan & Banani,6.24,google_trends
+2020-04-12,4,Agargaon & Kafrul,5.55,google_trends
+2020-04-12,5,Farmgate & Karwan Bazar,8.91,google_trends
+2020-04-12,6,Diabari & Ashkona,2.33,google_trends
+2020-04-12,7,Uttarkhan & Faidabad,4.07,google_trends
+2020-04-12,8,Dakshinkhan & Dumni,2.74,google_trends
+2020-04-12,9,Vatara & Kuril,7.17,google_trends
+2020-04-12,10,Badda & Aftabnagar,6.08,google_trends
+2020-04-12,11,Ramna & Motijheel,10.74,google_trends
+2020-04-12,12,Khilgaon & Mugda,9.89,google_trends
+2020-04-12,13,Dhanmondi & Azimpur,4.74,google_trends
+2020-04-12,14,Wari & Jatrabari,10.54,google_trends
+2020-04-12,15,Bashundhara R/A (NSU),10.74,google_trends
+2020-04-19,1,Uttara,9.85,google_trends
+2020-04-19,2,Mirpur,17.08,google_trends
+2020-04-19,3,Gulshan & Banani,15.74,google_trends
+2020-04-19,4,Agargaon & Kafrul,9.76,google_trends
+2020-04-19,5,Farmgate & Karwan Bazar,11.43,google_trends
+2020-04-19,6,Diabari & Ashkona,5.47,google_trends
+2020-04-19,7,Uttarkhan & Faidabad,8.53,google_trends
+2020-04-19,8,Dakshinkhan & Dumni,6.94,google_trends
+2020-04-19,9,Vatara & Kuril,10.93,google_trends
+2020-04-19,10,Badda & Aftabnagar,6.06,google_trends
+2020-04-19,11,Ramna & Motijheel,16.36,google_trends
+2020-04-19,12,Khilgaon & Mugda,13.3,google_trends
+2020-04-19,13,Dhanmondi & Azimpur,9.82,google_trends
+2020-04-19,14,Wari & Jatrabari,17.06,google_trends
+2020-04-19,15,Bashundhara R/A (NSU),17.29,google_trends
+2020-04-26,1,Uttara,7.12,google_trends
+2020-04-26,2,Mirpur,13.94,google_trends
+2020-04-26,3,Gulshan & Banani,8.48,google_trends
+2020-04-26,4,Agargaon & Kafrul,8.96,google_trends
+2020-04-26,5,Farmgate & Karwan Bazar,19.15,google_trends
+2020-04-26,6,Diabari & Ashkona,0.05,google_trends
+2020-04-26,7,Uttarkhan & Faidabad,2.53,google_trends
+2020-04-26,8,Dakshinkhan & Dumni,4.29,google_trends
+2020-04-26,9,Vatara & Kuril,9.04,google_trends
+2020-04-26,10,Badda & Aftabnagar,8.11,google_trends
+2020-04-26,11,Ramna & Motijheel,16.39,google_trends
+2020-04-26,12,Khilgaon & Mugda,12.15,google_trends
+2020-04-26,13,Dhanmondi & Azimpur,14.34,google_trends
+2020-04-26,14,Wari & Jatrabari,12.23,google_trends
+2020-04-26,15,Bashundhara R/A (NSU),15.77,google_trends
+2020-05-03,1,Uttara,6.56,google_trends
+2020-05-03,2,Mirpur,13.91,google_trends
+2020-05-03,3,Gulshan & Banani,14.18,google_trends
+2020-05-03,4,Agargaon & Kafrul,8.8,google_trends
+2020-05-03,5,Farmgate & Karwan Bazar,14.29,google_trends
+2020-05-03,6,Diabari & Ashkona,7.38,google_trends
+2020-05-03,7,Uttarkhan & Faidabad,6.44,google_trends
+2020-05-03,8,Dakshinkhan & Dumni,3.92,google_trends
+2020-05-03,9,Vatara & Kuril,6.55,google_trends
+2020-05-03,10,Badda & Aftabnagar,7.07,google_trends
+2020-05-03,11,Ramna & Motijheel,7.33,google_trends
+2020-05-03,12,Khilgaon & Mugda,11.34,google_trends
+2020-05-03,13,Dhanmondi & Azimpur,8.05,google_trends
+2020-05-03,14,Wari & Jatrabari,9.17,google_trends
+2020-05-03,15,Bashundhara R/A (NSU),17.43,google_trends
+2020-05-10,1,Uttara,10.97,google_trends
+2020-05-10,2,Mirpur,11.5,google_trends
+2020-05-10,3,Gulshan & Banani,4.26,google_trends
+2020-05-10,4,Agargaon & Kafrul,8.34,google_trends
+2020-05-10,5,Farmgate & Karwan Bazar,9.07,google_trends
+2020-05-10,6,Diabari & Ashkona,0.2,google_trends
+2020-05-10,7,Uttarkhan & Faidabad,6.38,google_trends
+2020-05-10,8,Dakshinkhan & Dumni,7.39,google_trends
+2020-05-10,9,Vatara & Kuril,6.76,google_trends
+2020-05-10,10,Badda & Aftabnagar,9.57,google_trends
+2020-05-10,11,Ramna & Motijheel,8.42,google_trends
+2020-05-10,12,Khilgaon & Mugda,7.96,google_trends
+2020-05-10,13,Dhanmondi & Azimpur,3.65,google_trends
+2020-05-10,14,Wari & Jatrabari,10.59,google_trends
+2020-05-10,15,Bashundhara R/A (NSU),9.1,google_trends
+2020-05-17,1,Uttara,13.09,google_trends
+2020-05-17,2,Mirpur,13.02,google_trends
+2020-05-17,3,Gulshan & Banani,13.74,google_trends
+2020-05-17,4,Agargaon & Kafrul,6.75,google_trends
+2020-05-17,5,Farmgate & Karwan Bazar,11.38,google_trends
+2020-05-17,6,Diabari & Ashkona,6.76,google_trends
+2020-05-17,7,Uttarkhan & Faidabad,6.67,google_trends
+2020-05-17,8,Dakshinkhan & Dumni,0.0,google_trends
+2020-05-17,9,Vatara & Kuril,8.87,google_trends
+2020-05-17,10,Badda & Aftabnagar,12.42,google_trends
+2020-05-17,11,Ramna & Motijheel,8.63,google_trends
+2020-05-17,12,Khilgaon & Mugda,11.91,google_trends
+2020-05-17,13,Dhanmondi & Azimpur,11.23,google_trends
+2020-05-17,14,Wari & Jatrabari,8.33,google_trends
+2020-05-17,15,Bashundhara R/A (NSU),18.48,google_trends
+2020-05-24,1,Uttara,7.81,google_trends
+2020-05-24,2,Mirpur,5.71,google_trends
+2020-05-24,3,Gulshan & Banani,2.15,google_trends
+2020-05-24,4,Agargaon & Kafrul,11.07,google_trends
+2020-05-24,5,Farmgate & Karwan Bazar,13.53,google_trends
+2020-05-24,6,Diabari & Ashkona,6.47,google_trends
+2020-05-24,7,Uttarkhan & Faidabad,1.9,google_trends
+2020-05-24,8,Dakshinkhan & Dumni,3.12,google_trends
+2020-05-24,9,Vatara & Kuril,13.67,google_trends
+2020-05-24,10,Badda & Aftabnagar,10.79,google_trends
+2020-05-24,11,Ramna & Motijheel,8.8,google_trends
+2020-05-24,12,Khilgaon & Mugda,11.27,google_trends
+2020-05-24,13,Dhanmondi & Azimpur,14.21,google_trends
+2020-05-24,14,Wari & Jatrabari,8.61,google_trends
+2020-05-24,15,Bashundhara R/A (NSU),17.38,google_trends
+2020-05-31,1,Uttara,3.65,google_trends
+2020-05-31,2,Mirpur,10.36,google_trends
+2020-05-31,3,Gulshan & Banani,12.94,google_trends
+2020-05-31,4,Agargaon & Kafrul,6.74,google_trends
+2020-05-31,5,Farmgate & Karwan Bazar,13.25,google_trends
+2020-05-31,6,Diabari & Ashkona,3.64,google_trends
+2020-05-31,7,Uttarkhan & Faidabad,2.52,google_trends
+2020-05-31,8,Dakshinkhan & Dumni,2.46,google_trends
+2020-05-31,9,Vatara & Kuril,6.63,google_trends
+2020-05-31,10,Badda & Aftabnagar,7.43,google_trends
+2020-05-31,11,Ramna & Motijheel,12.96,google_trends
+2020-05-31,12,Khilgaon & Mugda,8.94,google_trends
+2020-05-31,13,Dhanmondi & Azimpur,6.87,google_trends
+2020-05-31,14,Wari & Jatrabari,14.49,google_trends
+2020-05-31,15,Bashundhara R/A (NSU),14.2,google_trends
+2020-06-07,1,Uttara,7.18,google_trends
+2020-06-07,2,Mirpur,12.69,google_trends
+2020-06-07,3,Gulshan & Banani,7.16,google_trends
+2020-06-07,4,Agargaon & Kafrul,8.75,google_trends
+2020-06-07,5,Farmgate & Karwan Bazar,13.8,google_trends
+2020-06-07,6,Diabari & Ashkona,0.0,google_trends
+2020-06-07,7,Uttarkhan & Faidabad,1.44,google_trends
+2020-06-07,8,Dakshinkhan & Dumni,8.24,google_trends
+2020-06-07,9,Vatara & Kuril,7.3,google_trends
+2020-06-07,10,Badda & Aftabnagar,8.98,google_trends
+2020-06-07,11,Ramna & Motijheel,18.88,google_trends
+2020-06-07,12,Khilgaon & Mugda,10.14,google_trends
+2020-06-07,13,Dhanmondi & Azimpur,7.3,google_trends
+2020-06-07,14,Wari & Jatrabari,13.51,google_trends
+2020-06-07,15,Bashundhara R/A (NSU),15.79,google_trends
+2020-06-14,1,Uttara,7.7,google_trends
+2020-06-14,2,Mirpur,12.99,google_trends
+2020-06-14,3,Gulshan & Banani,7.87,google_trends
+2020-06-14,4,Agargaon & Kafrul,4.59,google_trends
+2020-06-14,5,Farmgate & Karwan Bazar,9.88,google_trends
+2020-06-14,6,Diabari & Ashkona,1.0,google_trends
+2020-06-14,7,Uttarkhan & Faidabad,7.66,google_trends
+2020-06-14,8,Dakshinkhan & Dumni,7.12,google_trends
+2020-06-14,9,Vatara & Kuril,5.49,google_trends
+2020-06-14,10,Badda & Aftabnagar,8.18,google_trends
+2020-06-14,11,Ramna & Motijheel,10.91,google_trends
+2020-06-14,12,Khilgaon & Mugda,8.95,google_trends
+2020-06-14,13,Dhanmondi & Azimpur,6.08,google_trends
+2020-06-14,14,Wari & Jatrabari,12.17,google_trends
+2020-06-14,15,Bashundhara R/A (NSU),11.7,google_trends
+2020-06-21,1,Uttara,12.07,google_trends
+2020-06-21,2,Mirpur,7.03,google_trends
+2020-06-21,3,Gulshan & Banani,8.18,google_trends
+2020-06-21,4,Agargaon & Kafrul,7.03,google_trends
+2020-06-21,5,Farmgate & Karwan Bazar,11.08,google_trends
+2020-06-21,6,Diabari & Ashkona,6.94,google_trends
+2020-06-21,7,Uttarkhan & Faidabad,3.44,google_trends
+2020-06-21,8,Dakshinkhan & Dumni,1.16,google_trends
+2020-06-21,9,Vatara & Kuril,6.59,google_trends
+2020-06-21,10,Badda & Aftabnagar,5.34,google_trends
+2020-06-21,11,Ramna & Motijheel,8.91,google_trends
+2020-06-21,12,Khilgaon & Mugda,6.47,google_trends
+2020-06-21,13,Dhanmondi & Azimpur,9.4,google_trends
+2020-06-21,14,Wari & Jatrabari,11.3,google_trends
+2020-06-21,15,Bashundhara R/A (NSU),15.79,google_trends
+2020-06-28,1,Uttara,9.79,google_trends
+2020-06-28,2,Mirpur,6.82,google_trends
+2020-06-28,3,Gulshan & Banani,10.11,google_trends
+2020-06-28,4,Agargaon & Kafrul,10.08,google_trends
+2020-06-28,5,Farmgate & Karwan Bazar,11.64,google_trends
+2020-06-28,6,Diabari & Ashkona,2.4,google_trends
+2020-06-28,7,Uttarkhan & Faidabad,3.59,google_trends
+2020-06-28,8,Dakshinkhan & Dumni,4.07,google_trends
+2020-06-28,9,Vatara & Kuril,6.03,google_trends
+2020-06-28,10,Badda & Aftabnagar,10.34,google_trends
+2020-06-28,11,Ramna & Motijheel,15.69,google_trends
+2020-06-28,12,Khilgaon & Mugda,5.07,google_trends
+2020-06-28,13,Dhanmondi & Azimpur,9.44,google_trends
+2020-06-28,14,Wari & Jatrabari,12.85,google_trends
+2020-06-28,15,Bashundhara R/A (NSU),15.12,google_trends
+2020-07-05,1,Uttara,8.73,google_trends
+2020-07-05,2,Mirpur,6.9,google_trends
+2020-07-05,3,Gulshan & Banani,9.27,google_trends
+2020-07-05,4,Agargaon & Kafrul,1.04,google_trends
+2020-07-05,5,Farmgate & Karwan Bazar,8.82,google_trends
+2020-07-05,6,Diabari & Ashkona,6.07,google_trends
+2020-07-05,7,Uttarkhan & Faidabad,3.95,google_trends
+2020-07-05,8,Dakshinkhan & Dumni,0.0,google_trends
+2020-07-05,9,Vatara & Kuril,10.62,google_trends
+2020-07-05,10,Badda & Aftabnagar,8.33,google_trends
+2020-07-05,11,Ramna & Motijheel,8.96,google_trends
+2020-07-05,12,Khilgaon & Mugda,6.36,google_trends
+2020-07-05,13,Dhanmondi & Azimpur,7.79,google_trends
+2020-07-05,14,Wari & Jatrabari,10.5,google_trends
+2020-07-05,15,Bashundhara R/A (NSU),11.94,google_trends
+2020-07-12,1,Uttara,7.37,google_trends
+2020-07-12,2,Mirpur,14.0,google_trends
+2020-07-12,3,Gulshan & Banani,12.28,google_trends
+2020-07-12,4,Agargaon & Kafrul,6.13,google_trends
+2020-07-12,5,Farmgate & Karwan Bazar,11.24,google_trends
+2020-07-12,6,Diabari & Ashkona,1.39,google_trends
+2020-07-12,7,Uttarkhan & Faidabad,1.22,google_trends
+2020-07-12,8,Dakshinkhan & Dumni,0.0,google_trends
+2020-07-12,9,Vatara & Kuril,3.17,google_trends
+2020-07-12,10,Badda & Aftabnagar,10.85,google_trends
+2020-07-12,11,Ramna & Motijheel,6.04,google_trends
+2020-07-12,12,Khilgaon & Mugda,9.18,google_trends
+2020-07-12,13,Dhanmondi & Azimpur,10.91,google_trends
+2020-07-12,14,Wari & Jatrabari,8.77,google_trends
+2020-07-12,15,Bashundhara R/A (NSU),13.19,google_trends
+2020-07-19,1,Uttara,4.41,google_trends
+2020-07-19,2,Mirpur,7.03,google_trends
+2020-07-19,3,Gulshan & Banani,8.3,google_trends
+2020-07-19,4,Agargaon & Kafrul,8.65,google_trends
+2020-07-19,5,Farmgate & Karwan Bazar,3.46,google_trends
+2020-07-19,6,Diabari & Ashkona,5.3,google_trends
+2020-07-19,7,Uttarkhan & Faidabad,4.65,google_trends
+2020-07-19,8,Dakshinkhan & Dumni,3.36,google_trends
+2020-07-19,9,Vatara & Kuril,3.94,google_trends
+2020-07-19,10,Badda & Aftabnagar,6.61,google_trends
+2020-07-19,11,Ramna & Motijheel,10.7,google_trends
+2020-07-19,12,Khilgaon & Mugda,9.25,google_trends
+2020-07-19,13,Dhanmondi & Azimpur,6.5,google_trends
+2020-07-19,14,Wari & Jatrabari,9.21,google_trends
+2020-07-19,15,Bashundhara R/A (NSU),17.25,google_trends
+2020-07-26,1,Uttara,3.24,google_trends
+2020-07-26,2,Mirpur,6.59,google_trends
+2020-07-26,3,Gulshan & Banani,6.85,google_trends
+2020-07-26,4,Agargaon & Kafrul,2.98,google_trends
+2020-07-26,5,Farmgate & Karwan Bazar,6.73,google_trends
+2020-07-26,6,Diabari & Ashkona,4.44,google_trends
+2020-07-26,7,Uttarkhan & Faidabad,0.9,google_trends
+2020-07-26,8,Dakshinkhan & Dumni,6.89,google_trends
+2020-07-26,9,Vatara & Kuril,2.24,google_trends
+2020-07-26,10,Badda & Aftabnagar,6.95,google_trends
+2020-07-26,11,Ramna & Motijheel,10.55,google_trends
+2020-07-26,12,Khilgaon & Mugda,7.01,google_trends
+2020-07-26,13,Dhanmondi & Azimpur,4.15,google_trends
+2020-07-26,14,Wari & Jatrabari,8.32,google_trends
+2020-07-26,15,Bashundhara R/A (NSU),5.46,google_trends
+2020-08-02,1,Uttara,3.79,google_trends
+2020-08-02,2,Mirpur,6.01,google_trends
+2020-08-02,3,Gulshan & Banani,5.46,google_trends
+2020-08-02,4,Agargaon & Kafrul,3.71,google_trends
+2020-08-02,5,Farmgate & Karwan Bazar,4.63,google_trends
+2020-08-02,6,Diabari & Ashkona,1.29,google_trends
+2020-08-02,7,Uttarkhan & Faidabad,5.44,google_trends
+2020-08-02,8,Dakshinkhan & Dumni,5.32,google_trends
+2020-08-02,9,Vatara & Kuril,8.7,google_trends
+2020-08-02,10,Badda & Aftabnagar,3.39,google_trends
+2020-08-02,11,Ramna & Motijheel,8.31,google_trends
+2020-08-02,12,Khilgaon & Mugda,6.58,google_trends
+2020-08-02,13,Dhanmondi & Azimpur,12.13,google_trends
+2020-08-02,14,Wari & Jatrabari,10.75,google_trends
+2020-08-02,15,Bashundhara R/A (NSU),7.13,google_trends
+2020-08-09,1,Uttara,7.39,google_trends
+2020-08-09,2,Mirpur,6.65,google_trends
+2020-08-09,3,Gulshan & Banani,13.9,google_trends
+2020-08-09,4,Agargaon & Kafrul,8.79,google_trends
+2020-08-09,5,Farmgate & Karwan Bazar,13.81,google_trends
+2020-08-09,6,Diabari & Ashkona,6.27,google_trends
+2020-08-09,7,Uttarkhan & Faidabad,9.63,google_trends
+2020-08-09,8,Dakshinkhan & Dumni,0.0,google_trends
+2020-08-09,9,Vatara & Kuril,7.96,google_trends
+2020-08-09,10,Badda & Aftabnagar,9.3,google_trends
+2020-08-09,11,Ramna & Motijheel,9.34,google_trends
+2020-08-09,12,Khilgaon & Mugda,9.6,google_trends
+2020-08-09,13,Dhanmondi & Azimpur,9.61,google_trends
+2020-08-09,14,Wari & Jatrabari,10.6,google_trends
+2020-08-09,15,Bashundhara R/A (NSU),12.16,google_trends
+2020-08-16,1,Uttara,6.05,google_trends
+2020-08-16,2,Mirpur,8.55,google_trends
+2020-08-16,3,Gulshan & Banani,5.48,google_trends
+2020-08-16,4,Agargaon & Kafrul,6.09,google_trends
+2020-08-16,5,Farmgate & Karwan Bazar,11.76,google_trends
+2020-08-16,6,Diabari & Ashkona,4.04,google_trends
+2020-08-16,7,Uttarkhan & Faidabad,2.4,google_trends
+2020-08-16,8,Dakshinkhan & Dumni,5.01,google_trends
+2020-08-16,9,Vatara & Kuril,2.27,google_trends
+2020-08-16,10,Badda & Aftabnagar,3.9,google_trends
+2020-08-16,11,Ramna & Motijheel,9.11,google_trends
+2020-08-16,12,Khilgaon & Mugda,10.07,google_trends
+2020-08-16,13,Dhanmondi & Azimpur,12.1,google_trends
+2020-08-16,14,Wari & Jatrabari,4.69,google_trends
+2020-08-16,15,Bashundhara R/A (NSU),13.94,google_trends
+2020-08-23,1,Uttara,5.8,google_trends
+2020-08-23,2,Mirpur,6.68,google_trends
+2020-08-23,3,Gulshan & Banani,9.64,google_trends
+2020-08-23,4,Agargaon & Kafrul,0.0,google_trends
+2020-08-23,5,Farmgate & Karwan Bazar,9.42,google_trends
+2020-08-23,6,Diabari & Ashkona,5.59,google_trends
+2020-08-23,7,Uttarkhan & Faidabad,9.45,google_trends
+2020-08-23,8,Dakshinkhan & Dumni,2.39,google_trends
+2020-08-23,9,Vatara & Kuril,6.31,google_trends
+2020-08-23,10,Badda & Aftabnagar,8.84,google_trends
+2020-08-23,11,Ramna & Motijheel,12.2,google_trends
+2020-08-23,12,Khilgaon & Mugda,11.98,google_trends
+2020-08-23,13,Dhanmondi & Azimpur,11.31,google_trends
+2020-08-23,14,Wari & Jatrabari,6.87,google_trends
+2020-08-23,15,Bashundhara R/A (NSU),9.39,google_trends
+2020-08-30,1,Uttara,5.98,google_trends
+2020-08-30,2,Mirpur,3.56,google_trends
+2020-08-30,3,Gulshan & Banani,9.54,google_trends
+2020-08-30,4,Agargaon & Kafrul,6.66,google_trends
+2020-08-30,5,Farmgate & Karwan Bazar,6.58,google_trends
+2020-08-30,6,Diabari & Ashkona,2.89,google_trends
+2020-08-30,7,Uttarkhan & Faidabad,1.51,google_trends
+2020-08-30,8,Dakshinkhan & Dumni,1.72,google_trends
+2020-08-30,9,Vatara & Kuril,7.95,google_trends
+2020-08-30,10,Badda & Aftabnagar,9.4,google_trends
+2020-08-30,11,Ramna & Motijheel,13.68,google_trends
+2020-08-30,12,Khilgaon & Mugda,5.96,google_trends
+2020-08-30,13,Dhanmondi & Azimpur,6.85,google_trends
+2020-08-30,14,Wari & Jatrabari,9.5,google_trends
+2020-08-30,15,Bashundhara R/A (NSU),9.98,google_trends
+2020-09-06,1,Uttara,3.7,google_trends
+2020-09-06,2,Mirpur,9.57,google_trends
+2020-09-06,3,Gulshan & Banani,8.57,google_trends
+2020-09-06,4,Agargaon & Kafrul,11.62,google_trends
+2020-09-06,5,Farmgate & Karwan Bazar,10.88,google_trends
+2020-09-06,6,Diabari & Ashkona,4.65,google_trends
+2020-09-06,7,Uttarkhan & Faidabad,5.34,google_trends
+2020-09-06,8,Dakshinkhan & Dumni,2.87,google_trends
+2020-09-06,9,Vatara & Kuril,7.56,google_trends
+2020-09-06,10,Badda & Aftabnagar,10.16,google_trends
+2020-09-06,11,Ramna & Motijheel,11.23,google_trends
+2020-09-06,12,Khilgaon & Mugda,7.79,google_trends
+2020-09-06,13,Dhanmondi & Azimpur,7.44,google_trends
+2020-09-06,14,Wari & Jatrabari,12.05,google_trends
+2020-09-06,15,Bashundhara R/A (NSU),14.99,google_trends
+2020-09-13,1,Uttara,6.69,google_trends
+2020-09-13,2,Mirpur,11.96,google_trends
+2020-09-13,3,Gulshan & Banani,7.72,google_trends
+2020-09-13,4,Agargaon & Kafrul,3.84,google_trends
+2020-09-13,5,Farmgate & Karwan Bazar,11.12,google_trends
+2020-09-13,6,Diabari & Ashkona,8.58,google_trends
+2020-09-13,7,Uttarkhan & Faidabad,0.0,google_trends
+2020-09-13,8,Dakshinkhan & Dumni,4.67,google_trends
+2020-09-13,9,Vatara & Kuril,7.41,google_trends
+2020-09-13,10,Badda & Aftabnagar,7.2,google_trends
+2020-09-13,11,Ramna & Motijheel,8.95,google_trends
+2020-09-13,12,Khilgaon & Mugda,6.07,google_trends
+2020-09-13,13,Dhanmondi & Azimpur,4.95,google_trends
+2020-09-13,14,Wari & Jatrabari,8.47,google_trends
+2020-09-13,15,Bashundhara R/A (NSU),17.21,google_trends
+2020-09-20,1,Uttara,10.4,google_trends
+2020-09-20,2,Mirpur,6.36,google_trends
+2020-09-20,3,Gulshan & Banani,5.34,google_trends
+2020-09-20,4,Agargaon & Kafrul,11.33,google_trends
+2020-09-20,5,Farmgate & Karwan Bazar,6.6,google_trends
+2020-09-20,6,Diabari & Ashkona,2.71,google_trends
+2020-09-20,7,Uttarkhan & Faidabad,3.45,google_trends
+2020-09-20,8,Dakshinkhan & Dumni,1.58,google_trends
+2020-09-20,9,Vatara & Kuril,3.78,google_trends
+2020-09-20,10,Badda & Aftabnagar,2.84,google_trends
+2020-09-20,11,Ramna & Motijheel,12.38,google_trends
+2020-09-20,12,Khilgaon & Mugda,5.39,google_trends
+2020-09-20,13,Dhanmondi & Azimpur,7.32,google_trends
+2020-09-20,14,Wari & Jatrabari,10.23,google_trends
+2020-09-20,15,Bashundhara R/A (NSU),7.97,google_trends
+2020-09-27,1,Uttara,5.74,google_trends
+2020-09-27,2,Mirpur,6.77,google_trends
+2020-09-27,3,Gulshan & Banani,8.93,google_trends
+2020-09-27,4,Agargaon & Kafrul,6.62,google_trends
+2020-09-27,5,Farmgate & Karwan Bazar,9.13,google_trends
+2020-09-27,6,Diabari & Ashkona,1.7,google_trends
+2020-09-27,7,Uttarkhan & Faidabad,1.66,google_trends
+2020-09-27,8,Dakshinkhan & Dumni,7.1,google_trends
+2020-09-27,9,Vatara & Kuril,4.49,google_trends
+2020-09-27,10,Badda & Aftabnagar,9.62,google_trends
+2020-09-27,11,Ramna & Motijheel,4.12,google_trends
+2020-09-27,12,Khilgaon & Mugda,5.86,google_trends
+2020-09-27,13,Dhanmondi & Azimpur,6.6,google_trends
+2020-09-27,14,Wari & Jatrabari,9.92,google_trends
+2020-09-27,15,Bashundhara R/A (NSU),8.38,google_trends
+2020-10-04,1,Uttara,4.77,google_trends
+2020-10-04,2,Mirpur,3.27,google_trends
+2020-10-04,3,Gulshan & Banani,8.38,google_trends
+2020-10-04,4,Agargaon & Kafrul,2.76,google_trends
+2020-10-04,5,Farmgate & Karwan Bazar,5.44,google_trends
+2020-10-04,6,Diabari & Ashkona,2.87,google_trends
+2020-10-04,7,Uttarkhan & Faidabad,1.47,google_trends
+2020-10-04,8,Dakshinkhan & Dumni,3.19,google_trends
+2020-10-04,9,Vatara & Kuril,6.38,google_trends
+2020-10-04,10,Badda & Aftabnagar,5.23,google_trends
+2020-10-04,11,Ramna & Motijheel,13.06,google_trends
+2020-10-04,12,Khilgaon & Mugda,9.89,google_trends
+2020-10-04,13,Dhanmondi & Azimpur,6.89,google_trends
+2020-10-04,14,Wari & Jatrabari,12.9,google_trends
+2020-10-04,15,Bashundhara R/A (NSU),9.05,google_trends
+2020-10-11,1,Uttara,8.32,google_trends
+2020-10-11,2,Mirpur,10.77,google_trends
+2020-10-11,3,Gulshan & Banani,5.93,google_trends
+2020-10-11,4,Agargaon & Kafrul,7.35,google_trends
+2020-10-11,5,Farmgate & Karwan Bazar,10.63,google_trends
+2020-10-11,6,Diabari & Ashkona,0.4,google_trends
+2020-10-11,7,Uttarkhan & Faidabad,0.0,google_trends
+2020-10-11,8,Dakshinkhan & Dumni,4.14,google_trends
+2020-10-11,9,Vatara & Kuril,3.68,google_trends
+2020-10-11,10,Badda & Aftabnagar,1.86,google_trends
+2020-10-11,11,Ramna & Motijheel,11.52,google_trends
+2020-10-11,12,Khilgaon & Mugda,10.06,google_trends
+2020-10-11,13,Dhanmondi & Azimpur,9.0,google_trends
+2020-10-11,14,Wari & Jatrabari,3.71,google_trends
+2020-10-11,15,Bashundhara R/A (NSU),8.28,google_trends
+2020-10-18,1,Uttara,8.64,google_trends
+2020-10-18,2,Mirpur,11.53,google_trends
+2020-10-18,3,Gulshan & Banani,8.54,google_trends
+2020-10-18,4,Agargaon & Kafrul,3.79,google_trends
+2020-10-18,5,Farmgate & Karwan Bazar,8.72,google_trends
+2020-10-18,6,Diabari & Ashkona,1.82,google_trends
+2020-10-18,7,Uttarkhan & Faidabad,0.0,google_trends
+2020-10-18,8,Dakshinkhan & Dumni,2.68,google_trends
+2020-10-18,9,Vatara & Kuril,2.01,google_trends
+2020-10-18,10,Badda & Aftabnagar,8.06,google_trends
+2020-10-18,11,Ramna & Motijheel,10.69,google_trends
+2020-10-18,12,Khilgaon & Mugda,10.02,google_trends
+2020-10-18,13,Dhanmondi & Azimpur,7.36,google_trends
+2020-10-18,14,Wari & Jatrabari,6.02,google_trends
+2020-10-18,15,Bashundhara R/A (NSU),6.8,google_trends
+2020-10-25,1,Uttara,4.22,google_trends
+2020-10-25,2,Mirpur,9.3,google_trends
+2020-10-25,3,Gulshan & Banani,6.36,google_trends
+2020-10-25,4,Agargaon & Kafrul,1.34,google_trends
+2020-10-25,5,Farmgate & Karwan Bazar,7.49,google_trends
+2020-10-25,6,Diabari & Ashkona,7.92,google_trends
+2020-10-25,7,Uttarkhan & Faidabad,0.97,google_trends
+2020-10-25,8,Dakshinkhan & Dumni,3.16,google_trends
+2020-10-25,9,Vatara & Kuril,2.39,google_trends
+2020-10-25,10,Badda & Aftabnagar,2.69,google_trends
+2020-10-25,11,Ramna & Motijheel,4.12,google_trends
+2020-10-25,12,Khilgaon & Mugda,7.88,google_trends
+2020-10-25,13,Dhanmondi & Azimpur,10.53,google_trends
+2020-10-25,14,Wari & Jatrabari,8.51,google_trends
+2020-10-25,15,Bashundhara R/A (NSU),9.06,google_trends
+2020-11-01,1,Uttara,5.52,google_trends
+2020-11-01,2,Mirpur,4.93,google_trends
+2020-11-01,3,Gulshan & Banani,0.0,google_trends
+2020-11-01,4,Agargaon & Kafrul,9.32,google_trends
+2020-11-01,5,Farmgate & Karwan Bazar,9.9,google_trends
+2020-11-01,6,Diabari & Ashkona,4.29,google_trends
+2020-11-01,7,Uttarkhan & Faidabad,0.81,google_trends
+2020-11-01,8,Dakshinkhan & Dumni,2.99,google_trends
+2020-11-01,9,Vatara & Kuril,2.61,google_trends
+2020-11-01,10,Badda & Aftabnagar,4.6,google_trends
+2020-11-01,11,Ramna & Motijheel,8.35,google_trends
+2020-11-01,12,Khilgaon & Mugda,4.27,google_trends
+2020-11-01,13,Dhanmondi & Azimpur,7.04,google_trends
+2020-11-01,14,Wari & Jatrabari,8.29,google_trends
+2020-11-01,15,Bashundhara R/A (NSU),12.26,google_trends
+2020-11-08,1,Uttara,4.83,google_trends
+2020-11-08,2,Mirpur,12.15,google_trends
+2020-11-08,3,Gulshan & Banani,8.37,google_trends
+2020-11-08,4,Agargaon & Kafrul,5.3,google_trends
+2020-11-08,5,Farmgate & Karwan Bazar,7.9,google_trends
+2020-11-08,6,Diabari & Ashkona,1.0,google_trends
+2020-11-08,7,Uttarkhan & Faidabad,5.91,google_trends
+2020-11-08,8,Dakshinkhan & Dumni,5.19,google_trends
+2020-11-08,9,Vatara & Kuril,5.98,google_trends
+2020-11-08,10,Badda & Aftabnagar,5.59,google_trends
+2020-11-08,11,Ramna & Motijheel,7.8,google_trends
+2020-11-08,12,Khilgaon & Mugda,5.47,google_trends
+2020-11-08,13,Dhanmondi & Azimpur,8.95,google_trends
+2020-11-08,14,Wari & Jatrabari,13.35,google_trends
+2020-11-08,15,Bashundhara R/A (NSU),10.47,google_trends
+2020-11-15,1,Uttara,4.75,google_trends
+2020-11-15,2,Mirpur,7.14,google_trends
+2020-11-15,3,Gulshan & Banani,2.71,google_trends
+2020-11-15,4,Agargaon & Kafrul,4.79,google_trends
+2020-11-15,5,Farmgate & Karwan Bazar,8.99,google_trends
+2020-11-15,6,Diabari & Ashkona,5.25,google_trends
+2020-11-15,7,Uttarkhan & Faidabad,3.03,google_trends
+2020-11-15,8,Dakshinkhan & Dumni,6.27,google_trends
+2020-11-15,9,Vatara & Kuril,5.97,google_trends
+2020-11-15,10,Badda & Aftabnagar,3.48,google_trends
+2020-11-15,11,Ramna & Motijheel,12.32,google_trends
+2020-11-15,12,Khilgaon & Mugda,8.22,google_trends
+2020-11-15,13,Dhanmondi & Azimpur,10.98,google_trends
+2020-11-15,14,Wari & Jatrabari,9.87,google_trends
+2020-11-15,15,Bashundhara R/A (NSU),7.99,google_trends
+2020-11-22,1,Uttara,7.44,google_trends
+2020-11-22,2,Mirpur,6.04,google_trends
+2020-11-22,3,Gulshan & Banani,4.84,google_trends
+2020-11-22,4,Agargaon & Kafrul,6.29,google_trends
+2020-11-22,5,Farmgate & Karwan Bazar,13.02,google_trends
+2020-11-22,6,Diabari & Ashkona,1.54,google_trends
+2020-11-22,7,Uttarkhan & Faidabad,0.0,google_trends
+2020-11-22,8,Dakshinkhan & Dumni,2.7,google_trends
+2020-11-22,9,Vatara & Kuril,7.17,google_trends
+2020-11-22,10,Badda & Aftabnagar,4.23,google_trends
+2020-11-22,11,Ramna & Motijheel,6.75,google_trends
+2020-11-22,12,Khilgaon & Mugda,4.67,google_trends
+2020-11-22,13,Dhanmondi & Azimpur,7.67,google_trends
+2020-11-22,14,Wari & Jatrabari,10.22,google_trends
+2020-11-22,15,Bashundhara R/A (NSU),10.9,google_trends
+2020-11-29,1,Uttara,7.5,google_trends
+2020-11-29,2,Mirpur,7.87,google_trends
+2020-11-29,3,Gulshan & Banani,10.25,google_trends
+2020-11-29,4,Agargaon & Kafrul,3.35,google_trends
+2020-11-29,5,Farmgate & Karwan Bazar,10.55,google_trends
+2020-11-29,6,Diabari & Ashkona,5.29,google_trends
+2020-11-29,7,Uttarkhan & Faidabad,1.41,google_trends
+2020-11-29,8,Dakshinkhan & Dumni,1.91,google_trends
+2020-11-29,9,Vatara & Kuril,6.72,google_trends
+2020-11-29,10,Badda & Aftabnagar,6.22,google_trends
+2020-11-29,11,Ramna & Motijheel,8.87,google_trends
+2020-11-29,12,Khilgaon & Mugda,5.27,google_trends
+2020-11-29,13,Dhanmondi & Azimpur,9.01,google_trends
+2020-11-29,14,Wari & Jatrabari,5.85,google_trends
+2020-11-29,15,Bashundhara R/A (NSU),9.75,google_trends
+2020-12-06,1,Uttara,4.07,google_trends
+2020-12-06,2,Mirpur,7.96,google_trends
+2020-12-06,3,Gulshan & Banani,6.46,google_trends
+2020-12-06,4,Agargaon & Kafrul,5.04,google_trends
+2020-12-06,5,Farmgate & Karwan Bazar,13.33,google_trends
+2020-12-06,6,Diabari & Ashkona,0.0,google_trends
+2020-12-06,7,Uttarkhan & Faidabad,6.23,google_trends
+2020-12-06,8,Dakshinkhan & Dumni,1.29,google_trends
+2020-12-06,9,Vatara & Kuril,7.94,google_trends
+2020-12-06,10,Badda & Aftabnagar,4.08,google_trends
+2020-12-06,11,Ramna & Motijheel,11.86,google_trends
+2020-12-06,12,Khilgaon & Mugda,5.5,google_trends
+2020-12-06,13,Dhanmondi & Azimpur,13.8,google_trends
+2020-12-06,14,Wari & Jatrabari,9.04,google_trends
+2020-12-06,15,Bashundhara R/A (NSU),19.04,google_trends
+2020-12-13,1,Uttara,1.22,google_trends
+2020-12-13,2,Mirpur,9.43,google_trends
+2020-12-13,3,Gulshan & Banani,8.54,google_trends
+2020-12-13,4,Agargaon & Kafrul,4.78,google_trends
+2020-12-13,5,Farmgate & Karwan Bazar,9.8,google_trends
+2020-12-13,6,Diabari & Ashkona,4.51,google_trends
+2020-12-13,7,Uttarkhan & Faidabad,0.3,google_trends
+2020-12-13,8,Dakshinkhan & Dumni,4.36,google_trends
+2020-12-13,9,Vatara & Kuril,2.46,google_trends
+2020-12-13,10,Badda & Aftabnagar,4.92,google_trends
+2020-12-13,11,Ramna & Motijheel,9.7,google_trends
+2020-12-13,12,Khilgaon & Mugda,8.16,google_trends
+2020-12-13,13,Dhanmondi & Azimpur,8.54,google_trends
+2020-12-13,14,Wari & Jatrabari,6.99,google_trends
+2020-12-13,15,Bashundhara R/A (NSU),13.97,google_trends
+2020-12-20,1,Uttara,8.24,google_trends
+2020-12-20,2,Mirpur,10.04,google_trends
+2020-12-20,3,Gulshan & Banani,7.26,google_trends
+2020-12-20,4,Agargaon & Kafrul,7.69,google_trends
+2020-12-20,5,Farmgate & Karwan Bazar,9.3,google_trends
+2020-12-20,6,Diabari & Ashkona,2.45,google_trends
+2020-12-20,7,Uttarkhan & Faidabad,2.45,google_trends
+2020-12-20,8,Dakshinkhan & Dumni,5.42,google_trends
+2020-12-20,9,Vatara & Kuril,4.94,google_trends
+2020-12-20,10,Badda & Aftabnagar,8.23,google_trends
+2020-12-20,11,Ramna & Motijheel,9.46,google_trends
+2020-12-20,12,Khilgaon & Mugda,5.99,google_trends
+2020-12-20,13,Dhanmondi & Azimpur,5.39,google_trends
+2020-12-20,14,Wari & Jatrabari,8.9,google_trends
+2020-12-20,15,Bashundhara R/A (NSU),10.8,google_trends
+2020-12-27,1,Uttara,7.5,google_trends
+2020-12-27,2,Mirpur,10.16,google_trends
+2020-12-27,3,Gulshan & Banani,2.04,google_trends
+2020-12-27,4,Agargaon & Kafrul,2.65,google_trends
+2020-12-27,5,Farmgate & Karwan Bazar,8.22,google_trends
+2020-12-27,6,Diabari & Ashkona,0.79,google_trends
+2020-12-27,7,Uttarkhan & Faidabad,5.53,google_trends
+2020-12-27,8,Dakshinkhan & Dumni,3.88,google_trends
+2020-12-27,9,Vatara & Kuril,6.51,google_trends
+2020-12-27,10,Badda & Aftabnagar,4.7,google_trends
+2020-12-27,11,Ramna & Motijheel,10.25,google_trends
+2020-12-27,12,Khilgaon & Mugda,6.31,google_trends
+2020-12-27,13,Dhanmondi & Azimpur,9.52,google_trends
+2020-12-27,14,Wari & Jatrabari,10.13,google_trends
+2020-12-27,15,Bashundhara R/A (NSU),9.36,google_trends
+2021-01-03,1,Uttara,9.89,google_trends
+2021-01-03,2,Mirpur,12.57,google_trends
+2021-01-03,3,Gulshan & Banani,8.68,google_trends
+2021-01-03,4,Agargaon & Kafrul,7.3,google_trends
+2021-01-03,5,Farmgate & Karwan Bazar,12.62,google_trends
+2021-01-03,6,Diabari & Ashkona,5.01,google_trends
+2021-01-03,7,Uttarkhan & Faidabad,3.21,google_trends
+2021-01-03,8,Dakshinkhan & Dumni,6.07,google_trends
+2021-01-03,9,Vatara & Kuril,5.14,google_trends
+2021-01-03,10,Badda & Aftabnagar,5.5,google_trends
+2021-01-03,11,Ramna & Motijheel,8.55,google_trends
+2021-01-03,12,Khilgaon & Mugda,7.93,google_trends
+2021-01-03,13,Dhanmondi & Azimpur,12.2,google_trends
+2021-01-03,14,Wari & Jatrabari,14.01,google_trends
+2021-01-03,15,Bashundhara R/A (NSU),13.19,google_trends
+2021-01-10,1,Uttara,9.98,google_trends
+2021-01-10,2,Mirpur,11.7,google_trends
+2021-01-10,3,Gulshan & Banani,10.13,google_trends
+2021-01-10,4,Agargaon & Kafrul,5.89,google_trends
+2021-01-10,5,Farmgate & Karwan Bazar,7.51,google_trends
+2021-01-10,6,Diabari & Ashkona,8.74,google_trends
+2021-01-10,7,Uttarkhan & Faidabad,4.14,google_trends
+2021-01-10,8,Dakshinkhan & Dumni,2.17,google_trends
+2021-01-10,9,Vatara & Kuril,6.32,google_trends
+2021-01-10,10,Badda & Aftabnagar,7.8,google_trends
+2021-01-10,11,Ramna & Motijheel,8.12,google_trends
+2021-01-10,12,Khilgaon & Mugda,4.78,google_trends
+2021-01-10,13,Dhanmondi & Azimpur,11.58,google_trends
+2021-01-10,14,Wari & Jatrabari,6.55,google_trends
+2021-01-10,15,Bashundhara R/A (NSU),10.76,google_trends
+2021-01-17,1,Uttara,11.34,google_trends
+2021-01-17,2,Mirpur,10.39,google_trends
+2021-01-17,3,Gulshan & Banani,11.84,google_trends
+2021-01-17,4,Agargaon & Kafrul,12.78,google_trends
+2021-01-17,5,Farmgate & Karwan Bazar,11.2,google_trends
+2021-01-17,6,Diabari & Ashkona,2.69,google_trends
+2021-01-17,7,Uttarkhan & Faidabad,2.61,google_trends
+2021-01-17,8,Dakshinkhan & Dumni,0.93,google_trends
+2021-01-17,9,Vatara & Kuril,8.06,google_trends
+2021-01-17,10,Badda & Aftabnagar,9.54,google_trends
+2021-01-17,11,Ramna & Motijheel,17.58,google_trends
+2021-01-17,12,Khilgaon & Mugda,9.62,google_trends
+2021-01-17,13,Dhanmondi & Azimpur,11.98,google_trends
+2021-01-17,14,Wari & Jatrabari,10.52,google_trends
+2021-01-17,15,Bashundhara R/A (NSU),10.81,google_trends
+2021-01-24,1,Uttara,13.01,google_trends
+2021-01-24,2,Mirpur,10.03,google_trends
+2021-01-24,3,Gulshan & Banani,9.32,google_trends
+2021-01-24,4,Agargaon & Kafrul,8.59,google_trends
+2021-01-24,5,Farmgate & Karwan Bazar,12.83,google_trends
+2021-01-24,6,Diabari & Ashkona,4.95,google_trends
+2021-01-24,7,Uttarkhan & Faidabad,5.43,google_trends
+2021-01-24,8,Dakshinkhan & Dumni,3.29,google_trends
+2021-01-24,9,Vatara & Kuril,8.41,google_trends
+2021-01-24,10,Badda & Aftabnagar,10.03,google_trends
+2021-01-24,11,Ramna & Motijheel,10.89,google_trends
+2021-01-24,12,Khilgaon & Mugda,11.36,google_trends
+2021-01-24,13,Dhanmondi & Azimpur,12.44,google_trends
+2021-01-24,14,Wari & Jatrabari,13.4,google_trends
+2021-01-24,15,Bashundhara R/A (NSU),20.3,google_trends
+2021-01-31,1,Uttara,12.07,google_trends
+2021-01-31,2,Mirpur,11.17,google_trends
+2021-01-31,3,Gulshan & Banani,11.84,google_trends
+2021-01-31,4,Agargaon & Kafrul,9.33,google_trends
+2021-01-31,5,Farmgate & Karwan Bazar,12.24,google_trends
+2021-01-31,6,Diabari & Ashkona,2.15,google_trends
+2021-01-31,7,Uttarkhan & Faidabad,0.0,google_trends
+2021-01-31,8,Dakshinkhan & Dumni,9.18,google_trends
+2021-01-31,9,Vatara & Kuril,9.78,google_trends
+2021-01-31,10,Badda & Aftabnagar,13.6,google_trends
+2021-01-31,11,Ramna & Motijheel,17.38,google_trends
+2021-01-31,12,Khilgaon & Mugda,15.16,google_trends
+2021-01-31,13,Dhanmondi & Azimpur,12.9,google_trends
+2021-01-31,14,Wari & Jatrabari,11.69,google_trends
+2021-01-31,15,Bashundhara R/A (NSU),16.82,google_trends
+2021-02-07,1,Uttara,21.87,google_trends
+2021-02-07,2,Mirpur,27.09,google_trends
+2021-02-07,3,Gulshan & Banani,23.11,google_trends
+2021-02-07,4,Agargaon & Kafrul,20.06,google_trends
+2021-02-07,5,Farmgate & Karwan Bazar,26.9,google_trends
+2021-02-07,6,Diabari & Ashkona,10.09,google_trends
+2021-02-07,7,Uttarkhan & Faidabad,10.69,google_trends
+2021-02-07,8,Dakshinkhan & Dumni,9.33,google_trends
+2021-02-07,9,Vatara & Kuril,26.39,google_trends
+2021-02-07,10,Badda & Aftabnagar,21.71,google_trends
+2021-02-07,11,Ramna & Motijheel,32.89,google_trends
+2021-02-07,12,Khilgaon & Mugda,24.78,google_trends
+2021-02-07,13,Dhanmondi & Azimpur,24.08,google_trends
+2021-02-07,14,Wari & Jatrabari,27.97,google_trends
+2021-02-07,15,Bashundhara R/A (NSU),37.95,google_trends
+2021-02-14,1,Uttara,21.89,google_trends
+2021-02-14,2,Mirpur,25.8,google_trends
+2021-02-14,3,Gulshan & Banani,23.04,google_trends
+2021-02-14,4,Agargaon & Kafrul,23.91,google_trends
+2021-02-14,5,Farmgate & Karwan Bazar,33.85,google_trends
+2021-02-14,6,Diabari & Ashkona,7.79,google_trends
+2021-02-14,7,Uttarkhan & Faidabad,13.32,google_trends
+2021-02-14,8,Dakshinkhan & Dumni,13.32,google_trends
+2021-02-14,9,Vatara & Kuril,25.24,google_trends
+2021-02-14,10,Badda & Aftabnagar,20.88,google_trends
+2021-02-14,11,Ramna & Motijheel,34.74,google_trends
+2021-02-14,12,Khilgaon & Mugda,28.29,google_trends
+2021-02-14,13,Dhanmondi & Azimpur,26.71,google_trends
+2021-02-14,14,Wari & Jatrabari,30.86,google_trends
+2021-02-14,15,Bashundhara R/A (NSU),39.4,google_trends
+2021-02-21,1,Uttara,20.95,google_trends
+2021-02-21,2,Mirpur,21.85,google_trends
+2021-02-21,3,Gulshan & Banani,22.99,google_trends
+2021-02-21,4,Agargaon & Kafrul,17.91,google_trends
+2021-02-21,5,Farmgate & Karwan Bazar,26.22,google_trends
+2021-02-21,6,Diabari & Ashkona,7.87,google_trends
+2021-02-21,7,Uttarkhan & Faidabad,5.39,google_trends
+2021-02-21,8,Dakshinkhan & Dumni,9.74,google_trends
+2021-02-21,9,Vatara & Kuril,16.48,google_trends
+2021-02-21,10,Badda & Aftabnagar,17.72,google_trends
+2021-02-21,11,Ramna & Motijheel,31.28,google_trends
+2021-02-21,12,Khilgaon & Mugda,23.99,google_trends
+2021-02-21,13,Dhanmondi & Azimpur,22.02,google_trends
+2021-02-21,14,Wari & Jatrabari,22.65,google_trends
+2021-02-21,15,Bashundhara R/A (NSU),32.88,google_trends
+2021-02-28,1,Uttara,15.19,google_trends
+2021-02-28,2,Mirpur,24.79,google_trends
+2021-02-28,3,Gulshan & Banani,18.51,google_trends
+2021-02-28,4,Agargaon & Kafrul,14.6,google_trends
+2021-02-28,5,Farmgate & Karwan Bazar,25.01,google_trends
+2021-02-28,6,Diabari & Ashkona,8.5,google_trends
+2021-02-28,7,Uttarkhan & Faidabad,9.53,google_trends
+2021-02-28,8,Dakshinkhan & Dumni,8.21,google_trends
+2021-02-28,9,Vatara & Kuril,19.23,google_trends
+2021-02-28,10,Badda & Aftabnagar,18.01,google_trends
+2021-02-28,11,Ramna & Motijheel,27.33,google_trends
+2021-02-28,12,Khilgaon & Mugda,21.31,google_trends
+2021-02-28,13,Dhanmondi & Azimpur,16.27,google_trends
+2021-02-28,14,Wari & Jatrabari,21.4,google_trends
+2021-02-28,15,Bashundhara R/A (NSU),27.54,google_trends
+2021-03-07,1,Uttara,19.23,google_trends
+2021-03-07,2,Mirpur,16.88,google_trends
+2021-03-07,3,Gulshan & Banani,18.06,google_trends
+2021-03-07,4,Agargaon & Kafrul,11.36,google_trends
+2021-03-07,5,Farmgate & Karwan Bazar,16.13,google_trends
+2021-03-07,6,Diabari & Ashkona,7.28,google_trends
+2021-03-07,7,Uttarkhan & Faidabad,5.23,google_trends
+2021-03-07,8,Dakshinkhan & Dumni,5.26,google_trends
+2021-03-07,9,Vatara & Kuril,14.6,google_trends
+2021-03-07,10,Badda & Aftabnagar,8.72,google_trends
+2021-03-07,11,Ramna & Motijheel,18.84,google_trends
+2021-03-07,12,Khilgaon & Mugda,14.19,google_trends
+2021-03-07,13,Dhanmondi & Azimpur,19.68,google_trends
+2021-03-07,14,Wari & Jatrabari,23.44,google_trends
+2021-03-07,15,Bashundhara R/A (NSU),23.81,google_trends
+2021-03-14,1,Uttara,8.41,google_trends
+2021-03-14,2,Mirpur,12.96,google_trends
+2021-03-14,3,Gulshan & Banani,17.43,google_trends
+2021-03-14,4,Agargaon & Kafrul,7.69,google_trends
+2021-03-14,5,Farmgate & Karwan Bazar,16.66,google_trends
+2021-03-14,6,Diabari & Ashkona,1.67,google_trends
+2021-03-14,7,Uttarkhan & Faidabad,3.36,google_trends
+2021-03-14,8,Dakshinkhan & Dumni,5.57,google_trends
+2021-03-14,9,Vatara & Kuril,13.03,google_trends
+2021-03-14,10,Badda & Aftabnagar,9.4,google_trends
+2021-03-14,11,Ramna & Motijheel,18.92,google_trends
+2021-03-14,12,Khilgaon & Mugda,19.58,google_trends
+2021-03-14,13,Dhanmondi & Azimpur,10.71,google_trends
+2021-03-14,14,Wari & Jatrabari,15.38,google_trends
+2021-03-14,15,Bashundhara R/A (NSU),19.08,google_trends
+2021-03-21,1,Uttara,11.66,google_trends
+2021-03-21,2,Mirpur,11.89,google_trends
+2021-03-21,3,Gulshan & Banani,16.64,google_trends
+2021-03-21,4,Agargaon & Kafrul,10.63,google_trends
+2021-03-21,5,Farmgate & Karwan Bazar,14.89,google_trends
+2021-03-21,6,Diabari & Ashkona,3.69,google_trends
+2021-03-21,7,Uttarkhan & Faidabad,6.19,google_trends
+2021-03-21,8,Dakshinkhan & Dumni,6.52,google_trends
+2021-03-21,9,Vatara & Kuril,10.99,google_trends
+2021-03-21,10,Badda & Aftabnagar,8.81,google_trends
+2021-03-21,11,Ramna & Motijheel,14.66,google_trends
+2021-03-21,12,Khilgaon & Mugda,8.13,google_trends
+2021-03-21,13,Dhanmondi & Azimpur,9.51,google_trends
+2021-03-21,14,Wari & Jatrabari,13.85,google_trends
+2021-03-21,15,Bashundhara R/A (NSU),20.68,google_trends
+2021-03-28,1,Uttara,12.9,google_trends
+2021-03-28,2,Mirpur,7.27,google_trends
+2021-03-28,3,Gulshan & Banani,8.41,google_trends
+2021-03-28,4,Agargaon & Kafrul,9.07,google_trends
+2021-03-28,5,Farmgate & Karwan Bazar,13.93,google_trends
+2021-03-28,6,Diabari & Ashkona,5.01,google_trends
+2021-03-28,7,Uttarkhan & Faidabad,6.94,google_trends
+2021-03-28,8,Dakshinkhan & Dumni,9.82,google_trends
+2021-03-28,9,Vatara & Kuril,8.42,google_trends
+2021-03-28,10,Badda & Aftabnagar,7.61,google_trends
+2021-03-28,11,Ramna & Motijheel,11.27,google_trends
+2021-03-28,12,Khilgaon & Mugda,11.84,google_trends
+2021-03-28,13,Dhanmondi & Azimpur,10.42,google_trends
+2021-03-28,14,Wari & Jatrabari,11.53,google_trends
+2021-03-28,15,Bashundhara R/A (NSU),14.37,google_trends
+2021-04-04,1,Uttara,16.18,google_trends
+2021-04-04,2,Mirpur,19.08,google_trends
+2021-04-04,3,Gulshan & Banani,9.15,google_trends
+2021-04-04,4,Agargaon & Kafrul,10.3,google_trends
+2021-04-04,5,Farmgate & Karwan Bazar,18.14,google_trends
+2021-04-04,6,Diabari & Ashkona,5.71,google_trends
+2021-04-04,7,Uttarkhan & Faidabad,10.24,google_trends
+2021-04-04,8,Dakshinkhan & Dumni,2.45,google_trends
+2021-04-04,9,Vatara & Kuril,10.25,google_trends
+2021-04-04,10,Badda & Aftabnagar,6.82,google_trends
+2021-04-04,11,Ramna & Motijheel,20.8,google_trends
+2021-04-04,12,Khilgaon & Mugda,13.29,google_trends
+2021-04-04,13,Dhanmondi & Azimpur,13.11,google_trends
+2021-04-04,14,Wari & Jatrabari,13.33,google_trends
+2021-04-04,15,Bashundhara R/A (NSU),21.76,google_trends
+2021-04-11,1,Uttara,9.0,google_trends
+2021-04-11,2,Mirpur,9.39,google_trends
+2021-04-11,3,Gulshan & Banani,11.71,google_trends
+2021-04-11,4,Agargaon & Kafrul,10.04,google_trends
+2021-04-11,5,Farmgate & Karwan Bazar,14.84,google_trends
+2021-04-11,6,Diabari & Ashkona,2.14,google_trends
+2021-04-11,7,Uttarkhan & Faidabad,4.67,google_trends
+2021-04-11,8,Dakshinkhan & Dumni,6.09,google_trends
+2021-04-11,9,Vatara & Kuril,7.76,google_trends
+2021-04-11,10,Badda & Aftabnagar,6.32,google_trends
+2021-04-11,11,Ramna & Motijheel,18.46,google_trends
+2021-04-11,12,Khilgaon & Mugda,12.02,google_trends
+2021-04-11,13,Dhanmondi & Azimpur,13.08,google_trends
+2021-04-11,14,Wari & Jatrabari,13.51,google_trends
+2021-04-11,15,Bashundhara R/A (NSU),18.27,google_trends
+2021-04-18,1,Uttara,14.01,google_trends
+2021-04-18,2,Mirpur,14.32,google_trends
+2021-04-18,3,Gulshan & Banani,14.49,google_trends
+2021-04-18,4,Agargaon & Kafrul,13.04,google_trends
+2021-04-18,5,Farmgate & Karwan Bazar,11.61,google_trends
+2021-04-18,6,Diabari & Ashkona,7.21,google_trends
+2021-04-18,7,Uttarkhan & Faidabad,4.15,google_trends
+2021-04-18,8,Dakshinkhan & Dumni,5.46,google_trends
+2021-04-18,9,Vatara & Kuril,11.46,google_trends
+2021-04-18,10,Badda & Aftabnagar,6.32,google_trends
+2021-04-18,11,Ramna & Motijheel,16.14,google_trends
+2021-04-18,12,Khilgaon & Mugda,14.66,google_trends
+2021-04-18,13,Dhanmondi & Azimpur,14.57,google_trends
+2021-04-18,14,Wari & Jatrabari,14.49,google_trends
+2021-04-18,15,Bashundhara R/A (NSU),19.82,google_trends
+2021-04-25,1,Uttara,22.19,google_trends
+2021-04-25,2,Mirpur,26.28,google_trends
+2021-04-25,3,Gulshan & Banani,25.97,google_trends
+2021-04-25,4,Agargaon & Kafrul,22.09,google_trends
+2021-04-25,5,Farmgate & Karwan Bazar,32.86,google_trends
+2021-04-25,6,Diabari & Ashkona,10.86,google_trends
+2021-04-25,7,Uttarkhan & Faidabad,10.92,google_trends
+2021-04-25,8,Dakshinkhan & Dumni,8.71,google_trends
+2021-04-25,9,Vatara & Kuril,21.36,google_trends
+2021-04-25,10,Badda & Aftabnagar,20.06,google_trends
+2021-04-25,11,Ramna & Motijheel,31.83,google_trends
+2021-04-25,12,Khilgaon & Mugda,28.54,google_trends
+2021-04-25,13,Dhanmondi & Azimpur,27.33,google_trends
+2021-04-25,14,Wari & Jatrabari,29.04,google_trends
+2021-04-25,15,Bashundhara R/A (NSU),36.51,google_trends
+2021-05-02,1,Uttara,7.64,google_trends
+2021-05-02,2,Mirpur,14.07,google_trends
+2021-05-02,3,Gulshan & Banani,12.14,google_trends
+2021-05-02,4,Agargaon & Kafrul,6.6,google_trends
+2021-05-02,5,Farmgate & Karwan Bazar,10.76,google_trends
+2021-05-02,6,Diabari & Ashkona,8.85,google_trends
+2021-05-02,7,Uttarkhan & Faidabad,5.23,google_trends
+2021-05-02,8,Dakshinkhan & Dumni,2.78,google_trends
+2021-05-02,9,Vatara & Kuril,9.24,google_trends
+2021-05-02,10,Badda & Aftabnagar,9.17,google_trends
+2021-05-02,11,Ramna & Motijheel,15.21,google_trends
+2021-05-02,12,Khilgaon & Mugda,8.62,google_trends
+2021-05-02,13,Dhanmondi & Azimpur,11.36,google_trends
+2021-05-02,14,Wari & Jatrabari,13.68,google_trends
+2021-05-02,15,Bashundhara R/A (NSU),12.71,google_trends
+2021-05-09,1,Uttara,11.31,google_trends
+2021-05-09,2,Mirpur,7.7,google_trends
+2021-05-09,3,Gulshan & Banani,7.95,google_trends
+2021-05-09,4,Agargaon & Kafrul,3.32,google_trends
+2021-05-09,5,Farmgate & Karwan Bazar,13.33,google_trends
+2021-05-09,6,Diabari & Ashkona,4.93,google_trends
+2021-05-09,7,Uttarkhan & Faidabad,0.02,google_trends
+2021-05-09,8,Dakshinkhan & Dumni,4.86,google_trends
+2021-05-09,9,Vatara & Kuril,4.19,google_trends
+2021-05-09,10,Badda & Aftabnagar,7.89,google_trends
+2021-05-09,11,Ramna & Motijheel,10.18,google_trends
+2021-05-09,12,Khilgaon & Mugda,6.24,google_trends
+2021-05-09,13,Dhanmondi & Azimpur,6.11,google_trends
+2021-05-09,14,Wari & Jatrabari,10.42,google_trends
+2021-05-09,15,Bashundhara R/A (NSU),14.25,google_trends
+2021-05-16,1,Uttara,8.38,google_trends
+2021-05-16,2,Mirpur,13.15,google_trends
+2021-05-16,3,Gulshan & Banani,7.9,google_trends
+2021-05-16,4,Agargaon & Kafrul,10.28,google_trends
+2021-05-16,5,Farmgate & Karwan Bazar,14.72,google_trends
+2021-05-16,6,Diabari & Ashkona,6.34,google_trends
+2021-05-16,7,Uttarkhan & Faidabad,3.14,google_trends
+2021-05-16,8,Dakshinkhan & Dumni,5.91,google_trends
+2021-05-16,9,Vatara & Kuril,6.67,google_trends
+2021-05-16,10,Badda & Aftabnagar,8.37,google_trends
+2021-05-16,11,Ramna & Motijheel,11.59,google_trends
+2021-05-16,12,Khilgaon & Mugda,11.48,google_trends
+2021-05-16,13,Dhanmondi & Azimpur,10.45,google_trends
+2021-05-16,14,Wari & Jatrabari,15.98,google_trends
+2021-05-16,15,Bashundhara R/A (NSU),15.55,google_trends
+2021-05-23,1,Uttara,5.14,google_trends
+2021-05-23,2,Mirpur,12.52,google_trends
+2021-05-23,3,Gulshan & Banani,9.67,google_trends
+2021-05-23,4,Agargaon & Kafrul,8.99,google_trends
+2021-05-23,5,Farmgate & Karwan Bazar,12.12,google_trends
+2021-05-23,6,Diabari & Ashkona,3.8,google_trends
+2021-05-23,7,Uttarkhan & Faidabad,5.68,google_trends
+2021-05-23,8,Dakshinkhan & Dumni,3.21,google_trends
+2021-05-23,9,Vatara & Kuril,7.76,google_trends
+2021-05-23,10,Badda & Aftabnagar,9.25,google_trends
+2021-05-23,11,Ramna & Motijheel,15.69,google_trends
+2021-05-23,12,Khilgaon & Mugda,5.48,google_trends
+2021-05-23,13,Dhanmondi & Azimpur,15.42,google_trends
+2021-05-23,14,Wari & Jatrabari,11.11,google_trends
+2021-05-23,15,Bashundhara R/A (NSU),12.89,google_trends
+2021-05-30,1,Uttara,22.31,google_trends
+2021-05-30,2,Mirpur,25.13,google_trends
+2021-05-30,3,Gulshan & Banani,22.32,google_trends
+2021-05-30,4,Agargaon & Kafrul,24.93,google_trends
+2021-05-30,5,Farmgate & Karwan Bazar,27.36,google_trends
+2021-05-30,6,Diabari & Ashkona,10.95,google_trends
+2021-05-30,7,Uttarkhan & Faidabad,10.53,google_trends
+2021-05-30,8,Dakshinkhan & Dumni,9.04,google_trends
+2021-05-30,9,Vatara & Kuril,18.64,google_trends
+2021-05-30,10,Badda & Aftabnagar,17.32,google_trends
+2021-05-30,11,Ramna & Motijheel,28.33,google_trends
+2021-05-30,12,Khilgaon & Mugda,27.67,google_trends
+2021-05-30,13,Dhanmondi & Azimpur,25.06,google_trends
+2021-05-30,14,Wari & Jatrabari,28.32,google_trends
+2021-05-30,15,Bashundhara R/A (NSU),36.22,google_trends
+2021-06-06,1,Uttara,9.04,google_trends
+2021-06-06,2,Mirpur,12.12,google_trends
+2021-06-06,3,Gulshan & Banani,11.41,google_trends
+2021-06-06,4,Agargaon & Kafrul,9.23,google_trends
+2021-06-06,5,Farmgate & Karwan Bazar,12.71,google_trends
+2021-06-06,6,Diabari & Ashkona,3.36,google_trends
+2021-06-06,7,Uttarkhan & Faidabad,0.94,google_trends
+2021-06-06,8,Dakshinkhan & Dumni,8.05,google_trends
+2021-06-06,9,Vatara & Kuril,9.28,google_trends
+2021-06-06,10,Badda & Aftabnagar,9.22,google_trends
+2021-06-06,11,Ramna & Motijheel,15.55,google_trends
+2021-06-06,12,Khilgaon & Mugda,12.64,google_trends
+2021-06-06,13,Dhanmondi & Azimpur,10.58,google_trends
+2021-06-06,14,Wari & Jatrabari,13.11,google_trends
+2021-06-06,15,Bashundhara R/A (NSU),17.27,google_trends
+2021-06-13,1,Uttara,13.45,google_trends
+2021-06-13,2,Mirpur,16.59,google_trends
+2021-06-13,3,Gulshan & Banani,13.18,google_trends
+2021-06-13,4,Agargaon & Kafrul,7.3,google_trends
+2021-06-13,5,Farmgate & Karwan Bazar,19.73,google_trends
+2021-06-13,6,Diabari & Ashkona,9.27,google_trends
+2021-06-13,7,Uttarkhan & Faidabad,6.16,google_trends
+2021-06-13,8,Dakshinkhan & Dumni,4.49,google_trends
+2021-06-13,9,Vatara & Kuril,10.96,google_trends
+2021-06-13,10,Badda & Aftabnagar,5.71,google_trends
+2021-06-13,11,Ramna & Motijheel,15.61,google_trends
+2021-06-13,12,Khilgaon & Mugda,10.56,google_trends
+2021-06-13,13,Dhanmondi & Azimpur,15.51,google_trends
+2021-06-13,14,Wari & Jatrabari,12.79,google_trends
+2021-06-13,15,Bashundhara R/A (NSU),19.31,google_trends
+2021-06-20,1,Uttara,25.76,google_trends
+2021-06-20,2,Mirpur,31.08,google_trends
+2021-06-20,3,Gulshan & Banani,27.96,google_trends
+2021-06-20,4,Agargaon & Kafrul,18.9,google_trends
+2021-06-20,5,Farmgate & Karwan Bazar,35.66,google_trends
+2021-06-20,6,Diabari & Ashkona,14.19,google_trends
+2021-06-20,7,Uttarkhan & Faidabad,14.04,google_trends
+2021-06-20,8,Dakshinkhan & Dumni,9.96,google_trends
+2021-06-20,9,Vatara & Kuril,27.71,google_trends
+2021-06-20,10,Badda & Aftabnagar,21.08,google_trends
+2021-06-20,11,Ramna & Motijheel,37.97,google_trends
+2021-06-20,12,Khilgaon & Mugda,32.07,google_trends
+2021-06-20,13,Dhanmondi & Azimpur,27.94,google_trends
+2021-06-20,14,Wari & Jatrabari,33.93,google_trends
+2021-06-20,15,Bashundhara R/A (NSU),44.4,google_trends
+2021-06-27,1,Uttara,23.27,google_trends
+2021-06-27,2,Mirpur,23.34,google_trends
+2021-06-27,3,Gulshan & Banani,24.86,google_trends
+2021-06-27,4,Agargaon & Kafrul,17.13,google_trends
+2021-06-27,5,Farmgate & Karwan Bazar,26.75,google_trends
+2021-06-27,6,Diabari & Ashkona,12.18,google_trends
+2021-06-27,7,Uttarkhan & Faidabad,3.66,google_trends
+2021-06-27,8,Dakshinkhan & Dumni,9.19,google_trends
+2021-06-27,9,Vatara & Kuril,18.38,google_trends
+2021-06-27,10,Badda & Aftabnagar,12.84,google_trends
+2021-06-27,11,Ramna & Motijheel,29.06,google_trends
+2021-06-27,12,Khilgaon & Mugda,20.03,google_trends
+2021-06-27,13,Dhanmondi & Azimpur,25.14,google_trends
+2021-06-27,14,Wari & Jatrabari,22.96,google_trends
+2021-06-27,15,Bashundhara R/A (NSU),29.69,google_trends
+2021-07-04,1,Uttara,46.93,google_trends
+2021-07-04,2,Mirpur,55.11,google_trends
+2021-07-04,3,Gulshan & Banani,45.87,google_trends
+2021-07-04,4,Agargaon & Kafrul,42.29,google_trends
+2021-07-04,5,Farmgate & Karwan Bazar,61.36,google_trends
+2021-07-04,6,Diabari & Ashkona,23.89,google_trends
+2021-07-04,7,Uttarkhan & Faidabad,23.55,google_trends
+2021-07-04,8,Dakshinkhan & Dumni,22.64,google_trends
+2021-07-04,9,Vatara & Kuril,41.48,google_trends
+2021-07-04,10,Badda & Aftabnagar,42.06,google_trends
+2021-07-04,11,Ramna & Motijheel,65.67,google_trends
+2021-07-04,12,Khilgaon & Mugda,46.87,google_trends
+2021-07-04,13,Dhanmondi & Azimpur,52.16,google_trends
+2021-07-04,14,Wari & Jatrabari,60.4,google_trends
+2021-07-04,15,Bashundhara R/A (NSU),74.21,google_trends
+2021-07-11,1,Uttara,54.26,google_trends
+2021-07-11,2,Mirpur,66.2,google_trends
+2021-07-11,3,Gulshan & Banani,59.91,google_trends
+2021-07-11,4,Agargaon & Kafrul,46.35,google_trends
+2021-07-11,5,Farmgate & Karwan Bazar,81.34,google_trends
+2021-07-11,6,Diabari & Ashkona,34.39,google_trends
+2021-07-11,7,Uttarkhan & Faidabad,23.56,google_trends
+2021-07-11,8,Dakshinkhan & Dumni,29.78,google_trends
+2021-07-11,9,Vatara & Kuril,54.25,google_trends
+2021-07-11,10,Badda & Aftabnagar,53.73,google_trends
+2021-07-11,11,Ramna & Motijheel,82.5,google_trends
+2021-07-11,12,Khilgaon & Mugda,68.08,google_trends
+2021-07-11,13,Dhanmondi & Azimpur,69.11,google_trends
+2021-07-11,14,Wari & Jatrabari,78.6,google_trends
+2021-07-11,15,Bashundhara R/A (NSU),97.08,google_trends
+2021-07-18,1,Uttara,33.35,google_trends
+2021-07-18,2,Mirpur,41.96,google_trends
+2021-07-18,3,Gulshan & Banani,37.75,google_trends
+2021-07-18,4,Agargaon & Kafrul,29.11,google_trends
+2021-07-18,5,Farmgate & Karwan Bazar,45.1,google_trends
+2021-07-18,6,Diabari & Ashkona,17.75,google_trends
+2021-07-18,7,Uttarkhan & Faidabad,17.12,google_trends
+2021-07-18,8,Dakshinkhan & Dumni,17.04,google_trends
+2021-07-18,9,Vatara & Kuril,27.82,google_trends
+2021-07-18,10,Badda & Aftabnagar,27.82,google_trends
+2021-07-18,11,Ramna & Motijheel,45.75,google_trends
+2021-07-18,12,Khilgaon & Mugda,37.26,google_trends
+2021-07-18,13,Dhanmondi & Azimpur,39.07,google_trends
+2021-07-18,14,Wari & Jatrabari,44.38,google_trends
+2021-07-18,15,Bashundhara R/A (NSU),55.75,google_trends
+2021-07-25,1,Uttara,47.46,google_trends
+2021-07-25,2,Mirpur,61.23,google_trends
+2021-07-25,3,Gulshan & Banani,52.66,google_trends
+2021-07-25,4,Agargaon & Kafrul,42.51,google_trends
+2021-07-25,5,Farmgate & Karwan Bazar,65.79,google_trends
+2021-07-25,6,Diabari & Ashkona,30.33,google_trends
+2021-07-25,7,Uttarkhan & Faidabad,22.12,google_trends
+2021-07-25,8,Dakshinkhan & Dumni,24.14,google_trends
+2021-07-25,9,Vatara & Kuril,46.72,google_trends
+2021-07-25,10,Badda & Aftabnagar,46.03,google_trends
+2021-07-25,11,Ramna & Motijheel,73.74,google_trends
+2021-07-25,12,Khilgaon & Mugda,59.99,google_trends
+2021-07-25,13,Dhanmondi & Azimpur,57.44,google_trends
+2021-07-25,14,Wari & Jatrabari,64.71,google_trends
+2021-07-25,15,Bashundhara R/A (NSU),80.16,google_trends
+2021-08-01,1,Uttara,68.07,google_trends
+2021-08-01,2,Mirpur,77.78,google_trends
+2021-08-01,3,Gulshan & Banani,70.29,google_trends
+2021-08-01,4,Agargaon & Kafrul,50.65,google_trends
+2021-08-01,5,Farmgate & Karwan Bazar,90.76,google_trends
+2021-08-01,6,Diabari & Ashkona,35.34,google_trends
+2021-08-01,7,Uttarkhan & Faidabad,25.21,google_trends
+2021-08-01,8,Dakshinkhan & Dumni,30.46,google_trends
+2021-08-01,9,Vatara & Kuril,59.64,google_trends
+2021-08-01,10,Badda & Aftabnagar,57.14,google_trends
+2021-08-01,11,Ramna & Motijheel,94.08,google_trends
+2021-08-01,12,Khilgaon & Mugda,76.87,google_trends
+2021-08-01,13,Dhanmondi & Azimpur,79.42,google_trends
+2021-08-01,14,Wari & Jatrabari,87.12,google_trends
+2021-08-01,15,Bashundhara R/A (NSU),100.0,google_trends
+2021-08-08,1,Uttara,48.86,google_trends
+2021-08-08,2,Mirpur,57.2,google_trends
+2021-08-08,3,Gulshan & Banani,51.51,google_trends
+2021-08-08,4,Agargaon & Kafrul,42.11,google_trends
+2021-08-08,5,Farmgate & Karwan Bazar,64.57,google_trends
+2021-08-08,6,Diabari & Ashkona,29.51,google_trends
+2021-08-08,7,Uttarkhan & Faidabad,23.37,google_trends
+2021-08-08,8,Dakshinkhan & Dumni,27.1,google_trends
+2021-08-08,9,Vatara & Kuril,44.19,google_trends
+2021-08-08,10,Badda & Aftabnagar,44.54,google_trends
+2021-08-08,11,Ramna & Motijheel,69.12,google_trends
+2021-08-08,12,Khilgaon & Mugda,57.24,google_trends
+2021-08-08,13,Dhanmondi & Azimpur,55.99,google_trends
+2021-08-08,14,Wari & Jatrabari,63.7,google_trends
+2021-08-08,15,Bashundhara R/A (NSU),79.83,google_trends
+2021-08-15,1,Uttara,28.53,google_trends
+2021-08-15,2,Mirpur,33.67,google_trends
+2021-08-15,3,Gulshan & Banani,33.33,google_trends
+2021-08-15,4,Agargaon & Kafrul,29.26,google_trends
+2021-08-15,5,Farmgate & Karwan Bazar,41.33,google_trends
+2021-08-15,6,Diabari & Ashkona,15.22,google_trends
+2021-08-15,7,Uttarkhan & Faidabad,13.33,google_trends
+2021-08-15,8,Dakshinkhan & Dumni,13.83,google_trends
+2021-08-15,9,Vatara & Kuril,29.37,google_trends
+2021-08-15,10,Badda & Aftabnagar,23.49,google_trends
+2021-08-15,11,Ramna & Motijheel,44.48,google_trends
+2021-08-15,12,Khilgaon & Mugda,29.73,google_trends
+2021-08-15,13,Dhanmondi & Azimpur,30.96,google_trends
+2021-08-15,14,Wari & Jatrabari,43.67,google_trends
+2021-08-15,15,Bashundhara R/A (NSU),47.64,google_trends
+2021-08-22,1,Uttara,34.29,google_trends
+2021-08-22,2,Mirpur,29.85,google_trends
+2021-08-22,3,Gulshan & Banani,29.05,google_trends
+2021-08-22,4,Agargaon & Kafrul,20.62,google_trends
+2021-08-22,5,Farmgate & Karwan Bazar,38.73,google_trends
+2021-08-22,6,Diabari & Ashkona,12.39,google_trends
+2021-08-22,7,Uttarkhan & Faidabad,11.76,google_trends
+2021-08-22,8,Dakshinkhan & Dumni,10.99,google_trends
+2021-08-22,9,Vatara & Kuril,26.18,google_trends
+2021-08-22,10,Badda & Aftabnagar,24.21,google_trends
+2021-08-22,11,Ramna & Motijheel,36.05,google_trends
+2021-08-22,12,Khilgaon & Mugda,32.62,google_trends
+2021-08-22,13,Dhanmondi & Azimpur,29.41,google_trends
+2021-08-22,14,Wari & Jatrabari,32.81,google_trends
+2021-08-22,15,Bashundhara R/A (NSU),50.52,google_trends
+2021-08-29,1,Uttara,30.65,google_trends
+2021-08-29,2,Mirpur,40.26,google_trends
+2021-08-29,3,Gulshan & Banani,34.1,google_trends
+2021-08-29,4,Agargaon & Kafrul,28.41,google_trends
+2021-08-29,5,Farmgate & Karwan Bazar,43.36,google_trends
+2021-08-29,6,Diabari & Ashkona,16.65,google_trends
+2021-08-29,7,Uttarkhan & Faidabad,17.58,google_trends
+2021-08-29,8,Dakshinkhan & Dumni,11.71,google_trends
+2021-08-29,9,Vatara & Kuril,29.52,google_trends
+2021-08-29,10,Badda & Aftabnagar,29.39,google_trends
+2021-08-29,11,Ramna & Motijheel,44.19,google_trends
+2021-08-29,12,Khilgaon & Mugda,40.79,google_trends
+2021-08-29,13,Dhanmondi & Azimpur,38.2,google_trends
+2021-08-29,14,Wari & Jatrabari,39.25,google_trends
+2021-08-29,15,Bashundhara R/A (NSU),51.1,google_trends
+2021-09-05,1,Uttara,30.46,google_trends
+2021-09-05,2,Mirpur,39.2,google_trends
+2021-09-05,3,Gulshan & Banani,32.59,google_trends
+2021-09-05,4,Agargaon & Kafrul,26.0,google_trends
+2021-09-05,5,Farmgate & Karwan Bazar,38.62,google_trends
+2021-09-05,6,Diabari & Ashkona,16.2,google_trends
+2021-09-05,7,Uttarkhan & Faidabad,9.12,google_trends
+2021-09-05,8,Dakshinkhan & Dumni,15.25,google_trends
+2021-09-05,9,Vatara & Kuril,31.52,google_trends
+2021-09-05,10,Badda & Aftabnagar,27.36,google_trends
+2021-09-05,11,Ramna & Motijheel,37.15,google_trends
+2021-09-05,12,Khilgaon & Mugda,32.18,google_trends
+2021-09-05,13,Dhanmondi & Azimpur,40.5,google_trends
+2021-09-05,14,Wari & Jatrabari,39.44,google_trends
+2021-09-05,15,Bashundhara R/A (NSU),52.23,google_trends
+2021-09-12,1,Uttara,27.45,google_trends
+2021-09-12,2,Mirpur,36.07,google_trends
+2021-09-12,3,Gulshan & Banani,27.87,google_trends
+2021-09-12,4,Agargaon & Kafrul,23.82,google_trends
+2021-09-12,5,Farmgate & Karwan Bazar,40.85,google_trends
+2021-09-12,6,Diabari & Ashkona,16.46,google_trends
+2021-09-12,7,Uttarkhan & Faidabad,10.48,google_trends
+2021-09-12,8,Dakshinkhan & Dumni,14.14,google_trends
+2021-09-12,9,Vatara & Kuril,22.59,google_trends
+2021-09-12,10,Badda & Aftabnagar,25.93,google_trends
+2021-09-12,11,Ramna & Motijheel,41.24,google_trends
+2021-09-12,12,Khilgaon & Mugda,32.85,google_trends
+2021-09-12,13,Dhanmondi & Azimpur,36.86,google_trends
+2021-09-12,14,Wari & Jatrabari,40.17,google_trends
+2021-09-12,15,Bashundhara R/A (NSU),51.4,google_trends
+2021-09-19,1,Uttara,26.57,google_trends
+2021-09-19,2,Mirpur,34.81,google_trends
+2021-09-19,3,Gulshan & Banani,26.65,google_trends
+2021-09-19,4,Agargaon & Kafrul,21.81,google_trends
+2021-09-19,5,Farmgate & Karwan Bazar,40.82,google_trends
+2021-09-19,6,Diabari & Ashkona,11.7,google_trends
+2021-09-19,7,Uttarkhan & Faidabad,15.99,google_trends
+2021-09-19,8,Dakshinkhan & Dumni,14.43,google_trends
+2021-09-19,9,Vatara & Kuril,25.97,google_trends
+2021-09-19,10,Badda & Aftabnagar,24.34,google_trends
+2021-09-19,11,Ramna & Motijheel,43.62,google_trends
+2021-09-19,12,Khilgaon & Mugda,26.92,google_trends
+2021-09-19,13,Dhanmondi & Azimpur,33.84,google_trends
+2021-09-19,14,Wari & Jatrabari,34.46,google_trends
+2021-09-19,15,Bashundhara R/A (NSU),42.37,google_trends
+2021-09-26,1,Uttara,34.77,google_trends
+2021-09-26,2,Mirpur,45.98,google_trends
+2021-09-26,3,Gulshan & Banani,39.82,google_trends
+2021-09-26,4,Agargaon & Kafrul,30.2,google_trends
+2021-09-26,5,Farmgate & Karwan Bazar,47.71,google_trends
+2021-09-26,6,Diabari & Ashkona,16.71,google_trends
+2021-09-26,7,Uttarkhan & Faidabad,14.75,google_trends
+2021-09-26,8,Dakshinkhan & Dumni,16.79,google_trends
+2021-09-26,9,Vatara & Kuril,31.53,google_trends
+2021-09-26,10,Badda & Aftabnagar,33.13,google_trends
+2021-09-26,11,Ramna & Motijheel,49.71,google_trends
+2021-09-26,12,Khilgaon & Mugda,38.28,google_trends
+2021-09-26,13,Dhanmondi & Azimpur,40.33,google_trends
+2021-09-26,14,Wari & Jatrabari,46.12,google_trends
+2021-09-26,15,Bashundhara R/A (NSU),63.2,google_trends
+2021-10-03,1,Uttara,20.89,google_trends
+2021-10-03,2,Mirpur,30.09,google_trends
+2021-10-03,3,Gulshan & Banani,23.53,google_trends
+2021-10-03,4,Agargaon & Kafrul,18.14,google_trends
+2021-10-03,5,Farmgate & Karwan Bazar,30.44,google_trends
+2021-10-03,6,Diabari & Ashkona,12.05,google_trends
+2021-10-03,7,Uttarkhan & Faidabad,9.0,google_trends
+2021-10-03,8,Dakshinkhan & Dumni,12.25,google_trends
+2021-10-03,9,Vatara & Kuril,22.18,google_trends
+2021-10-03,10,Badda & Aftabnagar,16.26,google_trends
+2021-10-03,11,Ramna & Motijheel,28.28,google_trends
+2021-10-03,12,Khilgaon & Mugda,29.18,google_trends
+2021-10-03,13,Dhanmondi & Azimpur,24.09,google_trends
+2021-10-03,14,Wari & Jatrabari,29.37,google_trends
+2021-10-03,15,Bashundhara R/A (NSU),35.51,google_trends
+2021-10-10,1,Uttara,24.34,google_trends
+2021-10-10,2,Mirpur,28.25,google_trends
+2021-10-10,3,Gulshan & Banani,24.12,google_trends
+2021-10-10,4,Agargaon & Kafrul,16.81,google_trends
+2021-10-10,5,Farmgate & Karwan Bazar,31.63,google_trends
+2021-10-10,6,Diabari & Ashkona,16.21,google_trends
+2021-10-10,7,Uttarkhan & Faidabad,5.6,google_trends
+2021-10-10,8,Dakshinkhan & Dumni,7.06,google_trends
+2021-10-10,9,Vatara & Kuril,19.41,google_trends
+2021-10-10,10,Badda & Aftabnagar,17.41,google_trends
+2021-10-10,11,Ramna & Motijheel,34.04,google_trends
+2021-10-10,12,Khilgaon & Mugda,24.79,google_trends
+2021-10-10,13,Dhanmondi & Azimpur,28.41,google_trends
+2021-10-10,14,Wari & Jatrabari,34.27,google_trends
+2021-10-10,15,Bashundhara R/A (NSU),39.22,google_trends
+2021-10-17,1,Uttara,17.82,google_trends
+2021-10-17,2,Mirpur,26.12,google_trends
+2021-10-17,3,Gulshan & Banani,11.42,google_trends
+2021-10-17,4,Agargaon & Kafrul,18.02,google_trends
+2021-10-17,5,Farmgate & Karwan Bazar,20.16,google_trends
+2021-10-17,6,Diabari & Ashkona,13.62,google_trends
+2021-10-17,7,Uttarkhan & Faidabad,11.62,google_trends
+2021-10-17,8,Dakshinkhan & Dumni,5.92,google_trends
+2021-10-17,9,Vatara & Kuril,13.84,google_trends
+2021-10-17,10,Badda & Aftabnagar,17.25,google_trends
+2021-10-17,11,Ramna & Motijheel,28.09,google_trends
+2021-10-17,12,Khilgaon & Mugda,20.29,google_trends
+2021-10-17,13,Dhanmondi & Azimpur,22.23,google_trends
+2021-10-17,14,Wari & Jatrabari,27.72,google_trends
+2021-10-17,15,Bashundhara R/A (NSU),31.08,google_trends
+2021-10-24,1,Uttara,14.04,google_trends
+2021-10-24,2,Mirpur,28.44,google_trends
+2021-10-24,3,Gulshan & Banani,17.99,google_trends
+2021-10-24,4,Agargaon & Kafrul,13.88,google_trends
+2021-10-24,5,Farmgate & Karwan Bazar,27.92,google_trends
+2021-10-24,6,Diabari & Ashkona,7.99,google_trends
+2021-10-24,7,Uttarkhan & Faidabad,4.35,google_trends
+2021-10-24,8,Dakshinkhan & Dumni,12.79,google_trends
+2021-10-24,9,Vatara & Kuril,21.36,google_trends
+2021-10-24,10,Badda & Aftabnagar,16.64,google_trends
+2021-10-24,11,Ramna & Motijheel,23.13,google_trends
+2021-10-24,12,Khilgaon & Mugda,22.06,google_trends
+2021-10-24,13,Dhanmondi & Azimpur,23.59,google_trends
+2021-10-24,14,Wari & Jatrabari,28.59,google_trends
+2021-10-24,15,Bashundhara R/A (NSU),32.94,google_trends
+2021-10-31,1,Uttara,21.22,google_trends
+2021-10-31,2,Mirpur,26.34,google_trends
+2021-10-31,3,Gulshan & Banani,20.94,google_trends
+2021-10-31,4,Agargaon & Kafrul,19.08,google_trends
+2021-10-31,5,Farmgate & Karwan Bazar,27.73,google_trends
+2021-10-31,6,Diabari & Ashkona,11.05,google_trends
+2021-10-31,7,Uttarkhan & Faidabad,8.38,google_trends
+2021-10-31,8,Dakshinkhan & Dumni,12.78,google_trends
+2021-10-31,9,Vatara & Kuril,18.01,google_trends
+2021-10-31,10,Badda & Aftabnagar,16.83,google_trends
+2021-10-31,11,Ramna & Motijheel,27.75,google_trends
+2021-10-31,12,Khilgaon & Mugda,26.2,google_trends
+2021-10-31,13,Dhanmondi & Azimpur,20.62,google_trends
+2021-10-31,14,Wari & Jatrabari,24.53,google_trends
+2021-10-31,15,Bashundhara R/A (NSU),35.56,google_trends
+2021-11-07,1,Uttara,22.09,google_trends
+2021-11-07,2,Mirpur,27.83,google_trends
+2021-11-07,3,Gulshan & Banani,20.94,google_trends
+2021-11-07,4,Agargaon & Kafrul,16.62,google_trends
+2021-11-07,5,Farmgate & Karwan Bazar,26.83,google_trends
+2021-11-07,6,Diabari & Ashkona,12.77,google_trends
+2021-11-07,7,Uttarkhan & Faidabad,10.52,google_trends
+2021-11-07,8,Dakshinkhan & Dumni,8.99,google_trends
+2021-11-07,9,Vatara & Kuril,17.8,google_trends
+2021-11-07,10,Badda & Aftabnagar,20.27,google_trends
+2021-11-07,11,Ramna & Motijheel,27.55,google_trends
+2021-11-07,12,Khilgaon & Mugda,21.61,google_trends
+2021-11-07,13,Dhanmondi & Azimpur,26.87,google_trends
+2021-11-07,14,Wari & Jatrabari,24.53,google_trends
+2021-11-07,15,Bashundhara R/A (NSU),30.41,google_trends
+2021-11-14,1,Uttara,22.37,google_trends
+2021-11-14,2,Mirpur,25.72,google_trends
+2021-11-14,3,Gulshan & Banani,23.78,google_trends
+2021-11-14,4,Agargaon & Kafrul,19.86,google_trends
+2021-11-14,5,Farmgate & Karwan Bazar,26.66,google_trends
+2021-11-14,6,Diabari & Ashkona,9.23,google_trends
+2021-11-14,7,Uttarkhan & Faidabad,11.73,google_trends
+2021-11-14,8,Dakshinkhan & Dumni,8.72,google_trends
+2021-11-14,9,Vatara & Kuril,19.06,google_trends
+2021-11-14,10,Badda & Aftabnagar,16.87,google_trends
+2021-11-14,11,Ramna & Motijheel,28.71,google_trends
+2021-11-14,12,Khilgaon & Mugda,13.17,google_trends
+2021-11-14,13,Dhanmondi & Azimpur,23.79,google_trends
+2021-11-14,14,Wari & Jatrabari,24.42,google_trends
+2021-11-14,15,Bashundhara R/A (NSU),29.09,google_trends
+2021-11-21,1,Uttara,19.69,google_trends
+2021-11-21,2,Mirpur,24.71,google_trends
+2021-11-21,3,Gulshan & Banani,22.2,google_trends
+2021-11-21,4,Agargaon & Kafrul,15.45,google_trends
+2021-11-21,5,Farmgate & Karwan Bazar,26.74,google_trends
+2021-11-21,6,Diabari & Ashkona,14.35,google_trends
+2021-11-21,7,Uttarkhan & Faidabad,9.79,google_trends
+2021-11-21,8,Dakshinkhan & Dumni,9.89,google_trends
+2021-11-21,9,Vatara & Kuril,19.79,google_trends
+2021-11-21,10,Badda & Aftabnagar,20.31,google_trends
+2021-11-21,11,Ramna & Motijheel,27.2,google_trends
+2021-11-21,12,Khilgaon & Mugda,25.4,google_trends
+2021-11-21,13,Dhanmondi & Azimpur,25.38,google_trends
+2021-11-21,14,Wari & Jatrabari,20.48,google_trends
+2021-11-21,15,Bashundhara R/A (NSU),33.03,google_trends
+2021-11-28,1,Uttara,16.61,google_trends
+2021-11-28,2,Mirpur,23.9,google_trends
+2021-11-28,3,Gulshan & Banani,18.23,google_trends
+2021-11-28,4,Agargaon & Kafrul,18.39,google_trends
+2021-11-28,5,Farmgate & Karwan Bazar,23.06,google_trends
+2021-11-28,6,Diabari & Ashkona,10.51,google_trends
+2021-11-28,7,Uttarkhan & Faidabad,10.87,google_trends
+2021-11-28,8,Dakshinkhan & Dumni,9.9,google_trends
+2021-11-28,9,Vatara & Kuril,21.53,google_trends
+2021-11-28,10,Badda & Aftabnagar,14.32,google_trends
+2021-11-28,11,Ramna & Motijheel,29.75,google_trends
+2021-11-28,12,Khilgaon & Mugda,15.97,google_trends
+2021-11-28,13,Dhanmondi & Azimpur,21.48,google_trends
+2021-11-28,14,Wari & Jatrabari,25.05,google_trends
+2021-11-28,15,Bashundhara R/A (NSU),24.82,google_trends
+2021-12-05,1,Uttara,12.96,google_trends
+2021-12-05,2,Mirpur,13.38,google_trends
+2021-12-05,3,Gulshan & Banani,17.92,google_trends
+2021-12-05,4,Agargaon & Kafrul,8.31,google_trends
+2021-12-05,5,Farmgate & Karwan Bazar,17.97,google_trends
+2021-12-05,6,Diabari & Ashkona,9.58,google_trends
+2021-12-05,7,Uttarkhan & Faidabad,3.85,google_trends
+2021-12-05,8,Dakshinkhan & Dumni,4.08,google_trends
+2021-12-05,9,Vatara & Kuril,15.31,google_trends
+2021-12-05,10,Badda & Aftabnagar,10.57,google_trends
+2021-12-05,11,Ramna & Motijheel,20.18,google_trends
+2021-12-05,12,Khilgaon & Mugda,19.76,google_trends
+2021-12-05,13,Dhanmondi & Azimpur,16.6,google_trends
+2021-12-05,14,Wari & Jatrabari,20.74,google_trends
+2021-12-05,15,Bashundhara R/A (NSU),25.28,google_trends
+2021-12-12,1,Uttara,13.59,google_trends
+2021-12-12,2,Mirpur,19.74,google_trends
+2021-12-12,3,Gulshan & Banani,13.25,google_trends
+2021-12-12,4,Agargaon & Kafrul,12.3,google_trends
+2021-12-12,5,Farmgate & Karwan Bazar,18.07,google_trends
+2021-12-12,6,Diabari & Ashkona,3.77,google_trends
+2021-12-12,7,Uttarkhan & Faidabad,8.6,google_trends
+2021-12-12,8,Dakshinkhan & Dumni,7.43,google_trends
+2021-12-12,9,Vatara & Kuril,16.16,google_trends
+2021-12-12,10,Badda & Aftabnagar,13.7,google_trends
+2021-12-12,11,Ramna & Motijheel,25.9,google_trends
+2021-12-12,12,Khilgaon & Mugda,14.09,google_trends
+2021-12-12,13,Dhanmondi & Azimpur,16.07,google_trends
+2021-12-12,14,Wari & Jatrabari,23.47,google_trends
+2021-12-12,15,Bashundhara R/A (NSU),22.07,google_trends
+2021-12-19,1,Uttara,13.92,google_trends
+2021-12-19,2,Mirpur,16.47,google_trends
+2021-12-19,3,Gulshan & Banani,13.01,google_trends
+2021-12-19,4,Agargaon & Kafrul,13.77,google_trends
+2021-12-19,5,Farmgate & Karwan Bazar,23.45,google_trends
+2021-12-19,6,Diabari & Ashkona,7.58,google_trends
+2021-12-19,7,Uttarkhan & Faidabad,9.99,google_trends
+2021-12-19,8,Dakshinkhan & Dumni,8.39,google_trends
+2021-12-19,9,Vatara & Kuril,12.13,google_trends
+2021-12-19,10,Badda & Aftabnagar,12.75,google_trends
+2021-12-19,11,Ramna & Motijheel,19.74,google_trends
+2021-12-19,12,Khilgaon & Mugda,18.46,google_trends
+2021-12-19,13,Dhanmondi & Azimpur,17.84,google_trends
+2021-12-19,14,Wari & Jatrabari,20.58,google_trends
+2021-12-19,15,Bashundhara R/A (NSU),30.98,google_trends
+2021-12-26,1,Uttara,11.84,google_trends
+2021-12-26,2,Mirpur,15.98,google_trends
+2021-12-26,3,Gulshan & Banani,12.35,google_trends
+2021-12-26,4,Agargaon & Kafrul,11.2,google_trends
+2021-12-26,5,Farmgate & Karwan Bazar,21.15,google_trends
+2021-12-26,6,Diabari & Ashkona,5.23,google_trends
+2021-12-26,7,Uttarkhan & Faidabad,8.06,google_trends
+2021-12-26,8,Dakshinkhan & Dumni,6.75,google_trends
+2021-12-26,9,Vatara & Kuril,12.96,google_trends
+2021-12-26,10,Badda & Aftabnagar,14.41,google_trends
+2021-12-26,11,Ramna & Motijheel,21.43,google_trends
+2021-12-26,12,Khilgaon & Mugda,13.48,google_trends
+2021-12-26,13,Dhanmondi & Azimpur,21.16,google_trends
+2021-12-26,14,Wari & Jatrabari,18.34,google_trends
+2021-12-26,15,Bashundhara R/A (NSU),19.4,google_trends
+2022-01-02,1,Uttara,15.5,google_trends
+2022-01-02,2,Mirpur,22.07,google_trends
+2022-01-02,3,Gulshan & Banani,24.03,google_trends
+2022-01-02,4,Agargaon & Kafrul,15.45,google_trends
+2022-01-02,5,Farmgate & Karwan Bazar,26.72,google_trends
+2022-01-02,6,Diabari & Ashkona,11.75,google_trends
+2022-01-02,7,Uttarkhan & Faidabad,9.3,google_trends
+2022-01-02,8,Dakshinkhan & Dumni,6.27,google_trends
+2022-01-02,9,Vatara & Kuril,16.65,google_trends
+2022-01-02,10,Badda & Aftabnagar,13.85,google_trends
+2022-01-02,11,Ramna & Motijheel,30.32,google_trends
+2022-01-02,12,Khilgaon & Mugda,19.59,google_trends
+2022-01-02,13,Dhanmondi & Azimpur,23.43,google_trends
+2022-01-02,14,Wari & Jatrabari,26.28,google_trends
+2022-01-02,15,Bashundhara R/A (NSU),31.81,google_trends
+2022-01-09,1,Uttara,28.15,google_trends
+2022-01-09,2,Mirpur,32.61,google_trends
+2022-01-09,3,Gulshan & Banani,32.99,google_trends
+2022-01-09,4,Agargaon & Kafrul,25.51,google_trends
+2022-01-09,5,Farmgate & Karwan Bazar,40.88,google_trends
+2022-01-09,6,Diabari & Ashkona,15.08,google_trends
+2022-01-09,7,Uttarkhan & Faidabad,13.12,google_trends
+2022-01-09,8,Dakshinkhan & Dumni,17.55,google_trends
+2022-01-09,9,Vatara & Kuril,24.68,google_trends
+2022-01-09,10,Badda & Aftabnagar,25.17,google_trends
+2022-01-09,11,Ramna & Motijheel,41.41,google_trends
+2022-01-09,12,Khilgaon & Mugda,32.89,google_trends
+2022-01-09,13,Dhanmondi & Azimpur,36.64,google_trends
+2022-01-09,14,Wari & Jatrabari,41.98,google_trends
+2022-01-09,15,Bashundhara R/A (NSU),46.55,google_trends
+2022-01-16,1,Uttara,25.8,google_trends
+2022-01-16,2,Mirpur,26.9,google_trends
+2022-01-16,3,Gulshan & Banani,21.57,google_trends
+2022-01-16,4,Agargaon & Kafrul,18.81,google_trends
+2022-01-16,5,Farmgate & Karwan Bazar,33.93,google_trends
+2022-01-16,6,Diabari & Ashkona,11.98,google_trends
+2022-01-16,7,Uttarkhan & Faidabad,11.48,google_trends
+2022-01-16,8,Dakshinkhan & Dumni,9.89,google_trends
+2022-01-16,9,Vatara & Kuril,21.29,google_trends
+2022-01-16,10,Badda & Aftabnagar,21.15,google_trends
+2022-01-16,11,Ramna & Motijheel,30.84,google_trends
+2022-01-16,12,Khilgaon & Mugda,24.42,google_trends
+2022-01-16,13,Dhanmondi & Azimpur,24.17,google_trends
+2022-01-16,14,Wari & Jatrabari,34.55,google_trends
+2022-01-16,15,Bashundhara R/A (NSU),33.41,google_trends
+2022-01-23,1,Uttara,16.99,google_trends
+2022-01-23,2,Mirpur,23.41,google_trends
+2022-01-23,3,Gulshan & Banani,20.52,google_trends
+2022-01-23,4,Agargaon & Kafrul,18.76,google_trends
+2022-01-23,5,Farmgate & Karwan Bazar,28.79,google_trends
+2022-01-23,6,Diabari & Ashkona,10.14,google_trends
+2022-01-23,7,Uttarkhan & Faidabad,7.38,google_trends
+2022-01-23,8,Dakshinkhan & Dumni,8.71,google_trends
+2022-01-23,9,Vatara & Kuril,20.29,google_trends
+2022-01-23,10,Badda & Aftabnagar,19.77,google_trends
+2022-01-23,11,Ramna & Motijheel,31.12,google_trends
+2022-01-23,12,Khilgaon & Mugda,21.01,google_trends
+2022-01-23,13,Dhanmondi & Azimpur,29.22,google_trends
+2022-01-23,14,Wari & Jatrabari,27.53,google_trends
+2022-01-23,15,Bashundhara R/A (NSU),33.5,google_trends
+2022-01-30,1,Uttara,18.16,google_trends
+2022-01-30,2,Mirpur,24.3,google_trends
+2022-01-30,3,Gulshan & Banani,23.01,google_trends
+2022-01-30,4,Agargaon & Kafrul,19.28,google_trends
+2022-01-30,5,Farmgate & Karwan Bazar,23.53,google_trends
+2022-01-30,6,Diabari & Ashkona,7.97,google_trends
+2022-01-30,7,Uttarkhan & Faidabad,8.92,google_trends
+2022-01-30,8,Dakshinkhan & Dumni,10.08,google_trends
+2022-01-30,9,Vatara & Kuril,16.68,google_trends
+2022-01-30,10,Badda & Aftabnagar,15.76,google_trends
+2022-01-30,11,Ramna & Motijheel,30.83,google_trends
+2022-01-30,12,Khilgaon & Mugda,18.83,google_trends
+2022-01-30,13,Dhanmondi & Azimpur,20.15,google_trends
+2022-01-30,14,Wari & Jatrabari,24.81,google_trends
+2022-01-30,15,Bashundhara R/A (NSU),31.68,google_trends
+2022-02-06,1,Uttara,16.65,google_trends
+2022-02-06,2,Mirpur,22.54,google_trends
+2022-02-06,3,Gulshan & Banani,17.01,google_trends
+2022-02-06,4,Agargaon & Kafrul,13.24,google_trends
+2022-02-06,5,Farmgate & Karwan Bazar,22.6,google_trends
+2022-02-06,6,Diabari & Ashkona,10.02,google_trends
+2022-02-06,7,Uttarkhan & Faidabad,6.88,google_trends
+2022-02-06,8,Dakshinkhan & Dumni,8.05,google_trends
+2022-02-06,9,Vatara & Kuril,11.49,google_trends
+2022-02-06,10,Badda & Aftabnagar,9.65,google_trends
+2022-02-06,11,Ramna & Motijheel,23.36,google_trends
+2022-02-06,12,Khilgaon & Mugda,21.53,google_trends
+2022-02-06,13,Dhanmondi & Azimpur,17.88,google_trends
+2022-02-06,14,Wari & Jatrabari,21.5,google_trends
+2022-02-06,15,Bashundhara R/A (NSU),28.77,google_trends
+2022-02-13,1,Uttara,19.74,google_trends
+2022-02-13,2,Mirpur,18.51,google_trends
+2022-02-13,3,Gulshan & Banani,16.34,google_trends
+2022-02-13,4,Agargaon & Kafrul,13.47,google_trends
+2022-02-13,5,Farmgate & Karwan Bazar,26.39,google_trends
+2022-02-13,6,Diabari & Ashkona,9.64,google_trends
+2022-02-13,7,Uttarkhan & Faidabad,11.12,google_trends
+2022-02-13,8,Dakshinkhan & Dumni,12.49,google_trends
+2022-02-13,9,Vatara & Kuril,13.64,google_trends
+2022-02-13,10,Badda & Aftabnagar,15.11,google_trends
+2022-02-13,11,Ramna & Motijheel,20.58,google_trends
+2022-02-13,12,Khilgaon & Mugda,18.64,google_trends
+2022-02-13,13,Dhanmondi & Azimpur,19.25,google_trends
+2022-02-13,14,Wari & Jatrabari,24.74,google_trends
+2022-02-13,15,Bashundhara R/A (NSU),28.46,google_trends
+2022-02-20,1,Uttara,28.62,google_trends
+2022-02-20,2,Mirpur,36.18,google_trends
+2022-02-20,3,Gulshan & Banani,31.12,google_trends
+2022-02-20,4,Agargaon & Kafrul,23.88,google_trends
+2022-02-20,5,Farmgate & Karwan Bazar,33.74,google_trends
+2022-02-20,6,Diabari & Ashkona,14.71,google_trends
+2022-02-20,7,Uttarkhan & Faidabad,14.76,google_trends
+2022-02-20,8,Dakshinkhan & Dumni,15.14,google_trends
+2022-02-20,9,Vatara & Kuril,23.27,google_trends
+2022-02-20,10,Badda & Aftabnagar,26.6,google_trends
+2022-02-20,11,Ramna & Motijheel,39.76,google_trends
+2022-02-20,12,Khilgaon & Mugda,33.91,google_trends
+2022-02-20,13,Dhanmondi & Azimpur,39.56,google_trends
+2022-02-20,14,Wari & Jatrabari,38.38,google_trends
+2022-02-20,15,Bashundhara R/A (NSU),51.92,google_trends
+2022-02-27,1,Uttara,14.47,google_trends
+2022-02-27,2,Mirpur,20.1,google_trends
+2022-02-27,3,Gulshan & Banani,16.32,google_trends
+2022-02-27,4,Agargaon & Kafrul,16.84,google_trends
+2022-02-27,5,Farmgate & Karwan Bazar,25.22,google_trends
+2022-02-27,6,Diabari & Ashkona,9.33,google_trends
+2022-02-27,7,Uttarkhan & Faidabad,1.59,google_trends
+2022-02-27,8,Dakshinkhan & Dumni,9.82,google_trends
+2022-02-27,9,Vatara & Kuril,13.95,google_trends
+2022-02-27,10,Badda & Aftabnagar,12.57,google_trends
+2022-02-27,11,Ramna & Motijheel,21.19,google_trends
+2022-02-27,12,Khilgaon & Mugda,17.48,google_trends
+2022-02-27,13,Dhanmondi & Azimpur,22.21,google_trends
+2022-02-27,14,Wari & Jatrabari,21.13,google_trends
+2022-02-27,15,Bashundhara R/A (NSU),26.65,google_trends
+2022-03-06,1,Uttara,18.32,google_trends
+2022-03-06,2,Mirpur,14.98,google_trends
+2022-03-06,3,Gulshan & Banani,12.2,google_trends
+2022-03-06,4,Agargaon & Kafrul,9.88,google_trends
+2022-03-06,5,Farmgate & Karwan Bazar,14.45,google_trends
+2022-03-06,6,Diabari & Ashkona,7.44,google_trends
+2022-03-06,7,Uttarkhan & Faidabad,5.17,google_trends
+2022-03-06,8,Dakshinkhan & Dumni,7.22,google_trends
+2022-03-06,9,Vatara & Kuril,11.1,google_trends
+2022-03-06,10,Badda & Aftabnagar,11.37,google_trends
+2022-03-06,11,Ramna & Motijheel,17.84,google_trends
+2022-03-06,12,Khilgaon & Mugda,12.71,google_trends
+2022-03-06,13,Dhanmondi & Azimpur,16.74,google_trends
+2022-03-06,14,Wari & Jatrabari,18.27,google_trends
+2022-03-06,15,Bashundhara R/A (NSU),20.0,google_trends
+2022-03-13,1,Uttara,11.7,google_trends
+2022-03-13,2,Mirpur,16.42,google_trends
+2022-03-13,3,Gulshan & Banani,17.81,google_trends
+2022-03-13,4,Agargaon & Kafrul,14.66,google_trends
+2022-03-13,5,Farmgate & Karwan Bazar,15.32,google_trends
+2022-03-13,6,Diabari & Ashkona,5.14,google_trends
+2022-03-13,7,Uttarkhan & Faidabad,8.65,google_trends
+2022-03-13,8,Dakshinkhan & Dumni,8.28,google_trends
+2022-03-13,9,Vatara & Kuril,13.93,google_trends
+2022-03-13,10,Badda & Aftabnagar,7.69,google_trends
+2022-03-13,11,Ramna & Motijheel,21.31,google_trends
+2022-03-13,12,Khilgaon & Mugda,16.0,google_trends
+2022-03-13,13,Dhanmondi & Azimpur,13.74,google_trends
+2022-03-13,14,Wari & Jatrabari,20.95,google_trends
+2022-03-13,15,Bashundhara R/A (NSU),14.93,google_trends
+2022-03-20,1,Uttara,14.13,google_trends
+2022-03-20,2,Mirpur,12.88,google_trends
+2022-03-20,3,Gulshan & Banani,9.39,google_trends
+2022-03-20,4,Agargaon & Kafrul,12.23,google_trends
+2022-03-20,5,Farmgate & Karwan Bazar,16.36,google_trends
+2022-03-20,6,Diabari & Ashkona,10.25,google_trends
+2022-03-20,7,Uttarkhan & Faidabad,4.62,google_trends
+2022-03-20,8,Dakshinkhan & Dumni,6.1,google_trends
+2022-03-20,9,Vatara & Kuril,14.19,google_trends
+2022-03-20,10,Badda & Aftabnagar,14.44,google_trends
+2022-03-20,11,Ramna & Motijheel,17.71,google_trends
+2022-03-20,12,Khilgaon & Mugda,12.79,google_trends
+2022-03-20,13,Dhanmondi & Azimpur,13.05,google_trends
+2022-03-20,14,Wari & Jatrabari,19.74,google_trends
+2022-03-20,15,Bashundhara R/A (NSU),19.72,google_trends
+2022-03-27,1,Uttara,6.08,google_trends
+2022-03-27,2,Mirpur,12.9,google_trends
+2022-03-27,3,Gulshan & Banani,14.34,google_trends
+2022-03-27,4,Agargaon & Kafrul,12.72,google_trends
+2022-03-27,5,Farmgate & Karwan Bazar,16.58,google_trends
+2022-03-27,6,Diabari & Ashkona,8.48,google_trends
+2022-03-27,7,Uttarkhan & Faidabad,6.33,google_trends
+2022-03-27,8,Dakshinkhan & Dumni,4.1,google_trends
+2022-03-27,9,Vatara & Kuril,10.78,google_trends
+2022-03-27,10,Badda & Aftabnagar,11.34,google_trends
+2022-03-27,11,Ramna & Motijheel,17.49,google_trends
+2022-03-27,12,Khilgaon & Mugda,19.71,google_trends
+2022-03-27,13,Dhanmondi & Azimpur,14.7,google_trends
+2022-03-27,14,Wari & Jatrabari,16.37,google_trends
+2022-03-27,15,Bashundhara R/A (NSU),22.57,google_trends
+2022-04-03,1,Uttara,10.48,google_trends
+2022-04-03,2,Mirpur,14.16,google_trends
+2022-04-03,3,Gulshan & Banani,9.03,google_trends
+2022-04-03,4,Agargaon & Kafrul,7.7,google_trends
+2022-04-03,5,Farmgate & Karwan Bazar,12.13,google_trends
+2022-04-03,6,Diabari & Ashkona,4.6,google_trends
+2022-04-03,7,Uttarkhan & Faidabad,1.17,google_trends
+2022-04-03,8,Dakshinkhan & Dumni,7.02,google_trends
+2022-04-03,9,Vatara & Kuril,9.75,google_trends
+2022-04-03,10,Badda & Aftabnagar,6.42,google_trends
+2022-04-03,11,Ramna & Motijheel,12.74,google_trends
+2022-04-03,12,Khilgaon & Mugda,12.33,google_trends
+2022-04-03,13,Dhanmondi & Azimpur,11.75,google_trends
+2022-04-03,14,Wari & Jatrabari,14.14,google_trends
+2022-04-03,15,Bashundhara R/A (NSU),15.61,google_trends
+2022-04-10,1,Uttara,7.63,google_trends
+2022-04-10,2,Mirpur,9.14,google_trends
+2022-04-10,3,Gulshan & Banani,4.74,google_trends
+2022-04-10,4,Agargaon & Kafrul,5.72,google_trends
+2022-04-10,5,Farmgate & Karwan Bazar,14.5,google_trends
+2022-04-10,6,Diabari & Ashkona,0.74,google_trends
+2022-04-10,7,Uttarkhan & Faidabad,6.89,google_trends
+2022-04-10,8,Dakshinkhan & Dumni,3.02,google_trends
+2022-04-10,9,Vatara & Kuril,7.84,google_trends
+2022-04-10,10,Badda & Aftabnagar,5.96,google_trends
+2022-04-10,11,Ramna & Motijheel,12.82,google_trends
+2022-04-10,12,Khilgaon & Mugda,10.92,google_trends
+2022-04-10,13,Dhanmondi & Azimpur,11.45,google_trends
+2022-04-10,14,Wari & Jatrabari,8.09,google_trends
+2022-04-10,15,Bashundhara R/A (NSU),12.4,google_trends
+2022-04-17,1,Uttara,9.29,google_trends
+2022-04-17,2,Mirpur,13.35,google_trends
+2022-04-17,3,Gulshan & Banani,11.23,google_trends
+2022-04-17,4,Agargaon & Kafrul,6.43,google_trends
+2022-04-17,5,Farmgate & Karwan Bazar,9.54,google_trends
+2022-04-17,6,Diabari & Ashkona,4.52,google_trends
+2022-04-17,7,Uttarkhan & Faidabad,4.28,google_trends
+2022-04-17,8,Dakshinkhan & Dumni,4.1,google_trends
+2022-04-17,9,Vatara & Kuril,6.43,google_trends
+2022-04-17,10,Badda & Aftabnagar,7.45,google_trends
+2022-04-17,11,Ramna & Motijheel,15.32,google_trends
+2022-04-17,12,Khilgaon & Mugda,8.69,google_trends
+2022-04-17,13,Dhanmondi & Azimpur,12.4,google_trends
+2022-04-17,14,Wari & Jatrabari,9.02,google_trends
+2022-04-17,15,Bashundhara R/A (NSU),17.81,google_trends
+2022-04-24,1,Uttara,5.4,google_trends
+2022-04-24,2,Mirpur,12.01,google_trends
+2022-04-24,3,Gulshan & Banani,5.31,google_trends
+2022-04-24,4,Agargaon & Kafrul,8.06,google_trends
+2022-04-24,5,Farmgate & Karwan Bazar,11.26,google_trends
+2022-04-24,6,Diabari & Ashkona,5.11,google_trends
+2022-04-24,7,Uttarkhan & Faidabad,0.0,google_trends
+2022-04-24,8,Dakshinkhan & Dumni,2.17,google_trends
+2022-04-24,9,Vatara & Kuril,8.59,google_trends
+2022-04-24,10,Badda & Aftabnagar,4.77,google_trends
+2022-04-24,11,Ramna & Motijheel,5.57,google_trends
+2022-04-24,12,Khilgaon & Mugda,4.7,google_trends
+2022-04-24,13,Dhanmondi & Azimpur,8.31,google_trends
+2022-04-24,14,Wari & Jatrabari,8.55,google_trends
+2022-04-24,15,Bashundhara R/A (NSU),13.27,google_trends
+2022-05-01,1,Uttara,6.25,google_trends
+2022-05-01,2,Mirpur,7.56,google_trends
+2022-05-01,3,Gulshan & Banani,7.62,google_trends
+2022-05-01,4,Agargaon & Kafrul,3.05,google_trends
+2022-05-01,5,Farmgate & Karwan Bazar,7.83,google_trends
+2022-05-01,6,Diabari & Ashkona,0.0,google_trends
+2022-05-01,7,Uttarkhan & Faidabad,2.91,google_trends
+2022-05-01,8,Dakshinkhan & Dumni,0.73,google_trends
+2022-05-01,9,Vatara & Kuril,4.85,google_trends
+2022-05-01,10,Badda & Aftabnagar,4.48,google_trends
+2022-05-01,11,Ramna & Motijheel,7.66,google_trends
+2022-05-01,12,Khilgaon & Mugda,3.24,google_trends
+2022-05-01,13,Dhanmondi & Azimpur,10.78,google_trends
+2022-05-01,14,Wari & Jatrabari,4.86,google_trends
+2022-05-01,15,Bashundhara R/A (NSU),12.69,google_trends
+2022-05-08,1,Uttara,8.75,google_trends
+2022-05-08,2,Mirpur,11.29,google_trends
+2022-05-08,3,Gulshan & Banani,11.1,google_trends
+2022-05-08,4,Agargaon & Kafrul,5.87,google_trends
+2022-05-08,5,Farmgate & Karwan Bazar,13.36,google_trends
+2022-05-08,6,Diabari & Ashkona,6.45,google_trends
+2022-05-08,7,Uttarkhan & Faidabad,6.7,google_trends
+2022-05-08,8,Dakshinkhan & Dumni,2.57,google_trends
+2022-05-08,9,Vatara & Kuril,10.32,google_trends
+2022-05-08,10,Badda & Aftabnagar,5.95,google_trends
+2022-05-08,11,Ramna & Motijheel,11.14,google_trends
+2022-05-08,12,Khilgaon & Mugda,13.22,google_trends
+2022-05-08,13,Dhanmondi & Azimpur,9.99,google_trends
+2022-05-08,14,Wari & Jatrabari,8.7,google_trends
+2022-05-08,15,Bashundhara R/A (NSU),12.28,google_trends
+2022-05-15,1,Uttara,3.83,google_trends
+2022-05-15,2,Mirpur,15.77,google_trends
+2022-05-15,3,Gulshan & Banani,7.19,google_trends
+2022-05-15,4,Agargaon & Kafrul,6.18,google_trends
+2022-05-15,5,Farmgate & Karwan Bazar,8.06,google_trends
+2022-05-15,6,Diabari & Ashkona,2.05,google_trends
+2022-05-15,7,Uttarkhan & Faidabad,4.2,google_trends
+2022-05-15,8,Dakshinkhan & Dumni,2.27,google_trends
+2022-05-15,9,Vatara & Kuril,7.12,google_trends
+2022-05-15,10,Badda & Aftabnagar,6.92,google_trends
+2022-05-15,11,Ramna & Motijheel,9.95,google_trends
+2022-05-15,12,Khilgaon & Mugda,10.69,google_trends
+2022-05-15,13,Dhanmondi & Azimpur,7.28,google_trends
+2022-05-15,14,Wari & Jatrabari,11.06,google_trends
+2022-05-15,15,Bashundhara R/A (NSU),13.75,google_trends
+2022-05-22,1,Uttara,10.14,google_trends
+2022-05-22,2,Mirpur,10.48,google_trends
+2022-05-22,3,Gulshan & Banani,9.04,google_trends
+2022-05-22,4,Agargaon & Kafrul,5.52,google_trends
+2022-05-22,5,Farmgate & Karwan Bazar,15.04,google_trends
+2022-05-22,6,Diabari & Ashkona,6.23,google_trends
+2022-05-22,7,Uttarkhan & Faidabad,6.24,google_trends
+2022-05-22,8,Dakshinkhan & Dumni,1.04,google_trends
+2022-05-22,9,Vatara & Kuril,11.09,google_trends
+2022-05-22,10,Badda & Aftabnagar,6.54,google_trends
+2022-05-22,11,Ramna & Motijheel,16.65,google_trends
+2022-05-22,12,Khilgaon & Mugda,10.3,google_trends
+2022-05-22,13,Dhanmondi & Azimpur,10.43,google_trends
+2022-05-22,14,Wari & Jatrabari,10.67,google_trends
+2022-05-22,15,Bashundhara R/A (NSU),12.16,google_trends
+2022-05-29,1,Uttara,8.22,google_trends
+2022-05-29,2,Mirpur,9.06,google_trends
+2022-05-29,3,Gulshan & Banani,11.01,google_trends
+2022-05-29,4,Agargaon & Kafrul,9.25,google_trends
+2022-05-29,5,Farmgate & Karwan Bazar,14.93,google_trends
+2022-05-29,6,Diabari & Ashkona,0.0,google_trends
+2022-05-29,7,Uttarkhan & Faidabad,5.13,google_trends
+2022-05-29,8,Dakshinkhan & Dumni,9.17,google_trends
+2022-05-29,9,Vatara & Kuril,3.82,google_trends
+2022-05-29,10,Badda & Aftabnagar,7.42,google_trends
+2022-05-29,11,Ramna & Motijheel,15.09,google_trends
+2022-05-29,12,Khilgaon & Mugda,9.66,google_trends
+2022-05-29,13,Dhanmondi & Azimpur,7.6,google_trends
+2022-05-29,14,Wari & Jatrabari,20.18,google_trends
+2022-05-29,15,Bashundhara R/A (NSU),17.45,google_trends
+2022-06-05,1,Uttara,8.14,google_trends
+2022-06-05,2,Mirpur,13.76,google_trends
+2022-06-05,3,Gulshan & Banani,15.61,google_trends
+2022-06-05,4,Agargaon & Kafrul,12.49,google_trends
+2022-06-05,5,Farmgate & Karwan Bazar,16.43,google_trends
+2022-06-05,6,Diabari & Ashkona,1.2,google_trends
+2022-06-05,7,Uttarkhan & Faidabad,7.88,google_trends
+2022-06-05,8,Dakshinkhan & Dumni,10.42,google_trends
+2022-06-05,9,Vatara & Kuril,10.76,google_trends
+2022-06-05,10,Badda & Aftabnagar,7.41,google_trends
+2022-06-05,11,Ramna & Motijheel,16.96,google_trends
+2022-06-05,12,Khilgaon & Mugda,11.59,google_trends
+2022-06-05,13,Dhanmondi & Azimpur,16.63,google_trends
+2022-06-05,14,Wari & Jatrabari,16.03,google_trends
+2022-06-05,15,Bashundhara R/A (NSU),19.48,google_trends
+2022-06-12,1,Uttara,3.75,google_trends
+2022-06-12,2,Mirpur,8.12,google_trends
+2022-06-12,3,Gulshan & Banani,6.86,google_trends
+2022-06-12,4,Agargaon & Kafrul,10.65,google_trends
+2022-06-12,5,Farmgate & Karwan Bazar,10.43,google_trends
+2022-06-12,6,Diabari & Ashkona,2.12,google_trends
+2022-06-12,7,Uttarkhan & Faidabad,5.0,google_trends
+2022-06-12,8,Dakshinkhan & Dumni,0.8,google_trends
+2022-06-12,9,Vatara & Kuril,2.35,google_trends
+2022-06-12,10,Badda & Aftabnagar,11.01,google_trends
+2022-06-12,11,Ramna & Motijheel,17.85,google_trends
+2022-06-12,12,Khilgaon & Mugda,12.47,google_trends
+2022-06-12,13,Dhanmondi & Azimpur,7.22,google_trends
+2022-06-12,14,Wari & Jatrabari,12.78,google_trends
+2022-06-12,15,Bashundhara R/A (NSU),13.33,google_trends
+2022-06-19,1,Uttara,9.03,google_trends
+2022-06-19,2,Mirpur,7.47,google_trends
+2022-06-19,3,Gulshan & Banani,9.19,google_trends
+2022-06-19,4,Agargaon & Kafrul,6.66,google_trends
+2022-06-19,5,Farmgate & Karwan Bazar,13.47,google_trends
+2022-06-19,6,Diabari & Ashkona,5.7,google_trends
+2022-06-19,7,Uttarkhan & Faidabad,1.53,google_trends
+2022-06-19,8,Dakshinkhan & Dumni,4.73,google_trends
+2022-06-19,9,Vatara & Kuril,12.22,google_trends
+2022-06-19,10,Badda & Aftabnagar,8.67,google_trends
+2022-06-19,11,Ramna & Motijheel,15.1,google_trends
+2022-06-19,12,Khilgaon & Mugda,9.47,google_trends
+2022-06-19,13,Dhanmondi & Azimpur,11.95,google_trends
+2022-06-19,14,Wari & Jatrabari,7.61,google_trends
+2022-06-19,15,Bashundhara R/A (NSU),18.37,google_trends
+2022-06-26,1,Uttara,7.76,google_trends
+2022-06-26,2,Mirpur,10.76,google_trends
+2022-06-26,3,Gulshan & Banani,7.98,google_trends
+2022-06-26,4,Agargaon & Kafrul,6.75,google_trends
+2022-06-26,5,Farmgate & Karwan Bazar,15.02,google_trends
+2022-06-26,6,Diabari & Ashkona,6.4,google_trends
+2022-06-26,7,Uttarkhan & Faidabad,7.07,google_trends
+2022-06-26,8,Dakshinkhan & Dumni,8.55,google_trends
+2022-06-26,9,Vatara & Kuril,9.07,google_trends
+2022-06-26,10,Badda & Aftabnagar,8.48,google_trends
+2022-06-26,11,Ramna & Motijheel,15.76,google_trends
+2022-06-26,12,Khilgaon & Mugda,11.26,google_trends
+2022-06-26,13,Dhanmondi & Azimpur,13.16,google_trends
+2022-06-26,14,Wari & Jatrabari,14.23,google_trends
+2022-06-26,15,Bashundhara R/A (NSU),14.44,google_trends
+2022-07-03,1,Uttara,9.49,google_trends
+2022-07-03,2,Mirpur,11.51,google_trends
+2022-07-03,3,Gulshan & Banani,5.98,google_trends
+2022-07-03,4,Agargaon & Kafrul,2.59,google_trends
+2022-07-03,5,Farmgate & Karwan Bazar,13.51,google_trends
+2022-07-03,6,Diabari & Ashkona,2.04,google_trends
+2022-07-03,7,Uttarkhan & Faidabad,2.91,google_trends
+2022-07-03,8,Dakshinkhan & Dumni,0.0,google_trends
+2022-07-03,9,Vatara & Kuril,2.19,google_trends
+2022-07-03,10,Badda & Aftabnagar,9.28,google_trends
+2022-07-03,11,Ramna & Motijheel,12.92,google_trends
+2022-07-03,12,Khilgaon & Mugda,10.22,google_trends
+2022-07-03,13,Dhanmondi & Azimpur,11.33,google_trends
+2022-07-03,14,Wari & Jatrabari,9.37,google_trends
+2022-07-03,15,Bashundhara R/A (NSU),15.46,google_trends
+2022-07-10,1,Uttara,12.95,google_trends
+2022-07-10,2,Mirpur,12.29,google_trends
+2022-07-10,3,Gulshan & Banani,12.0,google_trends
+2022-07-10,4,Agargaon & Kafrul,7.68,google_trends
+2022-07-10,5,Farmgate & Karwan Bazar,11.83,google_trends
+2022-07-10,6,Diabari & Ashkona,5.06,google_trends
+2022-07-10,7,Uttarkhan & Faidabad,6.46,google_trends
+2022-07-10,8,Dakshinkhan & Dumni,6.93,google_trends
+2022-07-10,9,Vatara & Kuril,11.93,google_trends
+2022-07-10,10,Badda & Aftabnagar,7.7,google_trends
+2022-07-10,11,Ramna & Motijheel,12.28,google_trends
+2022-07-10,12,Khilgaon & Mugda,11.53,google_trends
+2022-07-10,13,Dhanmondi & Azimpur,11.43,google_trends
+2022-07-10,14,Wari & Jatrabari,7.9,google_trends
+2022-07-10,15,Bashundhara R/A (NSU),11.69,google_trends
+2022-07-17,1,Uttara,10.56,google_trends
+2022-07-17,2,Mirpur,16.16,google_trends
+2022-07-17,3,Gulshan & Banani,8.77,google_trends
+2022-07-17,4,Agargaon & Kafrul,8.61,google_trends
+2022-07-17,5,Farmgate & Karwan Bazar,14.75,google_trends
+2022-07-17,6,Diabari & Ashkona,5.12,google_trends
+2022-07-17,7,Uttarkhan & Faidabad,4.31,google_trends
+2022-07-17,8,Dakshinkhan & Dumni,5.34,google_trends
+2022-07-17,9,Vatara & Kuril,8.34,google_trends
+2022-07-17,10,Badda & Aftabnagar,6.38,google_trends
+2022-07-17,11,Ramna & Motijheel,14.15,google_trends
+2022-07-17,12,Khilgaon & Mugda,10.63,google_trends
+2022-07-17,13,Dhanmondi & Azimpur,12.98,google_trends
+2022-07-17,14,Wari & Jatrabari,14.24,google_trends
+2022-07-17,15,Bashundhara R/A (NSU),16.99,google_trends
+2022-07-24,1,Uttara,11.52,google_trends
+2022-07-24,2,Mirpur,10.97,google_trends
+2022-07-24,3,Gulshan & Banani,9.87,google_trends
+2022-07-24,4,Agargaon & Kafrul,8.45,google_trends
+2022-07-24,5,Farmgate & Karwan Bazar,16.9,google_trends
+2022-07-24,6,Diabari & Ashkona,6.43,google_trends
+2022-07-24,7,Uttarkhan & Faidabad,0.0,google_trends
+2022-07-24,8,Dakshinkhan & Dumni,9.16,google_trends
+2022-07-24,9,Vatara & Kuril,10.61,google_trends
+2022-07-24,10,Badda & Aftabnagar,8.79,google_trends
+2022-07-24,11,Ramna & Motijheel,9.27,google_trends
+2022-07-24,12,Khilgaon & Mugda,8.83,google_trends
+2022-07-24,13,Dhanmondi & Azimpur,7.68,google_trends
+2022-07-24,14,Wari & Jatrabari,11.87,google_trends
+2022-07-24,15,Bashundhara R/A (NSU),18.44,google_trends
+2022-07-31,1,Uttara,8.08,google_trends
+2022-07-31,2,Mirpur,11.29,google_trends
+2022-07-31,3,Gulshan & Banani,9.16,google_trends
+2022-07-31,4,Agargaon & Kafrul,9.33,google_trends
+2022-07-31,5,Farmgate & Karwan Bazar,10.5,google_trends
+2022-07-31,6,Diabari & Ashkona,3.49,google_trends
+2022-07-31,7,Uttarkhan & Faidabad,2.6,google_trends
+2022-07-31,8,Dakshinkhan & Dumni,3.65,google_trends
+2022-07-31,9,Vatara & Kuril,6.56,google_trends
+2022-07-31,10,Badda & Aftabnagar,7.63,google_trends
+2022-07-31,11,Ramna & Motijheel,12.68,google_trends
+2022-07-31,12,Khilgaon & Mugda,11.86,google_trends
+2022-07-31,13,Dhanmondi & Azimpur,13.51,google_trends
+2022-07-31,14,Wari & Jatrabari,7.78,google_trends
+2022-07-31,15,Bashundhara R/A (NSU),11.12,google_trends
+2022-08-07,1,Uttara,9.04,google_trends
+2022-08-07,2,Mirpur,14.2,google_trends
+2022-08-07,3,Gulshan & Banani,8.54,google_trends
+2022-08-07,4,Agargaon & Kafrul,0.0,google_trends
+2022-08-07,5,Farmgate & Karwan Bazar,10.88,google_trends
+2022-08-07,6,Diabari & Ashkona,4.87,google_trends
+2022-08-07,7,Uttarkhan & Faidabad,7.26,google_trends
+2022-08-07,8,Dakshinkhan & Dumni,4.19,google_trends
+2022-08-07,9,Vatara & Kuril,4.83,google_trends
+2022-08-07,10,Badda & Aftabnagar,1.32,google_trends
+2022-08-07,11,Ramna & Motijheel,10.13,google_trends
+2022-08-07,12,Khilgaon & Mugda,9.32,google_trends
+2022-08-07,13,Dhanmondi & Azimpur,13.28,google_trends
+2022-08-07,14,Wari & Jatrabari,14.28,google_trends
+2022-08-07,15,Bashundhara R/A (NSU),16.48,google_trends
+2022-08-14,1,Uttara,9.42,google_trends
+2022-08-14,2,Mirpur,9.32,google_trends
+2022-08-14,3,Gulshan & Banani,8.22,google_trends
+2022-08-14,4,Agargaon & Kafrul,12.22,google_trends
+2022-08-14,5,Farmgate & Karwan Bazar,9.94,google_trends
+2022-08-14,6,Diabari & Ashkona,6.62,google_trends
+2022-08-14,7,Uttarkhan & Faidabad,4.61,google_trends
+2022-08-14,8,Dakshinkhan & Dumni,2.52,google_trends
+2022-08-14,9,Vatara & Kuril,5.54,google_trends
+2022-08-14,10,Badda & Aftabnagar,8.53,google_trends
+2022-08-14,11,Ramna & Motijheel,13.6,google_trends
+2022-08-14,12,Khilgaon & Mugda,9.25,google_trends
+2022-08-14,13,Dhanmondi & Azimpur,12.09,google_trends
+2022-08-14,14,Wari & Jatrabari,11.6,google_trends
+2022-08-14,15,Bashundhara R/A (NSU),16.84,google_trends
+2022-08-21,1,Uttara,8.64,google_trends
+2022-08-21,2,Mirpur,11.87,google_trends
+2022-08-21,3,Gulshan & Banani,11.07,google_trends
+2022-08-21,4,Agargaon & Kafrul,12.88,google_trends
+2022-08-21,5,Farmgate & Karwan Bazar,15.47,google_trends
+2022-08-21,6,Diabari & Ashkona,8.81,google_trends
+2022-08-21,7,Uttarkhan & Faidabad,5.77,google_trends
+2022-08-21,8,Dakshinkhan & Dumni,6.98,google_trends
+2022-08-21,9,Vatara & Kuril,5.24,google_trends
+2022-08-21,10,Badda & Aftabnagar,7.49,google_trends
+2022-08-21,11,Ramna & Motijheel,14.1,google_trends
+2022-08-21,12,Khilgaon & Mugda,15.36,google_trends
+2022-08-21,13,Dhanmondi & Azimpur,11.19,google_trends
+2022-08-21,14,Wari & Jatrabari,13.42,google_trends
+2022-08-21,15,Bashundhara R/A (NSU),18.27,google_trends
+2022-08-28,1,Uttara,10.93,google_trends
+2022-08-28,2,Mirpur,10.55,google_trends
+2022-08-28,3,Gulshan & Banani,4.69,google_trends
+2022-08-28,4,Agargaon & Kafrul,3.38,google_trends
+2022-08-28,5,Farmgate & Karwan Bazar,11.22,google_trends
+2022-08-28,6,Diabari & Ashkona,6.58,google_trends
+2022-08-28,7,Uttarkhan & Faidabad,5.1,google_trends
+2022-08-28,8,Dakshinkhan & Dumni,2.88,google_trends
+2022-08-28,9,Vatara & Kuril,9.42,google_trends
+2022-08-28,10,Badda & Aftabnagar,6.33,google_trends
+2022-08-28,11,Ramna & Motijheel,12.04,google_trends
+2022-08-28,12,Khilgaon & Mugda,9.3,google_trends
+2022-08-28,13,Dhanmondi & Azimpur,7.67,google_trends
+2022-08-28,14,Wari & Jatrabari,5.92,google_trends
+2022-08-28,15,Bashundhara R/A (NSU),13.61,google_trends
+2022-09-04,1,Uttara,8.12,google_trends
+2022-09-04,2,Mirpur,7.74,google_trends
+2022-09-04,3,Gulshan & Banani,6.88,google_trends
+2022-09-04,4,Agargaon & Kafrul,6.98,google_trends
+2022-09-04,5,Farmgate & Karwan Bazar,16.11,google_trends
+2022-09-04,6,Diabari & Ashkona,2.43,google_trends
+2022-09-04,7,Uttarkhan & Faidabad,7.46,google_trends
+2022-09-04,8,Dakshinkhan & Dumni,1.29,google_trends
+2022-09-04,9,Vatara & Kuril,11.05,google_trends
+2022-09-04,10,Badda & Aftabnagar,6.68,google_trends
+2022-09-04,11,Ramna & Motijheel,8.05,google_trends
+2022-09-04,12,Khilgaon & Mugda,10.49,google_trends
+2022-09-04,13,Dhanmondi & Azimpur,11.18,google_trends
+2022-09-04,14,Wari & Jatrabari,10.81,google_trends
+2022-09-04,15,Bashundhara R/A (NSU),15.42,google_trends
+2022-09-11,1,Uttara,6.44,google_trends
+2022-09-11,2,Mirpur,11.44,google_trends
+2022-09-11,3,Gulshan & Banani,9.61,google_trends
+2022-09-11,4,Agargaon & Kafrul,5.99,google_trends
+2022-09-11,5,Farmgate & Karwan Bazar,10.93,google_trends
+2022-09-11,6,Diabari & Ashkona,3.96,google_trends
+2022-09-11,7,Uttarkhan & Faidabad,8.15,google_trends
+2022-09-11,8,Dakshinkhan & Dumni,4.02,google_trends
+2022-09-11,9,Vatara & Kuril,6.96,google_trends
+2022-09-11,10,Badda & Aftabnagar,5.94,google_trends
+2022-09-11,11,Ramna & Motijheel,13.94,google_trends
+2022-09-11,12,Khilgaon & Mugda,9.49,google_trends
+2022-09-11,13,Dhanmondi & Azimpur,11.13,google_trends
+2022-09-11,14,Wari & Jatrabari,15.84,google_trends
+2022-09-11,15,Bashundhara R/A (NSU),11.12,google_trends
+2022-09-18,1,Uttara,10.46,google_trends
+2022-09-18,2,Mirpur,8.89,google_trends
+2022-09-18,3,Gulshan & Banani,10.92,google_trends
+2022-09-18,4,Agargaon & Kafrul,10.29,google_trends
+2022-09-18,5,Farmgate & Karwan Bazar,14.15,google_trends
+2022-09-18,6,Diabari & Ashkona,4.97,google_trends
+2022-09-18,7,Uttarkhan & Faidabad,5.44,google_trends
+2022-09-18,8,Dakshinkhan & Dumni,6.43,google_trends
+2022-09-18,9,Vatara & Kuril,10.81,google_trends
+2022-09-18,10,Badda & Aftabnagar,6.67,google_trends
+2022-09-18,11,Ramna & Motijheel,12.06,google_trends
+2022-09-18,12,Khilgaon & Mugda,14.57,google_trends
+2022-09-18,13,Dhanmondi & Azimpur,16.06,google_trends
+2022-09-18,14,Wari & Jatrabari,10.66,google_trends
+2022-09-18,15,Bashundhara R/A (NSU),17.17,google_trends
+2022-09-25,1,Uttara,8.69,google_trends
+2022-09-25,2,Mirpur,14.22,google_trends
+2022-09-25,3,Gulshan & Banani,11.28,google_trends
+2022-09-25,4,Agargaon & Kafrul,6.82,google_trends
+2022-09-25,5,Farmgate & Karwan Bazar,17.19,google_trends
+2022-09-25,6,Diabari & Ashkona,5.38,google_trends
+2022-09-25,7,Uttarkhan & Faidabad,6.42,google_trends
+2022-09-25,8,Dakshinkhan & Dumni,8.03,google_trends
+2022-09-25,9,Vatara & Kuril,9.45,google_trends
+2022-09-25,10,Badda & Aftabnagar,10.89,google_trends
+2022-09-25,11,Ramna & Motijheel,17.27,google_trends
+2022-09-25,12,Khilgaon & Mugda,13.96,google_trends
+2022-09-25,13,Dhanmondi & Azimpur,10.59,google_trends
+2022-09-25,14,Wari & Jatrabari,16.7,google_trends
+2022-09-25,15,Bashundhara R/A (NSU),14.93,google_trends
+2022-10-02,1,Uttara,14.23,google_trends
+2022-10-02,2,Mirpur,11.77,google_trends
+2022-10-02,3,Gulshan & Banani,9.42,google_trends
+2022-10-02,4,Agargaon & Kafrul,9.19,google_trends
+2022-10-02,5,Farmgate & Karwan Bazar,15.11,google_trends
+2022-10-02,6,Diabari & Ashkona,7.25,google_trends
+2022-10-02,7,Uttarkhan & Faidabad,5.17,google_trends
+2022-10-02,8,Dakshinkhan & Dumni,3.64,google_trends
+2022-10-02,9,Vatara & Kuril,6.85,google_trends
+2022-10-02,10,Badda & Aftabnagar,9.36,google_trends
+2022-10-02,11,Ramna & Motijheel,19.46,google_trends
+2022-10-02,12,Khilgaon & Mugda,7.96,google_trends
+2022-10-02,13,Dhanmondi & Azimpur,11.48,google_trends
+2022-10-02,14,Wari & Jatrabari,12.88,google_trends
+2022-10-02,15,Bashundhara R/A (NSU),21.02,google_trends
+2022-10-09,1,Uttara,13.45,google_trends
+2022-10-09,2,Mirpur,18.11,google_trends
+2022-10-09,3,Gulshan & Banani,16.16,google_trends
+2022-10-09,4,Agargaon & Kafrul,6.65,google_trends
+2022-10-09,5,Farmgate & Karwan Bazar,15.86,google_trends
+2022-10-09,6,Diabari & Ashkona,5.7,google_trends
+2022-10-09,7,Uttarkhan & Faidabad,7.21,google_trends
+2022-10-09,8,Dakshinkhan & Dumni,7.11,google_trends
+2022-10-09,9,Vatara & Kuril,13.68,google_trends
+2022-10-09,10,Badda & Aftabnagar,11.05,google_trends
+2022-10-09,11,Ramna & Motijheel,12.81,google_trends
+2022-10-09,12,Khilgaon & Mugda,11.46,google_trends
+2022-10-09,13,Dhanmondi & Azimpur,16.57,google_trends
+2022-10-09,14,Wari & Jatrabari,13.22,google_trends
+2022-10-09,15,Bashundhara R/A (NSU),15.36,google_trends
+2022-10-16,1,Uttara,5.6,google_trends
+2022-10-16,2,Mirpur,14.63,google_trends
+2022-10-16,3,Gulshan & Banani,9.74,google_trends
+2022-10-16,4,Agargaon & Kafrul,7.35,google_trends
+2022-10-16,5,Farmgate & Karwan Bazar,10.34,google_trends
+2022-10-16,6,Diabari & Ashkona,1.78,google_trends
+2022-10-16,7,Uttarkhan & Faidabad,6.05,google_trends
+2022-10-16,8,Dakshinkhan & Dumni,0.0,google_trends
+2022-10-16,9,Vatara & Kuril,11.21,google_trends
+2022-10-16,10,Badda & Aftabnagar,8.37,google_trends
+2022-10-16,11,Ramna & Motijheel,10.74,google_trends
+2022-10-16,12,Khilgaon & Mugda,11.92,google_trends
+2022-10-16,13,Dhanmondi & Azimpur,13.71,google_trends
+2022-10-16,14,Wari & Jatrabari,15.07,google_trends
+2022-10-16,15,Bashundhara R/A (NSU),13.77,google_trends
+2022-10-23,1,Uttara,5.27,google_trends
+2022-10-23,2,Mirpur,8.38,google_trends
+2022-10-23,3,Gulshan & Banani,6.64,google_trends
+2022-10-23,4,Agargaon & Kafrul,6.25,google_trends
+2022-10-23,5,Farmgate & Karwan Bazar,16.72,google_trends
+2022-10-23,6,Diabari & Ashkona,6.57,google_trends
+2022-10-23,7,Uttarkhan & Faidabad,5.21,google_trends
+2022-10-23,8,Dakshinkhan & Dumni,4.09,google_trends
+2022-10-23,9,Vatara & Kuril,9.32,google_trends
+2022-10-23,10,Badda & Aftabnagar,6.32,google_trends
+2022-10-23,11,Ramna & Motijheel,11.71,google_trends
+2022-10-23,12,Khilgaon & Mugda,6.82,google_trends
+2022-10-23,13,Dhanmondi & Azimpur,9.25,google_trends
+2022-10-23,14,Wari & Jatrabari,9.34,google_trends
+2022-10-23,15,Bashundhara R/A (NSU),20.91,google_trends
+2022-10-30,1,Uttara,9.92,google_trends
+2022-10-30,2,Mirpur,9.83,google_trends
+2022-10-30,3,Gulshan & Banani,8.83,google_trends
+2022-10-30,4,Agargaon & Kafrul,7.06,google_trends
+2022-10-30,5,Farmgate & Karwan Bazar,14.97,google_trends
+2022-10-30,6,Diabari & Ashkona,4.67,google_trends
+2022-10-30,7,Uttarkhan & Faidabad,0.97,google_trends
+2022-10-30,8,Dakshinkhan & Dumni,4.62,google_trends
+2022-10-30,9,Vatara & Kuril,9.59,google_trends
+2022-10-30,10,Badda & Aftabnagar,9.5,google_trends
+2022-10-30,11,Ramna & Motijheel,16.56,google_trends
+2022-10-30,12,Khilgaon & Mugda,10.47,google_trends
+2022-10-30,13,Dhanmondi & Azimpur,11.55,google_trends
+2022-10-30,14,Wari & Jatrabari,8.83,google_trends
+2022-10-30,15,Bashundhara R/A (NSU),14.76,google_trends
+2022-11-06,1,Uttara,8.89,google_trends
+2022-11-06,2,Mirpur,15.22,google_trends
+2022-11-06,3,Gulshan & Banani,11.18,google_trends
+2022-11-06,4,Agargaon & Kafrul,6.67,google_trends
+2022-11-06,5,Farmgate & Karwan Bazar,16.29,google_trends
+2022-11-06,6,Diabari & Ashkona,6.01,google_trends
+2022-11-06,7,Uttarkhan & Faidabad,3.13,google_trends
+2022-11-06,8,Dakshinkhan & Dumni,1.69,google_trends
+2022-11-06,9,Vatara & Kuril,10.75,google_trends
+2022-11-06,10,Badda & Aftabnagar,8.64,google_trends
+2022-11-06,11,Ramna & Motijheel,15.71,google_trends
+2022-11-06,12,Khilgaon & Mugda,11.95,google_trends
+2022-11-06,13,Dhanmondi & Azimpur,12.58,google_trends
+2022-11-06,14,Wari & Jatrabari,14.36,google_trends
+2022-11-06,15,Bashundhara R/A (NSU),18.9,google_trends
+2022-11-13,1,Uttara,13.23,google_trends
+2022-11-13,2,Mirpur,14.31,google_trends
+2022-11-13,3,Gulshan & Banani,7.08,google_trends
+2022-11-13,4,Agargaon & Kafrul,7.97,google_trends
+2022-11-13,5,Farmgate & Karwan Bazar,11.24,google_trends
+2022-11-13,6,Diabari & Ashkona,5.18,google_trends
+2022-11-13,7,Uttarkhan & Faidabad,6.15,google_trends
+2022-11-13,8,Dakshinkhan & Dumni,1.77,google_trends
+2022-11-13,9,Vatara & Kuril,9.52,google_trends
+2022-11-13,10,Badda & Aftabnagar,7.21,google_trends
+2022-11-13,11,Ramna & Motijheel,14.02,google_trends
+2022-11-13,12,Khilgaon & Mugda,9.84,google_trends
+2022-11-13,13,Dhanmondi & Azimpur,12.15,google_trends
+2022-11-13,14,Wari & Jatrabari,14.63,google_trends
+2022-11-13,15,Bashundhara R/A (NSU),17.36,google_trends
+2022-11-20,1,Uttara,9.75,google_trends
+2022-11-20,2,Mirpur,8.03,google_trends
+2022-11-20,3,Gulshan & Banani,5.78,google_trends
+2022-11-20,4,Agargaon & Kafrul,6.63,google_trends
+2022-11-20,5,Farmgate & Karwan Bazar,12.67,google_trends
+2022-11-20,6,Diabari & Ashkona,6.97,google_trends
+2022-11-20,7,Uttarkhan & Faidabad,3.6,google_trends
+2022-11-20,8,Dakshinkhan & Dumni,4.73,google_trends
+2022-11-20,9,Vatara & Kuril,3.98,google_trends
+2022-11-20,10,Badda & Aftabnagar,8.6,google_trends
+2022-11-20,11,Ramna & Motijheel,10.27,google_trends
+2022-11-20,12,Khilgaon & Mugda,7.26,google_trends
+2022-11-20,13,Dhanmondi & Azimpur,5.36,google_trends
+2022-11-20,14,Wari & Jatrabari,15.74,google_trends
+2022-11-20,15,Bashundhara R/A (NSU),11.28,google_trends
+2022-11-27,1,Uttara,8.16,google_trends
+2022-11-27,2,Mirpur,7.21,google_trends
+2022-11-27,3,Gulshan & Banani,12.15,google_trends
+2022-11-27,4,Agargaon & Kafrul,9.52,google_trends
+2022-11-27,5,Farmgate & Karwan Bazar,7.74,google_trends
+2022-11-27,6,Diabari & Ashkona,2.16,google_trends
+2022-11-27,7,Uttarkhan & Faidabad,3.54,google_trends
+2022-11-27,8,Dakshinkhan & Dumni,5.54,google_trends
+2022-11-27,9,Vatara & Kuril,8.38,google_trends
+2022-11-27,10,Badda & Aftabnagar,3.87,google_trends
+2022-11-27,11,Ramna & Motijheel,8.25,google_trends
+2022-11-27,12,Khilgaon & Mugda,4.66,google_trends
+2022-11-27,13,Dhanmondi & Azimpur,7.93,google_trends
+2022-11-27,14,Wari & Jatrabari,9.68,google_trends
+2022-11-27,15,Bashundhara R/A (NSU),9.33,google_trends
+2022-12-04,1,Uttara,4.58,google_trends
+2022-12-04,2,Mirpur,2.27,google_trends
+2022-12-04,3,Gulshan & Banani,11.61,google_trends
+2022-12-04,4,Agargaon & Kafrul,9.47,google_trends
+2022-12-04,5,Farmgate & Karwan Bazar,6.7,google_trends
+2022-12-04,6,Diabari & Ashkona,0.98,google_trends
+2022-12-04,7,Uttarkhan & Faidabad,0.0,google_trends
+2022-12-04,8,Dakshinkhan & Dumni,5.31,google_trends
+2022-12-04,9,Vatara & Kuril,6.31,google_trends
+2022-12-04,10,Badda & Aftabnagar,2.19,google_trends
+2022-12-04,11,Ramna & Motijheel,3.8,google_trends
+2022-12-04,12,Khilgaon & Mugda,6.98,google_trends
+2022-12-04,13,Dhanmondi & Azimpur,4.44,google_trends
+2022-12-04,14,Wari & Jatrabari,8.71,google_trends
+2022-12-04,15,Bashundhara R/A (NSU),8.87,google_trends
+2022-12-11,1,Uttara,4.97,google_trends
+2022-12-11,2,Mirpur,4.76,google_trends
+2022-12-11,3,Gulshan & Banani,6.94,google_trends
+2022-12-11,4,Agargaon & Kafrul,4.45,google_trends
+2022-12-11,5,Farmgate & Karwan Bazar,9.75,google_trends
+2022-12-11,6,Diabari & Ashkona,1.07,google_trends
+2022-12-11,7,Uttarkhan & Faidabad,5.88,google_trends
+2022-12-11,8,Dakshinkhan & Dumni,6.02,google_trends
+2022-12-11,9,Vatara & Kuril,7.27,google_trends
+2022-12-11,10,Badda & Aftabnagar,7.52,google_trends
+2022-12-11,11,Ramna & Motijheel,11.17,google_trends
+2022-12-11,12,Khilgaon & Mugda,9.84,google_trends
+2022-12-11,13,Dhanmondi & Azimpur,11.0,google_trends
+2022-12-11,14,Wari & Jatrabari,11.97,google_trends
+2022-12-11,15,Bashundhara R/A (NSU),11.53,google_trends
+2022-12-18,1,Uttara,9.24,google_trends
+2022-12-18,2,Mirpur,6.06,google_trends
+2022-12-18,3,Gulshan & Banani,10.04,google_trends
+2022-12-18,4,Agargaon & Kafrul,8.72,google_trends
+2022-12-18,5,Farmgate & Karwan Bazar,9.62,google_trends
+2022-12-18,6,Diabari & Ashkona,2.59,google_trends
+2022-12-18,7,Uttarkhan & Faidabad,0.0,google_trends
+2022-12-18,8,Dakshinkhan & Dumni,5.84,google_trends
+2022-12-18,9,Vatara & Kuril,4.88,google_trends
+2022-12-18,10,Badda & Aftabnagar,4.55,google_trends
+2022-12-18,11,Ramna & Motijheel,6.77,google_trends
+2022-12-18,12,Khilgaon & Mugda,7.82,google_trends
+2022-12-18,13,Dhanmondi & Azimpur,10.91,google_trends
+2022-12-18,14,Wari & Jatrabari,8.0,google_trends
+2022-12-18,15,Bashundhara R/A (NSU),13.78,google_trends
+2022-12-25,1,Uttara,9.74,google_trends
+2022-12-25,2,Mirpur,8.56,google_trends
+2022-12-25,3,Gulshan & Banani,8.72,google_trends
+2022-12-25,4,Agargaon & Kafrul,3.51,google_trends
+2022-12-25,5,Farmgate & Karwan Bazar,6.85,google_trends
+2022-12-25,6,Diabari & Ashkona,3.37,google_trends
+2022-12-25,7,Uttarkhan & Faidabad,3.88,google_trends
+2022-12-25,8,Dakshinkhan & Dumni,3.68,google_trends
+2022-12-25,9,Vatara & Kuril,8.93,google_trends
+2022-12-25,10,Badda & Aftabnagar,7.8,google_trends
+2022-12-25,11,Ramna & Motijheel,9.93,google_trends
+2022-12-25,12,Khilgaon & Mugda,10.96,google_trends
+2022-12-25,13,Dhanmondi & Azimpur,6.73,google_trends
+2022-12-25,14,Wari & Jatrabari,10.64,google_trends
+2022-12-25,15,Bashundhara R/A (NSU),19.41,google_trends
+2025-06-29,1,Uttara,37.42,google_trends
+2025-06-29,2,Mirpur,47.0,google_trends
+2025-06-29,3,Gulshan & Banani,42.48,google_trends
+2025-06-29,4,Agargaon & Kafrul,39.91,google_trends
+2025-06-29,5,Farmgate & Karwan Bazar,55.22,google_trends
+2025-06-29,6,Diabari & Ashkona,20.6,google_trends
+2025-06-29,7,Uttarkhan & Faidabad,18.44,google_trends
+2025-06-29,8,Dakshinkhan & Dumni,18.22,google_trends
+2025-06-29,9,Vatara & Kuril,34.31,google_trends
+2025-06-29,10,Badda & Aftabnagar,36.56,google_trends
+2025-06-29,11,Ramna & Motijheel,56.21,google_trends
+2025-06-29,12,Khilgaon & Mugda,44.87,google_trends
+2025-06-29,13,Dhanmondi & Azimpur,49.09,google_trends
+2025-06-29,14,Wari & Jatrabari,52.5,google_trends
+2025-06-29,15,Bashundhara R/A (NSU),70.13,google_trends
+2025-07-06,1,Uttara,37.32,google_trends
+2025-07-06,2,Mirpur,48.68,google_trends
+2025-07-06,3,Gulshan & Banani,38.01,google_trends
+2025-07-06,4,Agargaon & Kafrul,32.01,google_trends
+2025-07-06,5,Farmgate & Karwan Bazar,50.27,google_trends
+2025-07-06,6,Diabari & Ashkona,21.18,google_trends
+2025-07-06,7,Uttarkhan & Faidabad,21.16,google_trends
+2025-07-06,8,Dakshinkhan & Dumni,17.11,google_trends
+2025-07-06,9,Vatara & Kuril,37.37,google_trends
+2025-07-06,10,Badda & Aftabnagar,35.54,google_trends
+2025-07-06,11,Ramna & Motijheel,58.49,google_trends
+2025-07-06,12,Khilgaon & Mugda,45.08,google_trends
+2025-07-06,13,Dhanmondi & Azimpur,45.78,google_trends
+2025-07-06,14,Wari & Jatrabari,52.01,google_trends
+2025-07-06,15,Bashundhara R/A (NSU),65.16,google_trends
+2025-07-13,1,Uttara,46.89,google_trends
+2025-07-13,2,Mirpur,49.95,google_trends
+2025-07-13,3,Gulshan & Banani,43.96,google_trends
+2025-07-13,4,Agargaon & Kafrul,33.98,google_trends
+2025-07-13,5,Farmgate & Karwan Bazar,63.25,google_trends
+2025-07-13,6,Diabari & Ashkona,21.17,google_trends
+2025-07-13,7,Uttarkhan & Faidabad,21.72,google_trends
+2025-07-13,8,Dakshinkhan & Dumni,21.14,google_trends
+2025-07-13,9,Vatara & Kuril,41.13,google_trends
+2025-07-13,10,Badda & Aftabnagar,38.4,google_trends
+2025-07-13,11,Ramna & Motijheel,64.3,google_trends
+2025-07-13,12,Khilgaon & Mugda,52.92,google_trends
+2025-07-13,13,Dhanmondi & Azimpur,55.9,google_trends
+2025-07-13,14,Wari & Jatrabari,56.79,google_trends
+2025-07-13,15,Bashundhara R/A (NSU),71.21,google_trends
+2025-07-20,1,Uttara,46.01,google_trends
+2025-07-20,2,Mirpur,58.75,google_trends
+2025-07-20,3,Gulshan & Banani,48.01,google_trends
+2025-07-20,4,Agargaon & Kafrul,37.9,google_trends
+2025-07-20,5,Farmgate & Karwan Bazar,68.01,google_trends
+2025-07-20,6,Diabari & Ashkona,24.0,google_trends
+2025-07-20,7,Uttarkhan & Faidabad,24.63,google_trends
+2025-07-20,8,Dakshinkhan & Dumni,20.98,google_trends
+2025-07-20,9,Vatara & Kuril,42.16,google_trends
+2025-07-20,10,Badda & Aftabnagar,43.67,google_trends
+2025-07-20,11,Ramna & Motijheel,71.02,google_trends
+2025-07-20,12,Khilgaon & Mugda,54.37,google_trends
+2025-07-20,13,Dhanmondi & Azimpur,54.87,google_trends
+2025-07-20,14,Wari & Jatrabari,64.8,google_trends
+2025-07-20,15,Bashundhara R/A (NSU),84.6,google_trends
+2025-07-27,1,Uttara,44.42,google_trends
+2025-07-27,2,Mirpur,55.14,google_trends
+2025-07-27,3,Gulshan & Banani,47.9,google_trends
+2025-07-27,4,Agargaon & Kafrul,35.22,google_trends
+2025-07-27,5,Farmgate & Karwan Bazar,62.12,google_trends
+2025-07-27,6,Diabari & Ashkona,24.54,google_trends
+2025-07-27,7,Uttarkhan & Faidabad,24.52,google_trends
+2025-07-27,8,Dakshinkhan & Dumni,21.86,google_trends
+2025-07-27,9,Vatara & Kuril,40.86,google_trends
+2025-07-27,10,Badda & Aftabnagar,47.59,google_trends
+2025-07-27,11,Ramna & Motijheel,69.08,google_trends
+2025-07-27,12,Khilgaon & Mugda,53.89,google_trends
+2025-07-27,13,Dhanmondi & Azimpur,51.55,google_trends
+2025-07-27,14,Wari & Jatrabari,63.51,google_trends
+2025-07-27,15,Bashundhara R/A (NSU),78.99,google_trends
+2025-08-03,1,Uttara,44.55,google_trends
+2025-08-03,2,Mirpur,59.52,google_trends
+2025-08-03,3,Gulshan & Banani,54.04,google_trends
+2025-08-03,4,Agargaon & Kafrul,42.89,google_trends
+2025-08-03,5,Farmgate & Karwan Bazar,66.41,google_trends
+2025-08-03,6,Diabari & Ashkona,32.45,google_trends
+2025-08-03,7,Uttarkhan & Faidabad,26.9,google_trends
+2025-08-03,8,Dakshinkhan & Dumni,29.15,google_trends
+2025-08-03,9,Vatara & Kuril,40.54,google_trends
+2025-08-03,10,Badda & Aftabnagar,43.47,google_trends
+2025-08-03,11,Ramna & Motijheel,71.87,google_trends
+2025-08-03,12,Khilgaon & Mugda,56.89,google_trends
+2025-08-03,13,Dhanmondi & Azimpur,59.31,google_trends
+2025-08-03,14,Wari & Jatrabari,64.17,google_trends
+2025-08-03,15,Bashundhara R/A (NSU),81.3,google_trends
+2025-08-10,1,Uttara,61.6,google_trends
+2025-08-10,2,Mirpur,77.16,google_trends
+2025-08-10,3,Gulshan & Banani,65.02,google_trends
+2025-08-10,4,Agargaon & Kafrul,52.49,google_trends
+2025-08-10,5,Farmgate & Karwan Bazar,86.73,google_trends
+2025-08-10,6,Diabari & Ashkona,27.07,google_trends
+2025-08-10,7,Uttarkhan & Faidabad,28.78,google_trends
+2025-08-10,8,Dakshinkhan & Dumni,31.62,google_trends
+2025-08-10,9,Vatara & Kuril,57.78,google_trends
+2025-08-10,10,Badda & Aftabnagar,52.48,google_trends
+2025-08-10,11,Ramna & Motijheel,92.34,google_trends
+2025-08-10,12,Khilgaon & Mugda,72.57,google_trends
+2025-08-10,13,Dhanmondi & Azimpur,75.93,google_trends
+2025-08-10,14,Wari & Jatrabari,87.02,google_trends
+2025-08-10,15,Bashundhara R/A (NSU),99.55,google_trends
+2025-08-17,1,Uttara,61.7,google_trends
+2025-08-17,2,Mirpur,69.99,google_trends
+2025-08-17,3,Gulshan & Banani,71.94,google_trends
+2025-08-17,4,Agargaon & Kafrul,56.86,google_trends
+2025-08-17,5,Farmgate & Karwan Bazar,82.62,google_trends
+2025-08-17,6,Diabari & Ashkona,30.78,google_trends
+2025-08-17,7,Uttarkhan & Faidabad,26.3,google_trends
+2025-08-17,8,Dakshinkhan & Dumni,32.08,google_trends
+2025-08-17,9,Vatara & Kuril,58.3,google_trends
+2025-08-17,10,Badda & Aftabnagar,54.29,google_trends
+2025-08-17,11,Ramna & Motijheel,87.95,google_trends
+2025-08-17,12,Khilgaon & Mugda,73.35,google_trends
+2025-08-17,13,Dhanmondi & Azimpur,74.76,google_trends
+2025-08-17,14,Wari & Jatrabari,84.61,google_trends
+2025-08-17,15,Bashundhara R/A (NSU),100.0,google_trends
+2025-08-24,1,Uttara,66.08,google_trends
+2025-08-24,2,Mirpur,78.28,google_trends
+2025-08-24,3,Gulshan & Banani,73.54,google_trends
+2025-08-24,4,Agargaon & Kafrul,56.53,google_trends
+2025-08-24,5,Farmgate & Karwan Bazar,85.89,google_trends
+2025-08-24,6,Diabari & Ashkona,34.27,google_trends
+2025-08-24,7,Uttarkhan & Faidabad,31.73,google_trends
+2025-08-24,8,Dakshinkhan & Dumni,34.28,google_trends
+2025-08-24,9,Vatara & Kuril,56.93,google_trends
+2025-08-24,10,Badda & Aftabnagar,60.95,google_trends
+2025-08-24,11,Ramna & Motijheel,91.86,google_trends
+2025-08-24,12,Khilgaon & Mugda,73.75,google_trends
+2025-08-24,13,Dhanmondi & Azimpur,77.64,google_trends
+2025-08-24,14,Wari & Jatrabari,86.67,google_trends
+2025-08-24,15,Bashundhara R/A (NSU),100.0,google_trends
+2025-08-31,1,Uttara,59.69,google_trends
+2025-08-31,2,Mirpur,74.83,google_trends
+2025-08-31,3,Gulshan & Banani,61.88,google_trends
+2025-08-31,4,Agargaon & Kafrul,52.69,google_trends
+2025-08-31,5,Farmgate & Karwan Bazar,82.24,google_trends
+2025-08-31,6,Diabari & Ashkona,30.43,google_trends
+2025-08-31,7,Uttarkhan & Faidabad,30.03,google_trends
+2025-08-31,8,Dakshinkhan & Dumni,28.93,google_trends
+2025-08-31,9,Vatara & Kuril,58.63,google_trends
+2025-08-31,10,Badda & Aftabnagar,55.68,google_trends
+2025-08-31,11,Ramna & Motijheel,91.24,google_trends
+2025-08-31,12,Khilgaon & Mugda,75.3,google_trends
+2025-08-31,13,Dhanmondi & Azimpur,73.87,google_trends
+2025-08-31,14,Wari & Jatrabari,83.62,google_trends
+2025-08-31,15,Bashundhara R/A (NSU),100.0,google_trends
+2025-09-07,1,Uttara,56.19,google_trends
+2025-09-07,2,Mirpur,70.49,google_trends
+2025-09-07,3,Gulshan & Banani,58.48,google_trends
+2025-09-07,4,Agargaon & Kafrul,46.79,google_trends
+2025-09-07,5,Farmgate & Karwan Bazar,71.16,google_trends
+2025-09-07,6,Diabari & Ashkona,26.14,google_trends
+2025-09-07,7,Uttarkhan & Faidabad,23.3,google_trends
+2025-09-07,8,Dakshinkhan & Dumni,31.87,google_trends
+2025-09-07,9,Vatara & Kuril,49.0,google_trends
+2025-09-07,10,Badda & Aftabnagar,47.64,google_trends
+2025-09-07,11,Ramna & Motijheel,77.67,google_trends
+2025-09-07,12,Khilgaon & Mugda,61.36,google_trends
+2025-09-07,13,Dhanmondi & Azimpur,62.52,google_trends
+2025-09-07,14,Wari & Jatrabari,75.63,google_trends
+2025-09-07,15,Bashundhara R/A (NSU),91.57,google_trends
+2025-09-14,1,Uttara,48.1,google_trends
+2025-09-14,2,Mirpur,59.82,google_trends
+2025-09-14,3,Gulshan & Banani,50.46,google_trends
+2025-09-14,4,Agargaon & Kafrul,42.83,google_trends
+2025-09-14,5,Farmgate & Karwan Bazar,70.84,google_trends
+2025-09-14,6,Diabari & Ashkona,25.98,google_trends
+2025-09-14,7,Uttarkhan & Faidabad,23.47,google_trends
+2025-09-14,8,Dakshinkhan & Dumni,26.09,google_trends
+2025-09-14,9,Vatara & Kuril,44.68,google_trends
+2025-09-14,10,Badda & Aftabnagar,43.06,google_trends
+2025-09-14,11,Ramna & Motijheel,70.38,google_trends
+2025-09-14,12,Khilgaon & Mugda,53.42,google_trends
+2025-09-14,13,Dhanmondi & Azimpur,58.64,google_trends
+2025-09-14,14,Wari & Jatrabari,63.26,google_trends
+2025-09-14,15,Bashundhara R/A (NSU),85.18,google_trends
+2025-09-21,1,Uttara,50.74,google_trends
+2025-09-21,2,Mirpur,60.15,google_trends
+2025-09-21,3,Gulshan & Banani,56.44,google_trends
+2025-09-21,4,Agargaon & Kafrul,37.54,google_trends
+2025-09-21,5,Farmgate & Karwan Bazar,67.76,google_trends
+2025-09-21,6,Diabari & Ashkona,25.86,google_trends
+2025-09-21,7,Uttarkhan & Faidabad,20.42,google_trends
+2025-09-21,8,Dakshinkhan & Dumni,22.0,google_trends
+2025-09-21,9,Vatara & Kuril,44.72,google_trends
+2025-09-21,10,Badda & Aftabnagar,45.48,google_trends
+2025-09-21,11,Ramna & Motijheel,77.41,google_trends
+2025-09-21,12,Khilgaon & Mugda,56.69,google_trends
+2025-09-21,13,Dhanmondi & Azimpur,60.33,google_trends
+2025-09-21,14,Wari & Jatrabari,68.87,google_trends
+2025-09-21,15,Bashundhara R/A (NSU),80.99,google_trends
+2025-09-28,1,Uttara,45.3,google_trends
+2025-09-28,2,Mirpur,51.6,google_trends
+2025-09-28,3,Gulshan & Banani,49.2,google_trends
+2025-09-28,4,Agargaon & Kafrul,34.79,google_trends
+2025-09-28,5,Farmgate & Karwan Bazar,61.56,google_trends
+2025-09-28,6,Diabari & Ashkona,25.25,google_trends
+2025-09-28,7,Uttarkhan & Faidabad,22.89,google_trends
+2025-09-28,8,Dakshinkhan & Dumni,22.23,google_trends
+2025-09-28,9,Vatara & Kuril,39.49,google_trends
+2025-09-28,10,Badda & Aftabnagar,42.57,google_trends
+2025-09-28,11,Ramna & Motijheel,64.48,google_trends
+2025-09-28,12,Khilgaon & Mugda,52.31,google_trends
+2025-09-28,13,Dhanmondi & Azimpur,50.01,google_trends
+2025-09-28,14,Wari & Jatrabari,56.48,google_trends
+2025-09-28,15,Bashundhara R/A (NSU),68.53,google_trends
+2025-10-05,1,Uttara,54.18,google_trends
+2025-10-05,2,Mirpur,59.71,google_trends
+2025-10-05,3,Gulshan & Banani,53.15,google_trends
+2025-10-05,4,Agargaon & Kafrul,37.33,google_trends
+2025-10-05,5,Farmgate & Karwan Bazar,71.07,google_trends
+2025-10-05,6,Diabari & Ashkona,24.06,google_trends
+2025-10-05,7,Uttarkhan & Faidabad,22.13,google_trends
+2025-10-05,8,Dakshinkhan & Dumni,24.85,google_trends
+2025-10-05,9,Vatara & Kuril,50.3,google_trends
+2025-10-05,10,Badda & Aftabnagar,44.03,google_trends
+2025-10-05,11,Ramna & Motijheel,75.68,google_trends
+2025-10-05,12,Khilgaon & Mugda,57.91,google_trends
+2025-10-05,13,Dhanmondi & Azimpur,54.94,google_trends
+2025-10-05,14,Wari & Jatrabari,64.12,google_trends
+2025-10-05,15,Bashundhara R/A (NSU),82.49,google_trends
+2025-10-12,1,Uttara,63.36,google_trends
+2025-10-12,2,Mirpur,78.65,google_trends
+2025-10-12,3,Gulshan & Banani,67.5,google_trends
+2025-10-12,4,Agargaon & Kafrul,62.25,google_trends
+2025-10-12,5,Farmgate & Karwan Bazar,84.53,google_trends
+2025-10-12,6,Diabari & Ashkona,32.53,google_trends
+2025-10-12,7,Uttarkhan & Faidabad,27.48,google_trends
+2025-10-12,8,Dakshinkhan & Dumni,31.93,google_trends
+2025-10-12,9,Vatara & Kuril,51.78,google_trends
+2025-10-12,10,Badda & Aftabnagar,55.58,google_trends
+2025-10-12,11,Ramna & Motijheel,91.7,google_trends
+2025-10-12,12,Khilgaon & Mugda,68.02,google_trends
+2025-10-12,13,Dhanmondi & Azimpur,72.71,google_trends
+2025-10-12,14,Wari & Jatrabari,86.02,google_trends
+2025-10-12,15,Bashundhara R/A (NSU),100.0,google_trends
+2025-10-19,1,Uttara,50.57,google_trends
+2025-10-19,2,Mirpur,60.06,google_trends
+2025-10-19,3,Gulshan & Banani,53.61,google_trends
+2025-10-19,4,Agargaon & Kafrul,39.03,google_trends
+2025-10-19,5,Farmgate & Karwan Bazar,66.97,google_trends
+2025-10-19,6,Diabari & Ashkona,26.38,google_trends
+2025-10-19,7,Uttarkhan & Faidabad,20.04,google_trends
+2025-10-19,8,Dakshinkhan & Dumni,25.1,google_trends
+2025-10-19,9,Vatara & Kuril,46.28,google_trends
+2025-10-19,10,Badda & Aftabnagar,43.26,google_trends
+2025-10-19,11,Ramna & Motijheel,73.6,google_trends
+2025-10-19,12,Khilgaon & Mugda,53.39,google_trends
+2025-10-19,13,Dhanmondi & Azimpur,59.34,google_trends
+2025-10-19,14,Wari & Jatrabari,62.79,google_trends
+2025-10-19,15,Bashundhara R/A (NSU),80.2,google_trends
+2025-10-26,1,Uttara,47.19,google_trends
+2025-10-26,2,Mirpur,57.34,google_trends
+2025-10-26,3,Gulshan & Banani,50.23,google_trends
+2025-10-26,4,Agargaon & Kafrul,37.9,google_trends
+2025-10-26,5,Farmgate & Karwan Bazar,63.6,google_trends
+2025-10-26,6,Diabari & Ashkona,22.49,google_trends
+2025-10-26,7,Uttarkhan & Faidabad,17.74,google_trends
+2025-10-26,8,Dakshinkhan & Dumni,23.11,google_trends
+2025-10-26,9,Vatara & Kuril,39.38,google_trends
+2025-10-26,10,Badda & Aftabnagar,39.13,google_trends
+2025-10-26,11,Ramna & Motijheel,65.62,google_trends
+2025-10-26,12,Khilgaon & Mugda,49.93,google_trends
+2025-10-26,13,Dhanmondi & Azimpur,54.92,google_trends
+2025-10-26,14,Wari & Jatrabari,61.52,google_trends
+2025-10-26,15,Bashundhara R/A (NSU),76.52,google_trends
+2025-11-02,1,Uttara,49.06,google_trends
+2025-11-02,2,Mirpur,59.61,google_trends
+2025-11-02,3,Gulshan & Banani,50.11,google_trends
+2025-11-02,4,Agargaon & Kafrul,38.01,google_trends
+2025-11-02,5,Farmgate & Karwan Bazar,64.47,google_trends
+2025-11-02,6,Diabari & Ashkona,27.39,google_trends
+2025-11-02,7,Uttarkhan & Faidabad,25.78,google_trends
+2025-11-02,8,Dakshinkhan & Dumni,20.03,google_trends
+2025-11-02,9,Vatara & Kuril,45.69,google_trends
+2025-11-02,10,Badda & Aftabnagar,42.43,google_trends
+2025-11-02,11,Ramna & Motijheel,70.69,google_trends
+2025-11-02,12,Khilgaon & Mugda,50.19,google_trends
+2025-11-02,13,Dhanmondi & Azimpur,57.66,google_trends
+2025-11-02,14,Wari & Jatrabari,64.52,google_trends
+2025-11-02,15,Bashundhara R/A (NSU),77.38,google_trends
+2025-11-09,1,Uttara,45.58,google_trends
+2025-11-09,2,Mirpur,55.97,google_trends
+2025-11-09,3,Gulshan & Banani,49.6,google_trends
+2025-11-09,4,Agargaon & Kafrul,40.94,google_trends
+2025-11-09,5,Farmgate & Karwan Bazar,55.77,google_trends
+2025-11-09,6,Diabari & Ashkona,24.78,google_trends
+2025-11-09,7,Uttarkhan & Faidabad,20.02,google_trends
+2025-11-09,8,Dakshinkhan & Dumni,19.33,google_trends
+2025-11-09,9,Vatara & Kuril,44.63,google_trends
+2025-11-09,10,Badda & Aftabnagar,39.58,google_trends
+2025-11-09,11,Ramna & Motijheel,66.12,google_trends
+2025-11-09,12,Khilgaon & Mugda,57.02,google_trends
+2025-11-09,13,Dhanmondi & Azimpur,56.74,google_trends
+2025-11-09,14,Wari & Jatrabari,64.47,google_trends
+2025-11-09,15,Bashundhara R/A (NSU),74.59,google_trends
+2025-11-16,1,Uttara,39.54,google_trends
+2025-11-16,2,Mirpur,47.27,google_trends
+2025-11-16,3,Gulshan & Banani,37.12,google_trends
+2025-11-16,4,Agargaon & Kafrul,33.57,google_trends
+2025-11-16,5,Farmgate & Karwan Bazar,52.29,google_trends
+2025-11-16,6,Diabari & Ashkona,24.15,google_trends
+2025-11-16,7,Uttarkhan & Faidabad,16.79,google_trends
+2025-11-16,8,Dakshinkhan & Dumni,19.9,google_trends
+2025-11-16,9,Vatara & Kuril,44.39,google_trends
+2025-11-16,10,Badda & Aftabnagar,34.9,google_trends
+2025-11-16,11,Ramna & Motijheel,58.98,google_trends
+2025-11-16,12,Khilgaon & Mugda,44.26,google_trends
+2025-11-16,13,Dhanmondi & Azimpur,46.12,google_trends
+2025-11-16,14,Wari & Jatrabari,56.21,google_trends
+2025-11-16,15,Bashundhara R/A (NSU),67.55,google_trends
+2025-11-23,1,Uttara,42.69,google_trends
+2025-11-23,2,Mirpur,44.67,google_trends
+2025-11-23,3,Gulshan & Banani,43.51,google_trends
+2025-11-23,4,Agargaon & Kafrul,33.95,google_trends
+2025-11-23,5,Farmgate & Karwan Bazar,58.86,google_trends
+2025-11-23,6,Diabari & Ashkona,25.81,google_trends
+2025-11-23,7,Uttarkhan & Faidabad,17.76,google_trends
+2025-11-23,8,Dakshinkhan & Dumni,19.39,google_trends
+2025-11-23,9,Vatara & Kuril,40.15,google_trends
+2025-11-23,10,Badda & Aftabnagar,38.35,google_trends
+2025-11-23,11,Ramna & Motijheel,59.85,google_trends
+2025-11-23,12,Khilgaon & Mugda,47.59,google_trends
+2025-11-23,13,Dhanmondi & Azimpur,50.28,google_trends
+2025-11-23,14,Wari & Jatrabari,56.88,google_trends
+2025-11-23,15,Bashundhara R/A (NSU),70.61,google_trends
+2025-11-30,1,Uttara,36.71,google_trends
+2025-11-30,2,Mirpur,45.97,google_trends
+2025-11-30,3,Gulshan & Banani,41.65,google_trends
+2025-11-30,4,Agargaon & Kafrul,32.91,google_trends
+2025-11-30,5,Farmgate & Karwan Bazar,58.34,google_trends
+2025-11-30,6,Diabari & Ashkona,20.03,google_trends
+2025-11-30,7,Uttarkhan & Faidabad,17.95,google_trends
+2025-11-30,8,Dakshinkhan & Dumni,17.38,google_trends
+2025-11-30,9,Vatara & Kuril,35.67,google_trends
+2025-11-30,10,Badda & Aftabnagar,34.09,google_trends
+2025-11-30,11,Ramna & Motijheel,58.41,google_trends
+2025-11-30,12,Khilgaon & Mugda,44.69,google_trends
+2025-11-30,13,Dhanmondi & Azimpur,43.13,google_trends
+2025-11-30,14,Wari & Jatrabari,55.6,google_trends
+2025-11-30,15,Bashundhara R/A (NSU),70.86,google_trends
+2025-12-07,1,Uttara,34.67,google_trends
+2025-12-07,2,Mirpur,43.14,google_trends
+2025-12-07,3,Gulshan & Banani,36.8,google_trends
+2025-12-07,4,Agargaon & Kafrul,32.25,google_trends
+2025-12-07,5,Farmgate & Karwan Bazar,49.25,google_trends
+2025-12-07,6,Diabari & Ashkona,20.08,google_trends
+2025-12-07,7,Uttarkhan & Faidabad,19.99,google_trends
+2025-12-07,8,Dakshinkhan & Dumni,17.29,google_trends
+2025-12-07,9,Vatara & Kuril,38.06,google_trends
+2025-12-07,10,Badda & Aftabnagar,36.19,google_trends
+2025-12-07,11,Ramna & Motijheel,52.11,google_trends
+2025-12-07,12,Khilgaon & Mugda,42.92,google_trends
+2025-12-07,13,Dhanmondi & Azimpur,47.6,google_trends
+2025-12-07,14,Wari & Jatrabari,44.64,google_trends
+2025-12-07,15,Bashundhara R/A (NSU),63.69,google_trends
+2025-12-14,1,Uttara,34.15,google_trends
+2025-12-14,2,Mirpur,45.51,google_trends
+2025-12-14,3,Gulshan & Banani,36.84,google_trends
+2025-12-14,4,Agargaon & Kafrul,29.87,google_trends
+2025-12-14,5,Farmgate & Karwan Bazar,51.31,google_trends
+2025-12-14,6,Diabari & Ashkona,19.96,google_trends
+2025-12-14,7,Uttarkhan & Faidabad,13.08,google_trends
+2025-12-14,8,Dakshinkhan & Dumni,16.9,google_trends
+2025-12-14,9,Vatara & Kuril,30.86,google_trends
+2025-12-14,10,Badda & Aftabnagar,28.95,google_trends
+2025-12-14,11,Ramna & Motijheel,51.91,google_trends
+2025-12-14,12,Khilgaon & Mugda,40.88,google_trends
+2025-12-14,13,Dhanmondi & Azimpur,42.85,google_trends
+2025-12-14,14,Wari & Jatrabari,49.54,google_trends
+2025-12-14,15,Bashundhara R/A (NSU),56.08,google_trends
+2025-12-21,1,Uttara,28.86,google_trends
+2025-12-21,2,Mirpur,33.53,google_trends
+2025-12-21,3,Gulshan & Banani,32.99,google_trends
+2025-12-21,4,Agargaon & Kafrul,24.02,google_trends
+2025-12-21,5,Farmgate & Karwan Bazar,47.37,google_trends
+2025-12-21,6,Diabari & Ashkona,11.97,google_trends
+2025-12-21,7,Uttarkhan & Faidabad,11.65,google_trends
+2025-12-21,8,Dakshinkhan & Dumni,11.72,google_trends
+2025-12-21,9,Vatara & Kuril,29.84,google_trends
+2025-12-21,10,Badda & Aftabnagar,35.56,google_trends
+2025-12-21,11,Ramna & Motijheel,43.73,google_trends
+2025-12-21,12,Khilgaon & Mugda,37.16,google_trends
+2025-12-21,13,Dhanmondi & Azimpur,32.79,google_trends
+2025-12-21,14,Wari & Jatrabari,37.91,google_trends
+2025-12-21,15,Bashundhara R/A (NSU),45.78,google_trends
+2025-12-28,1,Uttara,27.48,google_trends
+2025-12-28,2,Mirpur,34.61,google_trends
+2025-12-28,3,Gulshan & Banani,32.48,google_trends
+2025-12-28,4,Agargaon & Kafrul,26.29,google_trends
+2025-12-28,5,Farmgate & Karwan Bazar,43.4,google_trends
+2025-12-28,6,Diabari & Ashkona,13.02,google_trends
+2025-12-28,7,Uttarkhan & Faidabad,12.81,google_trends
+2025-12-28,8,Dakshinkhan & Dumni,14.36,google_trends
+2025-12-28,9,Vatara & Kuril,29.56,google_trends
+2025-12-28,10,Badda & Aftabnagar,24.82,google_trends
+2025-12-28,11,Ramna & Motijheel,43.68,google_trends
+2025-12-28,12,Khilgaon & Mugda,38.22,google_trends
+2025-12-28,13,Dhanmondi & Azimpur,34.89,google_trends
+2025-12-28,14,Wari & Jatrabari,42.69,google_trends
+2025-12-28,15,Bashundhara R/A (NSU),47.31,google_trends
+2026-01-04,1,Uttara,28.32,google_trends
+2026-01-04,2,Mirpur,33.2,google_trends
+2026-01-04,3,Gulshan & Banani,27.37,google_trends
+2026-01-04,4,Agargaon & Kafrul,21.83,google_trends
+2026-01-04,5,Farmgate & Karwan Bazar,40.89,google_trends
+2026-01-04,6,Diabari & Ashkona,18.55,google_trends
+2026-01-04,7,Uttarkhan & Faidabad,14.33,google_trends
+2026-01-04,8,Dakshinkhan & Dumni,11.94,google_trends
+2026-01-04,9,Vatara & Kuril,23.58,google_trends
+2026-01-04,10,Badda & Aftabnagar,25.25,google_trends
+2026-01-04,11,Ramna & Motijheel,37.21,google_trends
+2026-01-04,12,Khilgaon & Mugda,39.18,google_trends
+2026-01-04,13,Dhanmondi & Azimpur,31.26,google_trends
+2026-01-04,14,Wari & Jatrabari,38.57,google_trends
+2026-01-04,15,Bashundhara R/A (NSU),43.04,google_trends
+2026-01-11,1,Uttara,29.82,google_trends
+2026-01-11,2,Mirpur,39.49,google_trends
+2026-01-11,3,Gulshan & Banani,34.54,google_trends
+2026-01-11,4,Agargaon & Kafrul,22.89,google_trends
+2026-01-11,5,Farmgate & Karwan Bazar,40.8,google_trends
+2026-01-11,6,Diabari & Ashkona,20.54,google_trends
+2026-01-11,7,Uttarkhan & Faidabad,15.09,google_trends
+2026-01-11,8,Dakshinkhan & Dumni,18.93,google_trends
+2026-01-11,9,Vatara & Kuril,28.31,google_trends
+2026-01-11,10,Badda & Aftabnagar,28.2,google_trends
+2026-01-11,11,Ramna & Motijheel,44.11,google_trends
+2026-01-11,12,Khilgaon & Mugda,40.44,google_trends
+2026-01-11,13,Dhanmondi & Azimpur,36.79,google_trends
+2026-01-11,14,Wari & Jatrabari,37.54,google_trends
+2026-01-11,15,Bashundhara R/A (NSU),53.84,google_trends
+2026-01-18,1,Uttara,35.54,google_trends
+2026-01-18,2,Mirpur,45.68,google_trends
+2026-01-18,3,Gulshan & Banani,39.7,google_trends
+2026-01-18,4,Agargaon & Kafrul,32.82,google_trends
+2026-01-18,5,Farmgate & Karwan Bazar,48.49,google_trends
+2026-01-18,6,Diabari & Ashkona,18.25,google_trends
+2026-01-18,7,Uttarkhan & Faidabad,18.46,google_trends
+2026-01-18,8,Dakshinkhan & Dumni,16.83,google_trends
+2026-01-18,9,Vatara & Kuril,31.32,google_trends
+2026-01-18,10,Badda & Aftabnagar,32.6,google_trends
+2026-01-18,11,Ramna & Motijheel,58.06,google_trends
+2026-01-18,12,Khilgaon & Mugda,42.4,google_trends
+2026-01-18,13,Dhanmondi & Azimpur,43.56,google_trends
+2026-01-18,14,Wari & Jatrabari,46.9,google_trends
+2026-01-18,15,Bashundhara R/A (NSU),58.56,google_trends
+2026-01-25,1,Uttara,38.78,google_trends
+2026-01-25,2,Mirpur,46.66,google_trends
+2026-01-25,3,Gulshan & Banani,42.82,google_trends
+2026-01-25,4,Agargaon & Kafrul,34.07,google_trends
+2026-01-25,5,Farmgate & Karwan Bazar,53.49,google_trends
+2026-01-25,6,Diabari & Ashkona,18.26,google_trends
+2026-01-25,7,Uttarkhan & Faidabad,18.91,google_trends
+2026-01-25,8,Dakshinkhan & Dumni,18.38,google_trends
+2026-01-25,9,Vatara & Kuril,33.09,google_trends
+2026-01-25,10,Badda & Aftabnagar,29.62,google_trends
+2026-01-25,11,Ramna & Motijheel,53.68,google_trends
+2026-01-25,12,Khilgaon & Mugda,43.44,google_trends
+2026-01-25,13,Dhanmondi & Azimpur,42.63,google_trends
+2026-01-25,14,Wari & Jatrabari,49.74,google_trends
+2026-01-25,15,Bashundhara R/A (NSU),62.59,google_trends
+2026-02-01,1,Uttara,39.37,google_trends
+2026-02-01,2,Mirpur,45.68,google_trends
+2026-02-01,3,Gulshan & Banani,42.4,google_trends
+2026-02-01,4,Agargaon & Kafrul,31.32,google_trends
+2026-02-01,5,Farmgate & Karwan Bazar,56.38,google_trends
+2026-02-01,6,Diabari & Ashkona,23.75,google_trends
+2026-02-01,7,Uttarkhan & Faidabad,17.41,google_trends
+2026-02-01,8,Dakshinkhan & Dumni,14.57,google_trends
+2026-02-01,9,Vatara & Kuril,36.04,google_trends
+2026-02-01,10,Badda & Aftabnagar,31.91,google_trends
+2026-02-01,11,Ramna & Motijheel,57.31,google_trends
+2026-02-01,12,Khilgaon & Mugda,47.18,google_trends
+2026-02-01,13,Dhanmondi & Azimpur,49.29,google_trends
+2026-02-01,14,Wari & Jatrabari,50.83,google_trends
+2026-02-01,15,Bashundhara R/A (NSU),67.29,google_trends
+2026-02-08,1,Uttara,33.14,google_trends
+2026-02-08,2,Mirpur,42.47,google_trends
+2026-02-08,3,Gulshan & Banani,33.0,google_trends
+2026-02-08,4,Agargaon & Kafrul,27.06,google_trends
+2026-02-08,5,Farmgate & Karwan Bazar,46.29,google_trends
+2026-02-08,6,Diabari & Ashkona,15.47,google_trends
+2026-02-08,7,Uttarkhan & Faidabad,13.36,google_trends
+2026-02-08,8,Dakshinkhan & Dumni,12.07,google_trends
+2026-02-08,9,Vatara & Kuril,29.75,google_trends
+2026-02-08,10,Badda & Aftabnagar,28.77,google_trends
+2026-02-08,11,Ramna & Motijheel,48.07,google_trends
+2026-02-08,12,Khilgaon & Mugda,39.27,google_trends
+2026-02-08,13,Dhanmondi & Azimpur,37.79,google_trends
+2026-02-08,14,Wari & Jatrabari,43.92,google_trends
+2026-02-08,15,Bashundhara R/A (NSU),50.88,google_trends
+2026-02-15,1,Uttara,35.2,google_trends
+2026-02-15,2,Mirpur,51.78,google_trends
+2026-02-15,3,Gulshan & Banani,45.24,google_trends
+2026-02-15,4,Agargaon & Kafrul,32.92,google_trends
+2026-02-15,5,Farmgate & Karwan Bazar,52.45,google_trends
+2026-02-15,6,Diabari & Ashkona,20.36,google_trends
+2026-02-15,7,Uttarkhan & Faidabad,22.92,google_trends
+2026-02-15,8,Dakshinkhan & Dumni,18.37,google_trends
+2026-02-15,9,Vatara & Kuril,31.45,google_trends
+2026-02-15,10,Badda & Aftabnagar,30.96,google_trends
+2026-02-15,11,Ramna & Motijheel,57.68,google_trends
+2026-02-15,12,Khilgaon & Mugda,50.69,google_trends
+2026-02-15,13,Dhanmondi & Azimpur,49.56,google_trends
+2026-02-15,14,Wari & Jatrabari,49.91,google_trends
+2026-02-15,15,Bashundhara R/A (NSU),59.04,google_trends
+2026-02-22,1,Uttara,45.66,google_trends
+2026-02-22,2,Mirpur,54.88,google_trends
+2026-02-22,3,Gulshan & Banani,49.18,google_trends
+2026-02-22,4,Agargaon & Kafrul,39.53,google_trends
+2026-02-22,5,Farmgate & Karwan Bazar,55.52,google_trends
+2026-02-22,6,Diabari & Ashkona,22.38,google_trends
+2026-02-22,7,Uttarkhan & Faidabad,16.78,google_trends
+2026-02-22,8,Dakshinkhan & Dumni,26.39,google_trends
+2026-02-22,9,Vatara & Kuril,41.35,google_trends
+2026-02-22,10,Badda & Aftabnagar,40.07,google_trends
+2026-02-22,11,Ramna & Motijheel,57.96,google_trends
+2026-02-22,12,Khilgaon & Mugda,48.9,google_trends
+2026-02-22,13,Dhanmondi & Azimpur,48.99,google_trends
+2026-02-22,14,Wari & Jatrabari,57.71,google_trends
+2026-02-22,15,Bashundhara R/A (NSU),71.6,google_trends
+2026-03-01,1,Uttara,40.34,google_trends
+2026-03-01,2,Mirpur,47.96,google_trends
+2026-03-01,3,Gulshan & Banani,45.44,google_trends
+2026-03-01,4,Agargaon & Kafrul,38.12,google_trends
+2026-03-01,5,Farmgate & Karwan Bazar,53.98,google_trends
+2026-03-01,6,Diabari & Ashkona,18.5,google_trends
+2026-03-01,7,Uttarkhan & Faidabad,17.3,google_trends
+2026-03-01,8,Dakshinkhan & Dumni,19.83,google_trends
+2026-03-01,9,Vatara & Kuril,34.53,google_trends
+2026-03-01,10,Badda & Aftabnagar,33.28,google_trends
+2026-03-01,11,Ramna & Motijheel,58.61,google_trends
+2026-03-01,12,Khilgaon & Mugda,41.5,google_trends
+2026-03-01,13,Dhanmondi & Azimpur,43.84,google_trends
+2026-03-01,14,Wari & Jatrabari,54.66,google_trends
+2026-03-01,15,Bashundhara R/A (NSU),66.02,google_trends
+2026-03-08,1,Uttara,36.93,google_trends
+2026-03-08,2,Mirpur,44.52,google_trends
+2026-03-08,3,Gulshan & Banani,42.37,google_trends
+2026-03-08,4,Agargaon & Kafrul,29.24,google_trends
+2026-03-08,5,Farmgate & Karwan Bazar,50.8,google_trends
+2026-03-08,6,Diabari & Ashkona,19.1,google_trends
+2026-03-08,7,Uttarkhan & Faidabad,16.98,google_trends
+2026-03-08,8,Dakshinkhan & Dumni,15.85,google_trends
+2026-03-08,9,Vatara & Kuril,34.75,google_trends
+2026-03-08,10,Badda & Aftabnagar,32.08,google_trends
+2026-03-08,11,Ramna & Motijheel,57.14,google_trends
+2026-03-08,12,Khilgaon & Mugda,43.91,google_trends
+2026-03-08,13,Dhanmondi & Azimpur,41.49,google_trends
+2026-03-08,14,Wari & Jatrabari,47.51,google_trends
+2026-03-08,15,Bashundhara R/A (NSU),62.57,google_trends
+2026-03-15,1,Uttara,21.69,google_trends
+2026-03-15,2,Mirpur,33.46,google_trends
+2026-03-15,3,Gulshan & Banani,33.58,google_trends
+2026-03-15,4,Agargaon & Kafrul,27.73,google_trends
+2026-03-15,5,Farmgate & Karwan Bazar,42.33,google_trends
+2026-03-15,6,Diabari & Ashkona,19.58,google_trends
+2026-03-15,7,Uttarkhan & Faidabad,14.45,google_trends
+2026-03-15,8,Dakshinkhan & Dumni,13.86,google_trends
+2026-03-15,9,Vatara & Kuril,28.71,google_trends
+2026-03-15,10,Badda & Aftabnagar,26.69,google_trends
+2026-03-15,11,Ramna & Motijheel,44.9,google_trends
+2026-03-15,12,Khilgaon & Mugda,37.2,google_trends
+2026-03-15,13,Dhanmondi & Azimpur,34.63,google_trends
+2026-03-15,14,Wari & Jatrabari,39.19,google_trends
+2026-03-15,15,Bashundhara R/A (NSU),50.24,google_trends
+2026-03-22,1,Uttara,38.92,google_trends
+2026-03-22,2,Mirpur,44.03,google_trends
+2026-03-22,3,Gulshan & Banani,44.3,google_trends
+2026-03-22,4,Agargaon & Kafrul,33.15,google_trends
+2026-03-22,5,Farmgate & Karwan Bazar,55.13,google_trends
+2026-03-22,6,Diabari & Ashkona,18.18,google_trends
+2026-03-22,7,Uttarkhan & Faidabad,20.35,google_trends
+2026-03-22,8,Dakshinkhan & Dumni,16.84,google_trends
+2026-03-22,9,Vatara & Kuril,36.67,google_trends
+2026-03-22,10,Badda & Aftabnagar,34.82,google_trends
+2026-03-22,11,Ramna & Motijheel,54.04,google_trends
+2026-03-22,12,Khilgaon & Mugda,47.94,google_trends
+2026-03-22,13,Dhanmondi & Azimpur,47.78,google_trends
+2026-03-22,14,Wari & Jatrabari,55.11,google_trends
+2026-03-22,15,Bashundhara R/A (NSU),64.47,google_trends
+2026-03-29,1,Uttara,53.62,google_trends
+2026-03-29,2,Mirpur,63.02,google_trends
+2026-03-29,3,Gulshan & Banani,53.14,google_trends
+2026-03-29,4,Agargaon & Kafrul,45.51,google_trends
+2026-03-29,5,Farmgate & Karwan Bazar,71.8,google_trends
+2026-03-29,6,Diabari & Ashkona,26.34,google_trends
+2026-03-29,7,Uttarkhan & Faidabad,18.92,google_trends
+2026-03-29,8,Dakshinkhan & Dumni,28.58,google_trends
+2026-03-29,9,Vatara & Kuril,46.24,google_trends
+2026-03-29,10,Badda & Aftabnagar,44.57,google_trends
+2026-03-29,11,Ramna & Motijheel,67.32,google_trends
+2026-03-29,12,Khilgaon & Mugda,56.03,google_trends
+2026-03-29,13,Dhanmondi & Azimpur,62.07,google_trends
+2026-03-29,14,Wari & Jatrabari,65.07,google_trends
+2026-03-29,15,Bashundhara R/A (NSU),84.07,google_trends
+2026-04-05,1,Uttara,44.41,google_trends
+2026-04-05,2,Mirpur,54.27,google_trends
+2026-04-05,3,Gulshan & Banani,53.77,google_trends
+2026-04-05,4,Agargaon & Kafrul,35.79,google_trends
+2026-04-05,5,Farmgate & Karwan Bazar,66.92,google_trends
+2026-04-05,6,Diabari & Ashkona,23.58,google_trends
+2026-04-05,7,Uttarkhan & Faidabad,22.73,google_trends
+2026-04-05,8,Dakshinkhan & Dumni,21.85,google_trends
+2026-04-05,9,Vatara & Kuril,40.77,google_trends
+2026-04-05,10,Badda & Aftabnagar,42.69,google_trends
+2026-04-05,11,Ramna & Motijheel,67.72,google_trends
+2026-04-05,12,Khilgaon & Mugda,55.88,google_trends
+2026-04-05,13,Dhanmondi & Azimpur,52.51,google_trends
+2026-04-05,14,Wari & Jatrabari,63.79,google_trends
+2026-04-05,15,Bashundhara R/A (NSU),80.77,google_trends
+2026-04-12,1,Uttara,44.1,google_trends
+2026-04-12,2,Mirpur,57.74,google_trends
+2026-04-12,3,Gulshan & Banani,49.04,google_trends
+2026-04-12,4,Agargaon & Kafrul,38.43,google_trends
+2026-04-12,5,Farmgate & Karwan Bazar,58.76,google_trends
+2026-04-12,6,Diabari & Ashkona,18.18,google_trends
+2026-04-12,7,Uttarkhan & Faidabad,20.56,google_trends
+2026-04-12,8,Dakshinkhan & Dumni,24.38,google_trends
+2026-04-12,9,Vatara & Kuril,42.09,google_trends
+2026-04-12,10,Badda & Aftabnagar,41.69,google_trends
+2026-04-12,11,Ramna & Motijheel,68.38,google_trends
+2026-04-12,12,Khilgaon & Mugda,49.7,google_trends
+2026-04-12,13,Dhanmondi & Azimpur,52.77,google_trends
+2026-04-12,14,Wari & Jatrabari,64.4,google_trends
+2026-04-12,15,Bashundhara R/A (NSU),76.74,google_trends
+2026-04-19,1,Uttara,44.18,google_trends
+2026-04-19,2,Mirpur,51.72,google_trends
+2026-04-19,3,Gulshan & Banani,47.26,google_trends
+2026-04-19,4,Agargaon & Kafrul,36.9,google_trends
+2026-04-19,5,Farmgate & Karwan Bazar,59.01,google_trends
+2026-04-19,6,Diabari & Ashkona,20.18,google_trends
+2026-04-19,7,Uttarkhan & Faidabad,22.8,google_trends
+2026-04-19,8,Dakshinkhan & Dumni,24.72,google_trends
+2026-04-19,9,Vatara & Kuril,46.47,google_trends
+2026-04-19,10,Badda & Aftabnagar,36.11,google_trends
+2026-04-19,11,Ramna & Motijheel,58.74,google_trends
+2026-04-19,12,Khilgaon & Mugda,45.93,google_trends
+2026-04-19,13,Dhanmondi & Azimpur,49.64,google_trends
+2026-04-19,14,Wari & Jatrabari,58.25,google_trends
+2026-04-19,15,Bashundhara R/A (NSU),76.47,google_trends
+2026-04-26,1,Uttara,39.31,google_trends
+2026-04-26,2,Mirpur,51.46,google_trends
+2026-04-26,3,Gulshan & Banani,42.68,google_trends
+2026-04-26,4,Agargaon & Kafrul,35.45,google_trends
+2026-04-26,5,Farmgate & Karwan Bazar,56.05,google_trends
+2026-04-26,6,Diabari & Ashkona,20.86,google_trends
+2026-04-26,7,Uttarkhan & Faidabad,19.59,google_trends
+2026-04-26,8,Dakshinkhan & Dumni,17.23,google_trends
+2026-04-26,9,Vatara & Kuril,37.95,google_trends
+2026-04-26,10,Badda & Aftabnagar,37.32,google_trends
+2026-04-26,11,Ramna & Motijheel,61.7,google_trends
+2026-04-26,12,Khilgaon & Mugda,49.47,google_trends
+2026-04-26,13,Dhanmondi & Azimpur,51.57,google_trends
+2026-04-26,14,Wari & Jatrabari,52.37,google_trends
+2026-04-26,15,Bashundhara R/A (NSU),66.84,google_trends
+2026-05-03,1,Uttara,39.75,google_trends
+2026-05-03,2,Mirpur,49.98,google_trends
+2026-05-03,3,Gulshan & Banani,47.72,google_trends
+2026-05-03,4,Agargaon & Kafrul,37.68,google_trends
+2026-05-03,5,Farmgate & Karwan Bazar,56.93,google_trends
+2026-05-03,6,Diabari & Ashkona,21.66,google_trends
+2026-05-03,7,Uttarkhan & Faidabad,18.44,google_trends
+2026-05-03,8,Dakshinkhan & Dumni,24.83,google_trends
+2026-05-03,9,Vatara & Kuril,38.73,google_trends
+2026-05-03,10,Badda & Aftabnagar,34.46,google_trends
+2026-05-03,11,Ramna & Motijheel,58.12,google_trends
+2026-05-03,12,Khilgaon & Mugda,47.9,google_trends
+2026-05-03,13,Dhanmondi & Azimpur,50.11,google_trends
+2026-05-03,14,Wari & Jatrabari,59.29,google_trends
+2026-05-03,15,Bashundhara R/A (NSU),71.59,google_trends
+2026-05-10,1,Uttara,45.76,google_trends
+2026-05-10,2,Mirpur,58.81,google_trends
+2026-05-10,3,Gulshan & Banani,47.56,google_trends
+2026-05-10,4,Agargaon & Kafrul,33.01,google_trends
+2026-05-10,5,Farmgate & Karwan Bazar,63.77,google_trends
+2026-05-10,6,Diabari & Ashkona,29.56,google_trends
+2026-05-10,7,Uttarkhan & Faidabad,21.06,google_trends
+2026-05-10,8,Dakshinkhan & Dumni,23.24,google_trends
+2026-05-10,9,Vatara & Kuril,45.91,google_trends
+2026-05-10,10,Badda & Aftabnagar,39.47,google_trends
+2026-05-10,11,Ramna & Motijheel,63.85,google_trends
+2026-05-10,12,Khilgaon & Mugda,51.84,google_trends
+2026-05-10,13,Dhanmondi & Azimpur,51.93,google_trends
+2026-05-10,14,Wari & Jatrabari,56.89,google_trends
+2026-05-10,15,Bashundhara R/A (NSU),77.39,google_trends
+2026-05-17,1,Uttara,38.14,google_trends
+2026-05-17,2,Mirpur,48.14,google_trends
+2026-05-17,3,Gulshan & Banani,43.28,google_trends
+2026-05-17,4,Agargaon & Kafrul,37.68,google_trends
+2026-05-17,5,Farmgate & Karwan Bazar,56.09,google_trends
+2026-05-17,6,Diabari & Ashkona,17.01,google_trends
+2026-05-17,7,Uttarkhan & Faidabad,21.37,google_trends
+2026-05-17,8,Dakshinkhan & Dumni,20.08,google_trends
+2026-05-17,9,Vatara & Kuril,34.88,google_trends
+2026-05-17,10,Badda & Aftabnagar,31.06,google_trends
+2026-05-17,11,Ramna & Motijheel,63.5,google_trends
+2026-05-17,12,Khilgaon & Mugda,41.08,google_trends
+2026-05-17,13,Dhanmondi & Azimpur,48.09,google_trends
+2026-05-17,14,Wari & Jatrabari,54.51,google_trends
+2026-05-17,15,Bashundhara R/A (NSU),62.74,google_trends
+2026-05-24,1,Uttara,28.02,google_trends
+2026-05-24,2,Mirpur,36.41,google_trends
+2026-05-24,3,Gulshan & Banani,32.22,google_trends
+2026-05-24,4,Agargaon & Kafrul,23.39,google_trends
+2026-05-24,5,Farmgate & Karwan Bazar,41.03,google_trends
+2026-05-24,6,Diabari & Ashkona,11.37,google_trends
+2026-05-24,7,Uttarkhan & Faidabad,14.87,google_trends
+2026-05-24,8,Dakshinkhan & Dumni,13.0,google_trends
+2026-05-24,9,Vatara & Kuril,22.16,google_trends
+2026-05-24,10,Badda & Aftabnagar,27.48,google_trends
+2026-05-24,11,Ramna & Motijheel,38.61,google_trends
+2026-05-24,12,Khilgaon & Mugda,26.66,google_trends
+2026-05-24,13,Dhanmondi & Azimpur,38.0,google_trends
+2026-05-24,14,Wari & Jatrabari,37.07,google_trends
+2026-05-24,15,Bashundhara R/A (NSU),49.56,google_trends
+2026-05-31,1,Uttara,42.29,google_trends
+2026-05-31,2,Mirpur,51.54,google_trends
+2026-05-31,3,Gulshan & Banani,42.14,google_trends
+2026-05-31,4,Agargaon & Kafrul,33.34,google_trends
+2026-05-31,5,Farmgate & Karwan Bazar,57.92,google_trends
+2026-05-31,6,Diabari & Ashkona,21.53,google_trends
+2026-05-31,7,Uttarkhan & Faidabad,24.15,google_trends
+2026-05-31,8,Dakshinkhan & Dumni,19.57,google_trends
+2026-05-31,9,Vatara & Kuril,38.68,google_trends
+2026-05-31,10,Badda & Aftabnagar,40.98,google_trends
+2026-05-31,11,Ramna & Motijheel,61.97,google_trends
+2026-05-31,12,Khilgaon & Mugda,42.25,google_trends
+2026-05-31,13,Dhanmondi & Azimpur,51.66,google_trends
+2026-05-31,14,Wari & Jatrabari,58.73,google_trends
+2026-05-31,15,Bashundhara R/A (NSU),65.96,google_trends
+2026-06-07,1,Uttara,37.64,google_trends
+2026-06-07,2,Mirpur,52.67,google_trends
+2026-06-07,3,Gulshan & Banani,43.18,google_trends
+2026-06-07,4,Agargaon & Kafrul,38.47,google_trends
+2026-06-07,5,Farmgate & Karwan Bazar,62.01,google_trends
+2026-06-07,6,Diabari & Ashkona,23.09,google_trends
+2026-06-07,7,Uttarkhan & Faidabad,21.17,google_trends
+2026-06-07,8,Dakshinkhan & Dumni,19.99,google_trends
+2026-06-07,9,Vatara & Kuril,40.39,google_trends
+2026-06-07,10,Badda & Aftabnagar,33.23,google_trends
+2026-06-07,11,Ramna & Motijheel,61.48,google_trends
+2026-06-07,12,Khilgaon & Mugda,51.42,google_trends
+2026-06-07,13,Dhanmondi & Azimpur,50.28,google_trends
+2026-06-07,14,Wari & Jatrabari,56.45,google_trends
+2026-06-07,15,Bashundhara R/A (NSU),67.82,google_trends
+2026-06-14,1,Uttara,39.5,google_trends
+2026-06-14,2,Mirpur,47.57,google_trends
+2026-06-14,3,Gulshan & Banani,36.88,google_trends
+2026-06-14,4,Agargaon & Kafrul,29.45,google_trends
+2026-06-14,5,Farmgate & Karwan Bazar,50.46,google_trends
+2026-06-14,6,Diabari & Ashkona,22.13,google_trends
+2026-06-14,7,Uttarkhan & Faidabad,19.04,google_trends
+2026-06-14,8,Dakshinkhan & Dumni,20.36,google_trends
+2026-06-14,9,Vatara & Kuril,29.18,google_trends
+2026-06-14,10,Badda & Aftabnagar,37.92,google_trends
+2026-06-14,11,Ramna & Motijheel,53.06,google_trends
+2026-06-14,12,Khilgaon & Mugda,43.41,google_trends
+2026-06-14,13,Dhanmondi & Azimpur,47.0,google_trends
+2026-06-14,14,Wari & Jatrabari,54.0,google_trends
+2026-06-14,15,Bashundhara R/A (NSU),64.0,google_trends
+2026-06-21,1,Uttara,35.39,google_trends
+2026-06-21,2,Mirpur,49.06,google_trends
+2026-06-21,3,Gulshan & Banani,41.25,google_trends
+2026-06-21,4,Agargaon & Kafrul,31.66,google_trends
+2026-06-21,5,Farmgate & Karwan Bazar,50.18,google_trends
+2026-06-21,6,Diabari & Ashkona,15.79,google_trends
+2026-06-21,7,Uttarkhan & Faidabad,18.33,google_trends
+2026-06-21,8,Dakshinkhan & Dumni,17.55,google_trends
+2026-06-21,9,Vatara & Kuril,35.5,google_trends
+2026-06-21,10,Badda & Aftabnagar,38.14,google_trends
+2026-06-21,11,Ramna & Motijheel,52.7,google_trends
+2026-06-21,12,Khilgaon & Mugda,46.66,google_trends
+2026-06-21,13,Dhanmondi & Azimpur,46.17,google_trends
+2026-06-21,14,Wari & Jatrabari,47.94,google_trends
+2026-06-21,15,Bashundhara R/A (NSU),62.27,google_trends
+2026-06-28,1,Uttara,37.73,google_trends
+2026-06-28,2,Mirpur,47.02,google_trends
+2026-06-28,3,Gulshan & Banani,40.23,google_trends
+2026-06-28,4,Agargaon & Kafrul,30.42,google_trends
+2026-06-28,5,Farmgate & Karwan Bazar,46.92,google_trends
+2026-06-28,6,Diabari & Ashkona,18.87,google_trends
+2026-06-28,7,Uttarkhan & Faidabad,17.65,google_trends
+2026-06-28,8,Dakshinkhan & Dumni,18.07,google_trends
+2026-06-28,9,Vatara & Kuril,29.97,google_trends
+2026-06-28,10,Badda & Aftabnagar,31.72,google_trends
+2026-06-28,11,Ramna & Motijheel,52.86,google_trends
+2026-06-28,12,Khilgaon & Mugda,41.6,google_trends
+2026-06-28,13,Dhanmondi & Azimpur,42.37,google_trends
+2026-06-28,14,Wari & Jatrabari,50.11,google_trends
+2026-06-28,15,Bashundhara R/A (NSU),59.77,google_trends

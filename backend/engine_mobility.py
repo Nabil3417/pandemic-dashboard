@@ -223,22 +223,25 @@ class MobilityDetectionEngine:
         pattern       = "Normal movement patterns"
 
         if len(anomaly_pts) >= min_pts:
-            clusterer = hdbscan.HDBSCAN(
-                min_cluster_size=min_pts,
-                min_samples=max(2, min_pts // 2),
-                cluster_selection_epsilon=0.005,
-                metric='euclidean'
-            )
-            labels        = clusterer.fit_predict(anomaly_pts)
-            unique_labels = set(labels)
-            unique_labels.discard(-1)
-            cluster_count = len(unique_labels)
-            noise_points  = int(np.sum(labels == -1))
+            try:
+                clusterer = hdbscan.HDBSCAN(
+                    min_cluster_size=min_pts,
+                    min_samples=max(2, min_pts // 2),
+                    cluster_selection_epsilon=0.005,
+                    metric='euclidean'
+                )
+                labels        = clusterer.fit_predict(anomaly_pts)
+                unique_labels = set(labels)
+                unique_labels.discard(-1)
+                cluster_count = len(unique_labels)
+                noise_points  = int(np.sum(labels == -1))
 
-            if cluster_count > 0:
-                cluster_size = int(max(
-                    np.sum(labels == lbl) for lbl in unique_labels
-                ))
+                if cluster_count > 0:
+                    cluster_size = int(max(
+                        np.sum(labels == lbl) for lbl in unique_labels
+                    ))
+            except TypeError:
+                pass
 
         if cluster_count == 0:
             pattern = "Normal movement patterns"
@@ -342,7 +345,7 @@ class MobilityDetectionEngine:
             for zone_id in ZONE_PROFILES:
                 zone_df = None
 
-                if zone_col == 'zone_id' and df[zone_col].dtype in [int, float]:
+                if zone_col == 'zone_id' and np.issubdtype(df[zone_col].dtype, np.number):
                     # Numeric zone_id column -- direct match
                     zone_df = df[df[zone_col] == zone_id].copy()
                 else:

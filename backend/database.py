@@ -31,6 +31,7 @@ mobility_data       = db['mobility_events']
 wastewater_readings = db['wastewater_readings']
 risk_snapshots      = db['risk_snapshots']      # NEW — stores every prediction result
 zones_collection    = db['zones']               # NEW — stores zone definitions
+trends_data         = db['trends_data']         # NEW — real Google Trends symptom-search data
 
 
 def save_risk_snapshot(zone_id, city, nlp_score, mobility_anomaly,
@@ -92,6 +93,64 @@ def get_zone_avg_bert_score(zone_id):
     ]
     result = list(social_posts.aggregate(pipeline))
     return result[0]['avg_score'] if result else None
+
+
+def save_trends_snapshot(zone_id, zone_name, date, symptom_score, source="google_trends"):
+    """
+    Saves one zone-week Google Trends symptom-search record.
+    Upserts on (zone_id, date) so re-running the collector doesn't
+    create duplicate rows for a week that was already collected.
+    """
+    trends_data.update_one(
+        {"zone_id": zone_id, "date": date},
+        {"$set": {
+            "zone_id":       zone_id,
+            "zone_name":     zone_name,
+            "date":          date,
+            "symptom_score": symptom_score,
+            "source":        source,
+            "collected_at":  datetime.now(),
+        }},
+        upsert=True
+    )
+
+
+def get_zone_trends_series(zone_id, limit=100):
+    """
+    Returns the stored Google Trends time series for a zone, sorted
+    oldest -> newest. Used by engine_wastewater.py to fit ARIMA on
+    REAL data instead of the synthetic fallback series.
+    """
+    docs = list(trends_data.find(
+        {"zone_id": zone_id},
+        sort=[("date", 1)],
+        limit=limit
+    ))
+    return docs
+
+
+def get_latest_zone_trends_score(zone_id):
+    """
+    Returns the most recent real symptom-search score for a zone,
+    or None if no Google Trends data has been collected yet for it.
+    """
+    doc = trends_data.find_one(
+        {"zone_id": zone_id},
+        sort=[("date", -1)]
+    )
+    return doc['symptom_score'] if doc else None
+
+
+def get_trends_data_stats():
+    """Returns collection stats — used by /api/db-stats to show real vs missing coverage."""
+    total = trends_data.count_documents({})
+    zones_with_data = len(trends_data.distinct("zone_id"))
+    latest = trends_data.find_one(sort=[("date", -1)])
+    return {
+        "total_trends_records": total,
+        "zones_with_real_data": zones_with_data,
+        "latest_date": latest['date'] if latest else None,
+    }
 
 
 def test_connection():

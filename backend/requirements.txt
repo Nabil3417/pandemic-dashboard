@@ -1,0 +1,20 @@
+# Windows: Install Visual C++ Redistributable 2019-2022 first
+# https://aka.ms/vs/17/release/vc_redist.x64.exe
+
+flask==3.0.3
+flask-cors==4.0.1
+pymongo==4.8.0
+certifi==2024.7.4
+python-dotenv==1.0.1
+transformers==4.44.2
+torch==2.3.1+cpu
+langdetect==1.0.9
+scikit-learn==1.5.1
+hdbscan==0.8.38.post2
+statsmodels==0.14.2
+numpy==1.26.4
+pandas==2.2.2
+telethon==1.36.0
+
+# Real wastewater proxy — Google Trends
+pytrends==4.9.2
