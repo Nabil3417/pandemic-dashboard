@@ -1,0 +1,92 @@
+{
+  "generated_at": "2026-07-02T15:33:19.691272",
+  "eval_zone": 11,
+  "total_weeks": 156,
+  "outbreak_weeks": 52,
+  "normal_weeks": 104,
+  "threshold": 22.0,
+  "fusion_weights": {
+    "nlp": 0.3,
+    "wastewater": 0.5,
+    "mobility": 0.2
+  },
+  "combined_model": {
+    "label": "Combined Model (NLP+Mobility+Wastewater)",
+    "precision": 0.6098,
+    "recall": 0.4808,
+    "f1_score": 0.5376,
+    "roc_auc": 0.7074,
+    "tp": 25,
+    "fp": 16,
+    "tn": 88,
+    "fn": 27,
+    "threshold": 22.0,
+    "total_weeks": 156,
+    "outbreak_weeks": 52
+  },
+  "per_modality": {
+    "nlp_only": {
+      "label": "NLP only (symptom search proxy)",
+      "precision": 0.5,
+      "recall": 0.3654,
+      "f1_score": 0.4222,
+      "roc_auc": 0.6762,
+      "tp": 19,
+      "fp": 19,
+      "tn": 85,
+      "fn": 33,
+      "threshold": 22.0,
+      "total_weeks": 156,
+      "outbreak_weeks": 52,
+      "weight_in_fusion": 0.3
+    },
+    "mobility_only": {
+      "label": "Mobility only",
+      "precision": 0.3609,
+      "recall": 0.9231,
+      "f1_score": 0.5189,
+      "roc_auc": 0.5534,
+      "tp": 48,
+      "fp": 85,
+      "tn": 19,
+      "fn": 4,
+      "threshold": 22.0,
+      "total_weeks": 156,
+      "outbreak_weeks": 52,
+      "weight_in_fusion": 0.2
+    },
+    "wastewater_only": {
+      "label": "Wastewater proxy only",
+      "precision": 0.8,
+      "recall": 0.2308,
+      "f1_score": 0.3582,
+      "roc_auc": 0.7247,
+      "tp": 12,
+      "fp": 3,
+      "tn": 101,
+      "fn": 40,
+      "threshold": 22.0,
+      "total_weeks": 156,
+      "outbreak_weeks": 52,
+      "weight_in_fusion": 0.5
+    }
+  },
+  "early_warning": {
+    "avg_lead_weeks": 1.0,
+    "outbreaks_detected_early": 2,
+    "lead_times": [
+      1,
+      1
+    ]
+  },
+  "model_comparison": {
+    "note": "Fine-tuned BanglaBERT comparison will be added after fine_tune_bert.py is run",
+    "base_model_f1": 0.5376,
+    "finetuned_model_f1": null
+  },
+  "data_sources": {
+    "trends": "Google Trends symptom-search (MongoDB + CSV)",
+    "mobility": "dhaka_zone_mobility_2020_2022.csv",
+    "iedcr": "DGHS/IEDCR dengue case data (MongoDB)"
+  }
+}

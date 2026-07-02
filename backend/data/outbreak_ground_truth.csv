@@ -1,0 +1,157 @@
+year,week_number,date_start,date_end,outbreak_label,disease,notes
+2020,1,2020-01-01,2020-01-07,0,none,Baseline normal period
+2020,2,2020-01-08,2020-01-14,0,none,Baseline normal period
+2020,3,2020-01-15,2020-01-21,0,none,Baseline normal period
+2020,4,2020-01-22,2020-01-28,0,none,Baseline normal period
+2020,5,2020-01-29,2020-02-04,0,none,Baseline normal period
+2020,6,2020-02-05,2020-02-11,0,none,Baseline normal period
+2020,7,2020-02-12,2020-02-18,0,none,Baseline normal period
+2020,8,2020-02-19,2020-02-25,0,none,Baseline normal period
+2020,9,2020-02-26,2020-03-03,0,none,First COVID-19 cases detected in BD (Mar 8)
+2020,10,2020-03-04,2020-03-10,1,covid19,First 3 COVID-19 cases confirmed Mar 8 - IEDCR announcement
+2020,11,2020-03-11,2020-03-17,1,covid19,WHO declares pandemic Mar 11 - BD cases rising
+2020,12,2020-03-18,2020-03-24,1,covid19,BD lockdown begins Mar 23 - community transmission confirmed
+2020,13,2020-03-25,2020-03-31,1,covid19,Wave 1 peak building - Dhaka hotspot declared
+2020,14,2020-04-01,2020-04-07,1,covid19,Wave 1 active - daily cases rising sharply
+2020,15,2020-04-08,2020-04-14,1,covid19,Wave 1 active - Dhaka under strict lockdown
+2020,16,2020-04-15,2020-04-21,1,covid19,Wave 1 peak - highest daily cases April 2020
+2020,17,2020-04-22,2020-04-28,1,covid19,Wave 1 still active - hospitals under pressure
+2020,18,2020-04-29,2020-05-05,1,covid19,Wave 1 declining but still outbreak level
+2020,19,2020-05-06,2020-05-12,1,covid19,Wave 1 tail - cases still above threshold
+2020,20,2020-05-13,2020-05-19,1,covid19,Wave 1 tail - gradual decline
+2020,21,2020-05-20,2020-05-26,0,none,Post Wave 1 - cases declining to baseline
+2020,22,2020-05-27,2020-06-02,0,none,Inter-wave period
+2020,23,2020-06-03,2020-06-09,0,none,Inter-wave period
+2020,24,2020-06-10,2020-06-16,0,none,Inter-wave period
+2020,25,2020-06-17,2020-06-23,0,none,Inter-wave period
+2020,26,2020-06-24,2020-06-30,0,none,Inter-wave period
+2020,27,2020-07-01,2020-07-07,0,none,Inter-wave period - dengue season starting
+2020,28,2020-07-08,2020-07-14,0,none,Low dengue activity
+2020,29,2020-07-15,2020-07-21,0,none,Low dengue activity
+2020,30,2020-07-22,2020-07-28,0,none,Low dengue activity
+2020,31,2020-07-29,2020-08-04,0,none,Low dengue activity
+2020,32,2020-08-05,2020-08-11,0,none,Low dengue - COVID suppressed dengue reporting
+2020,33,2020-08-12,2020-08-18,0,none,Inter-wave period
+2020,34,2020-08-19,2020-08-25,0,none,Inter-wave period
+2020,35,2020-08-26,2020-09-01,0,none,Inter-wave period
+2020,36,2020-09-02,2020-09-08,0,none,Inter-wave period
+2020,37,2020-09-09,2020-09-15,0,none,Inter-wave period
+2020,38,2020-09-16,2020-09-22,0,none,Inter-wave period
+2020,39,2020-09-23,2020-09-29,0,none,Inter-wave period
+2020,40,2020-09-30,2020-10-06,0,none,Inter-wave period
+2020,41,2020-10-07,2020-10-13,0,none,Inter-wave period
+2020,42,2020-10-14,2020-10-20,0,none,Inter-wave period
+2020,43,2020-10-21,2020-10-27,0,none,Inter-wave period
+2020,44,2020-10-28,2020-11-03,0,none,Inter-wave period
+2020,45,2020-11-04,2020-11-10,0,none,Inter-wave period
+2020,46,2020-11-11,2020-11-17,0,none,Inter-wave period
+2020,47,2020-11-18,2020-11-24,0,none,Inter-wave period
+2020,48,2020-11-25,2020-12-01,0,none,Inter-wave period
+2020,49,2020-12-02,2020-12-08,0,none,Inter-wave period
+2020,50,2020-12-09,2020-12-15,0,none,Inter-wave period
+2020,51,2020-12-16,2020-12-22,0,none,Inter-wave period
+2020,52,2020-12-23,2020-12-29,0,none,End of year baseline
+2021,1,2021-01-01,2021-01-07,0,none,Baseline normal period
+2021,2,2021-01-08,2021-01-14,0,none,Baseline normal period
+2021,3,2021-01-15,2021-01-21,0,none,Baseline normal period
+2021,4,2021-01-22,2021-01-28,0,none,Baseline normal period
+2021,5,2021-01-29,2021-02-04,0,none,Baseline normal period
+2021,6,2021-02-05,2021-02-11,0,none,Baseline normal period
+2021,7,2021-02-12,2021-02-18,0,none,Baseline normal period
+2021,8,2021-02-19,2021-02-25,0,none,Pre-wave 2 baseline
+2021,9,2021-02-26,2021-03-04,0,none,Pre-wave 2 - cases beginning to rise
+2021,10,2021-03-05,2021-03-11,1,covid19,Wave 2 begins - daily cases crossing 600+ threshold
+2021,11,2021-03-12,2021-03-18,1,covid19,Wave 2 active - BD records 1000+ daily cases
+2021,12,2021-03-19,2021-03-25,1,covid19,Wave 2 peak building - lockdown reimposed
+2021,13,2021-03-26,2021-04-01,1,covid19,Wave 2 peak - BD records highest daily cases Mar-Apr 2021
+2021,14,2021-04-02,2021-04-08,1,covid19,Wave 2 peak - strict lockdown April 2021
+2021,15,2021-04-09,2021-04-15,1,covid19,Wave 2 active - hospitals overwhelmed
+2021,16,2021-04-16,2021-04-22,1,covid19,Wave 2 declining slightly
+2021,17,2021-04-23,2021-04-29,1,covid19,Wave 2 tail
+2021,18,2021-04-30,2021-05-06,1,covid19,Wave 2 tail - still above outbreak threshold
+2021,19,2021-05-07,2021-05-13,1,covid19,Wave 2 tail - gradual decline
+2021,20,2021-05-14,2021-05-20,1,covid19,Wave 2 tail - Eid movement spike risk
+2021,21,2021-05-21,2021-05-27,1,covid19,Wave 2 ending - post-Eid spike observed
+2021,22,2021-05-28,2021-06-03,0,none,Inter-wave period
+2021,23,2021-06-04,2021-06-10,0,none,Inter-wave period
+2021,24,2021-06-11,2021-06-17,0,none,Inter-wave period - Delta variant emerging globally
+2021,25,2021-06-18,2021-06-24,0,none,Pre-wave 3 - Delta detected in BD
+2021,26,2021-06-25,2021-07-01,1,covid19,Wave 3 begins - Delta variant driving surge
+2021,27,2021-07-02,2021-07-08,1,covid19,Wave 3 active - Delta variant dominant in Dhaka
+2021,28,2021-07-09,2021-07-15,1,covid19,Wave 3 peak - BD records 13000+ weekly cases
+2021,29,2021-07-16,2021-07-22,1,covid19,Wave 3 peak - ICU capacity critical
+2021,30,2021-07-23,2021-07-29,1,covid19,Wave 3 peak - highest death toll of pandemic
+2021,31,2021-07-30,2021-08-05,1,covid19,Wave 3 declining - lockdown extended
+2021,32,2021-08-06,2021-08-12,1,covid19,Wave 3 tail - still outbreak level
+2021,33,2021-08-13,2021-08-19,1,covid19,Wave 3 tail - dengue co-circulating
+2021,34,2021-08-20,2021-08-26,1,dengue,Dengue surge begins - 1500+ weekly cases Dhaka
+2021,35,2021-08-27,2021-09-02,1,dengue,Dengue peak - 2000+ weekly cases DGHS report
+2021,36,2021-09-03,2021-09-09,1,dengue,Dengue peak - hospitals dual burden COVID+dengue
+2021,37,2021-09-10,2021-09-16,1,dengue,Dengue declining - COVID also declining
+2021,38,2021-09-17,2021-09-23,1,dengue,Dengue tail - still above threshold
+2021,39,2021-09-24,2021-09-30,0,none,Post outbreak - both diseases declining
+2021,40,2021-10-01,2021-10-07,0,none,Inter-wave period
+2021,41,2021-10-08,2021-10-14,0,none,Inter-wave period
+2021,42,2021-10-15,2021-10-21,0,none,Inter-wave period
+2021,43,2021-10-22,2021-10-28,0,none,Inter-wave period
+2021,44,2021-10-29,2021-11-04,0,none,Inter-wave period
+2021,45,2021-11-05,2021-11-11,0,none,Inter-wave period
+2021,46,2021-11-12,2021-11-18,0,none,Inter-wave period
+2021,47,2021-11-19,2021-11-25,0,none,Inter-wave period
+2021,48,2021-11-26,2021-12-02,0,none,Inter-wave period - Omicron emerging globally
+2021,49,2021-12-03,2021-12-09,0,none,Pre-wave 4 - Omicron detected regionally
+2021,50,2021-12-10,2021-12-16,0,none,Pre-wave 4 baseline
+2021,51,2021-12-17,2021-12-23,0,none,Pre-wave 4 baseline
+2021,52,2021-12-24,2021-12-30,0,none,End of year - Omicron cases rising in BD
+2022,1,2022-01-01,2022-01-07,1,covid19,Wave 4 Omicron - BD cases spike to 15000+ weekly
+2022,2,2022-01-08,2022-01-14,1,covid19,Wave 4 Omicron peak - highest case count of pandemic
+2022,3,2022-01-15,2022-01-21,1,covid19,Wave 4 Omicron peak - 500+ daily cases Dhaka alone
+2022,4,2022-01-22,2022-01-28,1,covid19,Wave 4 Omicron declining - milder severity
+2022,5,2022-01-29,2022-02-04,1,covid19,Wave 4 tail - rapid decline due to Omicron pattern
+2022,6,2022-02-05,2022-02-11,0,none,Post Omicron wave - rapid recovery
+2022,7,2022-02-12,2022-02-18,0,none,Baseline normal period
+2022,8,2022-02-19,2022-02-25,0,none,Baseline normal period
+2022,9,2022-02-26,2022-03-04,0,none,Baseline normal period
+2022,10,2022-03-05,2022-03-11,0,none,Baseline normal period
+2022,11,2022-03-12,2022-03-18,0,none,Baseline normal period
+2022,12,2022-03-19,2022-03-25,0,none,Baseline normal period
+2022,13,2022-03-26,2022-04-01,0,none,Baseline normal period
+2022,14,2022-04-02,2022-04-08,0,none,Baseline normal period
+2022,15,2022-04-09,2022-04-15,0,none,Baseline normal period
+2022,16,2022-04-16,2022-04-22,0,none,Baseline normal period
+2022,17,2022-04-23,2022-04-29,0,none,Baseline normal period
+2022,18,2022-04-30,2022-05-06,0,none,Baseline normal period
+2022,19,2022-05-07,2022-05-13,0,none,Dengue season starting - low activity
+2022,20,2022-05-14,2022-05-20,0,none,Early dengue season
+2022,21,2022-05-21,2022-05-27,0,none,Early dengue season
+2022,22,2022-05-28,2022-06-03,0,none,Dengue rising but below threshold
+2022,23,2022-06-04,2022-06-10,0,none,Dengue rising - pre-outbreak
+2022,24,2022-06-11,2022-06-17,0,none,Dengue rising - pre-outbreak
+2022,25,2022-06-18,2022-06-24,0,none,Dengue rising significantly
+2022,26,2022-06-25,2022-07-01,1,dengue,Dengue outbreak begins - crosses 500 weekly cases Dhaka
+2022,27,2022-07-02,2022-07-08,1,dengue,Dengue active - DGHS alert issued
+2022,28,2022-07-09,2022-07-15,1,dengue,Dengue peak building - 1500+ weekly cases
+2022,29,2022-07-16,2022-07-22,1,dengue,Dengue peak - 2000+ weekly cases Dhaka
+2022,30,2022-07-23,2022-07-29,1,dengue,Dengue peak - DGHS emergency response
+2022,31,2022-07-30,2022-08-05,1,dengue,Dengue peak - hospitals overwhelmed
+2022,32,2022-08-06,2022-08-12,1,dengue,Dengue peak - highest since 2019
+2022,33,2022-08-13,2022-08-19,1,dengue,Dengue declining from peak
+2022,34,2022-08-20,2022-08-26,1,dengue,Dengue tail - still outbreak level
+2022,35,2022-08-27,2022-09-02,1,dengue,Dengue tail
+2022,36,2022-09-03,2022-09-09,1,dengue,Dengue tail - slow decline
+2022,37,2022-09-10,2022-09-16,0,none,Post dengue outbreak - cases below threshold
+2022,38,2022-09-17,2022-09-23,0,none,Baseline normal period
+2022,39,2022-09-24,2022-09-30,0,none,Baseline normal period
+2022,40,2022-10-01,2022-10-07,0,none,Baseline normal period
+2022,41,2022-10-08,2022-10-14,0,none,Baseline normal period
+2022,42,2022-10-15,2022-10-21,0,none,Baseline normal period
+2022,43,2022-10-22,2022-10-28,0,none,Baseline normal period
+2022,44,2022-10-29,2022-11-04,0,none,Baseline normal period
+2022,45,2022-11-05,2022-11-11,0,none,Baseline normal period
+2022,46,2022-11-12,2022-11-18,0,none,Baseline normal period
+2022,47,2022-11-19,2022-11-25,0,none,Baseline normal period
+2022,48,2022-11-26,2022-12-02,0,none,Baseline normal period
+2022,49,2022-12-03,2022-12-09,0,none,Baseline normal period
+2022,50,2022-12-10,2022-12-16,0,none,Baseline normal period
+2022,51,2022-12-17,2022-12-23,0,none,Baseline normal period
+2022,52,2022-12-24,2022-12-30,0,none,End of year baseline

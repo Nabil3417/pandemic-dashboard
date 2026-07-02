@@ -1,6 +1,7 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 import os
+import json
 import random
 from datetime import datetime
 
@@ -426,6 +427,23 @@ def get_db_stats():
 @app.route('/api/engine-status', methods=['GET'])
 def get_engine_status():
     return jsonify(bert_ai.get_engine_status())
+
+
+@app.route('/api/evaluation-results', methods=['GET'])
+def get_evaluation_results():
+    """Returns pre-computed model evaluation metrics from evaluate.py output."""
+    results_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'data', 'evaluation_results.json')
+    try:
+        with open(results_path, 'r') as f:
+            results = json.load(f)
+        return jsonify(results)
+    except FileNotFoundError:
+        return jsonify({
+            "error": "evaluation_results.json not found — run python evaluate.py first"
+        }), 404
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 5000)), debug=False)
