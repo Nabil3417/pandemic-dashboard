@@ -20,10 +20,25 @@ PHONE     = os.getenv('TELEGRAM_PHONE')
 # Public Bangladeshi health-related Telegram channels
 # These are all public — no membership needed
 CHANNELS = [
+    # Already working
+    'Conflict_Watch_Bangla',
+    'JamunaTelevisionOfficial',
+    'channelelias',
+    'basherkella',
+    'newsboxbangla',
+    'internationalnews007',
+    
+    'ShamsulArefin2091',
+    'drsalimaldeen',
     'prothom_alo_feed',
     'TheDailyStar',
     'daily_jugantor',
     'somoynews_tv',
+
+
+   
+ 
+
 ]
 # Keywords that indicate health/illness content
 HEALTH_KEYWORDS = [
@@ -242,10 +257,10 @@ async def run_collector(days_back=30):
     return total_collected
 
 
-def collect_telegram_data(days_back=30):
+def collect_telegram_data(days_back=90):
     """Synchronous wrapper — call this from app.py or APScheduler."""
     return asyncio.run(run_collector(days_back))
 
 
 if __name__ == "__main__":
-    collect_telegram_data(days_back=30)
+    collect_telegram_data(days_back=90)
