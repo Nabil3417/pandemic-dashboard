@@ -25,14 +25,17 @@ except Exception as e:
     print(f"❌ Connection Error: {e}")
     exit(1)
 
-# Collections
+# ─── Collections ──────────────────────────────────────────────────────────────
 social_posts        = db['social_media_posts']
 mobility_data       = db['mobility_events']
 wastewater_readings = db['wastewater_readings']
-risk_snapshots      = db['risk_snapshots']      # NEW — stores every prediction result
-zones_collection    = db['zones']               # NEW — stores zone definitions
-trends_data         = db['trends_data']         # NEW — real Google Trends symptom-search data
+risk_snapshots      = db['risk_snapshots']
+zones_collection    = db['zones']
+trends_data         = db['trends_data']
+iedcr_reports       = db['iedcr_reports']       # NEW — DGHS/IEDCR disease case data
 
+
+# ─── Risk Snapshots ───────────────────────────────────────────────────────────
 
 def save_risk_snapshot(zone_id, city, nlp_score, mobility_anomaly,
                        wastewater_score, fused_score, risk_level,
@@ -51,10 +54,10 @@ def save_risk_snapshot(zone_id, city, nlp_score, mobility_anomaly,
     })
 
 
+# ─── Social Posts ─────────────────────────────────────────────────────────────
+
 def get_unprocessed_posts(limit=20):
-    """
-    Returns posts that haven't been scored by BERT yet.
-    """
+    """Returns posts that haven't been scored by BERT yet."""
     return list(social_posts.find(
         {"bert_score": None, "simulated": True},
         limit=limit
@@ -62,9 +65,7 @@ def get_unprocessed_posts(limit=20):
 
 
 def update_post_bert_score(post_id, score):
-    """
-    Writes BERT score back to the post document in MongoDB.
-    """
+    """Writes BERT score back to the post document in MongoDB."""
     social_posts.update_one(
         {"_id": post_id},
         {"$set": {"bert_score": score, "processed": True}}
@@ -72,9 +73,7 @@ def update_post_bert_score(post_id, score):
 
 
 def get_recent_posts_by_zone(zone_id, limit=5):
-    """
-    Returns the most recent posts for a specific zone.
-    """
+    """Returns the most recent posts for a specific zone."""
     return list(social_posts.find(
         {"zone_id": zone_id},
         sort=[("timestamp", -1)],
@@ -94,6 +93,8 @@ def get_zone_avg_bert_score(zone_id):
     result = list(social_posts.aggregate(pipeline))
     return result[0]['avg_score'] if result else None
 
+
+# ─── Google Trends ────────────────────────────────────────────────────────────
 
 def save_trends_snapshot(zone_id, zone_name, date, symptom_score, source="google_trends"):
     """
@@ -119,14 +120,13 @@ def get_zone_trends_series(zone_id, limit=100):
     """
     Returns the stored Google Trends time series for a zone, sorted
     oldest -> newest. Used by engine_wastewater.py to fit ARIMA on
-    REAL data instead of the synthetic fallback series.
+    real data instead of the synthetic fallback series.
     """
-    docs = list(trends_data.find(
+    return list(trends_data.find(
         {"zone_id": zone_id},
         sort=[("date", 1)],
         limit=limit
     ))
-    return docs
 
 
 def get_latest_zone_trends_score(zone_id):
@@ -152,6 +152,54 @@ def get_trends_data_stats():
         "latest_date": latest['date'] if latest else None,
     }
 
+
+# ─── IEDCR / DGHS Disease Reports ────────────────────────────────────────────
+
+def save_iedcr_report(year, month, disease, case_count, death_count, division):
+    """
+    Insert or update one IEDCR/DGHS disease record.
+    Upserts on (year, month, disease, division) to avoid duplicates.
+    Normalizes case count against historical max (52,341 — Aug 2023 Dhaka peak).
+    """
+    record = {
+        "year":             year,
+        "month":            month,
+        "disease":          disease,
+        "case_count":       case_count,
+        "death_count":      death_count,
+        "division":         division,
+        "normalized_score": round(min((case_count / 52341) * 100, 100), 2),
+        "collected_at":     datetime.now(),
+    }
+    iedcr_reports.update_one(
+        {
+            "year":     year,
+            "month":    month,
+            "disease":  disease,
+            "division": division,
+        },
+        {"$set": record},
+        upsert=True
+    )
+    return record
+
+
+def get_latest_iedcr_score(division="Dhaka"):
+    """
+    Returns the normalized 0-100 risk score from the most recent
+    IEDCR/DGHS dengue record for the given division.
+    Returns 0.0 if no data found.
+    """
+    latest = iedcr_reports.find_one(
+        {"division": division, "disease": "dengue"},
+        sort=[("year", -1), ("month", -1)]
+    )
+    if latest:
+        return latest.get("normalized_score", 0.0)
+    return 0.0
+
+
+# ─── Connection Test ──────────────────────────────────────────────────────────
 
 def test_connection():
     try:

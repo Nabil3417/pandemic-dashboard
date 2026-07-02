@@ -64,7 +64,7 @@ from statsmodels.tsa.arima.model import ARIMA
 import warnings
 warnings.filterwarnings('ignore')
 
-from database import get_zone_trends_series
+from database import get_zone_trends_series, get_latest_iedcr_score
 
 # ─────────────────────────────────────────────────────────────
 # ZONE PROFILES — used only for the synthetic fallback generator
@@ -240,22 +240,36 @@ class WastewaterARIMAEngine:
         """
         PRIMARY METHOD — called from app.py.
         Returns current symptom-search intensity score (0-100) for a zone.
+        Blends Google Trends ARIMA score (60%) with IEDCR/DGHS case data (40%).
         """
         series, _ = _get_zone_series(zone_id, crisis_mode)
         historical = series[:max(1, len(series) - 7)] if len(series) > 20 else series
         model = _fit_arima(historical)
 
+        # Google Trends score
         if model is not None:
             try:
                 fitted_values = model.fittedvalues
                 if len(fitted_values) > 0:
-                    current_load = float(fitted_values[-1])
-                    current_load = max(5.0, min(95.0, current_load))
-                    return round(current_load, 2)
+                    trends_score = float(fitted_values[-1])
+                    trends_score = max(5.0, min(95.0, trends_score))
+                else:
+                    trends_score = round(series[-1], 2)
             except Exception:
-                pass
+                trends_score = round(series[-1], 2)
+        else:
+            trends_score = round(series[-1], 2)
 
-        return round(series[-1], 2)
+        # IEDCR/DGHS score — normalized 0-100 from real case count data
+        iedcr_score = get_latest_iedcr_score(division="Dhaka")
+
+        # If IEDCR returned 0.0 (no data), use trends score only
+        if iedcr_score == 0.0:
+            return round(trends_score, 2)
+
+        # Blend: Google Trends 60% + IEDCR 40%
+        blended = (trends_score * 0.6) + (iedcr_score * 0.4)
+        return round(max(5.0, min(95.0, blended)), 2)
 
     def get_forecast(self, zone_id, crisis_mode=False, days=7):
         """Returns ARIMA forecast for next N days with confidence intervals."""
@@ -334,18 +348,24 @@ class WastewaterARIMAEngine:
             else:
                 fallback_zones += 1
 
+       # Get latest IEDCR score to report in status
+        iedcr_score = get_latest_iedcr_score(division="Dhaka")
+
         return {
             "model":              "ARIMA(1,1,1)",
             "zones":              len(ZONE_PROFILES),
             "zones_real_data":    real_zones,
             "zones_fallback":     fallback_zones,
             "cache_size":         len(_zone_cache),
-            "primary_source":     "Google Trends symptom-search (real)",
+            "data_source":        "google_trends + iedcr_reports",
+            "primary_source":     "Google Trends symptom-search (60% weight)",
+            "secondary_source":   "IEDCR/DGHS dengue case data (40% weight)",
+            "iedcr_latest_score": iedcr_score,
             "fallback_source":    "Literature-grounded synthetic generator",
             "reference":          "Ginsberg et al. 2009, Nature; "
                                    "Rogawski McQuade et al. 2023, Lancet Microbe",
             "status": (
-                "fully real"    if fallback_zones == 0 else
+                "fully real"     if fallback_zones == 0 else
                 "partially real" if real_zones > 0 else
                 "no real data collected yet — run google_trends_collector.py"
             ),
