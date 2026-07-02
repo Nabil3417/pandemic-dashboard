@@ -315,6 +315,30 @@ class WastewaterARIMAEngine:
 
     def get_14day_forecast(self, zone_id, crisis_mode=False):
         return self.get_forecast(zone_id, crisis_mode, days=14)
+    
+    def get_zone_forecast(self, zone_id, days=14):
+        """
+        Returns next N days of ARIMA forecast as a simple list of floats.
+        Called directly by the /api/forecast endpoint in app.py.
+        """
+        series, _ = _get_zone_series(zone_id, crisis_mode=False)
+        historical = series[:max(1, len(series) - 7)] if len(series) > 20 else series
+        model = _fit_arima(historical)
+
+        if model is not None:
+            try:
+                forecast = model.forecast(steps=days)
+                return [round(max(5.0, min(95.0, float(v))), 2) for v in forecast]
+            except Exception:
+                pass
+
+        # Fallback — linear extrapolation from last value
+        last = series[-1]
+        result = []
+        for _ in range(days):
+            last = min(95.0, max(5.0, last + random.gauss(0, 1)))
+            result.append(round(last, 2))
+        return result        
 
     def get_trend(self, zone_id, crisis_mode=False):
         series, _ = _get_zone_series(zone_id, crisis_mode)

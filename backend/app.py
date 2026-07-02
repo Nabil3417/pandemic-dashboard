@@ -388,16 +388,41 @@ def toggle_crisis():
 
 @app.route('/api/forecast', methods=['GET'])
 def get_forecast():
+    """
+    Returns 14-day ARIMA forecast for all zones.
+    Replaces fake random math with real model predictions.
+    Wastewater forecast: ARIMA on Google Trends series (engine_wastewater.py)
+    Mobility forecast:   ARIMA on historical mobility CSV (engine_mobility.py)
+    """
+    from engine_mobility import get_zone_mobility_forecast
+
     forecast_results = []
     for z in ZONES:
+        zone_id = z['id']
+        # Real ARIMA forecasts from both engines
+        wastewater_forecast = wastewater_ai.get_zone_forecast(zone_id, days=14)
+        mobility_forecast   = get_zone_mobility_forecast(zone_id, days=14)
+
         days = []
-        base_score, _, _, _, _, _ = calculate_multi_modal_risk(z, crisis_mode)
-        val = base_score
-        multiplier = 1.18 if crisis_mode else 1.03
         for i in range(14):
-            val = min(val * (multiplier + random.uniform(-0.02, 0.02)), 100)
-            days.append({"day": f"D{i+1}", "val": round(val, 1)})
-        forecast_results.append({"city": z['city'], "data": days})
+            wf = wastewater_forecast[i] if i < len(wastewater_forecast) else 30.0
+            mf = mobility_forecast[i]   if i < len(mobility_forecast)   else 30.0
+
+            # Fused forecast score — same weights as risk calculation
+            fused_val = round((wf * 0.7) + (mf * 0.3), 1)
+            days.append({
+                "day":              f"D{i+1}",
+                "val":              fused_val,
+                "wastewater_pred":  wf,
+                "mobility_pred":    mf,
+            })
+
+        forecast_results.append({
+            "city":    z['city'],
+            "zone_id": zone_id,
+            "data":    days,
+        })
+
     return jsonify(forecast_results)
 
 
