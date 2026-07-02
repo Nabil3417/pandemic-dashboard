@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { MapContainer, TileLayer, CircleMarker, Popup, ZoomControl, useMap } from 'react-leaflet';
+import { MapContainer, TileLayer, CircleMarker, Popup, ZoomControl, useMap, GeoJSON } from 'react-leaflet';
 import { Activity, Radio, Zap, Loader2 } from 'lucide-react';
 import 'leaflet/dist/leaflet.css';
 
@@ -15,6 +15,7 @@ const RiskMapping = () => {
   const [riskZones, setRiskZones] = useState([]);
   const [activeZone, setActiveZone] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [geoData, setGeoData] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -30,6 +31,30 @@ const RiskMapping = () => {
     };
     fetchData();
   }, []);
+
+  useEffect(() => {
+    fetch('/dhaka_zones.geojson')
+      .then(res => res.json())
+      .then(data => setGeoData(data))
+      .catch(err => console.error("Error fetching GeoJSON:", err));
+  }, []);
+
+  const getZoneColor = (riskIndex) => {
+    if (riskIndex > 70) return '#ef4444';
+    if (riskIndex >= 40) return '#f59e0b';
+    return '#22c55e';
+  };
+
+  const geoStyle = (feature) => {
+    const riskIndex = feature.properties?.risk_index || 50;
+    return {
+      fillColor: getZoneColor(riskIndex),
+      fillOpacity: 0.25,
+      color: getZoneColor(riskIndex),
+      weight: 1.5,
+      dashArray: '4, 6',
+    };
+  };
 
   if (loading) return (
     <div className="h-full w-full flex items-center justify-center bg-[#020617] rounded-[2.5rem]">
@@ -94,6 +119,14 @@ const RiskMapping = () => {
           <TileLayer url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png" />
           <ZoomControl position="bottomright" />
           <MapController center={activeZone?.center} />
+
+          {/* GeoJSON Choropleth Polygons */}
+          {geoData && (
+            <GeoJSON 
+              data={geoData} 
+              style={geoStyle}
+            />
+          )}
 
           {riskZones.map((zone) => (
             <React.Fragment key={zone.id}>
