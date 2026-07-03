@@ -87,26 +87,6 @@ const PredictiveEngine = () => {
           </div>
           <h2 className="text-5xl font-black uppercase italic tracking-tighter">AI <span className="text-blue-600">Forecast</span></h2>
         </div>
-        <div className="bg-white/5 px-6 py-3 rounded-2xl border border-white/10 text-right">
-            <p className="text-[9px] font-black text-slate-500 uppercase">Confidence Interval</p>
-            <p className="text-xl font-black text-emerald-500 italic">94.8%</p>
-        </div>
-      </div>
-
-      {/* Accuracy Stats */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
-        {[
-          { label: "Accuracy", val: "92.4%", icon: <Target className="text-emerald-400" /> },
-          { label: "Recall", val: "88.1%", icon: <Activity className="text-blue-400" /> },
-          { label: "Lead Time", val: "4.2 Days", icon: <ShieldCheck className="text-purple-400" /> },
-          { label: "F1 Score", val: "0.89", icon: <TrendingUp className="text-amber-400" /> }
-        ].map((stat, i) => (
-          <div key={i} className="bg-white/5 border border-white/10 p-6 rounded-[2.5rem] hover:border-blue-500/50 transition-colors">
-            <div className="bg-white/5 w-10 h-10 rounded-xl flex items-center justify-center mb-4">{stat.icon}</div>
-            <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest">{stat.label}</p>
-            <h4 className="text-2xl font-black italic mt-1">{stat.val}</h4>
-          </div>
-        ))}
       </div>
 
       {/* Projection Charts */}
@@ -128,7 +108,7 @@ const PredictiveEngine = () => {
                 <LineChart data={forecast.data}>
                   <CartesianGrid strokeDasharray="3 3" stroke="#ffffff05" vertical={false} />
                   <XAxis dataKey="day" stroke="#475569" fontSize={10} tickLine={false} axisLine={false} />
-                  <YAxis stroke="#475569" fontSize={10} tickLine={false} axisLine={false} />
+                  <YAxis stroke="#475569" fontSize={10} tickLine={false} axisLine={false} label={{ value: 'Predicted Risk Score (0–100)', angle: -90, position: 'insideLeft', fill: '#475569', fontSize: 9, fontWeight: '900' }} />
                   <Tooltip 
                     contentStyle={{ backgroundColor: '#020617', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '16px', fontSize: '12px' }}
                     itemStyle={{ fontWeight: '900', textTransform: 'uppercase' }}
@@ -144,7 +124,10 @@ const PredictiveEngine = () => {
                   />
                 </LineChart>
               </ResponsiveContainer>
-            </div>
+       </div>
+            <p className="text-[9px] font-bold text-slate-500 uppercase tracking-widest mt-4 text-center">
+              Forecast generated using ARIMA on historical mobility and symptom-search data
+            </p>
           </div>
         ))}
       </div>
