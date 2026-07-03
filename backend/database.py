@@ -59,7 +59,8 @@ def save_risk_snapshot(zone_id, city, nlp_score, mobility_anomaly,
 def get_unprocessed_posts(limit=20):
     """Returns posts that haven't been scored by BERT yet."""
     return list(social_posts.find(
-        {"bert_score": None, "simulated": True},
+        {"bert_score": None},
+        sort=[("timestamp", -1)],
         limit=limit
     ))
 

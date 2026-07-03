@@ -172,16 +172,48 @@ ZONES = [
 ]
 
 
+# ─── DISEASE KEYWORDS (shared for health relevance scoring) ──────────────────
+DISEASE_KEYWORDS = [
+    'dengue', 'cholera', 'malaria', 'pneumonia', 'diarrhea',
+    'outbreak', 'epidemic', 'pandemic', 'infection', 'virus',
+    'infected', 'contagious', 'quarantine', 'mortality', 'pathogen',
+    'fever', 'cough', 'respiratory', 'icu', 'admitted',
+    'hospitalized', 'death toll', 'case count', 'symptoms',
+    'patients', 'spread', 'transmission',
+    'ডেঙ্গু', 'কলেরা', 'ম্যালেরিয়া', 'নিউমোনিয়া', 'ডায়রিয়া',
+    'প্রাদুর্ভাব', 'মহামারী', 'সংক্রমণ', 'ভাইরাস', 'আক্রান্ত',
+    'হাসপাতালে ভর্তি', 'মৃত্যুহার', 'শ্বাসকষ্ট', 'রোগতত্ত্ব',
+    'হাম', 'রুবেলা', 'যক্ষ্মা', 'হেপাটাইটিস',
+    'প্রকোপ', 'উপসর্গ', 'রোগী', 'মৃত্যু',
+    'ভয়াবহ', 'সতর্ক', 'ক্রমবর্ধমান',
+]
+
+
+def health_relevance(text):
+    """Returns multiplier 0.3-1.0 based on disease keyword density."""
+    text_lower = text.lower()
+    matches = sum(1 for kw in DISEASE_KEYWORDS if kw in text_lower)
+    if matches >= 2:
+        return 1.0
+    elif matches >= 1:
+        return 0.85
+    else:
+        return 0.3
+
+
 def score_unprocessed_posts():
     """
     Finds posts in MongoDB that haven't been scored yet,
-    runs BERT on them, and writes the score back to the document.
+    runs BERT on them with health relevance multiplier, and writes the score back.
+    Processes up to 50 per call.
     Called on every /api/risk-status request.
     """
-    unprocessed = get_unprocessed_posts(limit=10)
+    unprocessed = get_unprocessed_posts(limit=50)
     for post in unprocessed:
-        score = bert_ai.analyze_text_signals(post['text'])
-        update_post_bert_score(post['_id'], score)
+        raw_score = bert_ai.analyze_text_signals(post['text'])
+        relevance = health_relevance(post['text'])
+        final_score = round(raw_score * relevance, 1)
+        update_post_bert_score(post['_id'], final_score)
 
 
 def get_nlp_score_for_zone(zone_id, crisis_mode):
@@ -215,11 +247,11 @@ def calculate_multi_modal_risk(zone, crisis_mode):
     nlp_score = get_nlp_score_for_zone(zone['id'], crisis_mode)
 
     # 2. Mobility anomaly — IsolationForest
-    lat, lng = zone['center']
     mobility_result = mobility_ai.analyze_zone_mobility(zone['id'], crisis_mode)
     is_anomaly      = mobility_result['is_anomaly']
     cluster_size    = mobility_result['cluster_size']
     mobility_score  = mobility_result['mobility_score']
+
     # 3. Wastewater viral load
     bio_load = wastewater_ai.get_localized_load(zone['id'], crisis_mode)
 
@@ -246,7 +278,7 @@ def calculate_multi_modal_risk(zone, crisis_mode):
         risk_level=risk,
         cluster_size=cluster_size,
         mobility_score=mobility_score
-           )
+    )
 
     return final_score, risk, color, nlp_score, is_anomaly, bio_load
 
@@ -371,7 +403,7 @@ def get_signals():
                 "impact":    impact,
                 "city":      z['city'],
                 "ai_score":  f"{round(ai_score)}%",
-                "timestamp": "No real data yet — run simulator"
+                "timestamp": "No real data yet"
             })
 
     return jsonify(all_signals)
@@ -429,7 +461,7 @@ def get_forecast():
 @app.route('/api/db-stats', methods=['GET'])
 def get_db_stats():
     """
-    New endpoint — shows what's in your MongoDB.
+    Shows what's in MongoDB.
     Useful to verify data collection is working.
     """
     return jsonify({
@@ -448,6 +480,7 @@ def get_db_stats():
                                  {"simulated": {"$ne": True}}
                              ),
     })
+
 
 @app.route('/api/engine-status', methods=['GET'])
 def get_engine_status():
@@ -469,6 +502,98 @@ def get_evaluation_results():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
+
+# ─── COLLECTION MANAGEMENT ENDPOINTS ─────────────────────────────────────────
+
+@app.route('/api/collection-status', methods=['GET'])
+def get_collection_status():
+    """Returns collection stats: last run, platform breakdown, recent count."""
+    from data_collectors.scheduler import STATE_FILE
+    try:
+        with open(STATE_FILE, "r") as f:
+            state = json.load(f)
+    except (FileNotFoundError, json.JSONDecodeError):
+        state = {"last_run": None}
+
+    platform_pipeline = [
+        {"$match": {"simulated": {"$ne": True}}},
+        {"$group": {"_id": "$platform", "count": {"$sum": 1}}},
+        {"$sort": {"count": -1}}
+    ]
+    platform_counts = {doc["_id"]: doc["count"] for doc in social_posts.aggregate(platform_pipeline)}
+
+    from datetime import timedelta
+    yesterday = datetime.now() - timedelta(hours=24)
+    recent_count = social_posts.count_documents({
+        "simulated": {"$ne": True},
+        "timestamp": {"$gte": yesterday}
+    })
+    unprocessed = social_posts.count_documents({
+        "simulated": {"$ne": True},
+        "bert_score": None
+    })
+
+    return jsonify({
+        "last_run": state.get("last_run"),
+        "next_run_in_hours": 12,
+        "total_posts": social_posts.count_documents({"simulated": {"$ne": True}}),
+        "recent_24h": recent_count,
+        "unprocessed": unprocessed,
+        "platforms": platform_counts,
+    })
+
+
+@app.route('/api/trigger-collection', methods=['POST'])
+def trigger_collection():
+    """Triggers a full collection run in a background thread."""
+    from data_collectors.scheduler import run_collection_job
+    import threading
+    thread = threading.Thread(target=run_collection_job, daemon=True)
+    thread.start()
+    return jsonify({"status": "started", "message": "Collection started in background."})
+
+
+@app.route('/api/posts', methods=['GET'])
+def get_posts():
+    """Returns paginated posts with optional platform filter."""
+    platform = request.args.get('platform', None)
+    limit = int(request.args.get('limit', 50))
+    offset = int(request.args.get('offset', 0))
+
+    query = {"simulated": {"$ne": True}}
+    if platform and platform != "ALL":
+        query["platform"] = platform
+
+    posts = list(social_posts.find(
+        query,
+        sort=[("timestamp", -1)],
+        skip=offset,
+        limit=limit
+    ))
+
+    result = []
+    for post in posts:
+        result.append({
+            "id": str(post["_id"]),
+            "text": post["text"][:200] + ("..." if len(post["text"]) > 200 else ""),
+            "platform": post.get("platform", "Unknown"),
+            "channel": post.get("channel", ""),
+            "zone_id": post.get("zone_id"),
+            "location_name": post.get("location_name", ""),
+            "bert_score": post.get("bert_score"),
+            "timestamp": post["timestamp"].strftime("%Y-%m-%d %H:%M")
+                         if isinstance(post["timestamp"], datetime)
+                         else str(post["timestamp"]),
+            "source_url": post.get("source_url", ""),
+        })
+
+    total = social_posts.count_documents(query)
+    return jsonify({"posts": result, "total": total, "limit": limit, "offset": offset})
+
+
+# ─── AUTO SCHEDULER ────────────────────────────────────────────────────────
+from data_collectors.scheduler import start_scheduler
+start_scheduler()
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=int(os.environ.get('PORT', 5000)), debug=False)

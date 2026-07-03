@@ -1,15 +1,23 @@
+"""
+rss_news_collector.py — Collects health-related articles from RSS feeds
+(Google News, DailyStar, ProthomAlo, BDNews24).
+
+Uses shared base_collector for keywords, zone detection, dedup, and MongoDB save.
+"""
+
 import os
 import sys
 import feedparser
-import hashlib
 from datetime import datetime, timedelta
 from time import mktime
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from database import social_posts
+
+from data_collectors.base_collector import (
+    is_health_related, save_post
+)
 
 # ─── RSS FEEDS ────────────────────────────────────────────────────────────────
-# All free, no API key needed
 
 RSS_FEEDS = [
     # English Bangladesh health/news
@@ -65,83 +73,6 @@ RSS_FEEDS = [
     },
 ]
 
-# ─── HEALTH KEYWORDS ──────────────────────────────────────────────────────────
-
-HEALTH_KEYWORDS = [
-    # English
-    'fever', 'sick', 'hospital', 'flu', 'cough', 'outbreak', 'infection',
-    'virus', 'symptom', 'medicine', 'doctor', 'clinic', 'patient', 'disease',
-    'health', 'dengue', 'cholera', 'epidemic', 'pandemic', 'vaccination',
-    'vaccine', 'WHO', 'DGHS', 'death toll', 'infected', 'pneumonia',
-    'diarrhea', 'malaria', 'respiratory', 'iedcr', 'quarantine', 'mortality',
-    'morbidity', 'pathogen', 'contagious', 'infectious',
-
-    # Bangla
-    'জ্বর', 'কাশি', 'হাসপাতাল', 'অসুস্থ', 'ডাক্তার', 'ভাইরাস', 'রোগ',
-    'ঔষধ', 'সর্দি', 'ক্লিনিক', 'রোগী', 'স্বাস্থ্য', 'ইনফেকশন', 'করোনা',
-    'ফ্লু', 'ডেঙ্গু', 'কলেরা', 'মহামারী', 'টিকা', 'আক্রান্ত', 'চিকিৎসা',
-    'হাসপাতালে ভর্তি', 'সংক্রমণ', 'প্রাদুর্ভাব', 'নিউমোনিয়া', 'ডায়রিয়া',
-    'ম্যালেরিয়া', 'শ্বাসকষ্ট', 'স্বাস্থ্যসেবা', 'চিকিৎসক', 'মৃত্যুহার',
-    'রোগতত্ত্ব', 'আইইডিসিআর', 'স্বাস্থ্য অধিদপ্তর', 'স্বাস্থ্য মন্ত্রণালয়',
-]
-
-# ─── ZONE KEYWORDS ────────────────────────────────────────────────────────────
-
-ZONE_KEYWORDS = {
-    1:  ['uttara', 'উত্তরা', 'uttarkhan', 'dakshinkhan', 'khilkhet'],
-    2:  ['mirpur', 'মিরপুর', 'pallabi', 'পল্লবী', 'rupnagar'],
-    3:  ['gulshan', 'গুলশান', 'banani', 'বনানী', 'baridhara', 'mohakhali', 'tejgaon'],
-    4:  ['agargaon', 'আগারগাঁও', 'kafrul', 'kazipara', 'shewrapara'],
-    5:  ['farmgate', 'ফার্মগেট', 'karwan bazar', 'kawran', 'sher-e-bangla'],
-    6:  ['diabari', 'দিয়াবাড়ি', 'ashkona', 'kawlar'],
-    7:  ['uttarkhan', 'উত্তরখান', 'faidabad'],
-    8:  ['dakshinkhan', 'দক্ষিণখান', 'dumni', 'satarkul'],
-    9:  ['vatara', 'ভাটারা', 'kuril', 'কুড়িল', 'nurerchala'],
-    10: ['badda', 'বাড্ডা', 'aftabnagar', 'beraid'],
-    11: ['ramna', 'রমনা', 'motijheel', 'মতিঝিল', 'paltan', 'shahbagh', 'segunbagicha'],
-    12: ['khilgaon', 'খিলগাঁও', 'mugda', 'basabo', 'malibagh', 'shantinagar'],
-    13: ['dhanmondi', 'ধানমন্ডি', 'azimpur', 'lalbagh', 'hazaribagh', 'kalabagan'],
-    14: ['wari', 'ওয়ারী', 'jatrabari', 'যাত্রাবাড়ী', 'sutrapur', 'gendaria', 'old dhaka'],
-    15: ['bashundhara', 'বসুন্ধরা', 'nsu', 'north south university', 'নর্থ সাউথ'],
-}
-
-ZONE_COORDS = {
-    1:  {"lat": 23.8759, "lng": 90.3795, "name": "Uttara"},
-    2:  {"lat": 23.8223, "lng": 90.3654, "name": "Mirpur"},
-    3:  {"lat": 23.7940, "lng": 90.4043, "name": "Gulshan & Banani"},
-    4:  {"lat": 23.7751, "lng": 90.3668, "name": "Agargaon & Kafrul"},
-    5:  {"lat": 23.7527, "lng": 90.3894, "name": "Farmgate & Karwan Bazar"},
-    6:  {"lat": 23.9012, "lng": 90.3456, "name": "Diabari & Ashkona"},
-    7:  {"lat": 23.9123, "lng": 90.4234, "name": "Uttarkhan & Faidabad"},
-    8:  {"lat": 23.8934, "lng": 90.4456, "name": "Dakshinkhan & Dumni"},
-    9:  {"lat": 23.8234, "lng": 90.4234, "name": "Vatara & Kuril"},
-    10: {"lat": 23.7845, "lng": 90.4234, "name": "Badda & Aftabnagar"},
-    11: {"lat": 23.7234, "lng": 90.4123, "name": "Ramna & Motijheel"},
-    12: {"lat": 23.7345, "lng": 90.4345, "name": "Khilgaon & Mugda"},
-    13: {"lat": 23.7456, "lng": 90.3789, "name": "Dhanmondi & Azimpur"},
-    14: {"lat": 23.7123, "lng": 90.4234, "name": "Wari & Jatrabari"},
-    15: {"lat": 23.8191, "lng": 90.4526, "name": "Bashundhara R/A (NSU)"},
-}
-
-# ─── HELPERS ──────────────────────────────────────────────────────────────────
-
-def detect_zone(text):
-    text_lower = text.lower()
-    for zone_id, keywords in ZONE_KEYWORDS.items():
-        if any(kw in text_lower for kw in keywords):
-            return zone_id
-    return 11  # Default to Motijheel/central Dhaka for general national news
-
-def is_health_related(text):
-    text_lower = text.lower()
-    return any(kw.lower() in text_lower for kw in HEALTH_KEYWORDS)
-
-def make_hash(text, source):
-    """Create a unique hash for deduplication — avoids exact text comparison."""
-    return hashlib.md5(f"{source}:{text[:100]}".encode()).hexdigest()
-
-def already_exists(text_hash):
-    return social_posts.find_one({"content_hash": text_hash}) is not None
 
 def parse_date(entry):
     """Extract publish date from RSS entry — handles missing dates gracefully."""
@@ -152,12 +83,11 @@ def parse_date(entry):
         pass
     return datetime.now()
 
-# ─── MAIN COLLECTOR ───────────────────────────────────────────────────────────
 
 def collect_rss_data(days_back=90):
     """
     Fetch all RSS feeds and save health-related articles to MongoDB.
-    Runs in one pass — call from APScheduler every 6 hours.
+    Uses base_collector.save_post() for dedup and zone detection.
     """
     print("🚀 Starting RSS News Collector")
     print(f"   Feeds: {len(RSS_FEEDS)}")
@@ -187,60 +117,38 @@ def collect_rss_data(days_back=90):
 
             for entry in feed.entries:
                 try:
-                    # Build full text from title + summary/description
                     title   = entry.get('title', '')
                     summary = entry.get('summary', entry.get('description', ''))
                     text    = f"{title}. {summary}".strip()
 
-                    # Skip very short entries
                     if len(text) < 20:
                         feed_skipped += 1
                         continue
-
-                    # Skip if not health related
                     if not is_health_related(text):
                         feed_skipped += 1
                         continue
 
-                    # Parse and check date
                     pub_date = parse_date(entry)
                     if pub_date < cutoff_date:
                         feed_skipped += 1
                         continue
 
-                    # Deduplicate by hash
-                    content_hash = make_hash(text, source)
-                    if already_exists(content_hash):
+                    # save_post() handles dedup, zone detection, and MongoDB insert
+                    saved = save_post(
+                        text=text,
+                        platform="RSS_NEWS",
+                        channel=source,
+                        timestamp=pub_date,
+                        source_url=entry.get('link', ''),
+                    )
+
+                    if saved:
+                        feed_collected += 1
+                        total_collected += 1
+                    else:
                         feed_skipped += 1
-                        continue
 
-                    # Detect zone and get coords
-                    zone_id = detect_zone(text)
-                    zone    = ZONE_COORDS[zone_id]
-
-                    # Build document
-                    post = {
-                        "text":          text,
-                        "platform":      "RSS_NEWS",
-                        "channel":       source,
-                        "source_url":    entry.get('link', ''),
-                        "timestamp":     pub_date,
-                        "zone_id":       zone_id,
-                        "location_name": zone["name"],
-                        "latitude":      zone["lat"],
-                        "longitude":     zone["lng"],
-                        "processed":     False,
-                        "bert_score":    None,
-                        "simulated":     False,
-                        "language":      "mixed",
-                        "content_hash":  content_hash,
-                    }
-
-                    social_posts.insert_one(post)
-                    feed_collected += 1
-                    total_collected += 1
-
-                except Exception as e:
+                except Exception:
                     feed_skipped += 1
                     continue
 
@@ -252,12 +160,13 @@ def collect_rss_data(days_back=90):
             total_failed += 1
             continue
 
-    # Final stats
     print(f"\n{'='*50}")
     print(f"✅ RSS COLLECTION COMPLETE")
     print(f"   New posts collected : {total_collected}")
     print(f"   Skipped             : {total_skipped}")
     print(f"   Failed feeds        : {total_failed}")
+
+    from database import social_posts
     real_count = social_posts.count_documents({"simulated": False})
     print(f"   Total real posts in MongoDB: {real_count}")
     print(f"{'='*50}")
