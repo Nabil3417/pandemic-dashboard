@@ -181,112 +181,96 @@ class MobilityDetectionEngine:
 
     def analyze_zone_mobility(self, zone_id, crisis_mode=False):
         """
-        Analyze mobility for a single zone.
+        Analyze mobility for a single zone using W-DZMI (real data).
+
+        Reads the composite W-DZMI score from MongoDB instead of
+        generating synthetic GPS points. Falls back to a safe
+        default if MongoDB has no data yet.
 
         Called by app.py calculate_multi_modal_risk().
         Returns dict with: is_anomaly, cluster_size, mobility_score, ...
-
-        If CSV data is loaded, enhances the score with ARIMA trend info.
         """
         if zone_id not in ZONE_PROFILES:
             zone_id = 15
 
-        profile  = ZONE_PROFILES[zone_id]
-        lat, lng = profile['center']
-        spread   = DENSITY_SPREAD[profile['density']]
-        min_pts  = profile['min_cluster']
-        model    = self.zone_models[zone_id]
-        scaler   = self.zone_scalers[zone_id]
+        profile = ZONE_PROFILES[zone_id]
 
-        # -- Generate simulation points --
-        n_anomalous = 40 if crisis_mode else 18
-        normal_pts  = _generate_normal_points(lat, lng, spread, n=220)
-        anom_pts    = _generate_anomalous_points(
-            lat, lng, spread, n=n_anomalous, crisis_mode=crisis_mode
-        )
+        # ── Try to fetch real W-DZMI from MongoDB ──
+        mobility_score = 30.0  # safe fallback
+        trend = "stable"
+        risk_level = "low"
+        confidence = 50.0
+        num_signals = 0
 
-        all_points = normal_pts + anom_pts
-        points_arr = np.array(all_points)
-        scaled_pts = scaler.transform(points_arr)
+        try:
+            from data_collectors.mobility_repository import MobilityRepository
+            repo = MobilityRepository()
+            zone_data = repo.get_zone(zone_id)
+            repo.close()
 
-        # -- IsolationForest prediction --
-        predictions   = model.predict(scaled_pts)
-        anomaly_mask  = predictions == -1
-        anomaly_pts   = points_arr[anomaly_mask]
-        is_anomaly    = bool(np.any(anomaly_mask))
-        anomaly_count = int(np.sum(anomaly_mask))
+            if zone_data:
+                mobility_score = zone_data.get("wdzmi_score", 30.0)
+                trend = zone_data.get("trend", "stable")
+                risk_level = zone_data.get("risk_level", "low")
+                confidence = zone_data.get("confidence", 50.0)
+                num_signals = zone_data.get("num_signals", 0)
+        except Exception as e:
+            print(f"  [W-DZMI] MongoDB fetch failed for zone {zone_id}: {e}")
+            print(f"  [W-DZMI] Using fallback score: {mobility_score}")
 
-        # -- HDBSCAN clustering on anomalies --
-        cluster_count = 0
-        cluster_size  = 0
-        noise_points  = 0
-        pattern       = "Normal movement patterns"
+        # ── Derive anomaly from W-DZMI trend + risk level ──
+        is_anomaly = False
+        if trend == "rising" and mobility_score >= 55:
+            is_anomaly = True
+        elif risk_level in ("critical", "high"):
+            is_anomaly = True
 
-        if len(anomaly_pts) >= min_pts:
-            try:
-                clusterer = hdbscan.HDBSCAN(
-                    min_cluster_size=min_pts,
-                    min_samples=max(2, min_pts // 2),
-                    cluster_selection_epsilon=0.005,
-                    metric='euclidean'
-                )
-                labels        = clusterer.fit_predict(anomaly_pts)
-                unique_labels = set(labels)
-                unique_labels.discard(-1)
-                cluster_count = len(unique_labels)
-                noise_points  = int(np.sum(labels == -1))
+        # Crisis mode boost
+        if crisis_mode:
+            mobility_score = min(mobility_score * 1.4, 100.0)
+            is_anomaly = True
 
-                if cluster_count > 0:
-                    cluster_size = int(max(
-                        np.sum(labels == lbl) for lbl in unique_labels
-                    ))
-            except TypeError:
-                pass
+        # ── Derive pattern description ──
+        pattern = "Normal movement patterns"
+        if risk_level == "critical":
+            pattern = "W-DZMI CRITICAL: Very high composite mobility detected"
+        elif risk_level == "high":
+            pattern = "W-DZMI HIGH: Elevated mobility across multiple signals"
+        elif trend == "rising":
+            pattern = "W-DZMI rising trend: Mobility increasing"
+        elif trend == "falling":
+            pattern = "W-DZMI falling trend: Mobility decreasing"
 
-        if cluster_count == 0:
-            pattern = "Normal movement patterns"
-        elif cluster_count == 1 and cluster_size < 10:
-            pattern = "Minor anomaly cluster detected"
-        elif cluster_count == 1 and cluster_size >= 10:
-            pattern = "Significant crowding detected"
-        elif cluster_count == 2:
-            pattern = "Multiple anomaly clusters - possible crowding event"
+        # ── Cluster info (semantic, not HDBSCAN) ──
+        # Map W-DZMI score to cluster metrics for compatibility
+        if mobility_score >= 75:
+            cluster_count, cluster_size, noise_points = 3, 25, 5
+        elif mobility_score >= 55:
+            cluster_count, cluster_size, noise_points = 2, 15, 8
+        elif mobility_score >= 35:
+            cluster_count, cluster_size, noise_points = 1, 8, 12
         else:
-            pattern = "High cluster density - mass behavioral change"
+            cluster_count, cluster_size, noise_points = 0, 0, 0
 
-        # -- Score computation --
-        base_score    = 8.0
-        anomaly_ratio = anomaly_count / len(all_points)
-        base_score   += anomaly_ratio * 35
+        anomaly_count = cluster_size if is_anomaly else 0
 
-        cluster_bonus = {0: 0, 1: 15, 2: 25, 3: 35}
-        base_score   += cluster_bonus.get(min(cluster_count, 3), 35)
-
-        if cluster_size >= 5:  base_score += 5
-        if cluster_size >= 10: base_score += 8
-        if cluster_size >= 20: base_score += 10
-        if crisis_mode:        base_score += 20
-
-        # -- Enhance with CSV trend if available --
-        if self.csv_loaded and zone_id in self.zone_stats:
-            trend = self.zone_stats[zone_id].get('trend', 'stable')
-            if trend == 'rising':
-                base_score += 5
-            elif trend == 'falling':
-                base_score -= 3
-
-        mobility_score = min(round(base_score, 2), 100.0)
+        mobility_score = round(min(mobility_score, 100.0), 2)
 
         return {
-            "is_anomaly":     is_anomaly,
-            "cluster_count":  cluster_count,
-            "cluster_size":   cluster_size,
-            "noise_points":   noise_points,
-            "anomaly_count":  anomaly_count,
-            "total_points":   len(all_points),
-            "mobility_score": mobility_score,
-            "pattern":        pattern,
-            "density_class":  profile['density'],
+            "is_anomaly":      is_anomaly,
+            "cluster_count":   cluster_count,
+            "cluster_size":    cluster_size,
+            "noise_points":    noise_points,
+            "anomaly_count":   anomaly_count,
+            "total_points":    220 + 18,  # compat with old format
+            "mobility_score":  mobility_score,
+            "pattern":         pattern,
+            "density_class":   profile['density'],
+            # New fields for richer frontend data
+            "wdzmi_trend":     trend,
+            "wdzmi_risk":      risk_level,
+            "wdzmi_confidence": confidence,
+            "wdzmi_signals":   num_signals,
         }
 
     # =============================================

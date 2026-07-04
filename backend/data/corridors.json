@@ -1,0 +1,287 @@
+{
+  "metadata": {
+    "version": "1.0.0",
+    "description": "BioGuard AI — Dhaka Travel Corridor Definitions for W-DZMI OSRM Routing Signal",
+    "last_updated": "2026-07-04",
+    "total_corridors": 25,
+    "routing_engine": "OSRM (open-source, OpenStreetMap)",
+    "update_interval_minutes": 120
+  },
+  "corridors": [
+    {
+      "id": "C01",
+      "name": "Uttara — Farmgate (Airport Road)",
+      "origin_zone": 1,
+      "destination_zone": 5,
+      "origin_coords": [23.8670, 90.3815],
+      "destination_coords": [23.7580, 90.3870],
+      "weight": 1.20,
+      "type": "commercial_hub",
+      "description": "Major arterial: connects north Dhaka to central business via Shahjalal Airport"
+    },
+    {
+      "id": "C02",
+      "name": "Mirpur — Farmgate (Mirpur Road)",
+      "origin_zone": 2,
+      "destination_zone": 5,
+      "origin_coords": [23.8080, 90.3620],
+      "destination_coords": [23.7580, 90.3870],
+      "weight": 1.20,
+      "type": "residential_dense",
+      "description": "Heavily used: 2M+ daily commuters on Mirpur Road corridor"
+    },
+    {
+      "id": "C03",
+      "name": "Gulshan — Motijheel (Hatirjheel Link)",
+      "origin_zone": 3,
+      "destination_zone": 11,
+      "origin_coords": [23.7910, 90.4140],
+      "destination_coords": [23.7310, 90.4100],
+      "weight": 1.15,
+      "type": "commercial_hub",
+      "description": "Hatirjheel route: diplomatic zone to financial district"
+    },
+    {
+      "id": "C04",
+      "name": "Dhanmondi — Farmgate",
+      "origin_zone": 13,
+      "destination_zone": 5,
+      "origin_coords": [23.7510, 90.3740],
+      "destination_coords": [23.7580, 90.3870],
+      "weight": 1.10,
+      "type": "commercial_hub",
+      "description": "Short high-traffic link between hospital cluster and transit hub"
+    },
+    {
+      "id": "C05",
+      "name": "Badda — Motijheel (Badda Link Road)",
+      "origin_zone": 10,
+      "destination_zone": 11,
+      "origin_coords": [23.7790, 90.4310],
+      "destination_coords": [23.7310, 90.4100],
+      "weight": 1.10,
+      "type": "residential_dense",
+      "description": "East Dhaka residential to CBD, growing traffic volume"
+    },
+    {
+      "id": "C06",
+      "name": "Uttara — Gulshan (Airport Road)",
+      "origin_zone": 1,
+      "destination_zone": 3,
+      "origin_coords": [23.8670, 90.3815],
+      "destination_coords": [23.7910, 90.4140],
+      "weight": 1.10,
+      "type": "commercial_hub",
+      "description": "Airport to diplomatic zone, high vehicle volume"
+    },
+    {
+      "id": "C07",
+      "name": "Mirpur — Dhanmondi (Mirpur Road)",
+      "origin_zone": 2,
+      "destination_zone": 13,
+      "origin_coords": [23.8080, 90.3620],
+      "destination_coords": [23.7510, 90.3740],
+      "weight": 1.05,
+      "type": "residential_dense",
+      "description": "Northwest residential to hospital cluster, continuous bus route"
+    },
+    {
+      "id": "C08",
+      "name": "Bashundhara — Gulshan",
+      "origin_zone": 15,
+      "destination_zone": 3,
+      "origin_coords": [23.8150, 90.4470],
+      "destination_coords": [23.7910, 90.4140],
+      "weight": 1.00,
+      "type": "research",
+      "description": "NSU research zone to commercial hub"
+    },
+    {
+      "id": "C09",
+      "name": "Wari — Motijheel",
+      "origin_zone": 14,
+      "destination_zone": 11,
+      "origin_coords": [23.7180, 90.4180],
+      "destination_coords": [23.7310, 90.4100],
+      "weight": 1.25,
+      "type": "market",
+      "description": "Old Dhaka to CBD: extreme density, highest pedestrian traffic"
+    },
+    {
+      "id": "C10",
+      "name": "Khilgaon — Motijheel",
+      "origin_zone": 12,
+      "destination_zone": 11,
+      "origin_coords": [23.7390, 90.4280],
+      "destination_coords": [23.7310, 90.4100],
+      "weight": 1.05,
+      "type": "residential_dense",
+      "description": "East-central residential to financial district"
+    },
+    {
+      "id": "C11",
+      "name": "Uttara — Bashundhara",
+      "origin_zone": 1,
+      "destination_zone": 15,
+      "origin_coords": [23.8700, 90.3920],
+      "destination_coords": [23.8150, 90.4470],
+      "weight": 0.90,
+      "type": "residential_suburban",
+      "description": "North residential cluster, moderate traffic"
+    },
+    {
+      "id": "C12",
+      "name": "Mirpur — Agargaon",
+      "origin_zone": 2,
+      "destination_zone": 4,
+      "origin_coords": [23.8100, 90.3670],
+      "destination_coords": [23.7800, 90.3690],
+      "weight": 0.95,
+      "type": "government",
+      "description": "Residential to government district, peak hour congestion"
+    },
+    {
+      "id": "C13",
+      "name": "Vatara — Gulshan",
+      "origin_zone": 9,
+      "destination_zone": 3,
+      "origin_coords": [23.8190, 90.4180],
+      "destination_coords": [23.7910, 90.4140],
+      "weight": 0.95,
+      "type": "residential_dense",
+      "description": "East residential to commercial, Pragati Sarani"
+    },
+    {
+      "id": "C14",
+      "name": "Badda — Khilgaon",
+      "origin_zone": 10,
+      "destination_zone": 12,
+      "origin_coords": [23.7790, 90.4310],
+      "destination_coords": [23.7390, 90.4280],
+      "weight": 0.90,
+      "type": "residential_dense",
+      "description": "Adjacent residential zones, Badda-Rampura bridge"
+    },
+    {
+      "id": "C15",
+      "name": "Dhanmondi — Wari (Old Dhaka Link)",
+      "origin_zone": 13,
+      "destination_zone": 14,
+      "origin_coords": [23.7480, 90.3890],
+      "destination_coords": [23.7180, 90.4180],
+      "weight": 1.10,
+      "type": "market",
+      "description": "Hospital cluster to Old Dhaka market area, high pedestrian"
+    },
+    {
+      "id": "C16",
+      "name": "Farmgate — Motijheel",
+      "origin_zone": 5,
+      "destination_zone": 11,
+      "origin_coords": [23.7580, 90.3870],
+      "destination_coords": [23.7310, 90.4100],
+      "weight": 1.20,
+      "type": "commercial_hub",
+      "description": "Central Dhaka spine: two biggest commercial nodes"
+    },
+    {
+      "id": "C17",
+      "name": "Agargaon — Farmgate",
+      "origin_zone": 4,
+      "destination_zone": 5,
+      "origin_coords": [23.7800, 90.3690],
+      "destination_coords": [23.7580, 90.3870],
+      "weight": 0.95,
+      "type": "government",
+      "description": "Government district to transit hub, Rokeya Sarani"
+    },
+    {
+      "id": "C18",
+      "name": "Diabari — Uttara",
+      "origin_zone": 6,
+      "destination_zone": 1,
+      "origin_coords": [23.8940, 90.3490],
+      "destination_coords": [23.8700, 90.3790],
+      "weight": 0.70,
+      "type": "residential_suburban",
+      "description": "Peripheral to main residential, lower traffic"
+    },
+    {
+      "id": "C19",
+      "name": "Dakshinkhan — Bashundhara",
+      "origin_zone": 8,
+      "destination_zone": 15,
+      "origin_coords": [23.8880, 90.4410],
+      "destination_coords": [23.8150, 90.4470],
+      "weight": 0.65,
+      "type": "residential_suburban",
+      "description": "Outskirts to research zone, low traffic"
+    },
+    {
+      "id": "C20",
+      "name": "Uttarkhan — Uttara",
+      "origin_zone": 7,
+      "destination_zone": 1,
+      "origin_coords": [23.9040, 90.4190],
+      "destination_coords": [23.8700, 90.3790],
+      "weight": 0.65,
+      "type": "residential_suburban",
+      "description": "Northern periphery to Uttara proper, light traffic"
+    },
+    {
+      "id": "C21",
+      "name": "Bashundhara — Badda",
+      "origin_zone": 15,
+      "destination_zone": 10,
+      "origin_coords": [23.8120, 90.4370],
+      "destination_coords": [23.7790, 90.4310],
+      "weight": 0.85,
+      "type": "residential_dense",
+      "description": "Adjacent east zones, Kuril-Bishwa Road"
+    },
+    {
+      "id": "C22",
+      "name": "Khilgaon — Wari",
+      "origin_zone": 12,
+      "destination_zone": 14,
+      "origin_coords": [23.7360, 90.4230],
+      "destination_coords": [23.7180, 90.4180],
+      "weight": 1.05,
+      "type": "market",
+      "description": "East residential into Old Dhaka market area"
+    },
+    {
+      "id": "C23",
+      "name": "Farmgate — Gulshan",
+      "origin_zone": 5,
+      "destination_zone": 3,
+      "origin_coords": [23.7580, 90.3870],
+      "destination_coords": [23.7910, 90.4140],
+      "weight": 1.05,
+      "type": "commercial_hub",
+      "description": "Central to diplomatic, via Mohakhali flyover"
+    },
+    {
+      "id": "C24",
+      "name": "Mirpur — Badda",
+      "origin_zone": 2,
+      "destination_zone": 10,
+      "origin_coords": [23.8080, 90.3750],
+      "destination_coords": [23.7790, 90.4310],
+      "weight": 0.85,
+      "type": "residential_dense",
+      "description": "Cross-city residential link, Mymensingh Road parallel"
+    },
+    {
+      "id": "C25",
+      "name": "Dhanmondi — Ramna",
+      "origin_zone": 13,
+      "destination_zone": 11,
+      "origin_coords": [23.7510, 90.3830],
+      "destination_coords": [23.7310, 90.4080],
+      "weight": 1.00,
+      "type": "commercial_hub",
+      "description": "Hospital cluster to university/government area, Manik Mia Ave"
+    }
+  ]
+}

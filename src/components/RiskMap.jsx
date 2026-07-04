@@ -4,14 +4,28 @@ import 'leaflet/dist/leaflet.css';
 
 
 const RiskMap = ({ isDark }) => {
- const [zones, setZones] = useState([]);
- const [geoData, setGeoData] = useState(null);
+  const [zones, setZones] = useState([]);
+  const [geoData, setGeoData] = useState(null);
+  const [mobilityData, setMobilityData] = useState({});
 
- useEffect(() => {
+  useEffect(() => {
     fetch('http://localhost:5000/api/risk-status')
       .then(res => res.json())
       .then(data => setZones(data.zones || []))
       .catch(err => console.error(err));
+
+    fetch('http://localhost:5000/api/mobility')
+      .then(res => res.json())
+      .then(data => {
+        if (data.success && data.data) {
+          const map = {};
+          (data.data.zones || []).forEach(z => {
+            map[z.zone_id] = z;
+          });
+          setMobilityData(map);
+        }
+      })
+      .catch(err => console.error('W-DZMI fetch failed:', err));
 
     fetch('/dhaka_zones.geojson')
       .then(res => res.json())
@@ -20,15 +34,17 @@ const RiskMap = ({ isDark }) => {
   }, []);
 
   const getRiskColor = (score) => {
-    if (score > 70) return '#ef4444';
-    if (score >= 40) return '#f59e0b';
-    return '#10b981';
+    if (score >= 75) return '#ef4444';
+    if (score >= 55) return '#f97316';
+    if (score >= 35) return '#f59e0b';
+    if (score >= 20) return '#10b981';
+    return '#6366f1';
   };
 
   const getTopFactor = (zone) => {
-    if (!zone) return 'N/A';
-    if (zone.score > 70) return 'Critical NLP Signal';
-    if (zone.score > 40) return 'Elevated Wastewater';
+    if (!zone) return 'Baseline Activity';
+    if (zone.score > 70) return 'Critical: Multi-signal Alert';
+    if (zone.score > 40) return 'Elevated Wastewater / Mobility';
     return 'Baseline Activity';
   };
 
@@ -59,15 +75,48 @@ const RiskMap = ({ isDark }) => {
     const score = matchedZone ? matchedZone.score : feature.properties.risk_index || 20;
     const risk = matchedZone ? matchedZone.risk : feature.properties.risk_level || 'LOW';
     const topFactor = getTopFactor(matchedZone);
+    const wdzmi = mobilityData[matchedZone?.id] || null;
+
+    let signalRows = '';
+    if (wdzmi && wdzmi.signal_breakdown) {
+      const signals = wdzmi.signal_breakdown;
+      signalRows = `
+        <div style="border-top:1px solid #334155;margin-top:6px;padding-top:6px">
+          <div style="font-size:8px;color:#94a3b8;font-weight:800;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:4px">W-DZMI Signal Breakdown</div>
+          ${Object.entries(signals).map(([key, sig]) => {
+            if (!sig) return '';
+            const barWidth = Math.min(sig.contribution, 40);
+            const barColor = sig.contribution > 15 ? '#f59e0b' : sig.contribution > 8 ? '#3b82f6' : '#64748b';
+            return `<div style="display:flex;align-items:center;gap:4px;margin:2px 0">
+              <span style="font-size:9px;color:#94a3b8;width:70px">${key}</span>
+              <div style="width:40px;height:4px;background:#1e293b;border-radius:2px;overflow:hidden">
+                <div style="width:${barWidth}px;height:100%;background:${barColor};border-radius:2px"></div>
+              </div>
+              <span style="font-size:9px;color:#e2e8f0;font-weight:700">${sig.contribution}</span>
+            </div>`;
+          }).join('')}
+        </div>
+      `;
+    }
+
+    const wdzmiRow = wdzmi
+      ? `<div style="font-size:10px;color:#64748b;text-transform:uppercase">W-DZMI: <b style="color:${getRiskColor(wdzmi.wdzmi_score)}">${wdzmi.wdzmi_score}</b> <span style="font-size:8px;opacity:0.6">(${wdzmi.trend}, ${wdzmi.num_signals}/4 signals)</span></div>`
+      : '';
 
     layer.bindTooltip(`
-      <div style="font-family:sans-serif;padding:8px;min-width:160px">
-        <div style="font-weight:900;font-size:11px;text-transform:uppercase;margin-bottom:4px">${zoneName}</div>
-        <div style="font-size:10px;color:#64748b;text-transform:uppercase">Risk Score: <b style="color:${getRiskColor(score)}">${score}</b></div>
-        <div style="font-size:10px;color:#64748b;text-transform:uppercase">Status: <b>${risk}</b></div>
-        <div style="font-size:10px;color:#64748b;text-transform:uppercase">Factor: <b>${topFactor}</b></div>
+      <div style="font-family:sans-serif;padding:10px;min-width:200px;max-width:260px;background:#0f172a;border-radius:12px;border:1px solid #1e293b">
+        <div style="font-weight:900;font-size:12px;text-transform:uppercase;margin-bottom:6px;color:#f1f5f9">${zoneName}</div>
+        <div style="font-size:10px;color:#64748b;text-transform:uppercase">Fused Risk: <b style="color:${getRiskColor(score)}">${score}</b> &middot; ${risk}</div>
+        ${wdzmiRow}
+        <div style="font-size:9px;color:#475569;margin-top:4px">${topFactor}</div>
+        ${signalRows}
       </div>
-    `, { sticky: true });
+    `, {
+      sticky: true,
+      className: 'bioguard-tooltip',
+      direction: 'top',
+      offset: [0, -10],
+    });
 
     layer.on({
       mouseover: (e) => {
@@ -95,24 +144,25 @@ const RiskMap = ({ isDark }) => {
         <TileLayer url={mapStyle} attribution='&copy; CARTO' />
         <ZoomControl position="topright" />
 
-      {geoData && (
-  <GeoJSON
-    key={zones.length}
-    data={geoData}
-    style={styleFeature}
-    onEachFeature={onEachFeature}
-  />
-)}
+        {geoData && (
+          <GeoJSON
+            key={zones.length}
+            data={geoData}
+            style={styleFeature}
+            onEachFeature={onEachFeature}
+          />
+        )}
       </MapContainer>
 
-      {/* Legend */}
       <div className={`absolute bottom-6 right-6 z-[1000] p-5 rounded-[2rem] border backdrop-blur-xl shadow-2xl ${isDark ? 'bg-slate-950/80 border-white/5 text-white' : 'bg-white/80 border-slate-200 text-slate-900'}`}>
         <h5 className="text-[9px] font-black uppercase tracking-[0.3em] mb-4 opacity-40">Risk Hierarchy</h5>
         <div className="space-y-3">
           {[
-            { label: 'Critical Threat', color: 'bg-red-500' },
-            { label: 'Moderate Watch', color: 'bg-amber-500' },
-            { label: 'Baseline Signal', color: 'bg-emerald-500' }
+            { label: 'Critical (>=75)', color: 'bg-red-500' },
+            { label: 'High (55-74)', color: 'bg-orange-500' },
+            { label: 'Moderate (35-54)', color: 'bg-amber-500' },
+            { label: 'Low (20-34)', color: 'bg-emerald-500' },
+            { label: 'Minimal (<20)', color: 'bg-indigo-500' }
           ].map((item, idx) => (
             <div key={idx} className="flex items-center gap-3">
               <div className={`w-3 h-3 rounded-full ${item.color}`} />

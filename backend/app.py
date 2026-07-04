@@ -256,7 +256,7 @@ def calculate_multi_modal_risk(zone, crisis_mode):
     bio_load = wastewater_ai.get_localized_load(zone['id'], crisis_mode)
 
     # MULTI-MODAL WEIGHTED FUSION
-    fused_score = (nlp_score * 0.3) + (bio_load * 0.5) + (mobility_score * 0.2)
+    fused_score = (nlp_score * 0.25) + (bio_load * 0.40) + (mobility_score * 0.35)
     final_score = min(round(fused_score), 100)
 
     # Risk level
@@ -590,6 +590,10 @@ def get_posts():
     total = social_posts.count_documents(query)
     return jsonify({"posts": result, "total": total, "limit": limit, "offset": offset})
 
+
+# ─── W-DZMI MOBILITY API ────────────────────────────────────────────────────
+from routes.mobility_routes import mobility_bp
+app.register_blueprint(mobility_bp)
 
 # ─── AUTO SCHEDULER ────────────────────────────────────────────────────────
 from data_collectors.scheduler import start_scheduler

@@ -1,0 +1,192 @@
+{
+  "metadata": {
+    "version": "1.0.0",
+    "description": "BioGuard AI — Dhaka Monitoring Zone Definitions for W-DZMI",
+    "last_updated": "2026-07-04",
+    "total_zones": 15,
+    "coordinate_system": "WGS84"
+  },
+  "zones": {
+    "1": {
+      "id": 1,
+      "name": "Uttara",
+      "name_bn": "উত্তরা",
+      "center": [23.8759, 90.3795],
+      "density_class": "medium",
+      "density_value": 0.60,
+      "zone_weight": 0.65,
+      "description": "Planned residential area, NSU campus nearby",
+      "neighbors": [6, 7, 8, 9, 15]
+    },
+    "2": {
+      "id": 2,
+      "name": "Mirpur",
+      "name_bn": "মিরপুর",
+      "center": [23.8223, 90.3654],
+      "density_class": "high",
+      "density_value": 0.80,
+      "zone_weight": 0.80,
+      "description": "High density residential, Pallabi, Rupnagar",
+      "neighbors": [1, 4, 9, 10, 12]
+    },
+    "3": {
+      "id": 3,
+      "name": "Gulshan & Banani",
+      "name_bn": "গুলশান ও বনানী",
+      "center": [23.7940, 90.4043],
+      "density_class": "medium",
+      "density_value": 0.65,
+      "zone_weight": 0.70,
+      "description": "Commercial hub, diplomatic zone, Mohakhali, Tejgaon",
+      "neighbors": [4, 5, 9, 10, 11, 15]
+    },
+    "4": {
+      "id": 4,
+      "name": "Agargaon & Kafrul",
+      "name_bn": "আগারগাঁও ও কাফরুল",
+      "center": [23.7751, 90.3668],
+      "density_class": "medium",
+      "density_value": 0.55,
+      "zone_weight": 0.55,
+      "description": "Government area, Sher-e-Bangla Nagar, Shewrapara",
+      "neighbors": [2, 3, 5, 10, 12, 13]
+    },
+    "5": {
+      "id": 5,
+      "name": "Farmgate & Karwan Bazar",
+      "name_bn": "ফার্মগেট ও কারওয়ান বাজার",
+      "center": [23.7527, 90.3894],
+      "density_class": "very_high",
+      "density_value": 0.95,
+      "zone_weight": 0.90,
+      "description": "Highest commercial activity, major transit hub",
+      "neighbors": [3, 4, 11, 13, 14]
+    },
+    "6": {
+      "id": 6,
+      "name": "Diabari & Ashkona",
+      "name_bn": "দিয়াবাড়ি ও আশকোনা",
+      "center": [23.9012, 90.3456],
+      "density_class": "low",
+      "density_value": 0.25,
+      "zone_weight": 0.35,
+      "description": "Peripheral suburban, low density",
+      "neighbors": [1, 7, 8]
+    },
+    "7": {
+      "id": 7,
+      "name": "Uttarkhan & Faidabad",
+      "name_bn": "উত্তরখান ও ফাইদাবাদ",
+      "center": [23.9123, 90.4234],
+      "density_class": "low",
+      "density_value": 0.22,
+      "zone_weight": 0.30,
+      "description": "Outskirts, semi-rural",
+      "neighbors": [1, 6, 8, 9]
+    },
+    "8": {
+      "id": 8,
+      "name": "Dakshinkhan & Dumni",
+      "name_bn": "দক্ষিনখান ও দুমনি",
+      "center": [23.8934, 90.4456],
+      "density_class": "low",
+      "density_value": 0.24,
+      "zone_weight": 0.32,
+      "description": "Outskirts, low population",
+      "neighbors": [1, 6, 7, 9, 15]
+    },
+    "9": {
+      "id": 9,
+      "name": "Vatara & Kuril",
+      "name_bn": "ভাটারা ও কুড়িল",
+      "center": [23.8234, 90.4234],
+      "density_class": "medium",
+      "density_value": 0.55,
+      "zone_weight": 0.60,
+      "description": "Mixed residential-commercial, Nurerchala",
+      "neighbors": [1, 2, 3, 7, 8, 10, 15]
+    },
+    "10": {
+      "id": 10,
+      "name": "Badda & Aftabnagar",
+      "name_bn": "বাড্ডা ও আফতাবনগর",
+      "center": [23.7845, 90.4234],
+      "density_class": "medium",
+      "density_value": 0.55,
+      "zone_weight": 0.58,
+      "description": "Residential, Beraid, growing area",
+      "neighbors": [2, 3, 4, 9, 11, 12, 15]
+    },
+    "11": {
+      "id": 11,
+      "name": "Ramna & Motijheel",
+      "name_bn": "রমনা ও মতিঝিল",
+      "center": [23.7234, 90.4123],
+      "density_class": "very_high",
+      "density_value": 0.95,
+      "zone_weight": 0.95,
+      "description": "CBD highest activity, Shahbagh, Paltan, Segunbagicha",
+      "neighbors": [3, 5, 10, 12, 13, 14]
+    },
+    "12": {
+      "id": 12,
+      "name": "Khilgaon & Mugda",
+      "name_bn": "খিলগাঁও ও মুগদা",
+      "center": [23.7345, 90.4345],
+      "density_class": "high",
+      "density_value": 0.80,
+      "zone_weight": 0.75,
+      "description": "Dense residential, Malibagh, Shantinagar, Basabo",
+      "neighbors": [2, 4, 10, 11, 13, 14]
+    },
+    "13": {
+      "id": 13,
+      "name": "Dhanmondi & Azimpur",
+      "name_bn": "ধানমন্ডি ও আজিমপুর",
+      "center": [23.7456, 90.3789],
+      "density_class": "high",
+      "density_value": 0.80,
+      "zone_weight": 0.78,
+      "description": "Hospital cluster, Kalabagan, Hazaribagh, Lalbagh",
+      "neighbors": [4, 5, 11, 12, 14]
+    },
+    "14": {
+      "id": 14,
+      "name": "Wari & Jatrabari",
+      "name_bn": "ওয়ারী ও যাত্রাবাড়ী",
+      "center": [23.7123, 90.4234],
+      "density_class": "very_high",
+      "density_value": 0.98,
+      "zone_weight": 0.88,
+      "description": "Old Dhaka extreme density, Sutrapur, Gendaria",
+      "neighbors": [5, 11, 12, 13]
+    },
+    "15": {
+      "id": 15,
+      "name": "Bashundhara R/A (NSU)",
+      "name_bn": "বসুন্ধরা আর/এ (এনএসইউ)",
+      "center": [23.8191, 90.4526],
+      "density_class": "medium",
+      "density_value": 0.60,
+      "zone_weight": 1.10,
+      "description": "Research zone, North South University, Norda",
+      "neighbors": [1, 3, 8, 9, 10]
+    }
+  },
+  "corridor_weights": {
+    "description": "Importance weight for each corridor type when computing W-DZMI",
+    "commercial_hub": 1.15,
+    "residential_dense": 1.0,
+    "residential_suburban": 0.85,
+    "government": 0.90,
+    "research": 0.80,
+    "market": 1.20
+  },
+  "signal_weights": {
+    "description": "Weights for the 4 signals that compose W-DZMI",
+    "google_mobility": 0.35,
+    "social_volume": 0.30,
+    "osrm_routing": 0.20,
+    "google_trends": 0.15
+  }
+}

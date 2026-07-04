@@ -1,0 +1,2 @@
+from scheduler import job_wdzmi_composite
+job_wdzmi_composite()
