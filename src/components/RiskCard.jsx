@@ -1,6 +1,6 @@
 import React from 'react';
 import { AreaChart, Area, ResponsiveContainer } from 'recharts';
-import { Activity, ArrowUpRight } from 'lucide-react';
+import { Activity } from 'lucide-react';
 
 const RiskCard = ({ title, value, color, description, isDark }) => {
   const trendData = [{ v: 20 }, { v: 35 }, { v: 30 }, { v: 55 }, { v: 45 }, { v: 70 }, { v: 65 }];

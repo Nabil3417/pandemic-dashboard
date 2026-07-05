@@ -105,7 +105,7 @@ def job_osrm_routing():
 
 def job_social_volume():
     """Recalculate social volume scores from existing posts."""
-    from data_collectors.social_volume_signal import calculate_all_zones
+    from data_collectors.social_volume_signal import compute_zone_scores as calculate_all_zones
 
     print(f"\n{'='*60}")
     print(f"  SCHEDULED: Social Volume Calculator")
@@ -113,17 +113,17 @@ def job_social_volume():
     print(f"{'='*60}")
 
     try:
-        count = calculate_all_zones()
+        result = calculate_all_zones()
         state = _load_state()
         _mark_run(state, "social_volume")
-        print(f"  Social volume done — {count} zones scored.")
+        print(f"  Social volume done — {len(result)} zones scored.")
     except Exception as e:
         print(f"  Social volume FAILED: {e}")
 
 
 def job_google_mobility():
     """Process Google Mobility CSV into zone scores."""
-    from data_collectors.google_mobility_signal import process_mobility_data
+    from data_collectors.google_mobility_signal import compute_zone_scores as process_mobility_data
 
     print(f"\n{'='*60}")
     print(f"  SCHEDULED: Google Mobility Processor")
@@ -131,17 +131,17 @@ def job_google_mobility():
     print(f"{'='*60}")
 
     try:
-        count = process_mobility_data()
+        result = process_mobility_data()
         state = _load_state()
         _mark_run(state, "google_mobility")
-        print(f"  Google Mobility done — {count} records.")
+        print(f"  Google Mobility done — {len(result)} zones processed.")
     except Exception as e:
         print(f"  Google Mobility FAILED: {e}")
 
 
 def job_google_trends():
     """Fetch Google Trends symptom search data."""
-    from data_collectors.google_trends_signal import main as gt_main
+    from data_collectors.google_trends_signal import compute_zone_scores as gt_main
 
     print(f"\n{'='*60}")
     print(f"  SCHEDULED: Google Trends Collector")

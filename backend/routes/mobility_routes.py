@@ -13,7 +13,8 @@ Endpoints:
   GET /api/mobility/signals/<zone_id>  — Signal breakdown for a zone
 """
 
-from flask import Blueprint, jsonify
+from flask import Blueprint, jsonify, Response
+import json as _json
 
 mobility_bp = Blueprint("mobility", __name__)
 
@@ -28,7 +29,11 @@ def _jsonify(data, status=200):
             return obj.isoformat()
         raise TypeError(f"Object of type {type(obj)} is not JSON serializable")
 
-    return jsonify(data, default=_serialize), status
+    return Response(
+        _json.dumps(data, default=_serialize),
+        mimetype="application/json",
+        status=status,
+    )
 
 
 # ── Endpoints ─────────────────────────────────────────────────────────────────

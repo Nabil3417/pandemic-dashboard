@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Target, BrainCircuit, ShieldCheck, Activity, Loader2, TrendingUp, BarChart3, Grid3X3, Crosshair } from 'lucide-react';
+import { Target, BrainCircuit, Activity, Loader2, TrendingUp, BarChart3, Grid3X3, Crosshair } from 'lucide-react';
 import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from 'recharts';
 
 const PredictiveEngine = () => {

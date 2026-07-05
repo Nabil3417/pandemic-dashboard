@@ -27,7 +27,6 @@ const DataFeed = () => {
   const [posts, setPosts] = useState([]);
   const [total, setTotal] = useState(0);
   const [collectionStatus, setCollectionStatus] = useState(null);
-  const [stats, setStats] = useState(null);
   const [activePlatform, setActivePlatform] = useState('ALL');
   const [page, setPage] = useState(0);
   const [isCollecting, setIsCollecting] = useState(false);
@@ -48,11 +47,6 @@ const DataFeed = () => {
     fetch('http://localhost:5000/api/collection-status')
       .then(res => res.json())
       .then(setCollectionStatus)
-      .catch(err => console.error(err));
-
-    fetch('http://localhost:5000/api/db-stats')
-      .then(res => res.json())
-      .then(setStats)
       .catch(err => console.error(err));
   }, []);
 

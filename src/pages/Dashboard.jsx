@@ -3,7 +3,7 @@ import RiskCard from '../components/RiskCard';
 import RiskMap from '../components/RiskMap';
 import RiskChart from '../components/RiskChart';
 import { 
-  Radio, Globe, Activity, TrendingUp, Zap, ShieldAlert, Bell
+  Radio, Globe, TrendingUp, Zap, ShieldAlert, Loader2
 } from 'lucide-react';
 import { toast, Toaster } from 'react-hot-toast';
 
@@ -44,7 +44,11 @@ const Dashboard = () => {
     }
   };
 
-  if (!data) return <div className="bg-[#020617] h-screen" />;
+  if (!data) return (
+    <div className="bg-[#020617] h-screen flex items-center justify-center">
+      <Loader2 className="animate-spin text-blue-500" size={40} />
+    </div>
+  );
 
   return (
     <div className={`transition-colors duration-700 ${isCrisis ? 'bg-[#1a0505]' : 'bg-[#020617]'} text-white min-h-screen p-6 lg:p-10 overflow-x-hidden relative`}>

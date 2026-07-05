@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { MapContainer, TileLayer, CircleMarker, Popup, ZoomControl, useMap, GeoJSON } from 'react-leaflet';
-import { Activity, Radio, Zap, Loader2 } from 'lucide-react';
+import { Radio, Zap, Loader2 } from 'lucide-react';
 import 'leaflet/dist/leaflet.css';
 
 const MapController = ({ center }) => {

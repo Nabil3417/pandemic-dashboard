@@ -27,6 +27,11 @@ CORS(app)
 
 # Global crisis toggle
 crisis_mode = False
+import time
+
+# Cache for /api/risk-status (avoids recalculating 15 zones every 5 seconds)
+_risk_cache = {"data": None, "ts": 0}
+RISK_CACHE_TTL = 30  # seconds
 
 # Zone definitions now live here as the single source of truth.
 # In Week 2 we will move this into MongoDB zones_collection.
@@ -304,8 +309,14 @@ def home():
 
 @app.route('/api/risk-status', methods=['GET'])
 def get_risk_status():
-    # Score any unprocessed posts first
-    score_unprocessed_posts()
+    # Return cached result if fresh (Dashboard polls every 5s, cache lasts 30s)
+    import threading
+    now = time.time()
+    if _risk_cache["data"] and (now - _risk_cache["ts"]) < RISK_CACHE_TTL:
+        return jsonify(_risk_cache["data"])
+
+    # Score unprocessed posts in background (non-blocking)
+    threading.Thread(target=score_unprocessed_posts, daemon=True).start()
 
     processed_zones = []
     tactical_alerts = []
@@ -338,14 +349,17 @@ def get_risk_status():
             "summary": summary
         })
 
-    return jsonify({
+    result = {
         "mobility_anomaly": 82.1 if crisis_mode else 12.4,
         "wastewater_load":  94.5 if crisis_mode else 45.2,
         "social_index":     9.2  if crisis_mode else 8.4,
         "zones":            processed_zones,
         "alerts":           tactical_alerts,
         "crisis_active":    crisis_mode
-    })
+    }
+    _risk_cache["data"] = result
+    _risk_cache["ts"] = time.time()
+    return jsonify(result)
 
 
 @app.route('/api/signals', methods=['GET'])
@@ -413,6 +427,7 @@ def get_signals():
 def toggle_crisis():
     global crisis_mode
     crisis_mode = not crisis_mode
+    _risk_cache["ts"] = 0  # invalidate cache so next request recalculates
     return jsonify({
         "status": "active" if crisis_mode else "nominal"
     })
@@ -508,7 +523,7 @@ def get_evaluation_results():
 @app.route('/api/collection-status', methods=['GET'])
 def get_collection_status():
     """Returns collection stats: last run, platform breakdown, recent count."""
-    from data_collectors.scheduler import STATE_FILE
+    from scheduler import STATE_FILE
     try:
         with open(STATE_FILE, "r") as f:
             state = json.load(f)
@@ -546,9 +561,9 @@ def get_collection_status():
 @app.route('/api/trigger-collection', methods=['POST'])
 def trigger_collection():
     """Triggers a full collection run in a background thread."""
-    from data_collectors.scheduler import run_collection_job
+    from scheduler import job_social_media
     import threading
-    thread = threading.Thread(target=run_collection_job, daemon=True)
+    thread = threading.Thread(target=job_social_media, daemon=True)
     thread.start()
     return jsonify({"status": "started", "message": "Collection started in background."})
 
@@ -596,7 +611,7 @@ from routes.mobility_routes import mobility_bp
 app.register_blueprint(mobility_bp)
 
 # ─── AUTO SCHEDULER ────────────────────────────────────────────────────────
-from data_collectors.scheduler import start_scheduler
+from scheduler import start_scheduler
 start_scheduler()
 
 if __name__ == '__main__':
