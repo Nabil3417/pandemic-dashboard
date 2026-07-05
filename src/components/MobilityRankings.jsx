@@ -38,7 +38,6 @@ const MobilityRankings = ({ onZoneClick }) => {
   return (
     <div className="absolute top-4 left-4 z-[1000] w-[240px]">
       <div className="bg-[#0f172a]/95 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl overflow-hidden">
-        {/* Header */}
         <button
           onClick={() => setCollapsed(!collapsed)}
           className="w-full flex items-center justify-between p-3 hover:bg-white/5 transition-colors"
@@ -54,7 +53,6 @@ const MobilityRankings = ({ onZoneClick }) => {
           </span>
         </button>
 
-        {/* Rankings List */}
         {!collapsed && (
           <div className="px-2 pb-2 max-h-[400px] overflow-y-auto custom-scrollbar">
             <div className="grid grid-cols-[24px_1fr_40px_36px] gap-1 items-center px-1 mb-1">
@@ -88,7 +86,6 @@ const MobilityRankings = ({ onZoneClick }) => {
               </button>
             ))}
 
-            {/* Legend */}
             <div className="mt-2 pt-2 border-t border-white/5 flex items-center justify-center gap-3">
               <div className="flex items-center gap-1">
                 <TrendingUp size={8} className="text-rose-400" />
