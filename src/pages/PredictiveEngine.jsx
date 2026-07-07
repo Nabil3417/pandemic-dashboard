@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { Target, BrainCircuit, Activity, Loader2, TrendingUp, BarChart3, Grid3X3, Crosshair } from 'lucide-react';
+import { Target, BrainCircuit, Activity, Loader2, TrendingUp, BarChart3, Grid3X3, Crosshair, Languages, ArrowRight, Sparkles, AlertCircle } from 'lucide-react';
 import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from 'recharts';
 
 const PredictiveEngine = () => {
   const [forecasts, setForecasts] = useState([]);
   const [evalResults, setEvalResults] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [nlpData, setNlpData] = useState(null);
+  const [nlpLoading, setNlpLoading] = useState(true);
 
   useEffect(() => {
     Promise.all([
@@ -22,6 +24,34 @@ const PredictiveEngine = () => {
         setLoading(false);
       });
   }, []);
+
+  useEffect(() => {
+    fetch('http://localhost:5000/api/nlp-evaluation')
+      .then(res => res.json())
+      .then(data => {
+        setNlpData(data);
+        setNlpLoading(false);
+      })
+      .catch(err => {
+        console.error("Error fetching NLP evaluation:", err);
+        setNlpLoading(false);
+      });
+  }, []);
+
+  const languageMeta = {
+    en: { name: 'English', emoji: '\u{1F1EC}\u{1F1E7}' },
+    bn: { name: 'Bangla', emoji: '\u{1F1E7}\u{1F1E9}' },
+    banglish: { name: 'Banglish', emoji: '\u{1F4F1}' },
+    hi: { name: 'Hindi', emoji: '\u{1F1EE}\u{1F1F3}' },
+    ar: { name: 'Arabic', emoji: '\u{1F1F8}\u{1F1E6}' },
+    id: { name: 'Indonesian', emoji: '\u{1F1EE}\u{1F1E9}' },
+    fr: { name: 'French', emoji: '\u{1F1EB}\u{1F1F7}' },
+    es: { name: 'Spanish', emoji: '\u{1F1EA}\u{1F1F8}' },
+    pt: { name: 'Portuguese', emoji: '\u{1F1E7}\u{1F1F7}' },
+    ur: { name: 'Urdu', emoji: '\u{1F1F5}\u{1F1F0}' },
+    ms: { name: 'Malay', emoji: '\u{1F1F2}\u{1F1FE}' },
+    ta: { name: 'Tamil', emoji: '\u{1F1F1}\u{1F1F0}' },
+  };
 
   const cm = evalResults?.combined_model || {};
   const confusionMatrix = [
@@ -71,6 +101,12 @@ const PredictiveEngine = () => {
 
   const metricColors = { F1: '#3b82f6', Precision: '#f59e0b', Recall: '#22c55e', AUC: '#a855f7' };
 
+  const getF1Color = (f1) => {
+    if (f1 > 0.70) return { bar: 'bg-emerald-500', text: 'text-emerald-400' };
+    if (f1 >= 0.50) return { bar: 'bg-amber-500', text: 'text-amber-400' };
+    return { bar: 'bg-rose-500', text: 'text-rose-400' };
+  };
+
   if (loading) return (
     <div className="h-full w-full flex items-center justify-center bg-[#020617]">
       <Loader2 className="animate-spin text-blue-500" size={40} />
@@ -108,7 +144,7 @@ const PredictiveEngine = () => {
                 <LineChart data={forecast.data}>
                   <CartesianGrid strokeDasharray="3 3" stroke="#ffffff05" vertical={false} />
                   <XAxis dataKey="day" stroke="#475569" fontSize={10} tickLine={false} axisLine={false} />
-                  <YAxis stroke="#475569" fontSize={10} tickLine={false} axisLine={false} label={{ value: 'Predicted Risk Score (0–100)', angle: -90, position: 'insideLeft', fill: '#475569', fontSize: 9, fontWeight: '900' }} />
+                  <YAxis stroke="#475569" fontSize={10} tickLine={false} axisLine={false} label={{ value: 'Predicted Risk Score (0\u2013100)', angle: -90, position: 'insideLeft', fill: '#475569', fontSize: 9, fontWeight: '900' }} />
                   <Tooltip 
                     contentStyle={{ backgroundColor: '#020617', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '16px', fontSize: '12px' }}
                     itemStyle={{ fontWeight: '900', textTransform: 'uppercase' }}
@@ -285,6 +321,200 @@ const PredictiveEngine = () => {
           <p className="text-sm font-bold text-rose-400">{evalResults.error}</p>
         </div>
       )}
+
+      {/* ===== MULTILINGUAL NLP PERFORMANCE ===== */}
+      <div className="mt-16">
+        {/* Section Header */}
+        <div className="flex items-center gap-3 mb-10">
+          <div className="p-2.5 bg-cyan-500/20 rounded-xl border border-cyan-500/20">
+            <Languages size={20} className="text-cyan-400" />
+          </div>
+          <div>
+            <h2 className="text-3xl font-black uppercase italic tracking-tighter">
+              Multilingual <span className="text-cyan-400">NLP</span> Performance
+            </h2>
+            <p className="text-[10px] font-black text-slate-500 uppercase tracking-[0.3em] mt-1">
+              11-language evaluation
+            </p>
+          </div>
+        </div>
+
+        {nlpLoading && (
+          <div className="bg-white/5 border border-white/10 rounded-[2.5rem] p-12 flex items-center justify-center">
+            <div className="flex flex-col items-center gap-4">
+              <Loader2 className="animate-spin text-cyan-500" size={32} />
+              <p className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-500">Loading NLP Evaluation...</p>
+            </div>
+          </div>
+        )}
+
+        {!nlpLoading && nlpData?.status === 'not_evaluated' && (
+          <div className="bg-white/5 border border-white/10 rounded-[2.5rem] p-12 flex items-center justify-center">
+            <div className="flex flex-col items-center gap-4 text-center">
+              <AlertCircle className="text-slate-500" size={32} />
+              <p className="text-sm font-bold text-slate-400">NLP evaluation not yet run.</p>
+              <p className="text-[11px] text-slate-500">Please run <span className="text-cyan-400 font-mono">python evaluate_nlp.py</span> first.</p>
+            </div>
+          </div>
+        )}
+
+        {!nlpLoading && nlpData?.status === 'evaluated' && (
+          <>
+            {/* Overall NLP Metrics Row */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+              {[
+                { label: 'NLP F1', value: (nlpData.nlp_evaluation.overall.f1 * 100).toFixed(1) + '%', color: 'border-cyan-500/30', icon: <Target className="text-cyan-400" /> },
+                { label: 'Precision', value: (nlpData.nlp_evaluation.overall.precision * 100).toFixed(1) + '%', color: 'border-amber-500/30', icon: <Crosshair className="text-amber-400" /> },
+                { label: 'Recall', value: (nlpData.nlp_evaluation.overall.recall * 100).toFixed(1) + '%', color: 'border-emerald-500/30', icon: <Activity className="text-emerald-400" /> },
+                { label: 'ROC-AUC', value: (nlpData.nlp_evaluation.overall.roc_auc * 100).toFixed(1) + '%', color: 'border-purple-500/30', icon: <TrendingUp className="text-purple-400" /> },
+              ].map((m, i) => (
+                <div key={i} className={`bg-white/5 border ${m.color} p-6 rounded-[2rem] hover:bg-white/[0.07] transition-colors`}>
+                  <div className="bg-white/5 w-10 h-10 rounded-xl flex items-center justify-center mb-4">{m.icon}</div>
+                  <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest">{m.label}</p>
+                  <h4 className="text-2xl font-black italic mt-1">{m.value}</h4>
+                </div>
+              ))}
+            </div>
+
+            {/* Language Cards */}
+            <div className="flex flex-wrap gap-4 mb-8">
+              {Object.entries(nlpData.nlp_evaluation.per_language)
+                .filter(([, data]) => data.n_samples >= 5)
+                .sort((a, b) => b[1].f1 - a[1].f1)
+                .map(([lang, data]) => {
+                  const meta = languageMeta[lang] || { name: lang, emoji: '' };
+                  const colors = getF1Color(data.f1);
+                  return (
+                    <div key={lang} className="bg-white/5 border border-white/10 rounded-[2rem] p-5 w-[200px] relative overflow-hidden hover:bg-white/[0.07] transition-colors group">
+                      <div className="flex items-center justify-between mb-3">
+                        <div className="flex items-center gap-2">
+                          <span className="text-lg">{meta.emoji}</span>
+                          <span className="text-[11px] font-black uppercase tracking-wider">{meta.name}</span>
+                        </div>
+                        <span className="text-[8px] font-bold text-slate-500 bg-white/5 px-2 py-0.5 rounded-full">
+                          n={data.n_samples}
+                        </span>
+                      </div>
+                      <p className={`text-[2rem] font-black italic ${colors.text} leading-none`}>
+                        {(data.f1 * 100).toFixed(1)}
+                        <span className="text-sm opacity-40">%</span>
+                      </p>
+                      <p className="text-[9px] font-bold text-slate-500 mt-2">
+                        Precision: {data.precision.toFixed(3)} &middot; Recall: {data.recall.toFixed(3)}
+                      </p>
+                      <div className={`absolute bottom-0 left-0 right-0 h-1 ${colors.bar}`} />
+                    </div>
+                  );
+                })}
+            </div>
+
+            {/* Fine-Tuning Results + Banglish Ablation */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              {/* Fine-Tuning Results */}
+              {nlpData.finetuning_results && (
+                <div className="bg-white/5 border border-white/10 rounded-[2.5rem] p-8">
+                  <div className="flex items-center gap-2 mb-6">
+                    <Sparkles size={16} className="text-cyan-400" />
+                    <h3 className="text-sm font-black uppercase tracking-wider">Fine-Tuning Impact</h3>
+                  </div>
+                  <div className="space-y-6">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p className="text-[9px] font-black text-slate-500 uppercase tracking-widest">Base XLM-RoBERTa</p>
+                        <p className="text-2xl font-black italic text-slate-400 mt-1">
+                          {(nlpData.finetuning_results.base_model.overall.f1 * 100).toFixed(1)}%
+                        </p>
+                      </div>
+                      <ArrowRight size={20} className="text-slate-600" />
+                      <div>
+                        <p className="text-[9px] font-black text-slate-500 uppercase tracking-widest">Fine-Tuned</p>
+                        <p className="text-2xl font-black italic text-cyan-400 mt-1">
+                          {(nlpData.finetuning_results.finetuned_model.overall.f1 * 100).toFixed(1)}%
+                        </p>
+                      </div>
+                    </div>
+                    <div className="h-3 w-full bg-white/5 rounded-full overflow-hidden">
+                      <div
+                        className="h-full bg-gradient-to-r from-cyan-600 to-emerald-500 rounded-full transition-all duration-1000"
+                        style={{ width: `${nlpData.finetuning_results.finetuned_model.overall.f1 * 100}%` }}
+                      />
+                    </div>
+                    <div className="flex items-center gap-2 justify-center">
+                      <span className="text-[10px] font-black text-emerald-400 uppercase">F1 Improvement:</span>
+                      <span className="text-lg font-black text-emerald-400">
+                        +{(nlpData.finetuning_results.improvement.overall_f1_delta * 100).toFixed(1)}%
+                      </span>
+                    </div>
+                    <div className="flex items-center gap-2 justify-center">
+                      <span className="text-[10px] font-black text-purple-400 uppercase">AUC:</span>
+                      <span className="text-[11px] font-black text-slate-300">
+                        {(nlpData.finetuning_results.base_model.overall.roc_auc * 100).toFixed(1)}%
+                      </span>
+                      <ArrowRight size={12} className="text-slate-600" />
+                      <span className="text-[11px] font-black text-purple-400">
+                        {(nlpData.finetuning_results.finetuned_model.overall.roc_auc * 100).toFixed(1)}%
+                      </span>
+                      <span className="text-[10px] font-black text-emerald-400">
+                        (+{(nlpData.finetuning_results.improvement.auc_delta * 100).toFixed(1)}%)
+                      </span>
+                    </div>
+                    <p className="text-[9px] font-bold text-slate-500 text-center">
+                      {nlpData.finetuning_results.training_config.train_samples} train &middot; {nlpData.finetuning_results.training_config.val_samples} val &middot; {nlpData.finetuning_results.training_config.test_samples} test &middot; {nlpData.finetuning_results.training_config.epochs} epochs
+                    </p>
+                  </div>
+                </div>
+              )}
+
+              {/* Banglish Ablation */}
+              {nlpData.banglish_ablation && (
+                <div className="bg-white/5 border border-white/10 rounded-[2.5rem] p-8">
+                  <div className="flex items-center gap-2 mb-6">
+                    <Languages size={16} className="text-amber-400" />
+                    <h3 className="text-sm font-black uppercase tracking-wider">Banglish Detection Ablation</h3>
+                  </div>
+                  <div className="grid grid-cols-2 gap-6 mb-6">
+                    <div className="bg-emerald-500/5 border border-emerald-500/10 rounded-2xl p-5 text-center">
+                      <p className="text-[9px] font-black text-emerald-400 uppercase tracking-widest mb-2">With Detection</p>
+                      <p className="text-3xl font-black italic text-emerald-400">
+                        {(nlpData.banglish_ablation.with_detection.f1 * 100).toFixed(1)}%
+                      </p>
+                      <p className="text-[9px] text-slate-500 mt-2">
+                        P: {nlpData.banglish_ablation.with_detection.precision.toFixed(3)} &middot; R: {nlpData.banglish_ablation.with_detection.recall.toFixed(3)}
+                      </p>
+                    </div>
+                    <div className="bg-white/5 border border-white/10 rounded-2xl p-5 text-center">
+                      <p className="text-[9px] font-black text-slate-500 uppercase tracking-widest mb-2">Without Detection</p>
+                      <p className="text-3xl font-black italic text-slate-300">
+                        {(nlpData.banglish_ablation.without_detection.f1 * 100).toFixed(1)}%
+                      </p>
+                      <p className="text-[9px] text-slate-500 mt-2">
+                        P: {nlpData.banglish_ablation.without_detection.precision.toFixed(3)} &middot; R: {nlpData.banglish_ablation.without_detection.recall.toFixed(3)}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="text-center">
+                    {nlpData.banglish_ablation.f1_improvement > 0 ? (
+                      <div className="flex items-center justify-center gap-2">
+                        <span className="text-[10px] font-black text-emerald-400 uppercase">F1 Improvement:</span>
+                        <span className="text-lg font-black text-emerald-400">
+                          +{(nlpData.banglish_ablation.f1_improvement * 100).toFixed(1)}%
+                        </span>
+                      </div>
+                    ) : (
+                      <p className="text-[10px] font-bold text-slate-500">
+                        Baseline comparable (ablation delta: {nlpData.banglish_ablation.f1_improvement.toFixed(3)})
+                      </p>
+                    )}
+                  </div>
+                  <p className="text-[9px] font-bold text-amber-400/70 text-center mt-4 italic">
+                    Novel contribution: First Banglish health signal detector for epidemic surveillance
+                  </p>
+                </div>
+              )}
+            </div>
+          </>
+        )}
+      </div>
     </div>
   );
 };
