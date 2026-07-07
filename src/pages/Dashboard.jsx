@@ -102,7 +102,7 @@ const Dashboard = () => {
       {/* 2. KPI Grid */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
         <RiskCard isDark={true} title="Mobility Anomaly" value={data.mobility_anomaly} color={isCrisis ? "rose" : "blue"} />
-        <RiskCard isDark={true} title="Wastewater Load" value={data.wastewater_load} color={isCrisis ? "rose" : "emerald"} />
+        <RiskCard isDark={true} title="Symptom Surveillance Index" value={data.wastewater_load} color={isCrisis ? "rose" : "emerald"} />
         <RiskCard isDark={true} title="Social Sentiment" value={data.social_index} color="rose" />
       </div>
 

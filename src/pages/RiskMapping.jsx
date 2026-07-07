@@ -127,7 +127,7 @@ const PopupContent = ({ zone, wdzmi }) => {
       <div style={{ background: '#1e293b', borderRadius: 6, padding: '6px 8px', marginBottom: 8 }}>
         <div style={{ fontSize: 7, fontWeight: 800, textTransform: 'uppercase', color: '#64748b', letterSpacing: '0.1em', marginBottom: 3 }}>Fusion Formula</div>
         <div style={{ fontSize: 8, color: '#94a3b8', fontFamily: 'monospace' }}>
-          NLP × 0.25 + Wastewater × 0.40 + W-DZMI × 0.35 = <span style={{ color: riskColor, fontWeight: 900 }}>{zone.score}</span>
+          NLP × 0.25 + Symptom Search × 0.40 + W-DZMI × 0.35 = <span style={{ color: riskColor, fontWeight: 900 }}>{zone.score}</span>
         </div>
       </div>
 
@@ -166,7 +166,7 @@ const ZoneDetailPanel = ({ zone, wdzmi, onClose }) => {
     if (wdzmi.wdzmi_score >= 55 && topScore > 70) {
       assessmentText = `${topLabel.charAt(0).toUpperCase() + topLabel.slice(1)} signal is elevated at ${topScore} — the primary risk driver for this zone. Social media activity and mobility patterns suggest increased population interaction, which combined with health signal data elevates the composite risk. This zone requires close monitoring and potential public health intervention.`;
     } else if (wdzmi.wdzmi_score >= 55) {
-      assessmentText = `Multiple signals are contributing to moderately elevated risk. While no single signal has spiked, the combined W-DZMI composite of ${wdzmi.wdzmi_score} suggests shifting mobility patterns that warrant continued surveillance. Cross-referencing with NLP health signals and wastewater data recommended.`;
+      assessmentText = `Multiple signals are contributing to moderately elevated risk. While no single signal has spiked, the combined W-DZMI composite of ${wdzmi.wdzmi_score} suggests shifting mobility patterns that warrant continued surveillance. Cross-referencing with NLP health signals and symptom search data recommended.`;
     } else {
       assessmentText = `All mobility signals are within normal operating range. The W-DZMI composite of ${wdzmi.wdzmi_score} indicates stable baseline population movement. No immediate public health concern detected from mobility data alone. Continue routine monitoring.`;
     }
@@ -257,7 +257,7 @@ const ZoneDetailPanel = ({ zone, wdzmi, onClose }) => {
                 <div className="text-[10px] font-black text-slate-300">× 0.25</div>
               </div>
               <div className="text-center">
-                <div className="text-[7px] font-bold text-emerald-400 uppercase">Wastewater</div>
+                <div className="text-[7px] font-bold text-emerald-400 uppercase">Symptom Search</div>
                 <div className="text-[10px] font-black text-slate-300">× 0.40</div>
               </div>
               <div className="text-center">

@@ -8,8 +8,8 @@ const SignalIntelligence = () => {
   // Modality weights usually come from your model's attention layers or configuration
   const modalities = [
     { label: "Social Media (NLP/BERT)", val: 45, color: "bg-blue-500", icon: <MessageSquare size={14}/> },
-    { label: "Wastewater Load", val: 35, color: "bg-emerald-500", icon: <Radio size={14}/> },
-    { label: "Social Mobility", val: 20, color: "bg-amber-500", icon: <Cpu size={14}/> }
+    { label: "Symptom Surveillance Index", val: 35, color: "bg-emerald-500", icon: <Radio size={14}/> },
+    { label: "Social Mobility", val: 20, color: "bg-amber-500", icon: <Cpu size={14}/>, tooltip: "Proxy: Google Trends symptom-search volume (Ginsberg et al., Nature 2009)" },
   ];
 
   useEffect(() => {
@@ -107,7 +107,7 @@ const SignalIntelligence = () => {
                   <div className="flex justify-between text-[10px] font-black uppercase mb-3">
                     <div className="flex items-center gap-2">
                       <span className="opacity-40">{m.icon}</span>
-                      <span className="group-hover:text-blue-400 transition-colors">{m.label}</span>
+                      <span className="group-hover:text-blue-400 transition-colors"title={m.tooltip}>{m.label}</span>
                     </div>
                     <span className="opacity-50 italic">{m.val}%</span>
                   </div>

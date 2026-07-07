@@ -66,9 +66,6 @@ const DataModalities = () => {
           <h1 className="text-6xl font-black text-white tracking-tighter uppercase italic">
             Data <span className="text-blue-600">Modalities</span>
           </h1>
-          <p className="text-slate-400 font-medium mt-4 text-lg max-w-2xl leading-relaxed">
-            Fusing heterogeneous data sources for localized pandemic prediction as defined in Objective 1 of the research proposal.
-          </p>
         </div>
         
         <button className="group flex items-center gap-3 px-8 py-4 bg-white/5 border border-white/10 rounded-2xl text-sm font-black text-white hover:bg-white/10 transition-all">
@@ -98,12 +95,12 @@ const DataModalities = () => {
         />
         <ModalityCard 
           icon={Wind}
-          title="Bio-Waste Feed"
+          title="Symptom Search Engine"
           status="SYNCING"
           color="bg-emerald-600 shadow-emerald-900/40"
           latency="2.1s"
           throughput="Batch: 24h"
-          details="Real-time viral RNA concentration tracking from wastewater runoff points to validate clinical infection trends."
+          details="Google Trends symptom-search volume tracking as a proxy for disease activity, following Ginsberg et al. (Nature 2009)."
         />
       </div>
 

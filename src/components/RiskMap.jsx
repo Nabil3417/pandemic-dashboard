@@ -44,7 +44,7 @@ const RiskMap = ({ isDark }) => {
   const getTopFactor = (zone) => {
     if (!zone) return 'Baseline Activity';
     if (zone.score > 70) return 'Critical: Multi-signal Alert';
-    if (zone.score > 40) return 'Elevated Wastewater / Mobility';
+    if (zone.score > 40) return 'Elevated Symptom Search / Mobility';
     return 'Baseline Activity';
   };
 

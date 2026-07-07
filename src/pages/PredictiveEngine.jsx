@@ -54,7 +54,7 @@ const PredictiveEngine = () => {
       AUC: +(evalResults.per_modality.mobility_only.roc_auc * 100).toFixed(1),
     },
     {
-      name: 'Wastewater',
+      name: 'Symptom Search',
       F1: +(evalResults.per_modality.wastewater_only.f1_score * 100).toFixed(1),
       Precision: +(evalResults.per_modality.wastewater_only.precision * 100).toFixed(1),
       Recall: +(evalResults.per_modality.wastewater_only.recall * 100).toFixed(1),
@@ -269,7 +269,7 @@ const PredictiveEngine = () => {
               </div>
               <div className="flex items-center gap-2">
                 <div className="w-2.5 h-2.5 rounded-full bg-emerald-500" />
-                <span className="text-[11px] font-black uppercase">Wastewater: {(evalResults.fusion_weights.wastewater * 100).toFixed(0)}%</span>
+                <span className="text-[11px] font-black uppercase">Symptom Search: {(evalResults.fusion_weights.wastewater * 100).toFixed(0)}%</span>
               </div>
               <div className="flex items-center gap-2">
                 <div className="w-2.5 h-2.5 rounded-full bg-amber-500" />

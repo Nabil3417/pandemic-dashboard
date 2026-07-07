@@ -4,7 +4,6 @@ import { Activity } from 'lucide-react';
 
 const RiskCard = ({ title, value, color, description, isDark }) => {
   const trendData = [{ v: 20 }, { v: 35 }, { v: 30 }, { v: 55 }, { v: 45 }, { v: 70 }, { v: 65 }];
-
   const config = {
     blue: { text: 'text-blue-500', bg: 'bg-blue-500/10', stroke: '#3b82f6' },
     emerald: { text: 'text-emerald-500', bg: 'bg-emerald-500/10', stroke: '#10b981' },
@@ -18,15 +17,15 @@ const RiskCard = ({ title, value, color, description, isDark }) => {
           <Activity size={24} />
         </div>
         <span className={`px-4 py-1 rounded-full text-[10px] font-black uppercase tracking-widest border border-current ${config.text}`}>
-          {title}
+          <span title="Proxy: Google Trends symptom-search volume (Ginsberg et al., Nature 2009)">{title}</span>
         </span>
       </div>
 
-      <div className="flex items-end justify-between relative z-10">
+      <div className="flex items-end justify-between relative z-10 gap-6">
         <h2 className={`text-5xl font-black tracking-tighter ${isDark ? 'text-white' : 'text-slate-900'}`}>
           {value}<span className="text-lg opacity-30 italic">.4</span>
         </h2>
-        <div className="h-16 w-32">
+        <div className="h-16 w-32 flex-shrink-0">
           <ResponsiveContainer width="100%" height="100%">
             <AreaChart data={trendData}>
               <Area type="monotone" dataKey="v" stroke={config.stroke} strokeWidth={3} fill={config.stroke} fillOpacity={0.1} dot={false} />
@@ -35,7 +34,6 @@ const RiskCard = ({ title, value, color, description, isDark }) => {
         </div>
       </div>
 
-      {/* Increased text size for description: 13px */}
       <p className={`mt-6 text-[13px] font-bold leading-relaxed border-t pt-4 ${isDark ? 'text-slate-400 border-white/5' : 'text-slate-500 border-slate-50'}`}>
         {description}
       </p>
