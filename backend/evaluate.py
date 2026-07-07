@@ -49,9 +49,11 @@ TRENDS_CSV      = os.path.join(DATA_DIR, "dhaka_zone_symptom_trends.csv")
 OUTPUT_JSON     = os.path.join(DATA_DIR, "evaluation_results.json")
 
 # Fusion weights — must match app.py
-NLP_WEIGHT        = 0.30
-WASTEWATER_WEIGHT = 0.50
-MOBILITY_WEIGHT   = 0.20
+NLP_WEIGHT        = 0.25
+WASTEWATER_WEIGHT = 0.40
+MOBILITY_WEIGHT   = 0.35
+
+print("Using fusion weights: NLP=0.25, Wastewater=0.40, Mobility=0.35")
 
 # Outbreak threshold — fused score above this = predicted outbreak
 OUTBREAK_THRESHOLD = 22.0

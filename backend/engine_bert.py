@@ -78,6 +78,8 @@ SYMPTOM_KEYWORDS = {
     'ar': [
         'حمى', 'مريض', 'مستشفى', 'سعال', 'فيروس', 'عدوى',
         'طبيب', 'دواء', 'مرض', 'صحة', 'وباء', 'لقاح', 'كورونا',
+        'بخار', 'کھانسی', 'وائرس', 'اسپتال', 'بیمار', 'وبا',
+        'انفیکشن', 'مریض', 'کورونا', 'ڈینگی',
     ],
     'pt': [
         'febre', 'doente', 'hospital', 'tosse', 'vírus', 'infecção',
@@ -98,6 +100,22 @@ SYMPTOM_KEYWORDS = {
         'demam', 'sakit', 'rumah sakit', 'batuk', 'virus', 'infeksi',
         'dokter', 'obat', 'pasien', 'penyakit', 'kesehatan', 'pandemi',
         'vaksin', 'covid', 'corona',
+    ],
+    'ur': [
+        'بخار', 'کھانسی', 'وائرس', 'اسپتال', 'بیمار', 'وبا',
+        'انفیکشن', 'مریض', 'کورونا', 'ڈینگی', 'طبیب', 'دوائی',
+        'مرض', 'صحت', 'وبا', 'لقاح', 'تھکاوٹ',
+    ],
+    'ms': [
+        'demam', 'batuk', 'virus', 'hospital', 'sakit', 'jangkitan',
+        'wabak', 'pesakit', 'covid', 'denggi', 'ubat', 'doktor',
+        'klinik', 'kesihatan', 'pandemik', 'vaksin',
+    ],
+    'ta': [
+        'காய்ச்சல்', 'இருமல்', 'வைரஸ்', 'மருத்துவமனை', 'நோய்',
+        'மருத்துவர்', 'மருந்து', 'நோயாளி', 'சுகாதாரம்',
+        'தொற்று', 'பேரிடம்', 'தடுப்பூசி', 'கொரோனா',
+        'டெங்கு', 'வயிற்றுப்போக்கு', 'நுரையீரல் அழற்சி',
     ],
 }
 
@@ -249,7 +267,7 @@ class MultiLingualSymptomEngine:
         self.banglabert        = None
         self.keyword_only      = False
 
-        print("🌍 Initializing Multi-Lingual Symptom Detection Engine...")
+        print("Initializing Multi-Lingual Symptom Detection Engine...")
         print("   Supports: Bangla, Banglish, English, Hindi, Arabic,")
         print("             French, Spanish, Portuguese, Indonesian + 96 more")
         print()
@@ -259,24 +277,51 @@ class MultiLingualSymptomEngine:
             self._load_banglabert()
 
             if self.xlmroberta_ready:
-                print("\n✅ Engine ready — Multi-lingual ensemble active")
+                print("\nEngine ready — Multi-lingual ensemble active")
             else:
-                print("\n⚠️  Engine ready — Limited mode")
+                print("\nEngine ready — Limited mode")
         else:
             self.keyword_only = True
-            print("\n⚠️  PyTorch/Transformers not available.")
+            print("\nPyTorch/Transformers not available.")
             print("   Running in KEYWORD-ONLY mode.")
             print("   Scores will be based on health-keyword matching only.")
             print("   To enable ML models, fix your PyTorch installation:")
-            print("   → pip uninstall torch")
-            print("   → pip install torch --index-url https://download.pytorch.org/whl/cpu")
-            print("   → Or install Visual C++ Redistributable 2019-2022")
+            print("   -> pip uninstall torch")
+            print("   -> pip install torch --index-url https://download.pytorch.org/whl/cpu")
+            print("   -> Or install Visual C++ Redistributable 2019-2022")
             print()
 
     def _load_xlmroberta(self):
-        """Primary model — XLM-RoBERTa for 104 languages."""
+        """Primary model — fine-tuned BioGuard XLM-RoBERTa if available,
+        otherwise falls back to base cardiffnlp model."""
+        finetuned_path = os.path.join(
+            os.path.dirname(os.path.abspath(__file__)),
+            "models", "bioguard_xlm_finetuned"
+        )
+
+        # Check if fine-tuned model exists
+        if os.path.isdir(finetuned_path) and \
+           os.path.exists(os.path.join(finetuned_path, "config.json")):
+            try:
+                print("Using fine-tuned BioGuard NLP model")
+                self.xlmroberta = pipeline(
+                    "text-classification",
+                    model=finetuned_path,
+                    tokenizer=finetuned_path,
+                    max_length=128,
+                    truncation=True,
+                    device=-1,
+                )
+                self.xlmroberta_ready = True
+                print("BioGuard fine-tuned model loaded!")
+                return
+            except Exception as e:
+                print(f"Fine-tuned model failed to load: {e}")
+                print("Falling back to base model...")
+
+        # Fallback to base model
         try:
-            print("📥 Loading XLM-RoBERTa (primary — 104 languages)...")
+            print("Fine-tuned model not found - using base XLM-RoBERTa")
             self.xlmroberta = pipeline(
                 "text-classification",
                 model="cardiffnlp/twitter-xlm-roberta-base-sentiment",
@@ -286,9 +331,9 @@ class MultiLingualSymptomEngine:
                 device=-1,
             )
             self.xlmroberta_ready = True
-            print("✅ XLM-RoBERTa (primary) loaded!")
+            print("Base XLM-RoBERTa loaded!")
         except Exception as e:
-            print(f"⚠️  XLM-RoBERTa failed: {e}")
+            print(f"Base model also failed: {e}")
             self._load_fallback_bert()
 
     def _load_banglabert(self):
@@ -297,7 +342,7 @@ class MultiLingualSymptomEngine:
         ensemble partner for Bangla/Banglish text.
         """
         try:
-            print("📥 Loading ensemble partner (Bangla/Banglish)...")
+            print("Loading ensemble partner (Bangla/Banglish)...")
             self.banglabert = pipeline(
                 "text-classification",
                 model="cardiffnlp/twitter-xlm-roberta-base-sentiment",
@@ -307,9 +352,9 @@ class MultiLingualSymptomEngine:
                 device=-1,
             )
             self.banglabert_ready = True
-            print("✅ Ensemble partner loaded!")
+            print("Ensemble partner loaded!")
         except Exception as e:
-            print(f"⚠️  Ensemble partner failed: {e}")
+            print(f"Ensemble partner failed: {e}")
             self.banglabert_ready = False
 
     def _load_fallback_bert(self):
@@ -323,18 +368,18 @@ class MultiLingualSymptomEngine:
                 device=-1,
             )
             self.xlmroberta_ready = True
-            print("✅ Fallback English BERT loaded")
+            print("Fallback English BERT loaded")
         except Exception as e:
-            print(f"❌ All models failed to load: {e}")
+            print(f"All models failed to load: {e}")
             print("   Switching to keyword-only mode.")
             self.keyword_only = True
 
     def _score_with_model(self, model_pipeline, text):
         """
         Runs inference and maps sentiment to outbreak risk score 0-100.
-        NEGATIVE sentiment → higher risk (sick posts are negative in tone).
-        NEUTRAL            → moderate baseline.
-        POSITIVE           → low risk.
+        NEGATIVE sentiment -> higher risk (sick posts are negative in tone).
+        NEUTRAL            -> moderate baseline.
+        POSITIVE           -> low risk.
         """
         try:
             result = model_pipeline(text[:512])[0]
@@ -342,9 +387,9 @@ class MultiLingualSymptomEngine:
             conf   = result['score']
 
             if label in ['NEGATIVE', 'NEG', 'LABEL_0']:
-                return conf * 100           # 0–100
+                return conf * 100           # 0-100
             elif label in ['POSITIVE', 'POS', 'LABEL_2']:
-                return (1 - conf) * 40      # 0–40
+                return (1 - conf) * 40      # 0-40
             else:
                 return 35.0                 # Neutral baseline
 
@@ -475,6 +520,9 @@ if __name__ == "__main__":
         ("Tengo fiebre y tos, necesito ir al médico",       "Spanish  HIGH"),
         ("Saya demam tinggi dan batuk parah",               "Indones  HIGH"),
         ("Just had a great lunch at Bashundhara City",      "English  LOW"),
+        ("بخار تین دن سے نہیں ٹٹ رہا، ہسپتال جانا پڑے گا", "Urdu     HIGH"),
+        ("Demam sudah tiga hari tak turun, kena pergi hospital", "Malay   HIGH"),
+        ("மூன்று நாட்களாக காய்ச்சல் குறையவில்லை",           "Tamil    HIGH"),
     ]
 
     print(f"\n{'Text':<48} {'Expected':<14} {'Lang':<6} {'Score':>6} {'Result'}")
@@ -496,7 +544,7 @@ if __name__ == "__main__":
 
         expected_level = "HIGH" if "HIGH" in expected else "LOW"
         actual_level   = "HIGH" if score > 55 else "LOW"
-        correct_mark   = "✓" if expected_level == actual_level else "✗"
+        correct_mark   = "OK" if expected_level == actual_level else "X"
         if expected_level == actual_level:
             correct += 1
 

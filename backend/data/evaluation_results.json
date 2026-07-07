@@ -1,25 +1,25 @@
 {
-  "generated_at": "2026-07-02T15:33:19.691272",
+  "generated_at": "2026-07-07T02:49:46.615941",
   "eval_zone": 11,
   "total_weeks": 156,
   "outbreak_weeks": 52,
   "normal_weeks": 104,
   "threshold": 22.0,
   "fusion_weights": {
-    "nlp": 0.3,
-    "wastewater": 0.5,
-    "mobility": 0.2
+    "nlp": 0.25,
+    "wastewater": 0.4,
+    "mobility": 0.35
   },
   "combined_model": {
     "label": "Combined Model (NLP+Mobility+Wastewater)",
-    "precision": 0.6098,
-    "recall": 0.4808,
-    "f1_score": 0.5376,
-    "roc_auc": 0.7074,
-    "tp": 25,
-    "fp": 16,
-    "tn": 88,
-    "fn": 27,
+    "precision": 0.4022,
+    "recall": 0.7115,
+    "f1_score": 0.5139,
+    "roc_auc": 0.6768,
+    "tp": 37,
+    "fp": 55,
+    "tn": 49,
+    "fn": 15,
     "threshold": 22.0,
     "total_weeks": 156,
     "outbreak_weeks": 52
@@ -38,7 +38,7 @@
       "threshold": 22.0,
       "total_weeks": 156,
       "outbreak_weeks": 52,
-      "weight_in_fusion": 0.3
+      "weight_in_fusion": 0.25
     },
     "mobility_only": {
       "label": "Mobility only",
@@ -53,7 +53,7 @@
       "threshold": 22.0,
       "total_weeks": 156,
       "outbreak_weeks": 52,
-      "weight_in_fusion": 0.2
+      "weight_in_fusion": 0.35
     },
     "wastewater_only": {
       "label": "Wastewater proxy only",
@@ -68,20 +68,21 @@
       "threshold": 22.0,
       "total_weeks": 156,
       "outbreak_weeks": 52,
-      "weight_in_fusion": 0.5
+      "weight_in_fusion": 0.4
     }
   },
   "early_warning": {
-    "avg_lead_weeks": 1.0,
-    "outbreaks_detected_early": 2,
+    "avg_lead_weeks": 1.3,
+    "outbreaks_detected_early": 3,
     "lead_times": [
+      2,
       1,
       1
     ]
   },
   "model_comparison": {
     "note": "Fine-tuned BanglaBERT comparison will be added after fine_tune_bert.py is run",
-    "base_model_f1": 0.5376,
+    "base_model_f1": 0.5139,
     "finetuned_model_f1": null
   },
   "data_sources": {
