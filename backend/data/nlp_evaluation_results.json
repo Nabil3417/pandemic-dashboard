@@ -1,0 +1,98 @@
+{
+  "overall": {
+    "accuracy": 0.9412,
+    "precision": 0.9231,
+    "recall": 0.96,
+    "f1": 0.9412,
+    "roc_auc": 0.9885,
+    "best_threshold": 30
+  },
+  "per_language": {
+    "ar": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "n_samples": 9
+    },
+    "banglish": {
+      "precision": 1.0,
+      "recall": 0.6667,
+      "f1": 0.8,
+      "n_samples": 10
+    },
+    "bn": {
+      "precision": 0.8,
+      "recall": 1.0,
+      "f1": 0.8889,
+      "n_samples": 30
+    },
+    "en": {
+      "precision": 1.0,
+      "recall": 0.9,
+      "f1": 0.9474,
+      "n_samples": 24
+    },
+    "es": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "n_samples": 10
+    },
+    "fr": {
+      "precision": 0.8333,
+      "recall": 1.0,
+      "f1": 0.9091,
+      "n_samples": 11
+    },
+    "hi": {
+      "precision": 0.6667,
+      "recall": 0.8,
+      "f1": 0.7273,
+      "n_samples": 10
+    },
+    "id": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "n_samples": 7
+    },
+    "ms": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "n_samples": 10
+    },
+    "pt": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "n_samples": 10
+    },
+    "ta": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "n_samples": 11
+    },
+    "ur": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0,
+      "n_samples": 11
+    }
+  },
+  "confusion_matrix": [
+    [
+      72,
+      6
+    ],
+    [
+      3,
+      72
+    ]
+  ],
+  "total_test_samples": 153,
+  "outbreak_samples": 75,
+  "threshold_used": 30,
+  "generated_at": "2026-07-07 16:56:04"
+}
