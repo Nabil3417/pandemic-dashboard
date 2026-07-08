@@ -1,30 +1,47 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { TrendingUp, TrendingDown, Minus } from 'lucide-react';
 
-const MobilityTrend = ({ zoneId, height = 60, showLabels = true }) => {
-  const [history, setHistory] = useState([]);
-  const [trend, setTrend] = useState('stable');
+/**
+ * MobilityTrend — renders a W-DZMI sparkline chart.
+ *
+ * PERFORMANCE FIX: Now accepts optional `historyData` prop.
+ * - If provided: renders immediately from pre-fetched batch data (ZERO extra API calls).
+ * - If NOT provided: falls back to fetching individually (backward compatible).
+ *
+ * Usage:
+ *   <MobilityTrend zoneId={1} height={80} showLabels={true} historyData={preFetchedHistory} />
+ */
+const MobilityTrend = ({ zoneId, height = 60, showLabels = true, historyData }) => {
+  const [localHistory, setLocalHistory] = React.useState([]);
 
-  useEffect(() => {
+  // Only fetch if historyData prop is NOT provided (backward compat)
+  React.useEffect(() => {
+    if (historyData) {
+      setLocalHistory(historyData);
+      return;
+    }
     if (!zoneId) return;
     fetch(`http://localhost:5000/api/mobility/history/${zoneId}?days=7`)
       .then(res => res.json())
       .then(data => {
         if (data.success && data.data) {
           const h = data.data.history || [];
-          setHistory(h);
-          // Derive trend from first vs last
-          if (h.length >= 2) {
-            const first = h[0].wdzmi_score;
-            const last = h[h.length - 1].wdzmi_score;
-            if (last - first > 5) setTrend('rising');
-            else if (first - last > 5) setTrend('falling');
-            else setTrend('stable');
-          }
+          setLocalHistory(h);
         }
       })
       .catch(() => {});
-  }, [zoneId]);
+  }, [zoneId, historyData]);
+
+  const history = historyData || localHistory;
+
+  // Derive trend from first vs last
+  let trend = 'stable';
+  if (history.length >= 2) {
+    const first = history[0].wdzmi_score;
+    const last = history[history.length - 1].wdzmi_score;
+    if (last - first > 5) trend = 'rising';
+    else if (first - last > 5) trend = 'falling';
+  }
 
   if (history.length < 2) {
     return (

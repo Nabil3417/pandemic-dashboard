@@ -206,5 +206,10 @@
   },
   "model_saved_at": "D:\\pandemic-dashboard\\backend\\models\\bioguard_xlm_finetuned",
   "base_model_name": "cardiffnlp/twitter-xlm-roberta-base-sentiment",
-  "generated_at": "2026-07-07 05:37:51"
+  "generated_at": "2026-07-07 05:37:51",
+  "paper_notes": {
+    "banglish_claim": "F1 improved from 0.0 (base) to 0.8 (fine-tuned). This is the paper's Banglish contribution number. The routing ablation in banglish_ablation.json shows 0.0 because the fine-tuned model handles Banglish internally without relying on is_banglish() routing.",
+    "perfect_f1_languages": "ur, ms, ta, id, es, pt all show F1=1.0 but have 7-11 synthetic test samples only. Write in paper: evaluated on synthetic test sets, proof-of-concept only.",
+    "citation_for_paper": "Fine-tuning improved overall NLP F1 from 0.611 (base) to 0.920 (fine-tuned), a delta of +0.309. Banglish specifically: from 0.000 to 0.800."
+  }
 }

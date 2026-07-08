@@ -10,6 +10,23 @@ Outputs:
 Run from:  cd backend && python evaluate_nlp.py
 """
 
+# ═══════════════════════════════════════════════════════════════════════════════
+# NOTE ON BANGLISH ABLATION RESULT (f1_improvement = 0.0)
+# ═══════════════════════════════════════════════════════════════════════════════
+# The ablation monkey-patches is_banglish() to always return False.
+# However, the fine-tuned XLM-RoBERTa model classifies text directly from
+# token embeddings — is_banglish() only gates the keyword boost and ensemble
+# routing path. Once the model is fine-tuned, it handles Banglish internally.
+#
+# The actual Banglish contribution is measured in finetuning_results.json:
+#   Base model Banglish F1: 0.000 (zero-shot, cannot detect Banglish)
+#   Fine-tuned Banglish F1: 0.800 (+0.800 improvement)
+#
+# This is the number to cite in the paper. The routing ablation measures
+# whether the keyword-boost routing makes a difference GIVEN the fine-tuned
+# model is already loaded. It does not.
+# ═══════════════════════════════════════════════════════════════════════════════
+
 import os
 import sys
 import json

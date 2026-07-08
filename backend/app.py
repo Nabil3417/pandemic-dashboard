@@ -29,9 +29,14 @@ CORS(app)
 crisis_mode = False
 import time
 
-# Cache for /api/risk-status (avoids recalculating 15 zones every 5 seconds)
+# ─── PERFORMANCE CACHES ─────────────────────────────────────────────────
+# Cache for /api/risk-status — avoids recalculating 15 zones on every poll
 _risk_cache = {"data": None, "ts": 0}
-RISK_CACHE_TTL = 30  # seconds
+RISK_CACHE_TTL = 300  # 5 minutes (was 30s — 15 BERT inferences are expensive)
+
+# Cache for /api/mobility — avoids creating a new MongoDB connection per request
+_mobility_cache = {"data": None, "ts": 0}
+MOBILITY_CACHE_TTL = 120  # 2 minutes
 
 # Zone definitions now live here as the single source of truth.
 # In Week 2 we will move this into MongoDB zones_collection.
@@ -211,7 +216,7 @@ def score_unprocessed_posts():
     Finds posts in MongoDB that haven't been scored yet,
     runs BERT on them with health relevance multiplier, and writes the score back.
     Processes up to 50 per call.
-    Called on every /api/risk-status request.
+    Called on every /api/risk-status cache miss.
     """
     unprocessed = get_unprocessed_posts(limit=50)
     for post in unprocessed:
@@ -301,7 +306,7 @@ def home():
             "BanglaBERT-NLP",
             "IsolationForest-Mobility",
             "Wastewater-ARIMA",
-            "XGBoost-Fusion",
+            "GradientBoosting-Fusion",
             "MongoDB-Atlas"
         ]
     })
@@ -309,7 +314,7 @@ def home():
 
 @app.route('/api/risk-status', methods=['GET'])
 def get_risk_status():
-    # Return cached result if fresh (Dashboard polls every 5s, cache lasts 30s)
+    # Return cached result if fresh (Dashboard polls every 5s, cache now lasts 5 min)
     import threading
     now = time.time()
     if _risk_cache["data"] and (now - _risk_cache["ts"]) < RISK_CACHE_TTL:
@@ -518,6 +523,92 @@ def get_evaluation_results():
         return jsonify({"error": str(e)}), 500
 
 
+@app.route('/api/nlp-evaluation', methods=['GET'])
+def get_nlp_evaluation():
+    """Returns combined NLP evaluation results for PredictiveEngine.jsx panel."""
+    _data_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'data')
+
+    def _load(filename):
+        try:
+            with open(os.path.join(_data_dir, filename), 'r', encoding='utf-8') as f:
+                return json.load(f)
+        except (FileNotFoundError, json.JSONDecodeError):
+            return None
+
+    nlp_eval = _load('nlp_evaluation_results.json')
+    finetuning = _load('finetuning_results.json')
+    banglish_abl = _load('banglish_ablation.json')
+
+    if nlp_eval is None:
+        return jsonify({
+            "status": "not_evaluated",
+            "message": "Run: cd backend && python evaluate_nlp.py",
+            "nlp_evaluation": None, "finetuning_results": None, "banglish_ablation": None
+        })
+
+    return jsonify({
+        "status": "evaluated",
+        "nlp_evaluation": nlp_eval,
+        "finetuning_results": finetuning,
+        "banglish_ablation": banglish_abl
+    })
+
+
+@app.route('/api/fusion-results', methods=['GET'])
+def get_fusion_results():
+    """Returns fusion classifier training results."""
+    _path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'data',
+                         'fusion_training_results.json')
+    try:
+        with open(_path, 'r', encoding='utf-8') as f:
+            return jsonify(json.load(f))
+    except FileNotFoundError:
+        return jsonify({"status": "not_trained", "message": "Run: cd backend && python train_fusion.py"})
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
+@app.route('/api/system-summary', methods=['GET'])
+def get_system_summary():
+    """Single endpoint with all key paper numbers."""
+    _data_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'data')
+
+    def _load(filename):
+        try:
+            with open(os.path.join(_data_dir, filename), 'r', encoding='utf-8') as f:
+                return json.load(f)
+        except (FileNotFoundError, json.JSONDecodeError):
+            return None
+
+    eval_res = _load('evaluation_results.json')
+    nlp_eval = _load('nlp_evaluation_results.json')
+    finetune = _load('finetuning_results.json')
+    banglish = _load('banglish_ablation.json')
+    fusion = _load('fusion_training_results.json')
+
+    def _safe(obj, *keys, default=None):
+        for k in keys:
+            if obj is None: return default
+            obj = obj.get(k, default) if isinstance(obj, dict) else default
+        return obj
+
+    return jsonify({
+        "combined_f1": _safe(eval_res, 'combined_model', 'f1_score'),
+        "combined_auc": _safe(eval_res, 'combined_model', 'roc_auc'),
+        "nlp_base_f1": _safe(finetune, 'base_model', 'overall', 'f1'),
+        "nlp_finetuned_f1": _safe(finetune, 'finetuned_model', 'overall', 'f1'),
+        "nlp_evaluated_f1": _safe(nlp_eval, 'overall', 'f1'),
+        "banglish_improvement": _safe(banglish, 'f1_improvement'),
+        "fusion_improvement_over_baseline": _safe(fusion, 'best_model', 'f1_improvement_over_baseline'),
+        "early_warning_avg_weeks": _safe(eval_res, 'early_warning', 'avg_lead_weeks'),
+        "total_eval_weeks": _safe(eval_res, 'total_weeks', default=156),
+        "languages_tested": 11,
+        "train_samples": _safe(finetune, 'training_config', 'train_samples'),
+        "test_samples": _safe(finetune, 'training_config', 'test_samples'),
+        "fusion_trained": fusion is not None,
+    })
+
+
 # ─── COLLECTION MANAGEMENT ENDPOINTS ─────────────────────────────────────────
 
 @app.route('/api/collection-status', methods=['GET'])
@@ -606,7 +697,7 @@ def get_posts():
     return jsonify({"posts": result, "total": total, "limit": limit, "offset": offset})
 
 
-# ─── W-DZMI MOBILITY API ────────────────────────────────────────────────────
+# ─── W-DZMI MOBILITY API (with cached MongoDB connection) ───────────────────
 from routes.mobility_routes import mobility_bp
 app.register_blueprint(mobility_bp)
 

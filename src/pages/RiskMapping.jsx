@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useMemo } from 'react';
+import React, { useEffect, useState, useMemo, useCallback } from 'react';
 import { MapContainer, TileLayer, CircleMarker, Popup, ZoomControl, useMap, GeoJSON } from 'react-leaflet';
 import { Radio, Zap, Loader2, TrendingUp, TrendingDown, Minus, X, ChevronRight } from 'lucide-react';
 import 'leaflet/dist/leaflet.css';
@@ -37,7 +37,7 @@ const getWdzmiColor = (score) => {
   return '#6366f1';
 };
 
-const PopupContent = ({ zone, wdzmi }) => {
+const PopupContent = ({ zone, wdzmi, historyData }) => {
   if (!wdzmi) {
     return (
       <div style={{ fontFamily: 'system-ui', padding: 12, minWidth: 200 }}>
@@ -131,7 +131,8 @@ const PopupContent = ({ zone, wdzmi }) => {
         </div>
       </div>
 
-      <MobilityTrend zoneId={zone.id} height={40} showLabels={false} />
+      {/* Trend from pre-fetched batch data — no separate API call */}
+      <MobilityTrend zoneId={zone.id} height={40} showLabels={false} historyData={historyData} />
 
       <div style={{ borderTop: '1px solid #1e293b', paddingTop: 8, marginTop: 8 }}>
         <div style={{ fontSize: 8, fontWeight: 800, textTransform: 'uppercase', color: '#94a3b8', letterSpacing: '0.1em', marginBottom: 4 }}>
@@ -150,7 +151,7 @@ const PopupContent = ({ zone, wdzmi }) => {
   );
 };
 
-const ZoneDetailPanel = ({ zone, wdzmi, onClose }) => {
+const ZoneDetailPanel = ({ zone, wdzmi, onClose, historyData }) => {
   if (!zone) return null;
 
   const signals = wdzmi?.signal_breakdown || {};
@@ -274,7 +275,8 @@ const ZoneDetailPanel = ({ zone, wdzmi, onClose }) => {
         </div>
 
         <div className="p-4 border-b border-white/5">
-          <MobilityTrend zoneId={zone.id} height={80} showLabels={true} />
+          {/* Trend from pre-fetched batch data — no separate API call */}
+          <MobilityTrend zoneId={zone.id} height={80} showLabels={true} historyData={historyData} />
         </div>
 
         <div className="p-4">
@@ -298,7 +300,9 @@ const RiskMapping = () => {
   const [loading, setLoading] = useState(true);
   const [lastSync, setLastSync] = useState(null);
   const [geoData, setGeoData] = useState(null);
+  const [historyCache, setHistoryCache] = useState({});  // batch-fetched history
 
+  // ── Main data fetch (risk-status + mobility in parallel) ──────────
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -334,6 +338,29 @@ const RiskMapping = () => {
     fetchData();
   }, []);
 
+  // ── Batch-fetch history for ALL zones in ONE request ────────────
+  // Replaces 15 individual /api/mobility/history/{id} calls
+  useEffect(() => {
+    if (riskZones.length === 0) return;
+    const zoneIds = riskZones.map(z => z.id).join(',');
+    fetch(`http://localhost:5000/api/mobility/history-batch?zones=${zoneIds}&days=7`)
+      .then(res => res.json())
+      .then(data => {
+        if (data.success && data.data) {
+          const cache = {};
+          for (const [zid, result] of Object.entries(data.data)) {
+            if (result.success && result.data?.history) {
+              cache[zid] = result.data.history;
+            }
+          }
+          setHistoryCache(cache);
+        }
+      })
+      .catch(() => {});
+   // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // ── GeoJSON (independent) ────────────────────────────────────────
   useEffect(() => {
     fetch('/dhaka_zones.geojson')
       .then(res => res.json())
@@ -383,12 +410,6 @@ const RiskMapping = () => {
     };
   };
 
-  if (loading) return (
-    <div className="h-full w-full flex items-center justify-center bg-[#020617] rounded-[2.5rem]">
-      <Loader2 className="animate-spin text-blue-500" size={40} />
-    </div>
-  );
-
   const formatTime = (ts) => {
     if (!ts) return '2 min ago';
     try {
@@ -402,6 +423,20 @@ const RiskMapping = () => {
       return 'synced';
     }
   };
+
+  const handleZoneClick = useCallback((z) => {
+    const match = riskZones.find(rz => rz.id === z.zone_id);
+    if (match) {
+      setActiveZone(match);
+      setSelectedZone(match);
+    }
+  }, [riskZones]);
+
+  if (loading) return (
+    <div className="h-full w-full flex items-center justify-center bg-[#020617] rounded-[2.5rem]">
+      <Loader2 className="animate-spin text-blue-500" size={40} />
+    </div>
+  );
 
   return (
     <div className="h-full w-full relative flex flex-col md:flex-row overflow-hidden rounded-[2.5rem] border border-white/10 bg-[#020617] shadow-2xl">
@@ -509,19 +544,14 @@ const RiskMapping = () => {
           <div className="scanner-line w-full h-[2px] bg-gradient-to-r from-transparent via-blue-500/50 to-transparent shadow-[0_0_20px_#3b82f6]" />
         </div>
 
-        <MobilityRankings onZoneClick={(z) => {
-          const match = riskZones.find(rz => rz.id === z.zone_id);
-          if (match) {
-            setActiveZone(match);
-            setSelectedZone(match);
-          }
-        }} />
+        <MobilityRankings onZoneClick={handleZoneClick} />
 
         {selectedZone && (
           <ZoneDetailPanel
             zone={selectedZone}
             wdzmi={wdzmiData[selectedZone.id]}
             onClose={() => setSelectedZone(null)}
+            historyData={historyCache[selectedZone.id] || null}
           />
         )}
 
@@ -559,7 +589,7 @@ const RiskMapping = () => {
                 }}
               >
                 <Popup className="custom-map-popup" maxWidth={320} minWidth={260}>
-                  <PopupContent zone={zone} wdzmi={wdzmi} />
+                  <PopupContent zone={zone} wdzmi={wdzmi} historyData={historyCache[zone.id] || null} />
                 </Popup>
               </CircleMarker>
             );

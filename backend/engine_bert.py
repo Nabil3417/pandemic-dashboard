@@ -99,6 +99,27 @@ SYMPTOM_KEYWORDS = {
         'dokter', 'obat', 'pasien', 'penyakit', 'kesehatan', 'pandemi',
         'vaksin', 'covid', 'corona',
     ],
+    'ur': [
+        'بخار', 'کھانسی', 'وائرس', 'اسپتال', 'بیمار', 'وبا',
+        'انفیکشن', 'مریض', 'بیماری', 'صحت', 'ڈاکٹر', 'دوا',
+        'کورونا', 'ڈینگی', 'نمونیا', 'ہیضہ', 'وبائی مرض',
+        'ویکسین', 'موت', 'متاثر', 'قرنطینہ', 'آئی سی یو',
+        'علامات', 'علاج', 'ہسپتال',
+    ],
+    'ms': [
+        'demam', 'batuk', 'virus', 'hospital', 'sakit', 'jangkitan',
+        'wabak', 'pesakit', 'penyakit', 'kesihatan', 'doktor', 'ubat',
+        'covid', 'denggi', 'pneumonia', 'taun', 'pandemik', 'vaksin',
+        'kematian', 'dijangkiti', 'kuarantin', 'icu', 'gejala',
+        'rawatan', 'kluster', 'kes baharu', 'positif', 'respiratori',
+    ],
+    'ta': [
+        'காய்ச்சல்', 'இருமல்', 'வைரஸ்', 'மருத்துவமனை', 'நோய்',
+        'தொற்று', 'நோயாளி', 'மருத்துவர்', 'மருந்து', 'நோய்க்காட்டி',
+        'தொற்றுநோய்', 'மோய்', 'காலரா', 'தொற்றுநோய்', 'தடுப்பூசி',
+        'இறப்பு', 'தனிமைப்படுத்தல்', 'ஐசியு', 'அறிகுறிகள்',
+        'சிகிச்சை', 'புரல்', 'சுகாதாரம்',
+    ],
 }
 
 UNIVERSAL_KEYWORDS = [
@@ -252,7 +273,8 @@ class MultiLingualSymptomEngine:
 
         print("🌍 Initializing Multi-Lingual Symptom Detection Engine...")
         print("   Supports: Bangla, Banglish, English, Hindi, Arabic,")
-        print("             French, Spanish, Portuguese, Indonesian + 96 more")
+        print("             French, Spanish, Portuguese, Indonesian,")
+        print("             Urdu, Malay, Tamil (11 languages)")
         print()
 
         if _transformers_available:
@@ -486,7 +508,7 @@ class MultiLingualSymptomEngine:
             "banglabert_active":   self.banglabert_ready,
             "keyword_only_mode":   self.keyword_only,
             "uses_finetuned":      self.uses_finetuned,
-            "languages_supported": 104 if self.xlmroberta_ready else (8 if _langdetect_available else 1),
+            "languages_supported": 11,  # en, bn, hi, ar, pt, fr, es, id, ur, ms, ta
             "models_active":       models,
             "mode": (
                 "KEYWORD-ONLY (torch unavailable)"
