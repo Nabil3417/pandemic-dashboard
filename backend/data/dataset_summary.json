@@ -1,0 +1,81 @@
+{
+  "total": 1017,
+  "label_1": 496,
+  "label_0": 521,
+  "real_posts": 141,
+  "synthetic_posts": 876,
+  "by_language": {
+    "en": {
+      "total": 178,
+      "label_1": 76,
+      "label_0": 102,
+      "avg_len": 121.3
+    },
+    "bn": {
+      "total": 155,
+      "label_1": 60,
+      "label_0": 95,
+      "avg_len": 77.4
+    },
+    "banglish": {
+      "total": 108,
+      "label_1": 54,
+      "label_0": 54,
+      "avg_len": 66.0
+    },
+    "hi": {
+      "total": 64,
+      "label_1": 34,
+      "label_0": 30,
+      "avg_len": 44.9
+    },
+    "ar": {
+      "total": 64,
+      "label_1": 34,
+      "label_0": 30,
+      "avg_len": 37.5
+    },
+    "id": {
+      "total": 64,
+      "label_1": 34,
+      "label_0": 30,
+      "avg_len": 42.5
+    },
+    "fr": {
+      "total": 64,
+      "label_1": 34,
+      "label_0": 30,
+      "avg_len": 46.9
+    },
+    "es": {
+      "total": 64,
+      "label_1": 34,
+      "label_0": 30,
+      "avg_len": 45.1
+    },
+    "pt": {
+      "total": 64,
+      "label_1": 34,
+      "label_0": 30,
+      "avg_len": 43.3
+    },
+    "ur": {
+      "total": 64,
+      "label_1": 34,
+      "label_0": 30,
+      "avg_len": 36.1
+    },
+    "ms": {
+      "total": 64,
+      "label_1": 34,
+      "label_0": 30,
+      "avg_len": 37.2
+    },
+    "ta": {
+      "total": 64,
+      "label_1": 34,
+      "label_0": 30,
+      "avg_len": 37.8
+    }
+  }
+}
