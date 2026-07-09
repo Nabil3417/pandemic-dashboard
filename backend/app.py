@@ -677,6 +677,32 @@ def get_fusion_info():
     return jsonify(info)
 
 
+# ─── T-17: SHAP FEATURE IMPORTANCE ENDPOINT ─────────────────────────────────
+@app.route('/api/feature-importance', methods=['GET'])
+def get_feature_importance():
+    """T-17: Returns SHAP feature importance from the latest evaluation_results.json."""
+    _path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'data',
+                         'evaluation_results.json')
+    try:
+        with open(_path, 'r', encoding='utf-8') as f:
+            results = json.load(f)
+        fi = results.get('feature_importance')
+        fd = results.get('feature_dominance')
+        if fi is None:
+            return jsonify({
+                "status": "not_computed",
+                "message": "Run evaluate.py with a trained fusion model loaded."
+            })
+        return jsonify({
+            "status": "ok",
+            "feature_importance": fi,
+            "feature_dominance": fd
+        })
+    except FileNotFoundError:
+        return jsonify({"status": "not_computed",
+                         "message": "Run evaluate.py first."}), 404
+
+
 @app.route('/api/system-summary', methods=['GET'])
 def get_system_summary():
     """Single endpoint with all key paper numbers."""

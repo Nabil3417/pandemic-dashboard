@@ -49,6 +49,13 @@ try:
 except ImportError:
     HAS_JOBLIB = False
 
+# ── T-17: SHAP imports ─────────────────────────────────────────────────────────
+try:
+    import shap
+    HAS_SHAP = True
+except ImportError:
+    HAS_SHAP = False
+
 # ── constants ─────────────────────────────────────────────────────────────────
 DATA_DIR        = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data")
 MODELS_DIR      = os.path.join(os.path.dirname(os.path.abspath(__file__)), "models")
@@ -408,8 +415,104 @@ def evaluate_trained_fusion(aligned_df):
 
 
 # ══════════════════════════════════════════════════════════════════════════════
-# STEP 7 — T-09: Expanded Early Warning Analysis
+# STEP 7 — T-17: SHAP Feature Contribution Analysis
 # ══════════════════════════════════════════════════════════════════════════════
+
+def compute_shap_values(aligned_df, fusion_model, scaler):
+    """
+    T-17: Compute SHAP values for the trained fusion classifier.
+    Returns dict with mean_abs_shap, normalized_importance, feature_dominance, etc.
+    Returns None if SHAP is not installed or model is None.
+    """
+    if fusion_model is None:
+        return None
+
+    if not HAS_SHAP:
+        print("\n  T-17: shap not installed — run 'pip install shap' to enable SHAP analysis")
+        return None
+
+    print(f"\n  T-17: Computing SHAP feature contribution analysis ({type(fusion_model).__name__})...")
+
+    from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier
+    from sklearn.linear_model import LogisticRegression
+
+    feature_names = ['nlp_proxy', 'wastewater_proxy', 'mobility_score']
+    X = aligned_df[feature_names].values
+    X_scaled = scaler.transform(X)
+
+    # Choose explainer based on model type
+    if isinstance(fusion_model, (RandomForestClassifier, GradientBoostingClassifier)):
+        explainer = shap.TreeExplainer(fusion_model)
+        method_name = "TreeExplainer"
+    elif isinstance(fusion_model, LogisticRegression):
+        explainer = shap.LinearExplainer(fusion_model, X_scaled)
+        method_name = "LinearExplainer"
+    else:
+        explainer = shap.KernelExplainer(fusion_model.predict_proba, shap.sample(X_scaled, 50))
+        method_name = "KernelExplainer"
+
+    shap_values = explainer.shap_values(X_scaled)
+
+    # If shap_values is a list (binary classification), take class 1 SHAP values
+    if isinstance(shap_values, list):
+        shap_values = shap_values[1]
+
+    # Mean absolute SHAP per feature
+    mean_abs = np.mean(np.abs(shap_values), axis=0)
+    total = mean_abs.sum()
+    normalized = {fn: float(mean_abs[i] / total) if total > 0 else 0 for i, fn in enumerate(feature_names)}
+
+    print(f"   Method: {method_name}")
+    print(f"   Mean |SHAP|:  {dict(zip(feature_names, [round(float(v), 4) for v in mean_abs]))}")
+    print(f"   Normalized:   {dict(zip(feature_names, [round(v, 4) for v in normalized.values()]))}")
+
+    # Feature dominance during outbreak vs normal weeks
+    dominant_feature_idx = np.argmax(np.abs(shap_values), axis=1)
+    outbreak_mask = aligned_df['outbreak_label'].values == 1
+    normal_mask   = ~outbreak_mask
+
+    def _dominance_pct(mask):
+        if mask.sum() == 0:
+            return {fn: 0.0 for fn in feature_names}
+        dom = dominant_feature_idx[mask]
+        return {feature_names[i]: round(float((dom == i).sum() / len(dom) * 100), 1) for i in range(len(feature_names))}
+
+    outbreak_dom = _dominance_pct(outbreak_mask)
+    normal_dom   = _dominance_pct(normal_mask)
+
+    print(f"   Outbreak weeks - dominant signal: NLP {outbreak_dom['nlp_proxy']}%, Search {outbreak_dom['wastewater_proxy']}%, Mobility {outbreak_dom['mobility_score']}%")
+    print(f"   Normal weeks   - dominant signal: NLP {normal_dom['nlp_proxy']}%, Search {normal_dom['wastewater_proxy']}%, Mobility {normal_dom['mobility_score']}%")
+
+    result = {
+        "method": method_name,
+        "feature_names": feature_names,
+        "mean_abs_shap": {fn: round(float(mean_abs[i]), 4) for i, fn in enumerate(feature_names)},
+        "normalized_importance": normalized,
+        "shap_values_sample": shap_values[:20].tolist(),
+        "weeks_sample_indices": aligned_df.index[:20].tolist(),
+    }
+
+    # Also save feature_dominance separately
+    feature_dominance = {
+        "outbreak_weeks": {
+            "nlp_dominant_pct":       outbreak_dom['nlp_proxy'],
+            "search_dominant_pct":    outbreak_dom['wastewater_proxy'],
+            "mobility_dominant_pct":  outbreak_dom['mobility_score'],
+        },
+        "normal_weeks": {
+            "nlp_dominant_pct":       normal_dom['nlp_proxy'],
+            "search_dominant_pct":    normal_dom['wastewater_proxy'],
+            "mobility_dominant_pct":  normal_dom['mobility_score'],
+        },
+    }
+
+    return result, feature_dominance
+
+
+# ══════════════════════════════════════════════════════════════════════════════
+# STEP 8 — T-09: Expanded Early Warning Analysis
+# ══════════════════════════════════════════════════════════════════════════════
+
 
 def _identify_outbreak_periods(df):
     """
@@ -608,6 +711,21 @@ def run_evaluation():
     # ── T-08: Trained fusion classifier evaluation ─────────────────────────
     trained_metrics, trained_proba = evaluate_trained_fusion(aligned_df)
 
+    # ── T-17: SHAP feature contribution analysis ─────────────────────────────
+    shap_result = None
+    feature_dominance = None
+    if trained_metrics:
+        model_path = os.path.join(MODELS_DIR, "fusion_classifier.pkl")
+        scaler_path = os.path.join(MODELS_DIR, "fusion_scaler.pkl")
+        try:
+            model  = joblib.load(model_path)
+            scaler = joblib.load(scaler_path)
+            shap_result = compute_shap_values(aligned_df, model, scaler)
+            if shap_result is not None:
+                feature_importance_out, feature_dominance = shap_result
+        except Exception as e:
+            print(f"\n  T-17: SHAP computation failed ({e}) — skipping")
+
     # ── T-09: Expanded early warning analysis ──────────────────────────────
     early_warning = compute_early_warning(aligned_df, trained_proba=trained_proba)
 
@@ -640,6 +758,8 @@ def run_evaluation():
                 "weight_in_fusion": WASTEWATER_WEIGHT,
             },
         },
+        "feature_importance":    feature_importance_out if shap_result else None,
+        "feature_dominance":    feature_dominance,
         "early_warning":    early_warning,
         "model_comparison": {
             "note": "Fine-tuned BanglaBERT comparison will be added after fine_tune_bert.py is run",
@@ -699,6 +819,24 @@ def run_evaluation():
         print(f"\n  Early warning: {total_ob} outbreaks, "
               f"strict ({STRICT_THRESHOLD}) catches {strict_caught}/{total_ob} avg {strict_avg}wk early, "
               f"soft ({SOFT_THRESHOLD}) catches {soft_caught}/{total_ob} avg {soft_avg}wk early")
+
+    # T-17 SHAP summary
+    if shap_result:
+        fi_out = shap_result[0]
+        fd_out = shap_result[1]
+        print(f"\n  SHAP FEATURE IMPORTANCE (T-17):")
+        print(f"   Method: {fi_out['method']}")
+        print(f"   {'Feature':<20} {'Mean |SHAP|':>12} {'Normalized':>12}")
+        print(f"   {'-'*46}")
+        for fn in fi_out['feature_names']:
+            print(f"   {fn:<20} {fi_out['mean_abs_shap'][fn]:>12.4f} {fi_out['normalized_importance'][fn]:>12.4f}")
+        print(f"\n   Feature Dominance:")
+        print(f"   {'':20} {'NLP':>8} {'Search':>8} {'Mobility':>10}")
+        print(f"   {'-'*50}")
+        od = fd_out['outbreak_weeks']
+        nd = fd_out['normal_weeks']
+        print(f"   {'Outbreak weeks':<20} {od['nlp_dominant_pct']:>7.1f}% {od['search_dominant_pct']:>7.1f}% {od['mobility_dominant_pct']:>9.1f}%")
+        print(f"   {'Normal weeks':<20} {nd['nlp_dominant_pct']:>7.1f}% {nd['search_dominant_pct']:>7.1f}% {nd['mobility_dominant_pct']:>9.1f}%")
 
     print(f"\n{'='*65}")
 
