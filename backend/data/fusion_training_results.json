@@ -1,0 +1,75 @@
+{
+  "baseline_fixed_weights": {
+    "weights": {
+      "nlp": 0.25,
+      "wastewater": 0.4,
+      "mobility": 0.35
+    },
+    "threshold": 22.0,
+    "cv_f1_mean": 0.4998,
+    "cv_f1_std": 0.0152,
+    "cv_auc_mean": 0.6741,
+    "cv_auc_std": 0.1169
+  },
+  "logistic_regression": {
+    "cv_f1_mean": 0.2238,
+    "cv_f1_std": 0.1274,
+    "cv_auc_mean": 0.702,
+    "cv_auc_std": 0.1068,
+    "cv_precision_mean": 0.7333,
+    "cv_recall_mean": 0.1345,
+    "coefficients": {
+      "nlp": 0.3415,
+      "wastewater": 0.5107,
+      "mobility": 0.1478
+    }
+  },
+  "random_forest": {
+    "cv_f1_mean": 0.4905,
+    "cv_f1_std": 0.1292,
+    "cv_auc_mean": 0.8633,
+    "cv_auc_std": 0.0561,
+    "cv_precision_mean": 0.7933,
+    "cv_recall_mean": 0.3691,
+    "feature_importances": {
+      "nlp": 0.3391,
+      "wastewater": 0.3682,
+      "mobility": 0.2927
+    }
+  },
+  "gradient_boosting": {
+    "cv_f1_mean": 0.6464,
+    "cv_f1_std": 0.0522,
+    "cv_auc_mean": 0.8555,
+    "cv_auc_std": 0.1023,
+    "cv_precision_mean": 0.7198,
+    "cv_recall_mean": 0.5964,
+    "feature_importances": {
+      "nlp": 0.3178,
+      "wastewater": 0.2718,
+      "mobility": 0.4104
+    }
+  },
+  "best_model": {
+    "name": "gradient_boosting",
+    "cv_f1_mean": 0.6464,
+    "cv_auc_mean": 0.8555,
+    "f1_improvement_over_baseline": 0.1466,
+    "auc_improvement_over_baseline": 0.1814,
+    "learned_weights": {
+      "nlp": 0.2578,
+      "wastewater": 0.3117,
+      "mobility": 0.4305
+    }
+  },
+  "training_config": {
+    "cv_folds": 5,
+    "random_state": 42,
+    "n_features": 3,
+    "n_samples": 156,
+    "scaler": "MinMaxScaler",
+    "scaler_path": "backend/models/fusion_scaler.pkl",
+    "model_path": "backend/models/fusion_classifier.pkl"
+  },
+  "generated_at": "2026-07-09T13:56:38.345035"
+}

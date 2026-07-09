@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Target, BrainCircuit, Activity, Loader2, TrendingUp, BarChart3, Grid3X3, Crosshair, Languages, ArrowRight, Sparkles, AlertCircle } from 'lucide-react';
+import { Target, BrainCircuit, Activity, Loader2, TrendingUp, BarChart3, Grid3X3, Crosshair, Languages, ArrowRight, Sparkles, AlertCircle, Zap } from 'lucide-react';
 import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from 'recharts';
 
 const PredictiveEngine = () => {
@@ -8,6 +8,7 @@ const PredictiveEngine = () => {
   const [loading, setLoading] = useState(true);
   const [nlpData, setNlpData] = useState(null);
   const [nlpLoading, setNlpLoading] = useState(true);
+  const [fusionInfo, setFusionInfo] = useState(null); // T-08: fusion classifier info
 
   useEffect(() => {
     Promise.all([
@@ -22,6 +23,18 @@ const PredictiveEngine = () => {
       .catch(err => {
         console.error("Error fetching data:", err);
         setLoading(false);
+      });
+  }, []);
+
+  // T-08: Fetch fusion classifier info
+  useEffect(() => {
+    fetch('http://localhost:5000/api/fusion-info')
+      .then(res => res.json())
+      .then(data => {
+        setFusionInfo(data);
+      })
+      .catch(err => {
+        console.error("Error fetching fusion info:", err);
       });
   }, []);
 
@@ -43,14 +56,13 @@ const PredictiveEngine = () => {
     bn: { name: 'Bangla', emoji: '\u{1F1E7}\u{1F1E9}' },
     banglish: { name: 'Banglish', emoji: '\u{1F4F1}' },
     hi: { name: 'Hindi', emoji: '\u{1F1EE}\u{1F1F3}' },
-    ar: { name: 'Arabic', emoji: '\u{1F1F8}\u{1F1E6}' },
-    id: { name: 'Indonesian', emoji: '\u{1F1EE}\u{1F1E9}' },
-    fr: { name: 'French', emoji: '\u{1F1EB}\u{1F1F7}' },
-    es: { name: 'Spanish', emoji: '\u{1F1EA}\u{1F1F8}' },
-    pt: { name: 'Portuguese', emoji: '\u{1F1E7}\u{1F1F7}' },
     ur: { name: 'Urdu', emoji: '\u{1F1F5}\u{1F1F0}' },
-    ms: { name: 'Malay', emoji: '\u{1F1F2}\u{1F1FE}' },
-    ta: { name: 'Tamil', emoji: '\u{1F1F1}\u{1F1F0}' },
+    ar: { name: 'Arabic', emoji: '\u{1F1F8}\u{1F1E6}' },
+    zh: { name: 'Chinese', emoji: '\u{1F1E8}\u{1F1F3}' },
+    es: { name: 'Spanish', emoji: '\u{1F1EA}\u{1F1F8}' },
+    fr: { name: 'French', emoji: '\u{1F1EB}\u{1F1F7}' },
+    pt: { name: 'Portuguese', emoji: '\u{1F1F5}\u{1F1F9}' },
+    ja: { name: 'Japanese', emoji: '\u{1F1EF}\u{1F1F5}' },
   };
 
   const cm = evalResults?.combined_model || {};
@@ -99,6 +111,17 @@ const PredictiveEngine = () => {
     },
   ] : [];
 
+  // T-08: Build fusion comparison data for the model comparison table
+  const fusionEval = evalResults?.fusion_classifier;
+  const fusionCompData = fusionInfo?.model_comparison || [];
+
+  // T-08: Feature importance bar chart data
+  const featureImpData = fusionInfo?.feature_importances ? [
+    { name: 'NLP', importance: +(fusionInfo.feature_importances.nlp_proxy * 100).toFixed(1), fill: '#3b82f6' },
+    { name: 'Symptom Search', importance: +(fusionInfo.feature_importances.wastewater_proxy * 100).toFixed(1), fill: '#22c55e' },
+    { name: 'Mobility', importance: +(fusionInfo.feature_importances.mobility_score * 100).toFixed(1), fill: '#f59e0b' },
+  ] : [];
+
   const metricColors = { F1: '#3b82f6', Precision: '#f59e0b', Recall: '#22c55e', AUC: '#a855f7' };
 
   const getF1Color = (f1) => {
@@ -123,6 +146,12 @@ const PredictiveEngine = () => {
           </div>
           <h2 className="text-5xl font-black uppercase italic tracking-tighter">AI <span className="text-blue-600">Forecast</span></h2>
         </div>
+        {fusionInfo?.active && (
+          <div className="flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/20 px-4 py-2 rounded-full">
+            <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+            <span className="text-[10px] font-black text-emerald-400 uppercase tracking-widest">GB Fusion Active</span>
+          </div>
+        )}
       </div>
 
       {/* Projection Charts */}
@@ -295,24 +324,198 @@ const PredictiveEngine = () => {
             </div>
           </div>
 
-          {/* Fusion Weights */}
-          <div className="bg-white/5 border border-white/10 rounded-[2rem] p-6">
-            <p className="text-[9px] font-black text-slate-500 uppercase tracking-[0.3em] mb-3">Fusion Weights</p>
-            <div className="flex flex-wrap gap-6">
-              <div className="flex items-center gap-2">
-                <div className="w-2.5 h-2.5 rounded-full bg-blue-500" />
-                <span className="text-[11px] font-black uppercase">NLP: {(evalResults.fusion_weights.nlp * 100).toFixed(0)}%</span>
+          {/* ===== T-08: FUSION CLASSIFIER PANEL ===== */}
+          <div className="mb-10">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="p-2.5 bg-emerald-500/20 rounded-xl border border-emerald-500/20">
+                <Zap size={20} className="text-emerald-400" />
               </div>
-              <div className="flex items-center gap-2">
-                <div className="w-2.5 h-2.5 rounded-full bg-emerald-500" />
-                <span className="text-[11px] font-black uppercase">Symptom Search: {(evalResults.fusion_weights.wastewater * 100).toFixed(0)}%</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <div className="w-2.5 h-2.5 rounded-full bg-amber-500" />
-                <span className="text-[11px] font-black uppercase">Mobility: {(evalResults.fusion_weights.mobility * 100).toFixed(0)}%</span>
+              <div>
+                <h2 className="text-3xl font-black uppercase italic tracking-tighter">
+                  Fusion <span className="text-emerald-400">Classifier</span>
+                </h2>
+                <p className="text-[10px] font-black text-slate-500 uppercase tracking-[0.3em] mt-1">
+                  T-08: GradientBoosting vs Fixed-Weight Baseline
+                </p>
               </div>
             </div>
+
+            {fusionInfo?.active ? (
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                {/* Feature Importances Bar Chart */}
+                <div className="lg:col-span-1 bg-white/5 border border-white/10 rounded-[2.5rem] p-8">
+                  <div className="flex items-center gap-2 mb-6">
+                    <BarChart3 size={16} className="text-emerald-400" />
+                    <h3 className="text-sm font-black uppercase tracking-wider">Signal Importance</h3>
+                  </div>
+                  <div className="h-[200px] w-full">
+                    <ResponsiveContainer width="100%" height="100%">
+                      <BarChart data={featureImpData} layout="vertical" barCategoryGap="20%">
+                        <CartesianGrid strokeDasharray="3 3" stroke="#ffffff05" horizontal={false} />
+                        <XAxis type="number" stroke="#475569" fontSize={9} tickLine={false} axisLine={false} tickFormatter={(v) => v + '%'} domain={[0, 'auto']} />
+                        <YAxis type="category" dataKey="name" stroke="#94a3b8" fontSize={10} tickLine={false} axisLine={false} width={100} tick={{ fontWeight: '900', textTransform: 'uppercase' }} />
+                        <Tooltip 
+                          contentStyle={{ backgroundColor: '#020617', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '12px', fontSize: '11px' }}
+                          formatter={(value) => [value + '%', 'Importance']}
+                        />
+                        <Bar dataKey="importance" radius={[0, 6, 6, 0]} barSize={20}>
+                          {featureImpData.map((entry, index) => (
+                            <rect key={index} fill={entry.fill} />
+                          ))}
+                        </Bar>
+                      </BarChart>
+                    </ResponsiveContainer>
+                  </div>
+                  <p className="text-[9px] font-bold text-slate-500 text-center mt-4 uppercase tracking-widest">
+                    Learned from {evalResults.total_weeks} weeks of data
+                  </p>
+                </div>
+
+                {/* GB vs Baseline Comparison + Status */}
+                <div className="lg:col-span-2 bg-white/5 border border-white/10 rounded-[2.5rem] p-8">
+                  <div className="flex items-center gap-2 mb-6">
+                    <Sparkles size={16} className="text-emerald-400" />
+                    <h3 className="text-sm font-black uppercase tracking-wider">Classifier Comparison</h3>
+                    <span className="text-[9px] font-bold text-emerald-400 uppercase ml-auto bg-emerald-500/10 px-2 py-0.5 rounded-full">
+                      {fusionInfo.model_name || 'GradientBoosting'}
+                    </span>
+                  </div>
+
+                  {/* Comparison Table */}
+                  {fusionCompData.length > 0 && (
+                    <div className="mb-6 overflow-x-auto">
+                      <table className="w-full text-left">
+                        <thead>
+                          <tr className="border-b border-white/5">
+                            <th className="text-[9px] font-black text-slate-500 uppercase tracking-widest pb-3">Model</th>
+                            <th className="text-[9px] font-black text-slate-500 uppercase tracking-widest pb-3 text-right">Mean F1</th>
+                            <th className="text-[9px] font-black text-slate-500 uppercase tracking-widest pb-3 text-right">F1 SD</th>
+                            <th className="text-[9px] font-black text-slate-500 uppercase tracking-widest pb-3 text-right">Mean AUC</th>
+                            <th className="text-[9px] font-black text-slate-500 uppercase tracking-widest pb-3 text-right">AUC SD</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {fusionCompData.map((m, i) => (
+                            <tr key={i} className={`border-b border-white/5 ${m.name === 'Fixed Weights (baseline)' ? 'opacity-50' : ''} ${m.name === (fusionInfo.model_name || 'gradient_boosting') ? 'bg-emerald-500/5' : ''}`}>
+                              <td className="py-3 text-[11px] font-black uppercase">
+                                {m.name === (fusionInfo.model_name || 'gradient_boosting') && (
+                                  <span className="text-emerald-400 mr-1">&#9650;</span>
+                                )}
+                                {m.name}
+                              </td>
+                              <td className="py-3 text-[11px] font-black text-right">{(m.cv_f1_mean * 100).toFixed(1)}%</td>
+                              <td className="py-3 text-[11px] font-bold text-slate-400 text-right">{(m.cv_f1_sd * 100).toFixed(1)}%</td>
+                              <td className="py-3 text-[11px] font-black text-right">{(m.cv_auc_mean * 100).toFixed(1)}%</td>
+                              <td className="py-3 text-[11px] font-bold text-slate-400 text-right">{(m.cv_auc_sd * 100).toFixed(1)}%</td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                      <p className="text-[8px] font-bold text-slate-600 mt-2 uppercase">5-fold Stratified Cross-Validation</p>
+                    </div>
+                  )}
+
+                  {/* Improvement Summary */}
+                  {fusionInfo.f1_improvement_over_baseline != null && (
+                    <div className="grid grid-cols-2 gap-4">
+                      <div className="bg-emerald-500/5 border border-emerald-500/10 rounded-2xl p-5 text-center">
+                        <p className="text-[9px] font-black text-emerald-400 uppercase tracking-widest mb-2">F1 Improvement</p>
+                        <p className="text-3xl font-black italic text-emerald-400">
+                          +{(fusionInfo.f1_improvement_over_baseline * 100).toFixed(1)}%
+                        </p>
+                        <p className="text-[9px] text-slate-500 mt-1">vs Fixed-Weight Baseline</p>
+                      </div>
+                      <div className="bg-purple-500/5 border border-purple-500/10 rounded-2xl p-5 text-center">
+                        <p className="text-[9px] font-black text-purple-400 uppercase tracking-widest mb-2">GB CV F1</p>
+                        <p className="text-3xl font-black italic text-purple-400">
+                          {(fusionInfo.cv_f1_mean * 100).toFixed(1)}%
+                        </p>
+                        <p className="text-[9px] text-slate-500 mt-1">SD: {(fusionInfo.cv_f1_sd * 100).toFixed(1)}%</p>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
+            ) : (
+              <div className="bg-white/5 border border-white/10 rounded-[2.5rem] p-8">
+                <div className="flex items-center gap-4">
+                  <AlertCircle size={20} className="text-slate-500" />
+                  <div>
+                    <p className="text-sm font-bold text-slate-400">Fusion classifier not yet trained.</p>
+                    <p className="text-[11px] text-slate-500 mt-1">Run <span className="text-emerald-400 font-mono">python train_fusion.py</span> in the backend directory to train the GradientBoosting classifier.</p>
+                  </div>
+                </div>
+
+                {/* Still show legacy weights */}
+                {evalResults.fusion_weights && (
+                  <div className="mt-6 pt-6 border-t border-white/5">
+                    <p className="text-[9px] font-black text-slate-500 uppercase tracking-[0.3em] mb-3">Current Fusion Weights (Manual)</p>
+                    <div className="flex flex-wrap gap-6">
+                      <div className="flex items-center gap-2">
+                        <div className="w-2.5 h-2.5 rounded-full bg-blue-500" />
+                        <span className="text-[11px] font-black uppercase">NLP: {(evalResults.fusion_weights.nlp * 100).toFixed(0)}%</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <div className="w-2.5 h-2.5 rounded-full bg-emerald-500" />
+                        <span className="text-[11px] font-black uppercase">Symptom Search: {(evalResults.fusion_weights.wastewater * 100).toFixed(0)}%</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <div className="w-2.5 h-2.5 rounded-full bg-amber-500" />
+                        <span className="text-[11px] font-black uppercase">Mobility: {(evalResults.fusion_weights.mobility * 100).toFixed(0)}%</span>
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
           </div>
+
+          {/* Legacy Fusion Weights — shown below classifier when active */}
+          {fusionInfo?.active && evalResults.fusion_weights && (
+            <div className="bg-white/[0.02] border border-white/5 rounded-[2rem] p-5 mb-10">
+              <p className="text-[9px] font-black text-slate-600 uppercase tracking-[0.3em] mb-3">Legacy Fusion Weights (Replaced by Classifier)</p>
+              <div className="flex flex-wrap gap-6 opacity-40">
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 rounded-full bg-blue-500" />
+                  <span className="text-[10px] font-black uppercase text-slate-400">NLP: {(evalResults.fusion_weights.nlp * 100).toFixed(0)}%</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 rounded-full bg-emerald-500" />
+                  <span className="text-[10px] font-black uppercase text-slate-400">Symptom Search: {(evalResults.fusion_weights.wastewater * 100).toFixed(0)}%</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 rounded-full bg-amber-500" />
+                  <span className="text-[10px] font-black uppercase text-slate-400">Mobility: {(evalResults.fusion_weights.mobility * 100).toFixed(0)}%</span>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* T-08: Fusion Classifier Evaluation from evaluate.py */}
+          {fusionEval?.active && (
+            <div className="bg-white/5 border border-white/10 rounded-[2rem] p-6 mb-10">
+              <p className="text-[9px] font-black text-slate-500 uppercase tracking-[0.3em] mb-3">Historical Evaluation (156 Weeks)</p>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div className="text-center">
+                  <p className="text-[9px] font-black text-slate-500 uppercase">GB F1</p>
+                  <p className="text-xl font-black italic text-emerald-400">{(fusionEval.metrics.f1_score * 100).toFixed(1)}%</p>
+                </div>
+                <div className="text-center">
+                  <p className="text-[9px] font-black text-slate-500 uppercase">Baseline F1</p>
+                  <p className="text-xl font-black italic text-slate-300">{(fusionEval.baseline_metrics.f1_score * 100).toFixed(1)}%</p>
+                </div>
+                <div className="text-center">
+                  <p className="text-[9px] font-black text-slate-500 uppercase">GB AUC</p>
+                  <p className="text-xl font-black italic text-purple-400">{(fusionEval.metrics.roc_auc * 100).toFixed(1)}%</p>
+                </div>
+                <div className="text-center">
+                  <p className="text-[9px] font-black text-slate-500 uppercase">Baseline AUC</p>
+                  <p className="text-xl font-black italic text-slate-300">{(fusionEval.baseline_metrics.roc_auc * 100).toFixed(1)}%</p>
+                </div>
+              </div>
+            </div>
+          )}
+
         </div>
       )}
 

@@ -3,6 +3,7 @@ from flask_cors import CORS
 import os
 import json
 import random
+import numpy as np
 from datetime import datetime
 
 # AI Engines
@@ -29,19 +30,71 @@ CORS(app)
 crisis_mode = False
 import time
 
-# ─── PERFORMANCE CACHES ─────────────────────────────────────────────────
-# Cache for /api/risk-status — avoids recalculating 15 zones on every poll
-_risk_cache = {"data": None, "ts": 0}
-RISK_CACHE_TTL = 300  # 5 minutes (was 30s — 15 BERT inferences are expensive)
+# ─── T-08: LOAD TRAINED FUSION CLASSIFIER ──────────────────────────────────
+_fusion_classifier = None
+_fusion_scaler = None
+_fusion_feature_importances = {}
+_fusion_model_info = {}
 
-# Cache for /api/mobility — avoids creating a new MongoDB connection per request
+def _load_fusion_classifier():
+    """
+    T-08 — Load the trained GradientBoosting fusion classifier + scaler.
+    Falls back gracefully if model files are not found (uses fixed weights).
+    """
+    global _fusion_classifier, _fusion_scaler, _fusion_feature_importances, _fusion_model_info
+
+    model_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'models')
+    classifier_path = os.path.join(model_dir, 'fusion_classifier.pkl')
+    scaler_path = os.path.join(model_dir, 'fusion_scaler.pkl')
+    results_path = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                                 'data', 'fusion_training_results.json')
+
+    if not os.path.exists(classifier_path):
+        print("⚠️  Fusion classifier not found — using fixed-weight fallback")
+        return False
+
+    try:
+        import joblib
+        _fusion_classifier = joblib.load(classifier_path)
+        _fusion_scaler = joblib.load(scaler_path)
+
+        # Extract feature importances
+        if hasattr(_fusion_classifier, 'feature_importances_'):
+            _fusion_feature_importances = {
+                "nlp_proxy":        round(float(_fusion_classifier.feature_importances_[0]), 4),
+                "wastewater_proxy": round(float(_fusion_classifier.feature_importances_[1]), 4),
+                "mobility_score":   round(float(_fusion_classifier.feature_importances_[2]), 4),
+            }
+
+        # Load training results for metadata
+        if os.path.exists(results_path):
+            with open(results_path, 'r') as f:
+                _fusion_model_info = json.load(f)
+
+        print("✅ T-08: Fusion classifier loaded (GradientBoosting)")
+        print(f"   Feature importances: NLP={_fusion_feature_importances.get('nlp_proxy',0):.4f}, "
+              f"SymptomSearch={_fusion_feature_importances.get('wastewater_proxy',0):.4f}, "
+              f"Mobility={_fusion_feature_importances.get('mobility_score',0):.4f}")
+        return True
+    except Exception as e:
+        print(f"⚠️  Failed to load fusion classifier: {e} — using fixed-weight fallback")
+        _fusion_classifier = None
+        _fusion_scaler = None
+        return False
+
+# Load at startup — runs once when Flask starts
+_fusion_loaded = _load_fusion_classifier()
+
+
+# ─── PERFORMANCE CACHES ─────────────────────────────────────────────────
+_risk_cache = {"data": None, "ts": 0}
+RISK_CACHE_TTL = 300  # 5 minutes
+
 _mobility_cache = {"data": None, "ts": 0}
 MOBILITY_CACHE_TTL = 120  # 2 minutes
 
 # Zone definitions now live here as the single source of truth.
-# In Week 2 we will move this into MongoDB zones_collection.
 ZONES = [
-    # ── DNCC Zones ──────────────────────────────────────────
     {
         "id": 1,
         "city": "Uttara",
@@ -248,10 +301,31 @@ def get_nlp_score_for_zone(zone_id, crisis_mode):
     return 20.0
 
 
+def _fuse_with_classifier(nlp_score, wastewater_score, mobility_score):
+    """
+    T-08 — Use trained GradientBoosting classifier to produce a fused risk score.
+    Takes raw 0-100 signal values, scales them, runs predict_proba(outbreak),
+    and converts the outbreak probability to a 0-100 risk score.
+
+    Returns: (fused_score: float, method: str)
+    """
+    features = np.array([[nlp_score, wastewater_score, mobility_score]])
+    scaled = _fusion_scaler.transform(features)
+
+    # predict_proba returns [P(normal), P(outbreak)]
+    proba = _fusion_classifier.predict_proba(scaled)[0]
+    outbreak_prob = proba[1]  # probability of class 1 (outbreak)
+
+    # Convert to 0-100 risk score
+    fused_score = min(round(outbreak_prob * 100), 100)
+    return fused_score, "gradient_boosting"
+
+
 def calculate_multi_modal_risk(zone, crisis_mode):
     """
-    RESEARCH FUSION LOGIC — fuses NLP, Mobility, and Wastewater scores.
-    Now reads NLP score from real MongoDB data where available.
+    T-08 — Fuses NLP, Mobility, and Symptom Search scores.
+    Uses GradientBoosting classifier if available (trained in A-NEW-2),
+    falls back to fixed-weight linear fusion otherwise.
     """
     # 1. NLP score — from real MongoDB posts or fallback
     nlp_score = get_nlp_score_for_zone(zone['id'], crisis_mode)
@@ -262,12 +336,21 @@ def calculate_multi_modal_risk(zone, crisis_mode):
     cluster_size    = mobility_result['cluster_size']
     mobility_score  = mobility_result['mobility_score']
 
-    # 3. Wastewater viral load
+    # 3. Symptom Search (formerly "wastewater") — ARIMA on Google Trends
     bio_load = wastewater_ai.get_localized_load(zone['id'], crisis_mode)
 
-    # MULTI-MODAL WEIGHTED FUSION
-    fused_score = (nlp_score * 0.25) + (bio_load * 0.40) + (mobility_score * 0.35)
-    final_score = min(round(fused_score), 100)
+    # ── T-08: FUSION — Classifier or Fixed Weights ────────────────────
+    if _fusion_classifier is not None:
+        fused_score, fusion_method = _fuse_with_classifier(
+            nlp_score, bio_load, mobility_score
+        )
+    else:
+        # Legacy fixed-weight fusion (pre-T-08)
+        fused_score = (nlp_score * 0.25) + (bio_load * 0.40) + (mobility_score * 0.35)
+        fused_score = min(round(fused_score), 100)
+        fusion_method = "fixed_weights"
+
+    final_score = fused_score
 
     # Risk level
     if final_score > 70:
@@ -290,7 +373,7 @@ def calculate_multi_modal_risk(zone, crisis_mode):
         mobility_score=mobility_score
     )
 
-    return final_score, risk, color, nlp_score, is_anomaly, bio_load
+    return final_score, risk, color, nlp_score, is_anomaly, bio_load, fusion_method
 
 
 # ─────────────────────────────────────────────
@@ -301,12 +384,13 @@ def calculate_multi_modal_risk(zone, crisis_mode):
 def home():
     return jsonify({
         "status":         "System Online",
-        "version":        "4.0.0",
+        "version":        "5.0.0",
+        "fusion_method":  "gradient_boosting" if _fusion_classifier else "fixed_weights",
         "active_engines": [
             "BanglaBERT-NLP",
             "IsolationForest-Mobility",
-            "Wastewater-ARIMA",
-            "GradientBoosting-Fusion",
+            "SymptomSearch-ARIMA",
+            "GradientBoosting-Fusion" if _fusion_classifier else "FixedWeight-Fusion",
             "MongoDB-Atlas"
         ]
     })
@@ -327,7 +411,7 @@ def get_risk_status():
     tactical_alerts = []
 
     for z in ZONES:
-        score, risk, color, nlp, anomaly, bio = calculate_multi_modal_risk(
+        score, risk, color, nlp, anomaly, bio, fusion_method = calculate_multi_modal_risk(
             z, crisis_mode
         )
 
@@ -354,13 +438,21 @@ def get_risk_status():
             "summary": summary
         })
 
+    # T-08: Determine which fusion method was used for ALL zones
+    active_method = "gradient_boosting" if _fusion_classifier else "fixed_weights"
+
     result = {
-        "mobility_anomaly": 82.1 if crisis_mode else 12.4,
-        "wastewater_load":  94.5 if crisis_mode else 45.2,
-        "social_index":     9.2  if crisis_mode else 8.4,
-        "zones":            processed_zones,
-        "alerts":           tactical_alerts,
-        "crisis_active":    crisis_mode
+        "mobility_anomaly":  82.1 if crisis_mode else 12.4,
+        "wastewater_load":   94.5 if crisis_mode else 45.2,
+        "social_index":      9.2  if crisis_mode else 8.4,
+        "zones":             processed_zones,
+        "alerts":            tactical_alerts,
+        "crisis_active":     crisis_mode,
+        # T-08: New fields
+        "fusion_method":     active_method,
+        "feature_importances": _fusion_feature_importances if _fusion_classifier else {
+            "nlp_proxy": 0.25, "wastewater_proxy": 0.40, "mobility_score": 0.35
+        },
     }
     _risk_cache["data"] = result
     _risk_cache["ts"] = time.time()
@@ -376,12 +468,10 @@ def get_signals():
     all_signals = []
 
     for z in ZONES:
-        # Get real posts from MongoDB for this zone
         real_posts = get_recent_posts_by_zone(z['id'], limit=3)
 
         if real_posts:
             for post in real_posts:
-                # Use stored BERT score if available, else score live
                 if post.get('bert_score') is not None:
                     ai_score = post['bert_score']
                 else:
@@ -408,7 +498,6 @@ def get_signals():
                                  else str(post['timestamp'])
                 })
         else:
-            # Fallback if no real data yet — use zone signal text
             ai_score = bert_ai.analyze_text_signals(z['signal'])
             impact = (
                 "Critical" if ai_score > 75 else
@@ -442,8 +531,7 @@ def toggle_crisis():
 def get_forecast():
     """
     Returns 14-day ARIMA forecast for all zones.
-    Replaces fake random math with real model predictions.
-    Wastewater forecast: ARIMA on Google Trends series (engine_wastewater.py)
+    Symptom Search forecast: ARIMA on Google Trends series (engine_wastewater.py)
     Mobility forecast:   ARIMA on historical mobility CSV (engine_mobility.py)
     """
     from engine_mobility import get_zone_mobility_forecast
@@ -451,7 +539,6 @@ def get_forecast():
     forecast_results = []
     for z in ZONES:
         zone_id = z['id']
-        # Real ARIMA forecasts from both engines
         wastewater_forecast = wastewater_ai.get_zone_forecast(zone_id, days=14)
         mobility_forecast   = get_zone_mobility_forecast(zone_id, days=14)
 
@@ -460,7 +547,6 @@ def get_forecast():
             wf = wastewater_forecast[i] if i < len(wastewater_forecast) else 30.0
             mf = mobility_forecast[i]   if i < len(mobility_forecast)   else 30.0
 
-            # Fused forecast score — same weights as risk calculation
             fused_val = round((wf * 0.7) + (mf * 0.3), 1)
             days.append({
                 "day":              f"D{i+1}",
@@ -480,10 +566,7 @@ def get_forecast():
 
 @app.route('/api/db-stats', methods=['GET'])
 def get_db_stats():
-    """
-    Shows what's in MongoDB.
-    Useful to verify data collection is working.
-    """
+    """Shows what's in MongoDB."""
     return jsonify({
         "total_posts":       social_posts.count_documents({}),
         "processed_posts":   social_posts.count_documents(
@@ -568,6 +651,32 @@ def get_fusion_results():
         return jsonify({"error": str(e)}), 500
 
 
+@app.route('/api/fusion-info', methods=['GET'])
+def get_fusion_info():
+    """
+    T-08 — Returns live fusion classifier status and feature importances.
+    Used by the frontend to display the GB model panel.
+    """
+    info = {
+        "active":          _fusion_classifier is not None,
+        "method":          "gradient_boosting" if _fusion_classifier else "fixed_weights",
+        "feature_importances": _fusion_feature_importances if _fusion_classifier else {
+            "nlp_proxy": 0.25, "wastewater_proxy": 0.40, "mobility_score": 0.35
+        },
+    }
+
+    if _fusion_classifier is not None and _fusion_model_info:
+        best = _fusion_model_info.get('best_model', {})
+        info["model_name"] = best.get('name', 'unknown')
+        info["cv_f1_mean"] = best.get('cv_f1_mean', None)
+        info["cv_f1_sd"] = best.get('cv_f1_sd', None)
+        info["cv_auc_mean"] = best.get('cv_auc_mean', None)
+        info["f1_improvement_over_baseline"] = best.get('f1_improvement_over_baseline', None)
+        info["model_comparison"] = _fusion_model_info.get('model_comparison', [])
+
+    return jsonify(info)
+
+
 @app.route('/api/system-summary', methods=['GET'])
 def get_system_summary():
     """Single endpoint with all key paper numbers."""
@@ -606,6 +715,7 @@ def get_system_summary():
         "train_samples": _safe(finetune, 'training_config', 'train_samples'),
         "test_samples": _safe(finetune, 'training_config', 'test_samples'),
         "fusion_trained": fusion is not None,
+        "fusion_method": "gradient_boosting" if _fusion_classifier else "fixed_weights",
     })
 
 

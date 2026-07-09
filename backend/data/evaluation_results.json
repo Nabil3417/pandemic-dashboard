@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-07T02:49:46.615941",
+  "generated_at": "2026-07-09T15:28:13.101867",
   "eval_zone": 11,
   "total_weeks": 156,
   "outbreak_weeks": 52,
@@ -23,6 +23,22 @@
     "threshold": 22.0,
     "total_weeks": 156,
     "outbreak_weeks": 52
+  },
+  "combined_model_trained": {
+    "label": "Combined Model (Trained Fusion Classifier)",
+    "precision": 0.9091,
+    "recall": 0.9615,
+    "f1_score": 0.9346,
+    "roc_auc": 0.9922,
+    "tp": 50,
+    "fp": 5,
+    "tn": 99,
+    "fn": 2,
+    "threshold": 0.46,
+    "total_weeks": 156,
+    "outbreak_weeks": 52,
+    "model_name": "GradientBoostingClassifier",
+    "feature_importances": {}
   },
   "per_modality": {
     "nlp_only": {
@@ -72,13 +88,208 @@
     }
   },
   "early_warning": {
-    "avg_lead_weeks": 1.3,
-    "outbreaks_detected_early": 3,
-    "lead_times": [
-      2,
-      1,
-      1
-    ]
+    "strict": {
+      "threshold": 22.0,
+      "outbreaks_caught": 4,
+      "outbreaks_total": 5,
+      "avg_lead_weeks": 7.8,
+      "lead_times": [
+        7,
+        8,
+        8,
+        8,
+        0
+      ],
+      "per_outbreak": [
+        {
+          "start_date": "2020-03-04",
+          "start_idx": 9,
+          "end_idx": 19,
+          "duration": 11,
+          "lead_weeks": 7
+        },
+        {
+          "start_date": "2021-03-05",
+          "start_idx": 61,
+          "end_idx": 72,
+          "duration": 12,
+          "lead_weeks": 8
+        },
+        {
+          "start_date": "2021-06-25",
+          "start_idx": 77,
+          "end_idx": 89,
+          "duration": 13,
+          "lead_weeks": 8
+        },
+        {
+          "start_date": "2022-01-01",
+          "start_idx": 104,
+          "end_idx": 108,
+          "duration": 5,
+          "lead_weeks": 8
+        },
+        {
+          "start_date": "2022-06-25",
+          "start_idx": 129,
+          "end_idx": 139,
+          "duration": 11,
+          "lead_weeks": 0
+        }
+      ]
+    },
+    "soft": {
+      "threshold": 15.0,
+      "outbreaks_caught": 5,
+      "outbreaks_total": 5,
+      "avg_lead_weeks": 7.4,
+      "lead_times": [
+        8,
+        8,
+        8,
+        8,
+        5
+      ],
+      "per_outbreak": [
+        {
+          "start_date": "2020-03-04",
+          "start_idx": 9,
+          "end_idx": 19,
+          "duration": 11,
+          "lead_weeks": 8
+        },
+        {
+          "start_date": "2021-03-05",
+          "start_idx": 61,
+          "end_idx": 72,
+          "duration": 12,
+          "lead_weeks": 8
+        },
+        {
+          "start_date": "2021-06-25",
+          "start_idx": 77,
+          "end_idx": 89,
+          "duration": 13,
+          "lead_weeks": 8
+        },
+        {
+          "start_date": "2022-01-01",
+          "start_idx": 104,
+          "end_idx": 108,
+          "duration": 5,
+          "lead_weeks": 8
+        },
+        {
+          "start_date": "2022-06-25",
+          "start_idx": 129,
+          "end_idx": 139,
+          "duration": 11,
+          "lead_weeks": 5
+        }
+      ]
+    },
+    "lookback_weeks": 8,
+    "outbreaks_total": 5,
+    "strict_trained": {
+      "threshold": 0.22,
+      "outbreaks_caught": 3,
+      "outbreaks_total": 5,
+      "avg_lead_weeks": 5.3,
+      "lead_times": [
+        0,
+        7,
+        8,
+        0,
+        1
+      ],
+      "per_outbreak": [
+        {
+          "start_date": "2020-03-04",
+          "start_idx": 9,
+          "end_idx": 19,
+          "duration": 11,
+          "lead_weeks": 0
+        },
+        {
+          "start_date": "2021-03-05",
+          "start_idx": 61,
+          "end_idx": 72,
+          "duration": 12,
+          "lead_weeks": 7
+        },
+        {
+          "start_date": "2021-06-25",
+          "start_idx": 77,
+          "end_idx": 89,
+          "duration": 13,
+          "lead_weeks": 8
+        },
+        {
+          "start_date": "2022-01-01",
+          "start_idx": 104,
+          "end_idx": 108,
+          "duration": 5,
+          "lead_weeks": 0
+        },
+        {
+          "start_date": "2022-06-25",
+          "start_idx": 129,
+          "end_idx": 139,
+          "duration": 11,
+          "lead_weeks": 1
+        }
+      ]
+    },
+    "soft_trained": {
+      "threshold": 0.15,
+      "outbreaks_caught": 4,
+      "outbreaks_total": 5,
+      "avg_lead_weeks": 5.2,
+      "lead_times": [
+        0,
+        7,
+        8,
+        5,
+        1
+      ],
+      "per_outbreak": [
+        {
+          "start_date": "2020-03-04",
+          "start_idx": 9,
+          "end_idx": 19,
+          "duration": 11,
+          "lead_weeks": 0
+        },
+        {
+          "start_date": "2021-03-05",
+          "start_idx": 61,
+          "end_idx": 72,
+          "duration": 12,
+          "lead_weeks": 7
+        },
+        {
+          "start_date": "2021-06-25",
+          "start_idx": 77,
+          "end_idx": 89,
+          "duration": 13,
+          "lead_weeks": 8
+        },
+        {
+          "start_date": "2022-01-01",
+          "start_idx": 104,
+          "end_idx": 108,
+          "duration": 5,
+          "lead_weeks": 5
+        },
+        {
+          "start_date": "2022-06-25",
+          "start_idx": 129,
+          "end_idx": 139,
+          "duration": 11,
+          "lead_weeks": 1
+        }
+      ]
+    }
   },
   "model_comparison": {
     "note": "Fine-tuned BanglaBERT comparison will be added after fine_tune_bert.py is run",
