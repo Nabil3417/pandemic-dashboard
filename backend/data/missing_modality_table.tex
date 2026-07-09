@@ -1,0 +1,15 @@
+\begin{table}[h]
+\centering
+\caption{Robustness to Missing Modalities}
+\label{tab:missing_modality}
+\begin{tabular}{lcccc}
+\hline
+Scenario & F1 & AUC & Relative F1 Drop & Note \\
+\hline
+All modalities (baseline) & 0.935 & 0.992 & 0.0\%% & Full system \\
+No NLP & 0.724 & 0.874 & 22.5\%% & Social media offline \\
+No Mobility & 0.736 & 0.874 & 21.3\%% & Google Mobility retired Oct 2023 \\
+No Symptom Search & 0.816 & 0.938 & 12.7\%% & Google Trends unavailable \\
+\hline
+\end{tabular}
+\end{table}
