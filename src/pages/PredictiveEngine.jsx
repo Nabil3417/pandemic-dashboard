@@ -26,7 +26,7 @@ const PredictiveEngine = () => {
       });
   }, []);
 
-  // T-08: Fetch fusion classifier info
+ 
   useEffect(() => {
     fetch('http://localhost:5000/api/fusion-info')
       .then(res => res.json())
@@ -96,7 +96,7 @@ const PredictiveEngine = () => {
       AUC: +(evalResults.per_modality.mobility_only.roc_auc * 100).toFixed(1),
     },
     {
-      name: 'Symptom Search',
+      name: 'Symptom Surveillance Index',
       F1: +(evalResults.per_modality.wastewater_only.f1_score * 100).toFixed(1),
       Precision: +(evalResults.per_modality.wastewater_only.precision * 100).toFixed(1),
       Recall: +(evalResults.per_modality.wastewater_only.recall * 100).toFixed(1),
@@ -118,7 +118,7 @@ const PredictiveEngine = () => {
   // T-08: Feature importance bar chart data
   const featureImpData = fusionInfo?.feature_importances ? [
     { name: 'NLP', importance: +(fusionInfo.feature_importances.nlp_proxy * 100).toFixed(1), fill: '#3b82f6' },
-    { name: 'Symptom Search', importance: +(fusionInfo.feature_importances.wastewater_proxy * 100).toFixed(1), fill: '#22c55e' },
+    { name: 'Symptom Surveillance Index', importance: +(fusionInfo.feature_importances.wastewater_proxy * 100).toFixed(1), fill: '#22c55e' },
     { name: 'Mobility', importance: +(fusionInfo.feature_importances.mobility_score * 100).toFixed(1), fill: '#f59e0b' },
   ] : [];
 
@@ -334,9 +334,6 @@ const PredictiveEngine = () => {
                 <h2 className="text-3xl font-black uppercase italic tracking-tighter">
                   Fusion <span className="text-emerald-400">Classifier</span>
                 </h2>
-                <p className="text-[10px] font-black text-slate-500 uppercase tracking-[0.3em] mt-1">
-                  T-08: GradientBoosting vs Fixed-Weight Baseline
-                </p>
               </div>
             </div>
 
@@ -457,7 +454,7 @@ const PredictiveEngine = () => {
                       </div>
                       <div className="flex items-center gap-2">
                         <div className="w-2.5 h-2.5 rounded-full bg-emerald-500" />
-                        <span className="text-[11px] font-black uppercase">Symptom Search: {(evalResults.fusion_weights.wastewater * 100).toFixed(0)}%</span>
+                        <span className="text-[11px] font-black uppercase">Symptom Surveillance Index: {(evalResults.fusion_weights.wastewater * 100).toFixed(0)}%</span>
                       </div>
                       <div className="flex items-center gap-2">
                         <div className="w-2.5 h-2.5 rounded-full bg-amber-500" />
@@ -481,7 +478,7 @@ const PredictiveEngine = () => {
                 </div>
                 <div className="flex items-center gap-2">
                   <div className="w-2 h-2 rounded-full bg-emerald-500" />
-                  <span className="text-[10px] font-black uppercase text-slate-400">Symptom Search: {(evalResults.fusion_weights.wastewater * 100).toFixed(0)}%</span>
+                  <span className="text-[10px] font-black uppercase text-slate-400">Symptom Surveillance Index: {(evalResults.fusion_weights.wastewater * 100).toFixed(0)}%</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <div className="w-2 h-2 rounded-full bg-amber-500" />
