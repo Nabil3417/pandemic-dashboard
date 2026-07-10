@@ -107,7 +107,7 @@ const SignalIntelligence = () => {
                   <div className="flex justify-between text-[10px] font-black uppercase mb-3">
                     <div className="flex items-center gap-2">
                       <span className="opacity-40">{m.icon}</span>
-                      <span className="group-hover:text-blue-400 transition-colors"title={m.tooltip}>{m.label}</span>
+                      <span className="group-hover:text-blue-400 transition-colors" title={m.tooltip || m.label}>{m.label}</span>
                     </div>
                     <span className="opacity-50 italic">{m.val}%</span>
                   </div>
