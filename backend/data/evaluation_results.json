@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-07-10T03:25:07.130213",
+  "generated_at": "2026-07-14T01:56:51.583165",
   "eval_zone": 11,
   "total_weeks": 156,
   "outbreak_weeks": 52,
@@ -38,7 +38,11 @@
     "total_weeks": 156,
     "outbreak_weeks": 52,
     "model_name": "GradientBoostingClassifier",
-    "feature_importances": {}
+    "feature_importances": {},
+    "paper_notes": {
+      "cv_5fold_f1": 0.6464,
+      "cv_5fold_auc": 0.8555
+    }
   },
   "per_modality": {
     "nlp_only": {
@@ -86,6 +90,107 @@
       "outbreak_weeks": 52,
       "weight_in_fusion": 0.4
     }
+  },
+  "weight_optimization": {
+    "baseline_weights": {
+      "nlp": 0.25,
+      "wastewater": 0.4,
+      "mobility": 0.35
+    },
+    "baseline_f1": 0.5139,
+    "baseline_auc": 0.6768,
+    "best_weights": {
+      "nlp": 0.0,
+      "wastewater": 0.9,
+      "mobility": 0.1
+    },
+    "best_f1": 0.6218,
+    "best_auc": 0.7702,
+    "best_threshold": 14.0,
+    "top_10_combinations": [
+      {
+        "nlp_w": 0.0,
+        "wastewater_w": 0.9,
+        "mobility_w": 0.1,
+        "f1": 0.6218,
+        "auc": 0.7702,
+        "best_threshold": 14.0
+      },
+      {
+        "nlp_w": 0.2,
+        "wastewater_w": 0.7,
+        "mobility_w": 0.1,
+        "f1": 0.6027,
+        "auc": 0.7489,
+        "best_threshold": 13.0
+      },
+      {
+        "nlp_w": 0.1,
+        "wastewater_w": 0.8,
+        "mobility_w": 0.1,
+        "f1": 0.6,
+        "auc": 0.7604,
+        "best_threshold": 13.0
+      },
+      {
+        "nlp_w": 0.1,
+        "wastewater_w": 0.9,
+        "mobility_w": 0.0,
+        "f1": 0.5972,
+        "auc": 0.7198,
+        "best_threshold": 9.0
+      },
+      {
+        "nlp_w": 0.3,
+        "wastewater_w": 0.7,
+        "mobility_w": 0.0,
+        "f1": 0.5915,
+        "auc": 0.7094,
+        "best_threshold": 10.0
+      },
+      {
+        "nlp_w": 0.0,
+        "wastewater_w": 1.0,
+        "mobility_w": 0.0,
+        "f1": 0.589,
+        "auc": 0.7247,
+        "best_threshold": 8.0
+      },
+      {
+        "nlp_w": 0.2,
+        "wastewater_w": 0.8,
+        "mobility_w": 0.0,
+        "f1": 0.589,
+        "auc": 0.7159,
+        "best_threshold": 9.0
+      },
+      {
+        "nlp_w": 0.4,
+        "wastewater_w": 0.6,
+        "mobility_w": 0.0,
+        "f1": 0.5857,
+        "auc": 0.7033,
+        "best_threshold": 11.0
+      },
+      {
+        "nlp_w": 0.3,
+        "wastewater_w": 0.6,
+        "mobility_w": 0.1,
+        "f1": 0.5833,
+        "auc": 0.7376,
+        "best_threshold": 12.0
+      },
+      {
+        "nlp_w": 0.0,
+        "wastewater_w": 0.8,
+        "mobility_w": 0.2,
+        "f1": 0.5823,
+        "auc": 0.7448,
+        "best_threshold": 15.0
+      }
+    ],
+    "total_combinations_tested": 66,
+    "note": "Trained GradientBoosting classifier supersedes manual weight tuning (see trained_model metrics for comparison)"
   },
   "per_disease_breakdown": {
     "covid19": {

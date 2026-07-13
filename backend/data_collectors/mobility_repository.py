@@ -1,3 +1,4 @@
+import os
 """
 Mobility Repository — Data Access Layer for W-DZMI
 ====================================================
@@ -13,11 +14,7 @@ Usage in Flask:
 from datetime import datetime, timezone, timedelta
 from pymongo import MongoClient
 
-MONGO_URI = (
-    "mongodb+srv://ahatesamahamed_db_user:Aew8XBwyjZm2sJGR"
-    "@cluster0.w9o56pq.mongodb.net/bioguard_research"
-    "?retryWrites=true&w=majority"
-)
+MONGO_URI = os.getenv("MONGO_URI")
 
 
 class MobilityRepository:

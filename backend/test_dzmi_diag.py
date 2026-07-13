@@ -1,3 +1,4 @@
+import os
 """Quick diagnostic to check actual data structures in MongoDB and zones.json."""
 import json
 from pymongo import MongoClient
@@ -5,7 +6,7 @@ from pathlib import Path
 
 # MongoDB
 client = MongoClient(
-    "mongodb+srv://ahatesamahamed_db_user:Aew8XBwyjZm2sJGR@cluster0.w9o56pq.mongodb.net/bioguard_research?retryWrites=true&w=majority",
+    os.getenv("MONGO_URI", ""),
     serverSelectionTimeoutMS=10000
 )
 db = client["bioguard_research"]

@@ -1,3 +1,4 @@
+import os
 """
 W-DZMI: Weighted Dynamic Zone Mobility Index
 =============================================
@@ -30,11 +31,7 @@ SIGNAL_WEIGHTS = {
 
 MIN_SIGNALS = 1
 
-MONGO_URI = (
-    "mongodb+srv://ahatesamahamed_db_user:Aew8XBwyjZm2sJGR"
-    "@cluster0.w9o56pq.mongodb.net/bioguard_research"
-    "?retryWrites=true&w=majority"
-)
+MONGO_URI = os.getenv("MONGO_URI")
 
 
 # ── MongoDB Connection ─────────────────────────────────────────────────────

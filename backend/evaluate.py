@@ -397,6 +397,12 @@ def evaluate_trained_fusion(aligned_df):
     y_true = aligned_df['outbreak_label'].values
     proba  = compute_trained_fusion_predictions(aligned_df, model, scaler)
 
+    # ── A2: WARNING — in-sample F1 vs cross-validated F1 ────────────────────
+    print(f"\n  ╔═══════════════════════════════════════════════════════════════════╗")
+    print(f"  ║  WARNING: The F1 below is IN-SAMPLE (train=evaluate).           ║")
+    print(f"  ║  For honest out-of-sample F1, see fusion_training_results.json. ║")
+    print(f"  ╚═══════════════════════════════════════════════════════════════════╝")
+
     # Find optimal threshold on proba (maximize F1)
     best_f1 = 0
     best_thresh = 0.5
@@ -427,16 +433,159 @@ def evaluate_trained_fusion(aligned_df):
     metrics["model_name"] = type(model).__name__
     metrics["feature_importances"] = fi
 
+    # ── A2: paper_notes with honest cross-validated metrics ─────────────────
+    paper_notes = {}
+    try:
+        with open(results_path, 'r') as f:
+            tres = json.load(f)
+        cv_f1 = tres.get('gradient_boosting', {}).get('cv_f1_mean')
+        cv_auc = tres.get('gradient_boosting', {}).get('cv_auc_mean')
+        if cv_f1 is not None:
+            paper_notes["cv_5fold_f1"] = cv_f1
+        if cv_auc is not None:
+            paper_notes["cv_5fold_auc"] = cv_auc
+    except Exception:
+        pass
+    metrics["paper_notes"] = paper_notes if paper_notes else None
+
     # Print comparison
     fixed_f1 = f1_score(y_true, predict_from_score(aligned_df['fused_score'].tolist()), zero_division=0)
     fixed_auc = roc_auc_score(y_true, aligned_df['fused_score'].tolist()) if len(np.unique(y_true)) > 1 else 0
     print(f"   Fixed-Weight Baseline :  F1={fixed_f1:.4f}  AUC={fixed_auc:.4f}")
     print(f"   {type(model).__name__:22s}:  F1={metrics['f1_score']:.4f}  AUC={metrics['roc_auc']:.4f}")
     print(f"   Delta                 :  F1={metrics['f1_score']-fixed_f1:+.4f}  AUC={metrics['roc_auc']-fixed_auc:+.4f}")
+    if paper_notes:
+        print(f"   Honest 5-fold CV F1   :  {paper_notes.get('cv_5fold_f1', 'N/A')}")
+        print(f"   Honest 5-fold CV AUC  :  {paper_notes.get('cv_5fold_auc', 'N/A')}")
     if fi:
         print(f"   Feature importances    :  {fi}")
 
     return metrics, proba
+
+
+# ══════════════════════════════════════════════════════════════════════════════
+# T-07: A3 — Weight Grid Search Optimization
+# ══════════════════════════════════════════════════════════════════════════════
+
+def run_weight_optimization(aligned_df):
+    """
+    T-07 / A3: Grid search over fixed-weight combinations to find the best
+    manual weight assignment. This proves that the trained GradientBoosting
+    classifier supersedes manual weight tuning.
+
+    Sweeps NLP_WEIGHT, WASTEWATER_WEIGHT, MOBILITY_WEIGHT (sum=1.0)
+    and reports F1/AUC for each combination.
+    """
+    print(f"\n  T-07 (A3): Weight Grid Search Optimization...")
+    print(f"  NOTE: This sweeps many weight combos — may take 1-2 minutes.\n")
+
+    y_true = aligned_df['outbreak_label'].values
+
+    # Grid: step=0.1, only keep combos where sum==1.0 (within tolerance)
+    step = 0.1
+    best_f1 = -1
+    best_auc = -1
+    best_weights = None
+    best_thresh = OUTBREAK_THRESHOLD
+    all_results = []
+
+    w_vals = np.arange(0.0, 1.01, step)
+
+    for wn in w_vals:
+        for ww in w_vals:
+            wm = round(1.0 - wn - ww, 2)
+            if wm < -0.001 or wm > 1.001:
+                continue
+            wm = max(0.0, min(1.0, wm))
+
+            # Skip if all zero
+            if wn == 0 and ww == 0 and wm == 0:
+                continue
+
+            # Compute weighted fusion score
+            fused = (
+                aligned_df['nlp_proxy'].values * wn +
+                aligned_df['wastewater_proxy'].values * ww +
+                aligned_df['mobility_score'].values * wm
+            )
+
+            # Find best threshold for this weight combo
+            combo_best_f1 = -1
+            combo_best_t = OUTBREAK_THRESHOLD
+            for t in np.arange(5.0, 45.0, 1.0):
+                preds = (fused >= t).astype(int)
+                if len(np.unique(preds)) < 2:
+                    continue
+                f1 = f1_score(y_true, preds, zero_division=0)
+                if f1 > combo_best_f1:
+                    combo_best_f1 = f1
+                    combo_best_t = t
+
+            preds = (fused >= combo_best_t).astype(int)
+            try:
+                auc = roc_auc_score(y_true, fused)
+            except Exception:
+                auc = 0.0
+
+            entry = {
+                "nlp_w": round(float(wn), 2),
+                "wastewater_w": round(float(ww), 2),
+                "mobility_w": round(float(wm), 2),
+                "f1": round(float(combo_best_f1), 4),
+                "auc": round(float(auc), 4),
+                "best_threshold": round(float(combo_best_t), 1),
+            }
+            all_results.append(entry)
+
+            if combo_best_f1 > best_f1:
+                best_f1 = combo_best_f1
+                best_auc = auc
+                best_weights = {"nlp": round(float(wn), 2), "wastewater": round(float(ww), 2), "mobility": round(float(wm), 2)}
+                best_thresh = combo_best_t
+
+    # Also evaluate current (baseline) weights
+    fused_baseline = (
+        aligned_df['nlp_proxy'].values * NLP_WEIGHT +
+        aligned_df['wastewater_proxy'].values * WASTEWATER_WEIGHT +
+        aligned_df['mobility_score'].values * MOBILITY_WEIGHT
+    )
+    baseline_preds = predict_from_score(fused_baseline.tolist())
+    baseline_f1 = f1_score(y_true, baseline_preds, zero_division=0)
+    try:
+        baseline_auc = roc_auc_score(y_true, fused_baseline)
+    except Exception:
+        baseline_auc = 0.0
+
+    # Sort by F1 descending, keep top 10
+    all_results.sort(key=lambda x: x['f1'], reverse=True)
+    top_10 = all_results[:10]
+
+    print(f"\n{'='*70}")
+    print(f"WEIGHT GRID SEARCH (T-07 / A3)")
+    print(f"{'='*70}")
+    print(f"  Baseline weights (NLP={NLP_WEIGHT}, WW={WASTEWATER_WEIGHT}, MOB={MOBILITY_WEIGHT}):")
+    print(f"    F1={baseline_f1:.4f}  AUC={baseline_auc:.4f}")
+    print(f"\n  Best grid-search weights (NLP={best_weights['nlp']}, WW={best_weights['wastewater']}, MOB={best_weights['mobility']}):")
+    print(f"    F1={best_f1:.4f}  AUC={best_auc:.4f}  (threshold={best_thresh:.1f})")
+    print(f"\n  Top 10 weight combinations:")
+    print(f"  {'NLP':>5} {'WW':>5} {'MOB':>5} {'F1':>8} {'AUC':>8} {'Thresh':>7}")
+    print(f"  {'-'*42}")
+    for r in top_10:
+        print(f"  {r['nlp_w']:>5.2f} {r['wastewater_w']:>5.2f} {r['mobility_w']:>5.2f} {r['f1']:>8.4f} {r['auc']:>8.4f} {r['best_threshold']:>7.1f}")
+    print(f"{'='*70}")
+
+    return {
+        "baseline_weights": {"nlp": NLP_WEIGHT, "wastewater": WASTEWATER_WEIGHT, "mobility": MOBILITY_WEIGHT},
+        "baseline_f1": round(float(baseline_f1), 4),
+        "baseline_auc": round(float(baseline_auc), 4),
+        "best_weights": best_weights,
+        "best_f1": round(float(best_f1), 4),
+        "best_auc": round(float(best_auc), 4),
+        "best_threshold": round(float(best_thresh), 1),
+        "top_10_combinations": top_10,
+        "total_combinations_tested": len(all_results),
+        "note": "Trained GradientBoosting classifier supersedes manual weight tuning (see trained_model metrics for comparison)",
+    }
 
 
 # ══════════════════════════════════════════════════════════════════════════════
@@ -1647,6 +1796,9 @@ def run_evaluation():
     print(f"  Actual Outbreak: {combined['fn']:>4}    {combined['tp']:>4}")
     print(f"{'='*65}")
 
+    # ── A3: Weight grid search optimization (T-07) ────────────────────────
+    weight_opt = run_weight_optimization(aligned_df)
+
     # ── Per-modality analysis ──────────────────────────────────────────────
     modality_results = run_modality_analysis(aligned_df)
 
@@ -1758,6 +1910,7 @@ def run_evaluation():
                 "weight_in_fusion": WASTEWATER_WEIGHT,
             },
         },
+        "weight_optimization": weight_opt,
         "per_disease_breakdown": per_disease,
         "n2_statistical_significance": n2_results,
         "feature_importance":    feature_importance_out if shap_result else None,
@@ -1801,6 +1954,14 @@ def run_evaluation():
         print(f"   {'-'*60}")
         print(f"   {'Fixed-Weight Baseline':<45} {combined['f1_score']:>6.3f}  {combined['roc_auc']:>6.3f}")
         print(f"   {trained_metrics['model_name']:<45} {trained_metrics['f1_score']:>6.3f}  {trained_metrics['roc_auc']:>6.3f}")
+
+    # A3: Weight optimization summary
+    if weight_opt:
+        print(f"\n  WEIGHT OPTIMIZATION (T-07 / A3):")
+        print(f"   Baseline weights F1: {weight_opt['baseline_f1']:.4f}")
+        print(f"   Best grid-search F1: {weight_opt['best_f1']:.4f}  "
+              f"(NLP={weight_opt['best_weights']['nlp']}, WW={weight_opt['best_weights']['wastewater']}, MOB={weight_opt['best_weights']['mobility']})")
+        print(f"   Note: Trained GradientBoosting classifier supersedes manual weight tuning")
 
     # T-09 early warning summary
     ew = early_warning

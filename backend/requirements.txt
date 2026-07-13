@@ -18,3 +18,13 @@ telethon==1.36.0
 
 # Real wastewater proxy — Google Trends
 pytrends==4.9.2
+apscheduler==3.10.4
+atproto==0.0.63
+feedparser==6.0.11
+beautifulsoup4==4.12.3
+google-api-python-client==2.140.0
+shap==0.45.1
+joblib==1.4.2
+scipy==1.13.1
+lxml==5.2.2
+python-dateutil==2.9.0
