@@ -54,54 +54,8 @@ HEALTH_KEYWORDS = [
 ]
 
 
-# ══════════════════════════════════════════════════════════════════════════════
-# ZONE DEFINITIONS — 15 Dhaka monitoring zones
-# ══════════════════════════════════════════════════════════════════════════════
-
-ZONE_KEYWORDS = {
-    1:  ['uttara', 'উত্তরা', 'uttarkhan', 'dakshinkhan', 'khilkhet',
-         'উত্তরখান', 'দক্ষিণখান'],
-    2:  ['mirpur', 'মিরপুর', 'pallabi', 'পল্লবী', 'rupnagar', 'রূপনগর'],
-    3:  ['gulshan', 'গুলশান', 'banani', 'বনানী', 'baridhara', 'বারিধারা',
-         'mohakhali', 'মহাখালী', 'tejgaon', 'তেজগাঁও'],
-    4:  ['agargaon', 'আগারগাঁও', 'kafrul', 'কাফরুল', 'kazipara',
-         'কাজীপাড়া', 'shewrapara', 'শেওড়াপাড়া'],
-    5:  ['farmgate', 'ফার্মগেট', 'karwan bazar', 'কারওয়ান বাজার',
-         'kawran', 'sher-e-bangla', 'শেরেবাংলা'],
-    6:  ['diabari', 'দিয়াবাড়ি', 'ashkona', 'আশকোনা', 'kawlar'],
-    7:  ['uttarkhan', 'উত্তরখান', 'faidabad', 'ফাইদাবাদ', 'barua', 'jamun'],
-    8:  ['dakshinkhan', 'দক্ষিনখান', 'dumni', 'satarkul'],
-    9:  ['vatara', 'ভাটারা', 'kuril', 'কুড়িল', 'nurerchala', 'নূরেরচালা'],
-    10: ['badda', 'বাড্ডা', 'aftabnagar', 'আফতাবনগর', 'beraid'],
-    11: ['ramna', 'রমনা', 'motijheel', 'মতিঝিল', 'paltan', 'পল্টন',
-         'shahbagh', 'শাহবাগ', 'segunbagicha'],
-    12: ['khilgaon', 'খিলগাঁও', 'mugda', 'মুগদা', 'basabo', 'বাসাবো',
-         'malibagh', 'মালিবাগ', 'shantinagar', 'শান্তিনগর'],
-    13: ['dhanmondi', 'ধানমন্ডি', 'azimpur', 'আজিমপুর', 'lalbagh',
-         'লালবাগ', 'hazaribagh', 'হাজারীবাগ', 'kalabagan', 'কলাবাগান'],
-    14: ['wari', 'ওয়ারী', 'jatrabari', 'যাত্রাবাড়ী', 'sutrapur',
-         'সূত্রাপুর', 'gendaria', 'গেন্ডারিয়া', 'old dhaka', 'পুরান ঢাকা'],
-    15: ['bashundhara', 'বসুন্ধরা', 'norda', 'নর্দা', 'nsu',
-         'north south university', 'নর্থ সাউথ'],
-}
-
-ZONE_COORDS = {
-    1:  {"lat": 23.8759, "lng": 90.3795, "name": "Uttara"},
-    2:  {"lat": 23.8223, "lng": 90.3654, "name": "Mirpur"},
-    3:  {"lat": 23.7940, "lng": 90.4043, "name": "Gulshan & Banani"},
-    4:  {"lat": 23.7751, "lng": 90.3668, "name": "Agargaon & Kafrul"},
-    5:  {"lat": 23.7527, "lng": 90.3894, "name": "Farmgate & Karwan Bazar"},
-    6:  {"lat": 23.9012, "lng": 90.3456, "name": "Diabari & Ashkona"},
-    7:  {"lat": 23.9123, "lng": 90.4234, "name": "Uttarkhan & Faidabad"},
-    8:  {"lat": 23.8934, "lng": 90.4456, "name": "Dakshinkhan & Dumni"},
-    9:  {"lat": 23.8234, "lng": 90.4234, "name": "Vatara & Kuril"},
-    10: {"lat": 23.7845, "lng": 90.4234, "name": "Badda & Aftabnagar"},
-    11: {"lat": 23.7234, "lng": 90.4123, "name": "Ramna & Motijheel"},
-    12: {"lat": 23.7345, "lng": 90.4345, "name": "Khilgaon & Mugda"},
-    13: {"lat": 23.7456, "lng": 90.3789, "name": "Dhanmondi & Azimpur"},
-    14: {"lat": 23.7123, "lng": 90.4234, "name": "Wari & Jatrabari"},
-    15: {"lat": 23.8191, "lng": 90.4526, "name": "Bashundhara R/A (NSU)"},
-}
+# Zone definitions — loaded from zones.json (single source of truth)
+from zones_loader import ZONE_KEYWORDS, ZONE_COORDS
 
 # Default zone when no location keyword matches
 ZONE_DEFAULT = 15  # NSU / Bashundhara research zone

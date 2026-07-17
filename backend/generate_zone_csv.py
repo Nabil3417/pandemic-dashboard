@@ -23,48 +23,10 @@ import numpy as np
 import pandas as pd
 from datetime import datetime
 
-# ─────────────────────────────────────────────
-# Zone definitions (must match engine_mobility.py)
-# ─────────────────────────────────────────────
-ZONE_PROFILES = {
-    1:  {"name": "Uttara",                  "center": (23.8759, 90.3795), "density": "medium"},
-    2:  {"name": "Mirpur",                  "center": (23.8223, 90.3654), "density": "high"},
-    3:  {"name": "Gulshan & Banani",        "center": (23.7940, 90.4043), "density": "high"},
-    4:  {"name": "Agargaon & Kafrul",       "center": (23.7751, 90.3668), "density": "medium"},
-    5:  {"name": "Farmgate & Karwan Bazar", "center": (23.7527, 90.3894), "density": "very_high"},
-    6:  {"name": "Diabari & Ashkona",       "center": (23.9012, 90.3456), "density": "low"},
-    7:  {"name": "Uttarkhan & Faidabad",    "center": (23.9123, 90.4234), "density": "low"},
-    8:  {"name": "Dakshinkhan & Dumni",     "center": (23.8934, 90.4456), "density": "low"},
-    9:  {"name": "Vatara & Kuril",          "center": (23.8234, 90.4234), "density": "medium"},
-    10: {"name": "Badda & Aftabnagar",      "center": (23.7845, 90.4234), "density": "medium"},
-    11: {"name": "Ramna & Motijheel",       "center": (23.7234, 90.4123), "density": "very_high"},
-    12: {"name": "Khilgaon & Mugda",        "center": (23.7345, 90.4345), "density": "high"},
-    13: {"name": "Dhanmondi & Azimpur",     "center": (23.7456, 90.3789), "density": "high"},
-    14: {"name": "Wari & Jatrabari",        "center": (23.7123, 90.4234), "density": "very_high"},
-    15: {"name": "Bashundhara R/A (NSU)",   "center": (23.8191, 90.4526), "density": "medium"},
-}
+# Zone definitions — loaded from zones.json (single source of truth)
+from zones_loader import ZONE_PROFILES, ZONE_WEIGHTS
 
-# Zone weights — how much each zone's mobility tracks the national average
-# Based on population density + commercial activity
-ZONE_WEIGHTS = {
-    1:  0.65,   # Uttara — planned residential
-    2:  0.80,   # Mirpur — high density
-    3:  0.70,   # Gulshan & Banani — commercial hub
-    4:  0.55,   # Agargaon — government area
-    5:  0.90,   # Farmgate — highest commercial
-    6:  0.35,   # Diabari — peripheral
-    7:  0.30,   # Uttarkhan — outskirts
-    8:  0.32,   # Dakshinkhan — outskirts
-    9:  0.60,   # Vatara — mixed
-    10: 0.58,   # Badda — residential
-    11: 0.95,   # Ramna — CBD highest
-    12: 0.75,   # Khilgaon — dense residential
-    13: 0.78,   # Dhanmondi — hospital cluster
-    14: 0.88,   # Wari — Old Dhaka extreme density
-    15: 1.10,   # Bashundhara NSU — research zone (high activity)
-}
-
-# Noise std-dev per density class (higher density = more volatile mobility)
+# Noise std-dev per density class
 DENSITY_NOISE = {
     "very_high": 5.5,
     "high":       4.5,

@@ -46,10 +46,23 @@ NORMAL_POSTS = [
     "Happy to be healthy and safe today!",
 ]
 
+# A9 fix: Corrected zone_id-to-name mapping (matches app.py ZONES definition)
 LOCATIONS = [
-    {"zone_id": 1, "name": "Bashundhara R/A", "lat": 23.8191, "lng": 90.4526},
-    {"zone_id": 2, "name": "Banani", "lat": 23.7940, "lng": 90.4043},
-    {"zone_id": 3, "name": "Uttara", "lat": 23.8759, "lng": 90.3795},
+    {"zone_id": 1,  "name": "Uttara",           "lat": 23.8759, "lng": 90.3795},
+    {"zone_id": 2,  "name": "Mirpur",           "lat": 23.8068, "lng": 90.3676},
+    {"zone_id": 3,  "name": "Gulshan & Banani", "lat": 23.7805, "lng": 90.4147},
+    {"zone_id": 4,  "name": "Dhanmondi",        "lat": 23.7466, "lng": 90.3760},
+    {"zone_id": 5,  "name": "Motijheel",        "lat": 23.7333, "lng": 90.4123},
+    {"zone_id": 6,  "name": "Mohammadpur",      "lat": 23.7657, "lng": 90.3624},
+    {"zone_id": 7,  "name": "Rampura",          "lat": 23.7531, "lng": 90.4123},
+    {"zone_id": 8,  "name": "Badda",            "lat": 23.7996, "lng": 90.4367},
+    {"zone_id": 9,  "name": "Khilgaon",         "lat": 23.7531, "lng": 90.4297},
+    {"zone_id": 10, "name": "Jatrabari",        "lat": 23.6994, "lng": 90.4123},
+    {"zone_id": 11, "name": "Tejgaon",          "lat": 23.7617, "lng": 90.3905},
+    {"zone_id": 12, "name": "Cantonment",       "lat": 23.8428, "lng": 90.4034},
+    {"zone_id": 13, "name": "Demra",            "lat": 23.6986, "lng": 90.4567},
+    {"zone_id": 14, "name": "Sabujbagh",        "lat": 23.7333, "lng": 90.4334},
+    {"zone_id": 15, "name": "Bashundhara R/A",  "lat": 23.8191, "lng": 90.4526},
 ]
 
 PLATFORMS = ["Twitter", "Reddit", "Facebook", "Instagram"]
@@ -64,7 +77,7 @@ def generate_social_media_data(days=30, posts_per_day=20):
         posts_per_day: Average posts per day (default 20)
     """
     
-    print(f"🚀 Generating {days} days of social media data...")
+    print(f"Generating {days} days of social media data...")
     
     start_date = datetime.now() - timedelta(days=days)
     outbreak_start_day = 20  # Outbreak starts on day 20
@@ -96,11 +109,11 @@ def generate_social_media_data(days=30, posts_per_day=20):
             else:
                 text = random.choice(NORMAL_POSTS)
             
-            # Select location (outbreak concentrated in Zone 1 - Bashundhara)
+            # Select location (outbreak concentrated in Zone 1 - Uttara)
             if is_outbreak and is_symptom_post:
                 # 70% of outbreak posts from Zone 1
                 if random.random() < 0.7:
-                    location = LOCATIONS[0]  # Bashundhara
+                    location = LOCATIONS[0]  # Uttara
                 else:
                     location = random.choice(LOCATIONS)
             else:
@@ -131,13 +144,13 @@ def generate_social_media_data(days=30, posts_per_day=20):
     # Insert into MongoDB
     if generated_posts:
         social_posts.insert_many(generated_posts)
-        print(f"✅ Generated and inserted {len(generated_posts)} social media posts!")
+        print(f"Generated and inserted {len(generated_posts)} social media posts!")
         
         # Statistics
         symptom_count = sum(1 for p in generated_posts if p['is_symptom'])
         normal_count = len(generated_posts) - symptom_count
         
-        print(f"\n📊 Statistics:")
+        print(f"\nStatistics:")
         print(f"   Total Posts: {len(generated_posts)}")
         print(f"   Symptom-related: {symptom_count} ({symptom_count/len(generated_posts)*100:.1f}%)")
         print(f"   Normal posts: {normal_count} ({normal_count/len(generated_posts)*100:.1f}%)")
@@ -150,7 +163,7 @@ def generate_social_media_data(days=30, posts_per_day=20):
             zone = post['location_name']
             zone_counts[zone] = zone_counts.get(zone, 0) + 1
         
-        print(f"\n📍 Location Distribution:")
+        print(f"\nLocation Distribution:")
         for zone, count in zone_counts.items():
             print(f"   {zone}: {count} posts")
     
@@ -160,10 +173,10 @@ def generate_social_media_data(days=30, posts_per_day=20):
 if __name__ == "__main__":
     # Clear existing simulated data
     deleted = social_posts.delete_many({"simulated": True})
-    print(f"🗑️  Cleared {deleted.deleted_count} old simulated posts\n")
+    print(f"Cleared {deleted.deleted_count} old simulated posts\n")
     
     # Generate new data
     generate_social_media_data(days=30, posts_per_day=20)
     
-    print("\n✅ Social media data generation complete!")
-    print("💡 Run 'python backend/database.py' to verify data was stored")
+    print("\nSocial media data generation complete!")
+    print("Run 'python backend/database.py' to verify data was stored")

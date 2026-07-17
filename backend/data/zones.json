@@ -1,10 +1,17 @@
 {
   "metadata": {
-    "version": "1.0.0",
-    "description": "BioGuard AI — Dhaka Monitoring Zone Definitions for W-DZMI",
-    "last_updated": "2026-07-04",
+    "version": "2.0.0",
+    "description": "BioGuard AI — Single source of truth for Dhaka 15 monitoring zones",
+    "last_updated": "2026-07-14",
     "total_zones": 15,
-    "coordinate_system": "WGS84"
+    "coordinate_system": "WGS84",
+    "source_files_consolidated": [
+      "app.py ZONES",
+      "engine_mobility.py ZONE_PROFILES",
+      "engine_wastewater.py ZONE_PROFILES",
+      "base_collector.py ZONE_KEYWORDS + ZONE_COORDS",
+      "generate_zone_csv.py ZONE_PROFILES + ZONE_WEIGHTS"
+    ]
   },
   "zones": {
     "1": {
@@ -16,7 +23,15 @@
       "density_value": 0.60,
       "zone_weight": 0.65,
       "description": "Planned residential area, NSU campus nearby",
-      "neighbors": [6, 7, 8, 9, 15]
+      "neighbors": [6, 7, 8, 9, 15],
+      "area": "Uttara Sectors 1-14, Uttarkhan, Dakshinkhan, Khilkhet",
+      "corporation": "DNCC",
+      "signal": "Monitoring residential sectors. Baseline activity.",
+      "default_mobility": 45.0,
+      "min_cluster": 5,
+      "ww_baseline": 35,
+      "ww_volatility": 0.08,
+      "keywords": ["uttara", "উত্তরা", "uttarkhan", "dakshinkhan", "khilkhet", "উত্তরখান", "দক্ষিনখান"]
     },
     "2": {
       "id": 2,
@@ -27,7 +42,15 @@
       "density_value": 0.80,
       "zone_weight": 0.80,
       "description": "High density residential, Pallabi, Rupnagar",
-      "neighbors": [1, 4, 9, 10, 12]
+      "neighbors": [1, 4, 9, 10, 12],
+      "area": "Mirpur-1, Mirpur-2, Mirpur-10, Mirpur-11, Pallabi, Rupnagar",
+      "corporation": "DNCC",
+      "signal": "High density residential zone. Normal signals.",
+      "default_mobility": 52.0,
+      "min_cluster": 8,
+      "ww_baseline": 48,
+      "ww_volatility": 0.10,
+      "keywords": ["mirpur", "মিরপুর", "pallabi", "পল্লবী", "rupnagar", "রূপনগর"]
     },
     "3": {
       "id": 3,
@@ -38,7 +61,15 @@
       "density_value": 0.65,
       "zone_weight": 0.70,
       "description": "Commercial hub, diplomatic zone, Mohakhali, Tejgaon",
-      "neighbors": [4, 5, 9, 10, 11, 15]
+      "neighbors": [4, 5, 9, 10, 11, 15],
+      "area": "Gulshan 1 & 2, Banani, Baridhara, Mohakhali, Tejgaon",
+      "corporation": "DNCC",
+      "signal": "Commercial hub. Normal traffic patterns.",
+      "default_mobility": 42.1,
+      "min_cluster": 5,
+      "ww_baseline": 30,
+      "ww_volatility": 0.07,
+      "keywords": ["gulshan", "গুলশান", "banani", "বনানী", "baridhara", "বারিধারা", "mohakhali", "মহাখালী", "tejgaon", "তেজগাঁও"]
     },
     "4": {
       "id": 4,
@@ -49,7 +80,15 @@
       "density_value": 0.55,
       "zone_weight": 0.55,
       "description": "Government area, Sher-e-Bangla Nagar, Shewrapara",
-      "neighbors": [2, 3, 5, 10, 12, 13]
+      "neighbors": [2, 3, 5, 10, 12, 13],
+      "area": "Agargaon, Shewrapara, Kazipara, Kafrul, Taltala",
+      "corporation": "DNCC",
+      "signal": "Government zone. Stable biosignals.",
+      "default_mobility": 38.0,
+      "min_cluster": 5,
+      "ww_baseline": 42,
+      "ww_volatility": 0.09,
+      "keywords": ["agargaon", "আগারগাঁও", "kafrul", "কাফরুল", "kazipara", "কাজীপাড়া", "shewrapara", "শেওড়াপাড়া"]
     },
     "5": {
       "id": 5,
@@ -60,7 +99,15 @@
       "density_value": 0.95,
       "zone_weight": 0.90,
       "description": "Highest commercial activity, major transit hub",
-      "neighbors": [3, 4, 11, 13, 14]
+      "neighbors": [3, 4, 11, 13, 14],
+      "area": "Farmgate, Kawran Bazar, Sher-e-Bangla Nagar",
+      "corporation": "DNCC",
+      "signal": "High foot traffic commercial area.",
+      "default_mobility": 67.0,
+      "min_cluster": 10,
+      "ww_baseline": 55,
+      "ww_volatility": 0.12,
+      "keywords": ["farmgate", "ফার্মগেট", "karwan bazar", "কারওয়ান বাজার", "kawran", "sher-e-bangla", "শেরেবাংলা"]
     },
     "6": {
       "id": 6,
@@ -71,7 +118,15 @@
       "density_value": 0.25,
       "zone_weight": 0.35,
       "description": "Peripheral suburban, low density",
-      "neighbors": [1, 7, 8]
+      "neighbors": [1, 7, 8],
+      "area": "Diabari, Ashkona, Kawlar",
+      "corporation": "DNCC",
+      "signal": "Peripheral zone. Low density signals.",
+      "default_mobility": 22.0,
+      "min_cluster": 3,
+      "ww_baseline": 25,
+      "ww_volatility": 0.06,
+      "keywords": ["diabari", "দিয়াবাড়ি", "ashkona", "আশকোনা", "kawlar"]
     },
     "7": {
       "id": 7,
@@ -82,7 +137,15 @@
       "density_value": 0.22,
       "zone_weight": 0.30,
       "description": "Outskirts, semi-rural",
-      "neighbors": [1, 6, 8, 9]
+      "neighbors": [1, 6, 8, 9],
+      "area": "Faidabad, Barua, Jamun",
+      "corporation": "DNCC",
+      "signal": "Outskirts zone. Baseline monitoring.",
+      "default_mobility": 18.0,
+      "min_cluster": 3,
+      "ww_baseline": 22,
+      "ww_volatility": 0.05,
+      "keywords": ["uttarkhan", "উত্তরখান", "faidabad", "ফাইদাবাদ", "barua", "jamun"]
     },
     "8": {
       "id": 8,
@@ -93,7 +156,15 @@
       "density_value": 0.24,
       "zone_weight": 0.32,
       "description": "Outskirts, low population",
-      "neighbors": [1, 6, 7, 9, 15]
+      "neighbors": [1, 6, 7, 9, 15],
+      "area": "Dumni, Satarkul",
+      "corporation": "DNCC",
+      "signal": "Residential outskirts. Stable readings.",
+      "default_mobility": 20.0,
+      "min_cluster": 3,
+      "ww_baseline": 28,
+      "ww_volatility": 0.06,
+      "keywords": ["dakshinkhan", "দক্ষিনখান", "dumni", "satarkul"]
     },
     "9": {
       "id": 9,
@@ -104,7 +175,15 @@
       "density_value": 0.55,
       "zone_weight": 0.60,
       "description": "Mixed residential-commercial, Nurerchala",
-      "neighbors": [1, 2, 3, 7, 8, 10, 15]
+      "neighbors": [1, 2, 3, 7, 8, 10, 15],
+      "area": "Vatara, Kuril, Nurerchala, Khilbaritech",
+      "corporation": "DNCC",
+      "signal": "Mixed zone near Bashundhara. Monitoring.",
+      "default_mobility": 35.0,
+      "min_cluster": 5,
+      "ww_baseline": 33,
+      "ww_volatility": 0.08,
+      "keywords": ["vatara", "ভাটারা", "kuril", "কুড়িল", "nurerchala", "নূরেরচালা"]
     },
     "10": {
       "id": 10,
@@ -115,7 +194,15 @@
       "density_value": 0.55,
       "zone_weight": 0.58,
       "description": "Residential, Beraid, growing area",
-      "neighbors": [2, 3, 4, 9, 11, 12, 15]
+      "neighbors": [2, 3, 4, 9, 11, 12, 15],
+      "area": "Uttar Badda, Madhya Badda, Beraid, Aftabnagar",
+      "corporation": "DNCC",
+      "signal": "Residential zone. Normal biosignals.",
+      "default_mobility": 41.0,
+      "min_cluster": 5,
+      "ww_baseline": 40,
+      "ww_volatility": 0.09,
+      "keywords": ["badda", "বাড্ডা", "aftabnagar", "আফতাবনগর", "beraid"]
     },
     "11": {
       "id": 11,
@@ -126,7 +213,15 @@
       "density_value": 0.95,
       "zone_weight": 0.95,
       "description": "CBD highest activity, Shahbagh, Paltan, Segunbagicha",
-      "neighbors": [3, 5, 10, 12, 13, 14]
+      "neighbors": [3, 5, 10, 12, 13, 14],
+      "area": "Ramna, Motijheel, Paltan, Shahbagh, Segunbagicha",
+      "corporation": "DSCC",
+      "signal": "Central business district. High mobility.",
+      "default_mobility": 72.0,
+      "min_cluster": 10,
+      "ww_baseline": 58,
+      "ww_volatility": 0.11,
+      "keywords": ["ramna", "রমনা", "motijheel", "মতিঝিল", "paltan", "পল্টন", "shahbagh", "শাহবাগ", "segunbagicha"]
     },
     "12": {
       "id": 12,
@@ -137,7 +232,15 @@
       "density_value": 0.80,
       "zone_weight": 0.75,
       "description": "Dense residential, Malibagh, Shantinagar, Basabo",
-      "neighbors": [2, 4, 10, 11, 13, 14]
+      "neighbors": [2, 4, 10, 11, 13, 14],
+      "area": "Khilgaon, Mugda, Basabo, Shantinagar, Malibagh",
+      "corporation": "DSCC",
+      "signal": "Dense residential area. Monitoring active.",
+      "default_mobility": 55.0,
+      "min_cluster": 8,
+      "ww_baseline": 50,
+      "ww_volatility": 0.10,
+      "keywords": ["khilgaon", "খিলগাঁও", "mugda", "মুগদা", "basabo", "বাসাবো", "malibagh", "মালিবাগ", "shantinagar", "শান্তিনগর"]
     },
     "13": {
       "id": 13,
@@ -148,7 +251,15 @@
       "density_value": 0.80,
       "zone_weight": 0.78,
       "description": "Hospital cluster, Kalabagan, Hazaribagh, Lalbagh",
-      "neighbors": [4, 5, 11, 12, 14]
+      "neighbors": [4, 5, 11, 12, 14],
+      "area": "Dhanmondi, Lalbagh, Azimpur, Hazaribagh, Kalabagan",
+      "corporation": "DSCC",
+      "signal": "Hospital cluster zone. High health activity.",
+      "default_mobility": 60.0,
+      "min_cluster": 8,
+      "ww_baseline": 45,
+      "ww_volatility": 0.09,
+      "keywords": ["dhanmondi", "ধানমন্ডি", "azimpur", "আজিমপুর", "lalbagh", "লালবাগ", "hazaribagh", "হাজারীবাগ", "kalabagan", "কলাবাগান"]
     },
     "14": {
       "id": 14,
@@ -159,7 +270,15 @@
       "density_value": 0.98,
       "zone_weight": 0.88,
       "description": "Old Dhaka extreme density, Sutrapur, Gendaria",
-      "neighbors": [5, 11, 12, 13]
+      "neighbors": [5, 11, 12, 13],
+      "area": "Wari, Sutrapur, Kotowali, Bangsal, Gendaria, Jatrabari",
+      "corporation": "DSCC",
+      "signal": "Old Dhaka high density. Elevated baseline.",
+      "default_mobility": 65.0,
+      "min_cluster": 10,
+      "ww_baseline": 62,
+      "ww_volatility": 0.13,
+      "keywords": ["wari", "ওয়ারী", "jatrabari", "যাত্রাবাড়ী", "sutrapur", "সূত্রাপুর", "gendaria", "গেন্ডারিয়া", "old dhaka", "পুরান ঢাকা"]
     },
     "15": {
       "id": 15,
@@ -170,7 +289,15 @@
       "density_value": 0.60,
       "zone_weight": 1.10,
       "description": "Research zone, North South University, Norda",
-      "neighbors": [1, 3, 8, 9, 10]
+      "neighbors": [1, 3, 8, 9, 10],
+      "area": "Bashundhara, Norda, North South University Campus",
+      "corporation": "DNCC",
+      "signal": "Primary research zone. NSU campus monitoring.",
+      "default_mobility": 88.5,
+      "min_cluster": 5,
+      "ww_baseline": 38,
+      "ww_volatility": 0.08,
+      "keywords": ["bashundhara", "বসুন্ধরা", "norda", "নর্দা", "nsu", "north south university", "নর্থ সাউথ"]
     }
   },
   "corridor_weights": {

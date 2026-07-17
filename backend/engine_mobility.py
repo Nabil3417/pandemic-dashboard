@@ -2,26 +2,20 @@
 BioGuard AI — Mobility Anomaly Detection Engine  v4.1
 ========================================================
 Dual-mode architecture:
-  Mode 1 — IsolationForest + HDBSCAN  (real-time anomaly detection per zone)
+  Mode 1 — IsolationForest  (real-time anomaly detection per zone)
   Mode 2 — CSV-backed ARIMA time-series (historical trends + forecasting)
 
 Data sources:
   - dhaka_zone_mobility_2020_2022.csv  (zone-level weekly mobility, 15 zones)
   - bd_mobility_risk_score_2020_2022.csv  (national-level, fallback)
 
-Why HDBSCAN over DBSCAN:
-  Dhaka has extreme density variation — Wari (Old Dhaka) is one of
-  the densest areas in the world while Diabari is sparse suburban.
-  DBSCAN uses one fixed radius (epsilon) for all zones — wrong.
-  HDBSCAN finds clusters automatically adapting to local density.
+Note on clustering:
+  Cluster metrics are placeholder values derived from the W-DZMI mobility score;
+  real GPS-trace clustering is not implemented in this version.
 
 Why per-zone IsolationForest:
   A global model trained on all zones treats low-density zone
   coordinates as anomalous when evaluated against high-density zones.
-
-Reference:
-  Campello et al. 2013 — Density-Based Clustering Based on
-  Hierarchical Density Estimates. ECML/PKDD.
 """
 
 import os
@@ -32,36 +26,11 @@ from datetime import datetime, timedelta
 
 from sklearn.ensemble import IsolationForest
 from sklearn.preprocessing import StandardScaler
-import hdbscan
 
 # ─────────────────────────────────────────────
-# Zone definitions (mirrors app.py ZONES)
-# ─────────────────────────────────────────────
-ZONE_PROFILES = {
-    1:  {"name": "Uttara",                  "center": (23.8759, 90.3795), "density": "medium",    "min_cluster": 5},
-    2:  {"name": "Mirpur",                  "center": (23.8223, 90.3654), "density": "high",       "min_cluster": 8},
-    3:  {"name": "Gulshan & Banani",        "center": (23.7940, 90.4043), "density": "medium",    "min_cluster": 5},
-    4:  {"name": "Agargaon & Kafrul",       "center": (23.7751, 90.3668), "density": "medium",    "min_cluster": 5},
-    5:  {"name": "Farmgate & Karwan Bazar", "center": (23.7527, 90.3894), "density": "very_high", "min_cluster": 10},
-    6:  {"name": "Diabari & Ashkona",       "center": (23.9012, 90.3456), "density": "low",       "min_cluster": 3},
-    7:  {"name": "Uttarkhan & Faidabad",    "center": (23.9123, 90.4234), "density": "low",       "min_cluster": 3},
-    8:  {"name": "Dakshinkhan & Dumni",     "center": (23.8934, 90.4456), "density": "low",       "min_cluster": 3},
-    9:  {"name": "Vatara & Kuril",          "center": (23.8234, 90.4234), "density": "medium",    "min_cluster": 5},
-    10: {"name": "Badda & Aftabnagar",      "center": (23.7845, 90.4234), "density": "medium",    "min_cluster": 5},
-    11: {"name": "Ramna & Motijheel",       "center": (23.7234, 90.4123), "density": "very_high", "min_cluster": 10},
-    12: {"name": "Khilgaon & Mugda",        "center": (23.7345, 90.4345), "density": "high",      "min_cluster": 8},
-    13: {"name": "Dhanmondi & Azimpur",     "center": (23.7456, 90.3789), "density": "high",      "min_cluster": 8},
-    14: {"name": "Wari & Jatrabari",        "center": (23.7123, 90.4234), "density": "very_high", "min_cluster": 10},
-    15: {"name": "Bashundhara R/A (NSU)",   "center": (23.8191, 90.4526), "density": "medium",    "min_cluster": 5},
-}
-
-DENSITY_SPREAD = {
-    "low":       0.015,
-    "medium":    0.010,
-    "high":      0.007,
-    "very_high": 0.005,
-}
-
+# Zone definitions 
+# Zone definitions — loaded from zones.json (single source of truth)
+from zones_loader import ZONE_PROFILES, DENSITY_SPREAD
 
 def _generate_normal_points(center_lat, center_lng, spread, n=300):
     """Generate normally distributed GPS points around a zone center."""
@@ -92,7 +61,7 @@ class MobilityDetectionEngine:
     Dual-mode mobility engine for BioGuard AI.
 
     Mode 1 — Real-time anomaly detection:
-        IsolationForest (per-zone) + HDBSCAN clustering
+        IsolationForest (per-zone)
         -> detect crowding events and behavioral changes
 
     Mode 2 — CSV-backed time-series:
@@ -132,7 +101,7 @@ class MobilityDetectionEngine:
         print("=" * 70)
 
     # =============================================
-    # MODE 1: ISOLATION FOREST + HDBSCAN
+    # MODE 1: ISOLATION FOREST (per-zone)
     # =============================================
 
     def _train_anomaly_models(self):
@@ -241,36 +210,35 @@ class MobilityDetectionEngine:
         elif trend == "falling":
             pattern = "W-DZMI falling trend: Mobility decreasing"
 
-        # ── Cluster info (semantic, not HDBSCAN) ──
-        # Map W-DZMI score to cluster metrics for compatibility
-        if mobility_score >= 75:
-            cluster_count, cluster_size, noise_points = 3, 25, 5
-        elif mobility_score >= 55:
-            cluster_count, cluster_size, noise_points = 2, 15, 8
-        elif mobility_score >= 35:
-            cluster_count, cluster_size, noise_points = 1, 8, 12
-        else:
-            cluster_count, cluster_size, noise_points = 0, 0, 0
+        # ── Cluster info (not implemented) ──
+        # Clustering is not implemented in this version; metrics are null.
+        cluster_count  = None
+        cluster_size   = None
+        noise_points   = None
+        clustering_note = "Clustering not implemented in this version; metrics are null."
 
-        anomaly_count = cluster_size if is_anomaly else 0
+        anomaly_count = 0
+        if is_anomaly and cluster_size is not None:
+            anomaly_count = cluster_size
 
         mobility_score = round(min(mobility_score, 100.0), 2)
 
         return {
-            "is_anomaly":      is_anomaly,
-            "cluster_count":   cluster_count,
-            "cluster_size":    cluster_size,
-            "noise_points":    noise_points,
-            "anomaly_count":   anomaly_count,
-            "total_points":    220 + 18,  # compat with old format
-            "mobility_score":  mobility_score,
-            "pattern":         pattern,
-            "density_class":   profile['density'],
+            "is_anomaly":       is_anomaly,
+            "cluster_count":    cluster_count,
+            "cluster_size":     cluster_size,
+            "noise_points":     noise_points,
+            "clustering_note":  clustering_note,
+            "anomaly_count":    anomaly_count,
+            "total_points":     220 + 18,  # compat with old format
+            "mobility_score":   mobility_score,
+            "pattern":          pattern,
+            "density_class":    profile['density'],
             # New fields for richer frontend data
-            "wdzmi_trend":     trend,
-            "wdzmi_risk":      risk_level,
+            "wdzmi_trend":      trend,
+            "wdzmi_risk":       risk_level,
             "wdzmi_confidence": confidence,
-            "wdzmi_signals":   num_signals,
+            "wdzmi_signals":    num_signals,
         }
 
     # =============================================
@@ -608,8 +576,8 @@ class MobilityDetectionEngine:
         """
         return {
             "status":           "ready" if self.trained else "error",
-            "isolation_forest": "active (per-zone)" if self.trained else "failed",
-            "clustering":       "HDBSCAN (density-adaptive)",
+            "isolation_forest": "active (per-zone, trained on synthetic baseline — real GPS traces not available)" if self.trained else "failed",
+            "clustering":       "not_implemented (placeholder only)",
             "zones_covered":    len(ZONE_PROFILES),
             "zone_models":      len(self.zone_models),
             "contamination":    "5%",
@@ -617,7 +585,6 @@ class MobilityDetectionEngine:
             "csv_loaded":       self.csv_loaded,
             "arima_zones":      len(self.arima_models),
             "national_score":   self.current_national_score,
-            "reference":        "Campello et al. 2013, ECML/PKDD",
         }
 
     def get_historical_data(self, days=90):
@@ -788,7 +755,7 @@ if __name__ == "__main__":
     print("=" * 85)
 
     print(f"\n{'Zone':<28} {'Density':<10} {'Score':>6} "
-          f"{'Clusters':>9} {'Size':>6} {'Pattern'}")
+          f"{'Anomaly':>8} {'Pattern'}")
     print("-" * 100)
 
     for zone_id, profile in ZONE_PROFILES.items():
@@ -796,8 +763,7 @@ if __name__ == "__main__":
         print(
             f"{profile['name']:<28} {profile['density']:<10} "
             f"{result['mobility_score']:>6.1f} "
-            f"{result['cluster_count']:>9} "
-            f"{result['cluster_size']:>6} "
+            f"{str(result['is_anomaly']):>8} "
             f"{result['pattern']}"
         )
 
@@ -805,10 +771,10 @@ if __name__ == "__main__":
     normal = mobility_ai.analyze_zone_mobility(14, crisis_mode=False)
     crisis = mobility_ai.analyze_zone_mobility(14, crisis_mode=True)
     print(f"Normal: score={normal['mobility_score']:>5.1f}  "
-          f"clusters={normal['cluster_count']}  "
+          f"anomaly={normal['is_anomaly']}  "
           f"pattern={normal['pattern']}")
     print(f"Crisis: score={crisis['mobility_score']:>5.1f}  "
-          f"clusters={crisis['cluster_count']}  "
+          f"anomaly={crisis['is_anomaly']}  "
           f"pattern={crisis['pattern']}")
 
     print(f"\n--- NATIONAL SCORE ---")
@@ -846,7 +812,7 @@ def get_zone_mobility_forecast(zone_id, days=14):
 
     base_dir = os.path.dirname(os.path.abspath(__file__))
     csv_path = os.path.join(base_dir, 'data', 'dhaka_zone_mobility_2020_2022.csv')
-
+    series = []  # initialize before try so except can reference it
     try:
         df = pd.read_csv(csv_path)
         df.columns = df.columns.str.strip().str.lower()

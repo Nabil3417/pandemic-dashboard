@@ -20,7 +20,8 @@ from data_collectors.base_collector import (
     is_health_related, detect_zone, save_post
 )
 
-API_ID   = int(os.getenv('TELEGRAM_API_ID'))
+_api_id_raw = os.getenv('TELEGRAM_API_ID')
+API_ID   = int(_api_id_raw) if _api_id_raw else None
 API_HASH = os.getenv('TELEGRAM_API_HASH')
 PHONE    = os.getenv('TELEGRAM_PHONE')
 
@@ -48,7 +49,7 @@ async def collect_from_channel(client, channel_username, days_back=30):
     errors    = 0
 
     try:
-        print(f"\n📡 Connecting to channel: @{channel_username}")
+        print(f"\n  Connecting to channel: @{channel_username}")
         entity = await client.get_entity(channel_username)
 
         date_from = datetime.now() - timedelta(days=days_back)
@@ -86,7 +87,7 @@ async def collect_from_channel(client, channel_username, days_back=30):
                 if saved:
                     collected += 1
                     if collected % 10 == 0:
-                        print(f"   ✅ Collected {collected} posts from @{channel_username}")
+                        print(f"     Collected {collected} posts from @{channel_username}")
                 else:
                     skipped += 1
 
@@ -94,24 +95,29 @@ async def collect_from_channel(client, channel_username, days_back=30):
                 errors += 1
                 continue
 
-        print(f"   📊 @{channel_username}: {collected} collected, "
+        print(f"   @{channel_username}: {collected} collected, "
               f"{skipped} skipped, {errors} errors")
         return collected
 
     except Exception as e:
-        print(f"   ❌ Could not access @{channel_username}: {e}")
+        print(f"   Could not access @{channel_username}: {e}")
         return 0
 
 
 async def run_collector(days_back=30):
     """Main function — connects to Telegram and collects from all channels."""
-    print("🚀 Starting Telegram Health Data Collector")
+
+    if API_ID is None:
+        print("TELEGRAM_API_ID not set, skipping Telegram collection")
+        return 0
+
+    print("Starting Telegram Health Data Collector")
     print(f"   Collecting last {days_back} days of messages")
     print(f"   Target channels: {len(CHANNELS)}")
 
     client = TelegramClient('bioguard_session', API_ID, API_HASH)
     await client.start(phone=PHONE)
-    print("\n✅ Telegram client connected!")
+    print("\nTelegram client connected!")
 
     total_collected = 0
     for channel in CHANNELS:
@@ -121,7 +127,7 @@ async def run_collector(days_back=30):
     await client.disconnect()
 
     print(f"\n{'='*50}")
-    print(f"✅ COLLECTION COMPLETE")
+    print(f"COLLECTION COMPLETE")
     print(f"   Total posts collected: {total_collected}")
 
     from database import social_posts

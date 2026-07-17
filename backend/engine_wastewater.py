@@ -67,25 +67,8 @@ warnings.filterwarnings('ignore')
 from database import get_zone_trends_series, get_latest_iedcr_score
 
 # ─────────────────────────────────────────────────────────────
-# ZONE PROFILES — used only for the synthetic fallback generator
-# ─────────────────────────────────────────────────────────────
-ZONE_PROFILES = {
-    1:  {"name": "Uttara",                  "baseline": 35, "volatility": 0.08},
-    2:  {"name": "Mirpur",                  "baseline": 48, "volatility": 0.10},
-    3:  {"name": "Gulshan & Banani",        "baseline": 30, "volatility": 0.07},
-    4:  {"name": "Agargaon & Kafrul",       "baseline": 42, "volatility": 0.09},
-    5:  {"name": "Farmgate & Karwan Bazar", "baseline": 55, "volatility": 0.12},
-    6:  {"name": "Diabari & Ashkona",       "baseline": 25, "volatility": 0.06},
-    7:  {"name": "Uttarkhan & Faidabad",    "baseline": 22, "volatility": 0.05},
-    8:  {"name": "Dakshinkhan & Dumni",     "baseline": 28, "volatility": 0.06},
-    9:  {"name": "Vatara & Kuril",          "baseline": 33, "volatility": 0.08},
-    10: {"name": "Badda & Aftabnagar",      "baseline": 40, "volatility": 0.09},
-    11: {"name": "Ramna & Motijheel",       "baseline": 58, "volatility": 0.11},
-    12: {"name": "Khilgaon & Mugda",        "baseline": 50, "volatility": 0.10},
-    13: {"name": "Dhanmondi & Azimpur",     "baseline": 45, "volatility": 0.09},
-    14: {"name": "Wari & Jatrabari",        "baseline": 62, "volatility": 0.13},
-    15: {"name": "Bashundhara R/A (NSU)",   "baseline": 38, "volatility": 0.08},
-}
+# Zone profiles — loaded from zones.json (single source of truth)
+from zones_loader import WW_ZONE_PROFILES as ZONE_PROFILES
 
 CSV_FILENAME = "dhaka_zone_symptom_trends.csv"
 MIN_REAL_POINTS = 15  # below this, ARIMA on real data is unreliable — use fallback
@@ -176,7 +159,7 @@ def _get_zone_series(zone_id, crisis_mode):
     last_update = _cache_timestamp.get(cache_key)
 
     if (last_update is not None and
-            (now - last_update).seconds < CACHE_TTL_MINUTES * 60):
+            (now - last_update).total_seconds() < CACHE_TTL_MINUTES * 60):
         return _zone_cache[cache_key]
 
     # 1. Try MongoDB (real, live)

@@ -421,7 +421,12 @@ def evaluate_trained_fusion(aligned_df):
     try:
         with open(results_path, 'r') as f:
             tres = json.load(f)
-            fi = tres.get('best_model', {}).get('feature_importances', {})
+            best_model_name = tres.get('best_model', {}).get('name', '').lower()
+            model_key = ('gradient_boosting' if 'gradient' in best_model_name
+                         else 'random_forest' if 'forest' in best_model_name
+                         else 'logistic_regression')
+            fi = tres.get(model_key, {}).get('feature_importances',
+                                              tres.get(model_key, {}).get('coefficients', {}))
     except Exception:
         pass
 
