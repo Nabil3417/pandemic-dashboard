@@ -1,36 +1,55 @@
 import React, { useState, useEffect } from 'react';
 import { MapContainer, TileLayer, GeoJSON, ZoomControl } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
+import { AlertCircle, RefreshCcw, Loader2 } from 'lucide-react';
 
 
 const RiskMap = ({ isDark }) => {
   const [zones, setZones] = useState([]);
   const [geoData, setGeoData] = useState(null);
   const [mobilityData, setMobilityData] = useState({});
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  useEffect(() => {
-    fetch('http://localhost:5000/api/risk-status')
-      .then(res => res.json())
-      .then(data => setZones(data.zones || []))
-      .catch(err => console.error(err));
+  const fetchMapData = () => {
+    setLoading(true);
+    setError(null);
 
-    fetch('http://localhost:5000/api/mobility')
-      .then(res => res.json())
-      .then(data => {
-        if (data.success && data.data) {
+    Promise.all([
+      fetch('/api/risk-status').then(res => {
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        return res.json();
+      }),
+      fetch('/api/mobility').then(res => {
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        return res.json();
+      }),
+      fetch('/dhaka_zones.geojson').then(res => {
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        return res.json();
+      })
+    ])
+      .then(([riskData, mobData, geo]) => {
+        setZones(riskData.zones || []);
+        if (mobData.success && mobData.data) {
           const map = {};
-          (data.data.zones || []).forEach(z => {
+          (mobData.data.zones || []).forEach(z => {
             map[z.zone_id] = z;
           });
           setMobilityData(map);
         }
+        setGeoData(geo);
+        setLoading(false);
       })
-      .catch(err => console.error('W-DZMI fetch failed:', err));
+      .catch(err => {
+        console.error('Map data fetch failed:', err);
+        setError(err.message);
+        setLoading(false);
+      });
+  };
 
-    fetch('/dhaka_zones.geojson')
-      .then(res => res.json())
-      .then(data => setGeoData(data))
-      .catch(err => console.error(err));
+  useEffect(() => {
+    fetchMapData();
   }, []);
 
   const getRiskColor = (score) => {
@@ -131,6 +150,34 @@ const RiskMap = ({ isDark }) => {
   const mapStyle = isDark
     ? "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png"
     : "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png";
+
+  if (loading) {
+    return (
+      <div className="h-full w-full flex items-center justify-center bg-[#020617] rounded-[3rem]">
+        <div className="flex flex-col items-center gap-3">
+          <Loader2 className="animate-spin text-blue-500" size={32} />
+          <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Loading Map...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="h-full w-full flex items-center justify-center bg-[#020617] rounded-[3rem]">
+        <div className="flex flex-col items-center gap-4 p-10 bg-red-500/10 border border-red-500/30 rounded-[2rem]">
+          <AlertCircle className="text-red-500" size={36} />
+          <p className="text-red-400 font-bold text-sm">Map data failed: {error}</p>
+          <button
+            onClick={fetchMapData}
+            className="flex items-center gap-2 px-6 py-2 bg-white/10 border border-white/20 rounded-xl text-xs font-black text-white hover:bg-white/20 transition-all"
+          >
+            <RefreshCcw size={14} /> Retry
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="h-full w-full relative">

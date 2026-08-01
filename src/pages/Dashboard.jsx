@@ -10,7 +10,8 @@ import { toast, Toaster } from 'react-hot-toast';
 const Dashboard = () => {
   const [data, setData] = useState(null);
   const [isCrisis, setIsCrisis] = useState(false);
-  const [alerts, setAlerts] = useState([]); // NEW: State for tactical alerts
+  const [alerts, setAlerts] = useState([]);
+  const [mobilityTrend, setMobilityTrend] = useState([]);
 
   const fetchData = () => {
     fetch('http://localhost:5000/api/risk-status')
@@ -18,13 +19,25 @@ const Dashboard = () => {
       .then(json => {
         setData(json);
         setIsCrisis(json.crisis_active);
-        setAlerts(json.alerts || []); // NEW: Capture alerts from backend
+        setAlerts(json.alerts || []);
       })
       .catch(err => console.error("Data Sync Error", err));
   };
 
+  const fetchMobilityHistory = () => {
+    fetch('http://localhost:5000/api/mobility/history/1?days=7')
+      .then(res => res.json())
+      .then(json => {
+        if (json.history && json.history.length > 0) {
+          setMobilityTrend(json.history.map(d => ({ v: d.mobility_score ?? d.score ?? d.val ?? 0 })));
+        }
+      })
+      .catch(() => {}); // silently skip if endpoint unavailable
+  };
+
   useEffect(() => {
     fetchData();
+    fetchMobilityHistory();
     const interval = setInterval(fetchData, 5000); 
     return () => clearInterval(interval);
   }, []);
@@ -99,11 +112,30 @@ const Dashboard = () => {
         </div>
       </header>
 
-      {/* 2. KPI Grid */}
+      {/* 2. KPI Grid — AF3: tooltip + trendData props */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
-        <RiskCard isDark={true} title="Mobility Anomaly" value={data.mobility_anomaly} color={isCrisis ? "rose" : "blue"} />
-        <RiskCard isDark={true} title="Symptom Surveillance Index" value={data.wastewater_load} color={isCrisis ? "rose" : "emerald"} />
-        <RiskCard isDark={true} title="Social Sentiment" value={data.social_index} color="rose" />
+        <RiskCard 
+          isDark={true} 
+          title="Mobility Anomaly" 
+          value={data.mobility_anomaly} 
+          color={isCrisis ? "rose" : "blue"} 
+          tooltip="Real-time W-DZMI mobility risk score"
+          trendData={mobilityTrend}
+        />
+        <RiskCard 
+          isDark={true} 
+          title="Symptom Surveillance Index" 
+          value={data.wastewater_load} 
+          color={isCrisis ? "rose" : "emerald"} 
+          tooltip="Proxy: Google Trends symptom-search volume (Ginsberg et al., Nature 2009)"
+        />
+        <RiskCard 
+          isDark={true} 
+          title="Social Sentiment" 
+          value={data.social_index} 
+          color="rose" 
+          tooltip="Multi-lingual BERT NLP score (11 languages)"
+        />
       </div>
 
       {/* 3. Main Workspace */}

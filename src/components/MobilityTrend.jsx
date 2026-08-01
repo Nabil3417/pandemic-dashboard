@@ -21,7 +21,7 @@ const MobilityTrend = ({ zoneId, height = 60, showLabels = true, historyData }) 
       return;
     }
     if (!zoneId) return;
-    fetch(`http://localhost:5000/api/mobility/history/${zoneId}?days=7`)
+    fetch(`/api/mobility/history/${zoneId}?days=7`)
       .then(res => res.json())
       .then(data => {
         if (data.success && data.data) {

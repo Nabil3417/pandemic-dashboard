@@ -1,46 +1,48 @@
 import React, { useState, useEffect } from 'react';
-import { Target, BrainCircuit, Activity, Loader2, TrendingUp, BarChart3, Grid3X3, Crosshair, Languages, ArrowRight, Sparkles, AlertCircle, Zap } from 'lucide-react';
+import { Target, BrainCircuit, Activity, Loader2, TrendingUp, BarChart3, Grid3X3, Crosshair, Languages, ArrowRight, Sparkles, AlertCircle, Zap, RefreshCcw } from 'lucide-react';
 import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from 'recharts';
 
 const PredictiveEngine = () => {
   const [forecasts, setForecasts] = useState([]);
   const [evalResults, setEvalResults] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [nlpData, setNlpData] = useState(null);
   const [nlpLoading, setNlpLoading] = useState(true);
-  const [fusionInfo, setFusionInfo] = useState(null); // T-08: fusion classifier info
+  const [fusionInfo, setFusionInfo] = useState(null);
+
+  const fetchMainData = async () => {
+    setLoading(true);
+    setError(null);
+    try {
+      const [forecastData, evalData] = await Promise.all([
+        fetch('/api/forecast').then(r => { if (!r.ok) throw new Error(`HTTP ${r.status}`); return r.json(); }),
+        fetch('/api/evaluation-results').then(r => { if (!r.ok) throw new Error(`HTTP ${r.status}`); return r.json(); })
+      ]);
+      setForecasts(forecastData);
+      setEvalResults(evalData);
+    } catch (err) {
+      console.error("Error fetching data:", err);
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
-    Promise.all([
-      fetch('http://localhost:5000/api/forecast').then(res => res.json()),
-      fetch('http://localhost:5000/api/evaluation-results').then(res => res.json())
-    ])
-      .then(([forecastData, evalData]) => {
-        setForecasts(forecastData);
-        setEvalResults(evalData);
-        setLoading(false);
-      })
-      .catch(err => {
-        console.error("Error fetching data:", err);
-        setLoading(false);
-      });
-  }, []);
-
- 
-  useEffect(() => {
-    fetch('http://localhost:5000/api/fusion-info')
-      .then(res => res.json())
-      .then(data => {
-        setFusionInfo(data);
-      })
-      .catch(err => {
-        console.error("Error fetching fusion info:", err);
-      });
+    fetchMainData();
   }, []);
 
   useEffect(() => {
-    fetch('http://localhost:5000/api/nlp-evaluation')
-      .then(res => res.json())
+    fetch('/api/fusion-info')
+      .then(r => { if (!r.ok) throw new Error(`HTTP ${r.status}`); return r.json(); })
+      .then(data => setFusionInfo(data))
+      .catch(err => console.error("Error fetching fusion info:", err));
+  }, []);
+
+  useEffect(() => {
+    fetch('/api/nlp-evaluation')
+      .then(r => { if (!r.ok) throw new Error(`HTTP ${r.status}`); return r.json(); })
       .then(data => {
         setNlpData(data);
         setNlpLoading(false);
@@ -132,7 +134,25 @@ const PredictiveEngine = () => {
 
   if (loading) return (
     <div className="h-full w-full flex items-center justify-center bg-[#020617]">
-      <Loader2 className="animate-spin text-blue-500" size={40} />
+      <div className="flex flex-col items-center gap-4">
+        <Loader2 className="animate-spin text-blue-500" size={40} />
+        <p className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-500">Loading Engine...</p>
+      </div>
+    </div>
+  );
+
+  if (error) return (
+    <div className="h-full w-full flex items-center justify-center bg-[#020617]">
+      <div className="flex flex-col items-center gap-6 p-12 bg-red-500/10 border border-red-500/30 rounded-[3rem]">
+        <AlertCircle className="text-red-500" size={48} />
+        <p className="text-red-400 font-bold text-lg">Failed to load engine data: {error}</p>
+        <button
+          onClick={fetchMainData}
+          className="flex items-center gap-2 px-8 py-3 bg-white/10 border border-white/20 rounded-2xl text-sm font-black text-white hover:bg-white/20 transition-all"
+        >
+          <RefreshCcw size={16} /> Retry
+        </button>
+      </div>
     </div>
   );
 

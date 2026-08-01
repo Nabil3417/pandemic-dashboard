@@ -1,21 +1,32 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import { 
-  Search, Clock, ArrowUpRight, Download, MapPin
+import {
+  Search, Clock, ArrowUpRight, Download, MapPin, AlertCircle, RefreshCcw, Loader2
 } from 'lucide-react';
 
 const AlertLogs = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [activeFilter, setActiveFilter] = useState('All');
-  const [dynamicLogs, setDynamicLogs] = useState([]); // NEW: Real-time data
+  const [dynamicLogs, setDynamicLogs] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  // Fetch real-time alerts from backend
   const fetchAlerts = () => {
-    fetch('http://localhost:5000/api/risk-status')
-      .then(res => res.json())
+    setLoading(true);
+    setError(null);
+    fetch('/api/risk-status')
+      .then(res => {
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        return res.json();
+      })
       .then(data => {
         setDynamicLogs(data.alerts || []);
+        setLoading(false);
       })
-      .catch(err => console.error("Alert Fetch Error", err));
+      .catch(err => {
+        console.error("Alert Fetch Error", err);
+        setError(err.message);
+        setLoading(false);
+      });
   };
 
   useEffect(() => {
@@ -25,14 +36,46 @@ const AlertLogs = () => {
   }, []);
 
   const filteredLogs = useMemo(() => {
-    return dynamicLogs.filter(log => 
+    if (!dynamicLogs) return [];
+    return dynamicLogs.filter(log =>
       (log.message.toLowerCase().includes(searchTerm.toLowerCase()) || log.city.toLowerCase().includes(searchTerm.toLowerCase())) &&
       (activeFilter === 'All' || log.severity.includes(activeFilter.toUpperCase()))
     );
   }, [searchTerm, activeFilter, dynamicLogs]);
 
+  if (loading && !dynamicLogs) return (
+    <div className="h-screen flex items-center justify-center bg-[#020617]">
+      <div className="flex flex-col items-center gap-4">
+        <Loader2 className="animate-spin text-blue-500" size={40} />
+        <p className="text-[10px] font-black uppercase tracking-[0.3em] text-slate-500">Loading Alerts...</p>
+      </div>
+    </div>
+  );
+
+  if (error && !dynamicLogs) return (
+    <div className="h-screen flex items-center justify-center bg-[#020617]">
+      <div className="flex flex-col items-center gap-6 p-12 bg-red-500/10 border border-red-500/30 rounded-[3rem]">
+        <AlertCircle className="text-red-500" size={48} />
+        <p className="text-red-400 font-bold text-lg">Failed to load alerts: {error}</p>
+        <button
+          onClick={fetchAlerts}
+          className="flex items-center gap-2 px-8 py-3 bg-white/10 border border-white/20 rounded-2xl text-sm font-black text-white hover:bg-white/20 transition-all"
+        >
+          <RefreshCcw size={16} /> Retry
+        </button>
+      </div>
+    </div>
+  );
+
   return (
     <div className="p-8 lg:p-12 bg-[#020617] min-h-screen text-left">
+      {error && dynamicLogs && (
+        <div className="mb-6 flex items-center gap-3 p-4 bg-red-500/10 border border-red-500/30 rounded-2xl text-red-400 text-sm font-medium">
+          <AlertCircle size={16} />
+          Connection lost: {error} — retrying automatically...
+        </div>
+      )}
+
       <header className="flex flex-col xl:flex-row justify-between items-start xl:items-center mb-12 gap-8">
         <div>
           <div className="flex items-center gap-3 mb-2">
@@ -45,35 +88,35 @@ const AlertLogs = () => {
         <div className="flex flex-wrap gap-4 w-full xl:w-auto">
           <div className="relative flex-1 xl:flex-none">
             <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500" size={18} />
-            <input 
-              type="text" 
+            <input
+              type="text"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              placeholder="Search tactical summaries..." 
+              placeholder="Search tactical summaries..."
               className="pl-12 pr-6 py-4 bg-white/5 border border-white/10 rounded-2xl text-sm font-bold text-white focus:outline-none focus:border-blue-500 w-full xl:w-80 transition-all"
             />
           </div>
-          <button 
-  onClick={() => {
-    if (!dynamicLogs.length) return;
-    const headers = ['ID', 'City', 'Severity', 'Message', 'Timestamp'];
-    const rows = dynamicLogs.map(a => [
-      a.id, a.city, a.severity, a.message, new Date().toISOString()
-    ]);
-    const csvContent = [headers, ...rows]
-      .map(row => row.map(cell => `"${cell}"`).join(','))
-      .join('\n');
-    const blob = new Blob([csvContent], { type: 'text/csv' });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = `bioguard_alerts_${new Date().toISOString().split('T')[0]}.csv`;
-    link.click();
-    URL.revokeObjectURL(url);
-  }}
-  className="flex items-center gap-3 px-8 py-4 bg-blue-600 text-white rounded-2xl text-[10px] font-black uppercase tracking-widest hover:bg-blue-700 transition-all shadow-xl shadow-blue-900/20">
-  <Download size={18} /> Export Results
-</button>
+          <button
+            onClick={() => {
+              if (!dynamicLogs || !dynamicLogs.length) return;
+              const headers = ['ID', 'City', 'Severity', 'Message', 'Timestamp'];
+              const rows = dynamicLogs.map(a => [
+                a.id, a.city, a.severity, a.message, new Date().toISOString()
+              ]);
+              const csvContent = [headers, ...rows]
+                .map(row => row.map(cell => `"${cell}"`).join(','))
+                .join('\n');
+              const blob = new Blob([csvContent], { type: 'text/csv' });
+              const url = URL.createObjectURL(blob);
+              const link = document.createElement('a');
+              link.href = url;
+              link.download = `bioguard_alerts_${new Date().toISOString().split('T')[0]}.csv`;
+              link.click();
+              URL.revokeObjectURL(url);
+            }}
+            className="flex items-center gap-3 px-8 py-4 bg-blue-600 text-white rounded-2xl text-[10px] font-black uppercase tracking-widest hover:bg-blue-700 transition-all shadow-xl shadow-blue-900/20">
+            <Download size={18} /> Export Results
+          </button>
         </div>
       </header>
 
@@ -83,8 +126,8 @@ const AlertLogs = () => {
             key={type}
             onClick={() => setActiveFilter(type)}
             className={`px-6 py-2 rounded-xl text-[10px] font-black transition-all border shrink-0 ${
-              activeFilter === type 
-              ? 'bg-blue-600 text-white border-blue-600' 
+              activeFilter === type
+              ? 'bg-blue-600 text-white border-blue-600'
               : 'bg-white/5 text-slate-500 border-white/10 hover:border-white/20'
             }`}
           >

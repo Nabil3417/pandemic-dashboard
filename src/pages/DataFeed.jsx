@@ -34,7 +34,7 @@ const DataFeed = () => {
 
   const fetchPosts = useCallback(() => {
     const platform = activePlatform === 'ALL' ? '' : `&platform=${activePlatform}`;
-    fetch(`http://localhost:5000/api/posts?limit=${limit}&offset=${page * limit}${platform}`)
+    fetch(`/api/posts?limit=${limit}&offset=${page * limit}${platform}`)
       .then(res => res.json())
       .then(data => {
         setPosts(data.posts);
@@ -44,7 +44,7 @@ const DataFeed = () => {
   }, [activePlatform, page]);
 
   const fetchStatus = useCallback(() => {
-    fetch('http://localhost:5000/api/collection-status')
+    fetch('/api/collection-status')
       .then(res => res.json())
       .then(setCollectionStatus)
       .catch(err => console.error(err));
@@ -64,7 +64,7 @@ const DataFeed = () => {
     setIsCollecting(true);
     toast('Collection started in background...', { icon: '🔄' });
     try {
-      await fetch('http://localhost:5000/api/trigger-collection', { method: 'POST' });
+      await fetch('/api/trigger-collection', { method: 'POST' });
       toast.success('Collectors running! Results in ~5 min.');
     } catch {
       toast.error('Failed to trigger collection');

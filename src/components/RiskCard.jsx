@@ -2,8 +2,8 @@ import React from 'react';
 import { AreaChart, Area, ResponsiveContainer } from 'recharts';
 import { Activity } from 'lucide-react';
 
-const RiskCard = ({ title, value, color, description, isDark }) => {
-  const trendData = [{ v: 20 }, { v: 35 }, { v: 30 }, { v: 55 }, { v: 45 }, { v: 70 }, { v: 65 }];
+const RiskCard = ({ title, value, color, description, isDark, tooltip, trendData }) => {
+  const sparkData = trendData && trendData.length > 0 ? trendData : [];
   const config = {
     blue: { text: 'text-blue-500', bg: 'bg-blue-500/10', stroke: '#3b82f6' },
     emerald: { text: 'text-emerald-500', bg: 'bg-emerald-500/10', stroke: '#10b981' },
@@ -17,7 +17,7 @@ const RiskCard = ({ title, value, color, description, isDark }) => {
           <Activity size={24} />
         </div>
         <span className={`px-4 py-1 rounded-full text-[10px] font-black uppercase tracking-widest border border-current ${config.text}`}>
-          <span title="Proxy: Google Trends symptom-search volume (Ginsberg et al., Nature 2009)">{title}</span>
+          <span title={tooltip || ""}>{title}</span>
         </span>
       </div>
 
@@ -25,13 +25,15 @@ const RiskCard = ({ title, value, color, description, isDark }) => {
         <h2 className={`text-5xl font-black tracking-tighter ${isDark ? 'text-white' : 'text-slate-900'}`}>
           {value}<span className="text-lg opacity-30 italic">.4</span>
         </h2>
-        <div className="h-16 w-32 flex-shrink-0">
-          <ResponsiveContainer width="100%" height="100%">
-            <AreaChart data={trendData}>
-              <Area type="monotone" dataKey="v" stroke={config.stroke} strokeWidth={3} fill={config.stroke} fillOpacity={0.1} dot={false} />
-            </AreaChart>
-          </ResponsiveContainer>
-        </div>
+        {sparkData.length > 0 && (
+          <div className="h-16 w-32 flex-shrink-0">
+            <ResponsiveContainer width="100%" height="100%">
+              <AreaChart data={sparkData}>
+                <Area type="monotone" dataKey="v" stroke={config.stroke} strokeWidth={3} fill={config.stroke} fillOpacity={0.1} dot={false} />
+              </AreaChart>
+            </ResponsiveContainer>
+          </div>
+        )}
       </div>
 
       <p className={`mt-6 text-[13px] font-bold leading-relaxed border-t pt-4 ${isDark ? 'text-slate-400 border-white/5' : 'text-slate-500 border-slate-50'}`}>

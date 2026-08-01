@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
-import { 
-  Share2, Wind, Activity, CheckCircle2, 
-  Zap, BarChart3, Binary, Cpu, RefreshCcw 
+import React, { useState, useEffect } from 'react';
+import {
+  Share2, Wind, Activity, CheckCircle2,
+  Zap, BarChart3, Binary, Cpu, RefreshCcw, AlertCircle
 } from 'lucide-react';
 
 const ModalityCard = ({ icon: Icon, title, status, details, color, latency, throughput }) => {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
-    <div 
+    <div
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       className="bg-white/5 p-8 rounded-[3rem] border border-white/10 hover:border-blue-500/50 transition-all duration-500 group relative overflow-hidden text-left"
@@ -53,6 +53,42 @@ const ModalityCard = ({ icon: Icon, title, status, details, color, latency, thro
 };
 
 const DataModalities = () => {
+  const [summary, setSummary] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  const fetchSummary = async () => {
+    setLoading(true);
+    setError(null);
+    try {
+      const res = await fetch('/api/system-summary');
+      if (!res.ok) throw new Error(`Server returned ${res.status}`);
+      const data = await res.json();
+      setSummary(data);
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchSummary();
+  }, []);
+
+  const fmtPct = (val) => {
+    if (val === null || val === undefined) return '--';
+    return (val * 100).toFixed(1);
+  };
+
+  if (loading) {
+    return (
+      <div className="p-8 lg:p-12 bg-[#020617] min-h-screen flex items-center justify-center">
+        <RefreshCcw className="animate-spin text-blue-500" size={40} />
+      </div>
+    );
+  }
+
   return (
     <div className="p-8 lg:p-12 bg-[#020617] min-h-screen text-left">
       <header className="flex flex-col lg:flex-row justify-between items-start lg:items-end mb-16 gap-8">
@@ -67,39 +103,50 @@ const DataModalities = () => {
             Data <span className="text-blue-600">Modalities</span>
           </h1>
         </div>
-        
-        <button className="group flex items-center gap-3 px-8 py-4 bg-white/5 border border-white/10 rounded-2xl text-sm font-black text-white hover:bg-white/10 transition-all">
-          <RefreshCcw size={18} className="group-hover:rotate-180 transition-transform duration-700" />
+
+        <button
+          onClick={fetchSummary}
+          disabled={loading}
+          className="group flex items-center gap-3 px-8 py-4 bg-white/5 border border-white/10 rounded-2xl text-sm font-black text-white hover:bg-white/10 transition-all disabled:opacity-50"
+        >
+          <RefreshCcw size={18} className={`transition-transform duration-700 ${loading ? 'animate-spin' : 'group-hover:rotate-180'}`} />
           SYNC ALL DATA PIPELINES
         </button>
       </header>
 
+      {error && (
+        <div className="mb-8 flex items-center gap-3 p-4 bg-red-500/10 border border-red-500/30 rounded-2xl text-red-400 text-sm font-medium">
+          <AlertCircle size={18} />
+          Failed to connect to backend: {error}
+        </div>
+      )}
+
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-        <ModalityCard 
+        <ModalityCard
           icon={Share2}
           title="NLP BERT Engine"
-          status="ACTIVE"
+          status={summary ? 'ACTIVE' : 'OFFLINE'}
           color="bg-rose-600 shadow-rose-900/40"
-          latency="84ms"
-          throughput="1.2k req/s"
-          details="Scanning social media for illness-related sentiment and symptomatic keyword clusters in Dhaka sectors."
+          latency={summary ? `${fmtPct(summary.nlp_finetuned_f1)}% F1` : '--'}
+          throughput={summary ? `${summary.languages_tested} languages` : '--'}
+          details="Fine-tuned XLM-RoBERTa scanning social media for illness-related sentiment and symptomatic keyword clusters across 11 languages."
         />
-        <ModalityCard 
+        <ModalityCard
           icon={Activity}
           title="Mobility Hub"
-          status="ACTIVE"
+          status={summary ? 'ACTIVE' : 'OFFLINE'}
           color="bg-blue-600 shadow-blue-900/40"
-          latency="112ms"
-          throughput="8.4GB/hr"
-          details="Anonymized GPS density tracking using Isolation Forest algorithms to detect abnormal campus clustering."
+          latency={summary ? `${fmtPct(summary.combined_f1)}% F1` : '--'}
+          throughput={summary ? `AUC ${summary.combined_auc ? fmtPct(summary.combined_auc) : '--'}%` : '--'}
+          details="Anonymized GPS density tracking using Isolation Forest algorithms fused with NLP and wastewater signals for outbreak detection."
         />
-        <ModalityCard 
+        <ModalityCard
           icon={Wind}
           title="Symptom Search Engine"
-          status="SYNCING"
+          status={summary ? 'SYNCING' : 'OFFLINE'}
           color="bg-emerald-600 shadow-emerald-900/40"
-          latency="2.1s"
-          throughput="Batch: 24h"
+          latency={summary ? `${summary.early_warning_avg_weeks ?? '--'} wks lead` : '--'}
+          throughput={summary ? `${summary.total_eval_weeks ?? '--'} weeks data` : '--'}
           details="Google Trends symptom-search volume tracking as a proxy for disease activity, following Ginsberg et al. (Nature 2009)."
         />
       </div>
@@ -107,22 +154,30 @@ const DataModalities = () => {
       <div className="mt-16 bg-white/5 border border-white/10 rounded-[4rem] p-12 relative overflow-hidden">
         <div className="absolute top-0 right-0 w-1/2 h-full bg-blue-600/5 blur-3xl pointer-events-none" />
         <div className="relative z-10 grid grid-cols-1 xl:grid-cols-2 gap-12 items-center">
-            <div>
-              <h2 className="text-3xl font-black text-white italic uppercase tracking-tighter mb-4">Fusion Pipeline Health</h2>
-              <p className="text-slate-400 font-medium leading-relaxed max-w-xl">
-                The Cross-Modality Validation engine cross-references social spikes against mobility patterns to filter out 99.8% of noise.
+          <div>
+            <h2 className="text-3xl font-black text-white italic uppercase tracking-tighter mb-4">Fusion Pipeline Health</h2>
+            <p className="text-slate-400 font-medium leading-relaxed max-w-xl">
+              Cross-Modality Validation engine cross-references social spikes against mobility patterns.
+              Fusion method: {summary ? (summary.fusion_method || 'N/A') : '--'}.
+              {summary && summary.fusion_improvement_over_baseline != null
+                ? ` F1 improvement over baseline: +${(summary.fusion_improvement_over_baseline * 100).toFixed(1)}%.`
+                : ''}
+            </p>
+          </div>
+          <div className="grid grid-cols-2 gap-8">
+            <div className="p-6 bg-black/40 rounded-3xl border border-white/5">
+              <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2">NLP Fine-tuned F1</p>
+              <p className="text-4xl font-black text-white italic">
+                {summary ? fmtPct(summary.nlp_finetuned_f1) : '--'}<span className="text-blue-500">%</span>
               </p>
             </div>
-            <div className="grid grid-cols-2 gap-8">
-               <div className="p-6 bg-black/40 rounded-3xl border border-white/5">
-                  <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2">Model Precision</p>
-                  <p className="text-4xl font-black text-white italic">98.2<span className="text-blue-500">%</span></p>
-               </div>
-               <div className="p-6 bg-black/40 rounded-3xl border border-white/5">
-                  <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2">Global Uptime</p>
-                  <p className="text-4xl font-black text-white italic">99.9<span className="text-emerald-500">%</span></p>
-               </div>
+            <div className="p-6 bg-black/40 rounded-3xl border border-white/5">
+              <p className="text-[10px] font-black text-slate-500 uppercase tracking-widest mb-2">Combined F1</p>
+              <p className="text-4xl font-black text-white italic">
+                {summary ? fmtPct(summary.combined_f1) : '--'}<span className="text-emerald-500">%</span>
+              </p>
             </div>
+          </div>
         </div>
       </div>
     </div>
